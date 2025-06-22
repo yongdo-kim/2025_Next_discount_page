@@ -2,6 +2,7 @@ interface PostProps {
   id: string;
   title: string;
   content: string;
+  imageUrl: string;
   authorId: string;
   createdAt: Date;
   updatedAt: Date;
@@ -11,6 +12,7 @@ export class PostEntity {
   public readonly id: string;
   public title: string;
   public content: string;
+  public readonly imageUrl: string;
   public readonly authorId: string;
   public readonly createdAt: Date;
   public updatedAt: Date;
@@ -22,10 +24,12 @@ export class PostEntity {
     authorId,
     createdAt,
     updatedAt,
+    imageUrl,
   }: PostProps) {
     this.id = id;
     this.title = title;
     this.content = content;
+    this.imageUrl = imageUrl;
     this.authorId = authorId;
     this.createdAt = createdAt;
     this.updatedAt = updatedAt;
@@ -40,6 +44,7 @@ export class PostEntity {
       authorId: this.authorId, // 변경 불가
       createdAt: this.createdAt, // 변경 불가
       updatedAt: partial.updatedAt ?? this.updatedAt,
+      imageUrl: partial.imageUrl ?? this.imageUrl,
     });
   }
 
@@ -49,6 +54,7 @@ export class PostEntity {
       id: this.id,
       title: this.title,
       content: this.content,
+      imageUrl: this.imageUrl,
       authorId: this.authorId,
       createdAt: this.createdAt.toISOString(),
       updatedAt: this.updatedAt.toISOString(),

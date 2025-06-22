@@ -8,9 +8,10 @@ import { IS_DEVMODE } from "../constants";
 const postRepository = () => {
   return IS_DEVMODE ? new MockPostRepository() : new HttpPostRepository();
 };
+
 const postService = new PostService(postRepository());
 
-export const DIContainer = {
+export const container = {
   postService,
   // 다른 의존성들...
 };

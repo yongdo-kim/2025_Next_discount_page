@@ -1,13 +1,20 @@
-import { DIContainer } from "@/lib/di/dependencies";
+import { postKeys } from "@/features/post/infrastructure/contstant/query-keys";
+import { container } from "@/lib/di/dependencies";
+import { queryClient } from "@/lib/react-query";
+import { HydrationBoundary, dehydrate } from "@tanstack/react-query";
 import { PostList } from "./post/post-list";
-
 export default async function Page() {
-  const initialPosts = await DIContainer.postService.getPostList();
+  await queryClient.prefetchQuery({
+    queryKey: [postKeys.all],
+    queryFn: async () => {
+      const posts = await container.postService.getPostList();
+      return JSON.parse(JSON.stringify(posts));
+    },
+  });
 
   return (
-    <div>
-      <h1>Page</h1>
-      <PostList initialData={initialPosts} />
-    </div>
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      <PostList />
+    </HydrationBoundary>
   );
 }

@@ -16,9 +16,10 @@ export function Providers({ children }: { children: React.ReactNode }) {
         disableTransitionOnChange
       >
         {children}
-        <Toaster />
+
         {process.env.NODE_ENV === "development" && <ReactQueryDevtools />}
       </ThemeProvider>
+      <Toaster />
     </QueryClientProvider>
   );
 }

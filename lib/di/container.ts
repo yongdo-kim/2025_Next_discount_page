@@ -1,13 +1,9 @@
-
 // import { PostService } from "@/features/post/application/services/post.service";
 // import { createContext, useContext } from "react";
 
 // // 1. 컨텍스트 타입 정의
 // export type DIContainer = {
-//   // 여기에 피처별 의존성들이 추가됩니다.
-//   post: {
-//     postService: PostService;
-//   };
+//   postService: PostService;
 //   // 다른 피처들...
 // };
 
@@ -21,4 +17,4 @@
 //     throw new Error("DIContainerProvider를 상위에서 감싸주세요");
 //   }
 //   return container;
-// } 
+// }
