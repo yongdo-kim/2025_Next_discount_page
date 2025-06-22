@@ -1,21 +1,13 @@
-import { ErrorBoundary } from "@/components/error/error-boundary";
-import { usePosts } from "@/features/post/presentation/hooks/use-posts";
+import { DIContainer } from "@/lib/di/dependencies";
+import { PostList } from "./post/post-list";
 
-export default function Page() {
-  const { data: posts, isLoading, error } = usePosts();
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error.message}</div>;
+export default async function Page() {
+  const initialPosts = await DIContainer.postService.getPostList();
+
   return (
     <div>
       <h1>Page</h1>
-      <ErrorBoundary>
-        {posts?.map((post) => (
-          <div key={post.id}>
-            <h2>{post.title}</h2>
-            <p>{post.content}</p>
-          </div>
-        ))}
-      </ErrorBoundary>
+      <PostList initialData={initialPosts} />
     </div>
   );
 }

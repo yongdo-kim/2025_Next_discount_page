@@ -42,4 +42,16 @@ export class PostEntity {
       updatedAt: partial.updatedAt ?? this.updatedAt,
     });
   }
+
+  // 순수 객체로 변환
+  toPlainObject() {
+    return {
+      id: this.id,
+      title: this.title,
+      content: this.content,
+      authorId: this.authorId,
+      createdAt: this.createdAt.toISOString(),
+      updatedAt: this.updatedAt.toISOString(),
+    };
+  }
 }

@@ -1,13 +1,12 @@
 // lib/react-query.ts
 import { QueryCache, QueryClient } from "@tanstack/react-query";
-import { toast } from "sonner";
 
 // 전역 에러 타입 정의
-type CustomError = {
-  message: string;
-  code?: string;
-  status?: number;
-};
+// type CustomError = {
+//   message: string;
+//   code?: string;
+//   status?: number;
+// };
 
 // 전역 QueryClient 인스턴스 생성
 export const queryClient = new QueryClient({
@@ -16,7 +15,7 @@ export const queryClient = new QueryClient({
       // 특정 쿼리에서 전역 에러 핸들링을 건너뛰려면 meta.skipGlobalError 사용
       if (query.meta?.skipGlobalError) return;
 
-      const err = error as CustomError;
+      //const err = error as CustomError;
 
       //   // 401 Unauthorized 처리 예시
       //   if (err.status === 401) {
@@ -26,7 +25,7 @@ export const queryClient = new QueryClient({
       //   }
 
       // 기타 에러 처리
-      toast.error(err.message || "알 수 없는 오류가 발생했습니다.");
+      //toast.error(err.message || "알 수 없는 오류가 발생했습니다.");
     },
   }),
 

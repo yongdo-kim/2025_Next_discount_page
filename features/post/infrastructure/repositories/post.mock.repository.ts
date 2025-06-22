@@ -32,6 +32,7 @@ export class MockPostRepository implements PostRepository {
           post.content.toLowerCase().includes(searchTerm)
       );
     }
+    console.log(this.mockPosts);
     return this.mockPosts;
   }
 }
