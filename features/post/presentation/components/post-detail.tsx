@@ -1,13 +1,13 @@
 "use client";
 import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
+import { notFound } from "next/navigation";
 import { usePostDetail } from "../hooks/use-posts";
 export const PostDetail = ({ postId }: { postId: string }) => {
-  const { data: post, isLoading, error } = usePostDetail(postId);
+  const { data: post, error } = usePostDetail(postId);
 
-  if (isLoading) return <div>로딩중...</div>;
-  if (error) return <div>에러가 발생했습니다.</div>;
-  if (!post) return <div>게시글이 존재하지 않습니다.</div>;
+  if (error) notFound();
+  if (!post) notFound();
 
   return (
     <article className="max-w-screen-lg mx-auto px-4 py-6">

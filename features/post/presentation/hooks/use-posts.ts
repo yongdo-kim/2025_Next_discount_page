@@ -17,6 +17,6 @@ export const usePostDetail = (id: string) => {
   return useQuery<PostEntity>({
     queryKey: [postKeys.detail(id)],
     queryFn: () => container.postService.getPostDetail(id),
-    throwOnError: true, //에러바운더리에 연락
+    //throwOnError: true, //에러바운더리에 연락
   });
 };

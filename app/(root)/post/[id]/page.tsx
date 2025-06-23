@@ -1,5 +1,3 @@
-
-
 import { postKeys } from "@/features/post/infrastructure/contstant/query-keys";
 import { PostDetail } from "@/features/post/presentation/components/post-detail";
 import { container } from "@/lib/di/dependencies";
@@ -10,7 +8,6 @@ export default async function PostDetailPage({
 }: {
   params: { id: string }; //[id]로 지정한 값이 온다.
 }) {
-  console.log(params);
   const { id } = await params;
 
   await queryClient.prefetchQuery({
