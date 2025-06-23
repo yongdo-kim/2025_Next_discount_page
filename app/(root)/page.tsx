@@ -4,6 +4,8 @@ import { queryClient } from "@/lib/react-query";
 import { HydrationBoundary, dehydrate } from "@tanstack/react-query";
 import { PostList } from "./post/post-list";
 
+//메인 첫번째 화면이 보이는 곳,
+
 export default async function Page() {
   await queryClient.prefetchQuery({
     queryKey: [postKeys.all],
@@ -15,7 +17,9 @@ export default async function Page() {
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
+      <nav>NAV</nav>
       <PostList />
+      <footer>FOOTER</footer>
     </HydrationBoundary>
   );
 }

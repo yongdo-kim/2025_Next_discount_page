@@ -12,3 +12,11 @@ export const usePosts = () => {
     throwOnError: true, //에러바운더리에 연락
   });
 };
+
+export const usePostDetail = (id: string) => {
+  return useQuery<PostEntity>({
+    queryKey: [postKeys.detail(id)],
+    queryFn: () => container.postService.getPostDetail(id),
+    throwOnError: true, //에러바운더리에 연락
+  });
+};

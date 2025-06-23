@@ -5,10 +5,14 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { container } from "@/lib/di/dependencies";
+import { queryClient } from "@/lib/react-query";
 import { formatDistanceToNow } from "date-fns";
 import { ko } from "date-fns/locale/ko";
 import Image from "next/image";
+import Link from "next/link";
 import { PostEntity } from "../../domain/entities/post.entity";
+import { postKeys } from "../../infrastructure/contstant/query-keys";
 
 export const PostPreviewItem = ({ post }: { post: PostEntity }) => {
   // createdAt이 string인 경우 Date 객체로 변환
@@ -21,48 +25,58 @@ export const PostPreviewItem = ({ post }: { post: PostEntity }) => {
   });
 
   return (
-    <Card className="p-4 cursor-pointer hover:bg-accent ">
-      <div className="flex items-center gap-2">
-        {post.tags.map((tag) => (
-          <Badge variant="outline" className="text-xs" key={tag.id}>
-            {tag.name}
-          </Badge>
-        ))}
-      </div>
-      <Image
-        src={post.imageUrl || ""}
-        className="rounded-xl aspect-video w-full object-cover"
-        alt={post.title}
-        width={400}
-        height={200}
-      />
-      <CardHeader className="px-2">
-        {/* 상단 */}
-        <CardTitle className="line-clamp-1 font-bold">{post.title}</CardTitle>
-        {/* 중단 */}
-        <CardDescription className="line-clamp-2">
-          {post.content}
-        </CardDescription>
-        {/* 하단 */}
+    <Link href={`/post/${post.id}`}>
+      <Card
+        className="p-4 cursor-pointer hover:bg-accent "
+        onMouseEnter={() => {
+          queryClient.prefetchQuery({
+            queryKey: [postKeys.detail(post.id)],
+            queryFn: () => container.postService.getPostDetail(post.id),
+          });
+        }}
+      >
+        <div className="flex items-center gap-2">
+          {post.tags.map((tag) => (
+            <Badge variant="outline" className="text-xs" key={tag.id}>
+              {tag.name}
+            </Badge>
+          ))}
+        </div>
+        <Image
+          src={post.imageUrl || ""}
+          className="rounded-xl aspect-video w-full object-cover"
+          alt={post.title}
+          width={400}
+          height={200}
+        />
+        <CardHeader className="px-2">
+          {/* 상단 */}
+          <CardTitle className="line-clamp-1 font-bold">{post.title}</CardTitle>
+          {/* 중단 */}
+          <CardDescription className="line-clamp-2">
+            {post.content}
+          </CardDescription>
+          {/* 하단 */}
 
-        <CardDescription className="mt-2">
-          <div className="flex justify-between items-center">
-            <div className="flex items-center justify-center gap-2">
-              <CardDescription>
-                <Image
-                  src={post.user.profileImageUrl}
-                  alt={post.user.nickname}
-                  className="rounded-full aspect-square"
-                  width={25}
-                  height={25}
-                />
-              </CardDescription>
-              <div className="text-black text-sm">{post.user.nickname}</div>
+          <CardDescription className="mt-2">
+            <div className="flex justify-between items-center">
+              <div className="flex items-center justify-center gap-2">
+                <CardDescription>
+                  <Image
+                    src={post.user.profileImageUrl}
+                    alt={post.user.nickname}
+                    className="rounded-full aspect-square"
+                    width={25}
+                    height={25}
+                  />
+                </CardDescription>
+                <div className="text-black text-sm">{post.user.nickname}</div>
+              </div>
+              <div className="text-black text-sm">{timeAgo}</div>
             </div>
-            <div className="text-black text-sm">{timeAgo}</div>
-          </div>
-        </CardDescription>
-      </CardHeader>
-    </Card>
+          </CardDescription>
+        </CardHeader>
+      </Card>
+    </Link>
   );
 };
