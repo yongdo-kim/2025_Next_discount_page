@@ -1,5 +1,7 @@
 "use client";
 import { Badge } from "@/components/ui/badge";
+import { format } from "date-fns";
+import { ko } from "date-fns/locale/ko";
 import Image from "next/image";
 import { PostEntity } from "../../domain/entities/post.entity";
 import { usePostDetail } from "../hooks/use-posts";
@@ -15,48 +17,60 @@ export const PostDetail = ({
     error,
     isLoading,
   } = usePostDetail({ id: postId, initialPost });
-  console.log("postpostpost", post);
+
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error</div>;
   if (!post) return <div>no data</div>;
 
-  return (
-    <article className="max-w-screen-lg mx-auto px-4 py-6 ">
-      {/* 태그 */}
-
-      <div className="flex flex-wrap gap-2 mb-4">
-        {post.tags.map((tag) => (
+  function TagList({ tags }: { tags: { id: string; name: string }[] }) {
+    if (!tags?.length) return null;
+    return (
+      <div className="flex flex-wrap gap-2 mt-12">
+        {tags.map((tag) => (
           <Badge variant="outline" key={tag.id}>
             {tag.name}
           </Badge>
         ))}
       </div>
+    );
+  }
 
-      {/* 제목 */}
-      <h1 className="text-2xl font-bold mb-2 pt-8">{post.title}</h1>
-
-      {/* 작성자, 작성일 */}
+  function AuthorInfo({
+    user,
+    createdAt,
+  }: {
+    user: { nickname: string; profileImageUrl: string };
+    createdAt: Date;
+  }) {
+    return (
       <div className="flex items-center gap-3 mb-6">
         <Image
-          src={post.user.profileImageUrl}
-          alt={post.user.nickname}
+          src={user.profileImageUrl}
+          alt={user.nickname}
           width={30}
           height={30}
           className="w-8 h-8 rounded-full object-cover "
         />
         <div>
-          <div className="font-semibold text-gray-800">
-            {post.user.nickname}
-          </div>
+          <div className="font-semibold text-gray-800">{user.nickname}</div>
           <div className="text-xs text-gray-500">
-            {new Date(post.createdAt).toLocaleDateString("ko-KR", {
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-            })}
+            {format(new Date(createdAt), "yyyy년 M월 d일", { locale: ko })}
           </div>
         </div>
       </div>
+    );
+  }
+
+  return (
+    <article className="max-w-screen-lg mx-auto md:px-32 px-4 py-6 ">
+      {/* 태그 */}
+      <TagList tags={post.tags} />
+
+      {/* 제목 */}
+      <h1 className="text-3xl font-bold mb-2 pt-2">{post.title}</h1>
+
+      {/* 작성자, 작성일 */}
+      <AuthorInfo user={post.user} createdAt={post.createdAt} />
 
       {/* 대표 이미지 */}
       <Image
