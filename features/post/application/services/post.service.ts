@@ -9,4 +9,8 @@ export class PostService {
     const posts = await this.postRepository.getPostList("/posts");
     return posts;
   }
+  async getPostDetail(id: string): Promise<PostEntity> {
+    const post = await this.postRepository.getPostDetail(id);
+    return post;
+  }
 }

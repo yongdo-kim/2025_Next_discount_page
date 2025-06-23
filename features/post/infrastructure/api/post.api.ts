@@ -7,4 +7,8 @@ export const postApi = {
     const response = await apiClient.get(path, query);
     return postResponseSchema.array().parse(response);
   },
+  async getPostDetail(id: string) {
+    const response = await apiClient.get(`/posts/${id}`);
+    return postResponseSchema.parse(response);
+  },
 };
