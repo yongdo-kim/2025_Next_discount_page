@@ -1,3 +1,4 @@
+import ScrollHideNavbar from "@/components/scroll-hide-navbar";
 import { postKeys } from "@/features/post/infrastructure/contstant/query-keys";
 import { PostDetail } from "@/features/post/presentation/components/post-detail";
 import { container } from "@/lib/di/dependencies";
@@ -13,13 +14,19 @@ export default async function PostDetailPage({
   await queryClient.prefetchQuery({
     queryKey: postKeys.detail(id),
     queryFn: async () => {
-      const post = await container.postService.getPostDetail(id);
-      return JSON.parse(JSON.stringify(post));
+      try {
+        const post = await container.postService.getPostDetail(id);
+        return JSON.parse(JSON.stringify(post));
+      } catch (error) {
+        console.error("Failed to fetch post:", error);
+        return null; // 또는 적절한 기본값 반환
+      }
     },
   });
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
+      <ScrollHideNavbar />
       <PostDetail postId={id} />
     </HydrationBoundary>
   );

@@ -4,10 +4,11 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { usePostDetail } from "../hooks/use-posts";
 export const PostDetail = ({ postId }: { postId: string }) => {
-  const { data: post, error } = usePostDetail(postId);
-
+  const { data: post, error, isLoading } = usePostDetail(postId);
+  console.log("postpostpost,", post);
   if (error) notFound();
   if (!post) notFound();
+  if (isLoading) return <div>Loading...</div>;
 
   return (
     <article className="max-w-screen-lg mx-auto px-4 py-6">
