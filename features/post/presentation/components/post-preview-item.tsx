@@ -31,7 +31,7 @@ export const PostPreviewItem = ({ post }: { post: PostEntity }) => {
       </div>
       <Image
         src={post.imageUrl || ""}
-        className="rounded-xl aspect-video w-full "
+        className="rounded-xl aspect-video w-full object-cover"
         alt={post.title}
         width={400}
         height={200}
@@ -52,7 +52,7 @@ export const PostPreviewItem = ({ post }: { post: PostEntity }) => {
                 <Image
                   src={post.user.profileImageUrl}
                   alt={post.user.nickname}
-                  className="rounded-full"
+                  className="rounded-full aspect-square"
                   width={25}
                   height={25}
                 />
