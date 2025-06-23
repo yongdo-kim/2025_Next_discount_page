@@ -2,6 +2,7 @@
 import { Progress } from "@/components/ui/progress";
 import clsx from "clsx";
 import { useEffect, useRef, useState } from "react";
+import ThemeToggleButton from "../theme-toggle-button";
 
 export default function ScrollHideNavbar() {
   const [show, setShow] = useState(true);
@@ -33,25 +34,26 @@ export default function ScrollHideNavbar() {
     <>
       <div
         className={clsx(
-          "fixed left-0 w-full z-50 transition-all duration-300",
+          "fixed left-0 w-full z-50 transition-all duration-300 ",
           show ? "top-[50px]" : "top-0"
         )}
       >
         <Progress
           value={scrollProgress}
-          className="h-1 w-full rounded-none bg-slate-100 [&>div]:bg-emerald-500"
+          className="h-1 w-full rounded-none dark:bg-neutral-800 bg-slate-50 [&>div]:bg-emerald-500"
         />
       </div>
 
       <div className="fixed top-0 left-0 w-full z-40">
         <nav
           className={clsx(
-            "w-full transition-transform duration-300  shadow bg-white h-[50px]",
+            "w-full transition-transform duration-300  shadow  h-[50px]",
             show ? "translate-y-0" : "-translate-y-full"
           )}
         >
-          <div className="max-w-screen-lg mx-auto px-4 py-3">
+          <div className="max-w-screen-lg mx-auto px-4 py-3 flex items-center justify-between bg-white dark:bg-neutral-900">
             <span className="font-bold text-lg">로고</span>
+            <ThemeToggleButton />
           </div>
         </nav>
       </div>

@@ -1,4 +1,4 @@
-import ScrollHideNavbar from "@/components/scroll-hide-navbar";
+import ScrollHideNavbar from "@/components/navbar/scroll-hide-navbar";
 import { PostEntity } from "@/features/post/domain/entities/post.entity";
 import { postKeys } from "@/features/post/infrastructure/contstant/query-keys";
 import { PostDetail } from "@/features/post/presentation/components/post-detail";
