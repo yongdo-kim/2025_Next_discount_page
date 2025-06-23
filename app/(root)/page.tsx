@@ -1,9 +1,10 @@
+import NavBar from "@/components/navbar/nav-bar";
 import { postKeys } from "@/features/post/infrastructure/contstant/query-keys";
 import { container } from "@/lib/di/dependencies";
 import { queryClient } from "@/lib/react-query";
 import { HydrationBoundary, dehydrate } from "@tanstack/react-query";
+import clsx from "clsx";
 import { PostList } from "./post/post-list";
-
 //메인 첫번째 화면이 보이는 곳,
 
 export default async function Page() {
@@ -17,7 +18,7 @@ export default async function Page() {
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <nav>NAV</nav>
+      <NavBar className={clsx("w-full border-b-1 dark:border-neutral-800")} />
       <PostList />
       <footer>FOOTER</footer>
     </HydrationBoundary>

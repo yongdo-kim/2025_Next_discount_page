@@ -70,9 +70,13 @@ export const PostPreviewItem = ({ post }: { post: PostEntity }) => {
                     height={25}
                   />
                 </CardDescription>
-                <div className="text-black text-sm">{post.user.nickname}</div>
+                <div className="text-neutral-800 dark:text-neutral-50 text-sm">
+                  {post.user.nickname}
+                </div>
               </div>
-              <div className="text-black text-sm">{timeAgo}</div>
+              <div className="text-neutral-500 dark:text-neutral-400 text-sm">
+                {timeAgo}
+              </div>
             </div>
           </CardDescription>
         </CardHeader>

@@ -2,7 +2,7 @@
 import { Progress } from "@/components/ui/progress";
 import clsx from "clsx";
 import { useEffect, useRef, useState } from "react";
-import ThemeToggleButton from "../theme-toggle-button";
+import NavBar from "./nav-bar";
 
 export default function ScrollHideNavbar() {
   const [show, setShow] = useState(true);
@@ -45,17 +45,12 @@ export default function ScrollHideNavbar() {
       </div>
 
       <div className="fixed top-0 left-0 w-full z-40">
-        <nav
+        <NavBar
           className={clsx(
-            "w-full transition-transform duration-300  shadow  h-[50px]",
+            "w-full transition-transform duration-300 shadow h-[50px]",
             show ? "translate-y-0" : "-translate-y-full"
           )}
-        >
-          <div className="max-w-screen-lg mx-auto px-4 py-3 flex items-center justify-between bg-white dark:bg-neutral-900">
-            <span className="font-bold text-lg">로고</span>
-            <ThemeToggleButton />
-          </div>
-        </nav>
+        />
       </div>
     </>
   );
