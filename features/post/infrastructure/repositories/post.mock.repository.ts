@@ -1,3 +1,4 @@
+import { TagEntity } from "@/features/tag/domain/entities/post.entity";
 import { UserEntity } from "@/features/user/domain/entities/user.entity";
 import { PostEntity } from "../../domain/entities/post.entity";
 import { PostRepository } from "../../domain/repositories/post.repository";
@@ -18,6 +19,16 @@ export class MockPostRepository implements PostRepository {
         profileImageUrl:
           "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcRbGPxP885Ec4R9o87PksD0HHGfEkgnhX-ltdHaT6fuBWvDqAap8DNrmxVMBM6iLEyiDZns1At1A9KvVyi6qTG1Cw",
       }),
+      tags: [
+        new TagEntity({
+          id: "1",
+          name: "점심",
+        }),
+        new TagEntity({
+          id: "2",
+          name: "저녁",
+        }),
+      ],
       createdAt: new Date(),
       updatedAt: new Date(),
     }),
@@ -34,6 +45,16 @@ export class MockPostRepository implements PostRepository {
         profileImageUrl:
           "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcRbGPxP885Ec4R9o87PksD0HHGfEkgnhX-ltdHaT6fuBWvDqAap8DNrmxVMBM6iLEyiDZns1At1A9KvVyi6qTG1Cw",
       }),
+      tags: [
+        new TagEntity({
+          id: "1",
+          name: "점심",
+        }),
+        new TagEntity({
+          id: "2",
+          name: "저녁",
+        }),
+      ],
       createdAt: new Date(),
       updatedAt: new Date(),
     }),

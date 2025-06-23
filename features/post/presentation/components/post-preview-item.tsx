@@ -21,13 +21,17 @@ export const PostPreviewItem = ({ post }: { post: PostEntity }) => {
   });
 
   return (
-    <Card className="px-4 py-4 cursor-pointer hover:bg-accent">
-      <Badge variant="outline" className="text-xs my-0">
-        Tag
-      </Badge>
+    <Card className="p-4 cursor-pointer hover:bg-accent ">
+      <div className="flex items-center gap-2">
+        {post.tags.map((tag) => (
+          <Badge variant="outline" className="text-xs" key={tag.id}>
+            {tag.name}
+          </Badge>
+        ))}
+      </div>
       <Image
         src={post.imageUrl || ""}
-        className="rounded-xl aspect-video w-full"
+        className="rounded-xl aspect-video w-full "
         alt={post.title}
         width={400}
         height={200}

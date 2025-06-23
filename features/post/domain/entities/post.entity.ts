@@ -1,3 +1,4 @@
+import { TagEntity } from "@/features/tag/domain/entities/post.entity";
 import { UserEntity } from "@/features/user/domain/entities/user.entity";
 
 //태그도
@@ -7,6 +8,7 @@ interface PostProps {
   content: string;
   imageUrl: string;
   user: UserEntity;
+  tags: TagEntity[];
   createdAt: Date;
   updatedAt: Date;
 }
@@ -17,6 +19,7 @@ export class PostEntity {
   public content: string;
   public readonly imageUrl: string;
   public readonly user: UserEntity;
+  public readonly tags: TagEntity[];
   public readonly createdAt: Date;
   public updatedAt: Date;
 
@@ -28,6 +31,7 @@ export class PostEntity {
     updatedAt,
     imageUrl,
     user,
+    tags,
   }: PostProps) {
     this.id = id;
     this.title = title;
@@ -36,5 +40,6 @@ export class PostEntity {
     this.user = user;
     this.createdAt = createdAt;
     this.updatedAt = updatedAt;
+    this.tags = tags;
   }
 }
