@@ -18,7 +18,7 @@ export class MockPostRepository implements PostRepository {
       "개발 일기",
       "맛집 후기",
       "스터디 후기",
-      "자기계발",
+      "입만 털지 않고 직접 해봤습니다(5일만에 시장검증하기",
       "카페 탐방",
     ];
     const contents = [
