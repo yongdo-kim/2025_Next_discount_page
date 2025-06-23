@@ -21,7 +21,7 @@ export const PostPreviewItem = ({ post }: { post: PostEntity }) => {
   });
 
   return (
-    <Card className="px-4 py-4 cursor-pointer">
+    <Card className="px-4 py-4 cursor-pointer hover:bg-accent">
       <Badge variant="outline" className="text-xs my-0">
         Tag
       </Badge>
@@ -33,14 +33,31 @@ export const PostPreviewItem = ({ post }: { post: PostEntity }) => {
         height={200}
       />
       <CardHeader className="px-2">
-        <CardTitle>{post.title}</CardTitle>
+        {/* 상단 */}
+        <CardTitle className="line-clamp-1 font-bold">{post.title}</CardTitle>
+        {/* 중단 */}
         <CardDescription className="line-clamp-2">
           {post.content}
         </CardDescription>
-        <div className="flex justify-between">
-          <CardDescription>{post.user.nickname}</CardDescription>
-          <CardDescription>{timeAgo}</CardDescription>
-        </div>
+        {/* 하단 */}
+
+        <CardDescription className="mt-2">
+          <div className="flex justify-between items-center">
+            <div className="flex items-center justify-center gap-2">
+              <CardDescription>
+                <Image
+                  src={post.user.profileImageUrl}
+                  alt={post.user.nickname}
+                  className="rounded-full"
+                  width={25}
+                  height={25}
+                />
+              </CardDescription>
+              <div className="text-black text-sm">{post.user.nickname}</div>
+            </div>
+            <div className="text-black text-sm">{timeAgo}</div>
+          </div>
+        </CardDescription>
       </CardHeader>
     </Card>
   );
