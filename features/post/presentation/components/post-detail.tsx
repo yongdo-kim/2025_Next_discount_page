@@ -85,7 +85,7 @@ export const PostDetail = ({
       />
 
       {/* 본문 */}
-      <div className="prose prose-lg max-w-none text-neutral-900 dark:text-neutral-100 whitespace-pre-line">
+      <div className="prose prose-lg max-w-none text-neutral-900 dark:text-neutral-100 whitespace-pre-line text-lg">
         {post.content}
       </div>
     </article>

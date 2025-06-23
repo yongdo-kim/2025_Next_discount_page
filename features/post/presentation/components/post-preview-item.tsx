@@ -66,8 +66,8 @@ export const PostPreviewItem = ({ post }: { post: PostEntity }) => {
                     src={post.user.profileImageUrl}
                     alt={post.user.nickname}
                     className="rounded-full aspect-square"
-                    width={25}
-                    height={25}
+                    width={20}
+                    height={20}
                   />
                 </CardDescription>
                 <div className="text-neutral-800 dark:text-neutral-50 text-sm">
