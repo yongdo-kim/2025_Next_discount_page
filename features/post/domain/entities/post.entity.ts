@@ -1,9 +1,12 @@
+import { UserEntity } from "@/features/user/domain/entities/user.entity";
+
+//태그도
 interface PostProps {
   id: string;
   title: string;
   content: string;
   imageUrl: string;
-  authorId: string;
+  user: UserEntity;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -13,7 +16,7 @@ export class PostEntity {
   public title: string;
   public content: string;
   public readonly imageUrl: string;
-  public readonly authorId: string;
+  public readonly user: UserEntity;
   public readonly createdAt: Date;
   public updatedAt: Date;
 
@@ -21,43 +24,17 @@ export class PostEntity {
     id,
     title,
     content,
-    authorId,
     createdAt,
     updatedAt,
     imageUrl,
+    user,
   }: PostProps) {
     this.id = id;
     this.title = title;
     this.content = content;
     this.imageUrl = imageUrl;
-    this.authorId = authorId;
+    this.user = user;
     this.createdAt = createdAt;
     this.updatedAt = updatedAt;
-  }
-
-  // copyWith 메서드 수정
-  copyWith(partial: Partial<PostProps>): PostEntity {
-    return new PostEntity({
-      id: this.id, // 변경 불가
-      title: partial.title ?? this.title,
-      content: partial.content ?? this.content,
-      authorId: this.authorId, // 변경 불가
-      createdAt: this.createdAt, // 변경 불가
-      updatedAt: partial.updatedAt ?? this.updatedAt,
-      imageUrl: partial.imageUrl ?? this.imageUrl,
-    });
-  }
-
-  // 순수 객체로 변환
-  toPlainObject() {
-    return {
-      id: this.id,
-      title: this.title,
-      content: this.content,
-      imageUrl: this.imageUrl,
-      authorId: this.authorId,
-      createdAt: this.createdAt.toISOString(),
-      updatedAt: this.updatedAt.toISOString(),
-    };
   }
 }

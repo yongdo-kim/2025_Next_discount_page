@@ -5,12 +5,23 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { formatDistanceToNow } from "date-fns";
+import { ko } from "date-fns/locale/ko";
 import Image from "next/image";
 import { PostEntity } from "../../domain/entities/post.entity";
 
 export const PostPreviewItem = ({ post }: { post: PostEntity }) => {
+  // createdAt이 string인 경우 Date 객체로 변환
+  const createdAt = post.createdAt ? post.createdAt : new Date();
+
+  // 현재 시간과의 차이를 계산 (예: "2시간 전")
+  const timeAgo = formatDistanceToNow(createdAt, {
+    addSuffix: true,
+    locale: ko, // 한국어 설정
+  });
+
   return (
-    <Card className="px-4 py-4 cursor-pointer hover:bg-accent">
+    <Card className="px-4 py-4 cursor-pointer">
       <Badge variant="outline" className="text-xs my-0">
         Tag
       </Badge>
@@ -26,6 +37,10 @@ export const PostPreviewItem = ({ post }: { post: PostEntity }) => {
         <CardDescription className="line-clamp-2">
           {post.content}
         </CardDescription>
+        <div className="flex justify-between">
+          <CardDescription>{post.user.nickname}</CardDescription>
+          <CardDescription>{timeAgo}</CardDescription>
+        </div>
       </CardHeader>
     </Card>
   );

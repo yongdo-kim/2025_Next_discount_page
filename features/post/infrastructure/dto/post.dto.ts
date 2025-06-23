@@ -1,3 +1,4 @@
+import { userResponseSchema } from "@/features/user/infrastructure/dto/user.dto";
 import { z } from "zod";
 import { PostEntity } from "../../domain/entities/post.entity";
 
@@ -6,7 +7,7 @@ export const postResponseSchema = z.object({
   title: z.string(),
   content: z.string(),
   imageUrl: z.string(),
-  authorId: z.string(),
+  user: userResponseSchema,
   createdAt: z.string(),
   updatedAt: z.string(),
 });
@@ -20,7 +21,7 @@ export function toEntity(dto: PostDto): PostEntity {
     title: dto.title,
     content: dto.content,
     imageUrl: dto.imageUrl,
-    authorId: dto.authorId,
+    user: userResponseSchema.parse(dto.user),
     createdAt: new Date(dto.createdAt),
     updatedAt: new Date(dto.updatedAt),
   });

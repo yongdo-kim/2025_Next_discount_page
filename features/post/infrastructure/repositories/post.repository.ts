@@ -12,7 +12,7 @@ export class HttpPostRepository implements PostRepository {
           title: post.title,
           content: post.content,
           imageUrl: post.imageUrl,
-          authorId: post.authorId,
+          user: post.user,
           createdAt: new Date(post.createdAt),
           updatedAt: new Date(post.updatedAt),
         })
