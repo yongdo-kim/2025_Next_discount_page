@@ -52,8 +52,10 @@ export const PostDetail = ({
           className="w-8 h-8 rounded-full object-cover "
         />
         <div>
-          <div className="font-semibold text-gray-800">{user.nickname}</div>
-          <div className="text-xs text-gray-500">
+          <div className="font-semibold text-neutral-800 dark:text-neutral-50">
+            {user.nickname}
+          </div>
+          <div className="text-xs text-neutral-500 dark:text-neutral-400">
             {format(new Date(createdAt), "yyyy년 M월 d일", { locale: ko })}
           </div>
         </div>
@@ -83,7 +85,7 @@ export const PostDetail = ({
       />
 
       {/* 본문 */}
-      <div className="prose prose-lg max-w-none text-gray-900 whitespace-pre-line">
+      <div className="prose prose-lg max-w-none text-neutral-900 dark:text-neutral-100 whitespace-pre-line">
         {post.content}
       </div>
     </article>
