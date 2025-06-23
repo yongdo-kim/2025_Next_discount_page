@@ -3,6 +3,7 @@ import { container } from "@/lib/di/dependencies";
 import { queryClient } from "@/lib/react-query";
 import { HydrationBoundary, dehydrate } from "@tanstack/react-query";
 import { PostList } from "./post/post-list";
+
 export default async function Page() {
   await queryClient.prefetchQuery({
     queryKey: [postKeys.all],
