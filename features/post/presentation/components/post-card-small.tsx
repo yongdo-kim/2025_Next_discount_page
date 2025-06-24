@@ -1,0 +1,34 @@
+import { container } from "@/lib/di/dependencies";
+import { queryClient } from "@/lib/react-query";
+import Image from "next/image";
+import Link from "next/link";
+import { PostEntity } from "../../domain/entities/post.entity";
+import { postKeys } from "../../infrastructure/contstant/query-keys";
+
+export const PostCardSmall = ({ post }: { post: PostEntity }) => {
+  return (
+    <div className="hover:bg-accent h-[180px] w-[180px] cursor-pointer rounded-2xl border">
+      <Link href={`/post/${post.id}`}>
+        <div
+          onMouseEnter={() => {
+            queryClient.prefetchQuery({
+              queryKey: [postKeys.detail(post.id)],
+              queryFn: () => container.postService.getPostDetail(post.id),
+            });
+          }}
+        >
+          <Image
+            src={post.imageUrl || ""}
+            className="aspect-auto w-full rounded-t-2xl object-cover"
+            alt={post.title}
+            width={180}
+            height={180}
+          />
+          <div className="p-2">
+            <div className="line-clamp-2 font-medium">{post.title}</div>
+          </div>
+        </div>
+      </Link>
+    </div>
+  );
+};

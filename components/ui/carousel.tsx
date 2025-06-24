@@ -6,8 +6,6 @@ import "swiper/css/pagination";
 import { Autoplay, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-const carouselImageClass =
-  "w-full object-cover h-[150px] sm:h-[250px] md:h-[300px] lg:max-h-[400px]";
 export default function Carousel() {
   return (
     <Swiper
@@ -17,25 +15,24 @@ export default function Carousel() {
       }}
       autoplay={{
         delay: 5000, // 자동 슬라이드 시간
-        disableOnInteraction: false, // 사용자 인터랙션으로 슬라이드 중지 여부
       }}
       spaceBetween={30}
       slidesPerView={1}
       loop={true}
     >
-      <SwiperSlide>
+      <SwiperSlide className="cursor-pointer overflow-hidden rounded-2xl">
         <Image
           src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800"
-          className={carouselImageClass}
+          className="h-[100px] w-full object-cover px-8"
           alt=""
           width={800}
           height={400}
         />
       </SwiperSlide>
-      <SwiperSlide>
+      {/* <SwiperSlide>
         <Image
           src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?w=800"
-          className={carouselImageClass}
+          className="h-[150px] w-full rounded-full object-cover sm:h-[250px] sm:rounded-none md:h-[300px] lg:max-h-[400px]"
           alt=""
           width={800}
           height={400}
@@ -44,12 +41,12 @@ export default function Carousel() {
       <SwiperSlide>
         <Image
           src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800"
-          className={carouselImageClass}
+          className="h-[150px] w-full rounded-full object-cover sm:h-[250px] sm:rounded-none md:h-[300px] lg:max-h-[400px]"
           alt=""
           width={800}
           height={400}
         />
-      </SwiperSlide>
+      </SwiperSlide> */}
     </Swiper>
   );
 }

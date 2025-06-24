@@ -3,7 +3,13 @@ import { PostRepository } from "../../domain/repositories/post.repository";
 import { postApi } from "../api/\bpost.api";
 
 export class HttpPostRepository implements PostRepository {
-  async getPostList(path: string, query?: string): Promise<PostEntity[]> {
+  async getPostList({
+    path,
+    query,
+  }: {
+    path: string;
+    query?: string;
+  }): Promise<PostEntity[]> {
     const posts = await postApi.getPosts(path, query);
     return posts.map(
       (post) =>

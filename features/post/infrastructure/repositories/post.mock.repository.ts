@@ -93,7 +93,7 @@ export class MockPostRepository implements PostRepository {
       // 최근 1년 이내 랜덤 날짜
       const now = new Date();
       const randomPast = new Date(
-        now.getTime() - Math.random() * 365 * 24 * 60 * 60 * 1000
+        now.getTime() - Math.random() * 365 * 24 * 60 * 60 * 1000,
       );
 
       result.push(
@@ -106,20 +106,26 @@ export class MockPostRepository implements PostRepository {
           tags: postTags,
           createdAt: randomPast,
           updatedAt: randomPast,
-        })
+        }),
       );
     }
     return result;
   }
 
-  async getPostList(path: string, query?: string): Promise<PostEntity[]> {
+  async getPostList({
+    path,
+    query,
+  }: {
+    path: string;
+    query?: string;
+  }): Promise<PostEntity[]> {
     // 간단한 검색 기능 구현 (선택사항)
     if (query) {
       const searchTerm = query.toLowerCase();
       return this.mockPosts.filter(
         (post) =>
           post.title.toLowerCase().includes(searchTerm) ||
-          post.content.toLowerCase().includes(searchTerm)
+          post.content.toLowerCase().includes(searchTerm),
       );
     }
     console.log(this.mockPosts);
