@@ -5,10 +5,10 @@ import { useQuery } from "@tanstack/react-query";
 import { PostEntity } from "../../domain/entities/post.entity";
 import { postKeys } from "../../infrastructure/contstant/query-keys";
 
-export const usePosts = (category?: string, limit?: number) => {
+export const usePosts = (category?: string, query?: string) => {
   return useQuery<PostEntity[]>({
     queryKey: [postKeys.all, category],
-    queryFn: () => container.postService.getPostList(category, limit),
+    queryFn: () => container.postService.getPostList(category, query),
     throwOnError: true, //에러바운더리에 연락
   });
 };

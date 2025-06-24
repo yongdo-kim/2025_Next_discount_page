@@ -7,7 +7,6 @@ export class PostService {
 
   async getPostList(
     category?: string,
-    limit?: number,
     query?: string,
   ): Promise<PostEntity[]> {
     const endpoint = category ? `/posts/${category}` : "/posts";

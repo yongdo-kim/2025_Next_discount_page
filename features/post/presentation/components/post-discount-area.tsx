@@ -37,7 +37,7 @@ export default function PostDiscountArea({
   } else if (itemSize === "middle") {
     children = (
       <div className="grid grid-cols-1 gap-2 md:grid-cols-3 lg:grid-cols-3">
-        {slicedPosts?.slice(0, 3)?.map((post) => (
+        {slicedPosts?.map((post) => (
           <li key={post.id}>
             <PostCardMiddle post={post} />
           </li>
