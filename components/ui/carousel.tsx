@@ -20,10 +20,10 @@ export default function Carousel() {
       slidesPerView={1}
       loop={true}
     >
-      <SwiperSlide className="cursor-pointer overflow-hidden rounded-2xl">
+      <SwiperSlide className="cursor-pointer overflow-hidden">
         <Image
           src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800"
-          className="h-[100px] w-full object-cover px-8"
+          className="h-[100px] md:h-[200px] lg:h-[300px] w-full object-cover"
           alt=""
           width={800}
           height={400}

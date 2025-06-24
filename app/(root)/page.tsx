@@ -7,7 +7,6 @@ import { container } from "@/lib/di/dependencies";
 import { queryClient } from "@/lib/react-query";
 import { HydrationBoundary, dehydrate } from "@tanstack/react-query";
 import clsx from "clsx";
-import PostList from "./post/post-list";
 //메인 첫번째 화면이 보이는 곳,
 
 export default async function Page() {
@@ -25,17 +24,24 @@ export default async function Page() {
       <div className="mt-8">
         <Carousel />
       </div>
-      <PostDiscountArea
-        title="가장 인기있는 할인"
-        category="popular"
-        itemSize={"small"}
-      />
-      <PostDiscountArea
-        title="마감임박 할인"
-        category="popular"
-        itemSize={"middle"}
-      />
-      <PostList />
+      <div className="mx-auto max-w-screen-xl">
+        <PostDiscountArea
+          title="가장 인기있는 할인"
+          category="popular"
+          itemSize={"small"}
+        />
+        <PostDiscountArea
+          title="마감임박 할인"
+          category="popular"
+          itemSize={"middle"}
+        />
+        <PostDiscountArea
+          title="지금 할인 중"
+          category="popular"
+          itemSize={"large"}
+        />
+      </div>
+
       <Footer />
     </HydrationBoundary>
   );

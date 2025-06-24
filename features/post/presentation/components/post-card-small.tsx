@@ -7,7 +7,7 @@ import { postKeys } from "../../infrastructure/contstant/query-keys";
 
 export default function PostCardSmall({ post }: { post: PostEntity }) {
   return (
-    <div className="hover:bg-accent h-[180px] w-[180px] cursor-pointer rounded-2xl border md:h-[240px] md:w-[240px]">
+    <div className="hover:bg-accent h-full w-full cursor-pointer rounded-2xl border">
       <Link href={`/post/${post.id}`}>
         <div
           onMouseEnter={() => {

@@ -21,32 +21,44 @@ export default function PostDiscountArea({
 }: PostDiscountAreaProps) {
   const { data: posts } = usePosts(category);
 
-  const slicedPosts = posts?.slice(0, 5);
+  const slicedPosts = posts?.slice(0, 10);
 
   let children;
   if (itemSize === "small") {
-    children = slicedPosts?.map((post) => (
-      <li key={post.id}>
-        <PostCardSmall post={post} />
-      </li>
-    ));
+    children = (
+      <div className="grid grid-cols-1 gap-2 md:grid-cols-3 lg:grid-cols-4">
+        {slicedPosts?.slice(0, 4)?.map((post) => (
+          <li key={post.id}>
+            <PostCardSmall post={post} />
+          </li>
+        ))}
+      </div>
+    );
   } else if (itemSize === "middle") {
-    children = slicedPosts?.map((post) => (
-      <li key={post.id}>
-        <PostCardMiddle post={post} />
-      </li>
-    ));
+    children = (
+      <div className="grid grid-cols-1 gap-2 md:grid-cols-3 lg:grid-cols-3">
+        {slicedPosts?.slice(0, 3)?.map((post) => (
+          <li key={post.id}>
+            <PostCardMiddle post={post} />
+          </li>
+        ))}
+      </div>
+    );
   } else if (itemSize === "large") {
-    children = slicedPosts?.map((post) => (
-      <li key={post.id}>
-        <PostCardLarge post={post} />
-      </li>
-    ));
+    children = (
+      <div className="grid grid-cols-1 flex-nowrap gap-2 md:grid-cols-3 lg:grid-cols-3">
+        {slicedPosts?.map((post) => (
+          <li key={post.id}>
+            <PostCardLarge post={post} />
+          </li>
+        ))}
+      </div>
+    );
   }
 
   return (
     <section className="px-8 pt-4 pb-2">
-      <div className="flex items-center justify-between pb-2">
+      <div className="flex items-center justify-between justify-items-center pb-2">
         <div className="pb-2 text-lg font-bold">{title}</div>
         <button
           type="button"
@@ -58,7 +70,7 @@ export default function PostDiscountArea({
           전체보기
         </button>
       </div>
-      <ul className="scrollbar-hide flex flex-nowrap gap-2">{children}</ul>
+      <ul className="scrollbar-hide">{children}</ul>
     </section>
   );
 }
