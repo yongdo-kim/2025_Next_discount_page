@@ -13,6 +13,9 @@ export const metadata = {
   },
   description: APP_DESCRIPTION,
   metadataBase: new URL(SERVER_URL),
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({
@@ -23,7 +26,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${inter.className} antialiased bg-white dark:bg-neutral-900`}
+        className={`${inter.className} bg-white antialiased dark:bg-neutral-900`}
       >
         <Providers>{children}</Providers>
       </body>
