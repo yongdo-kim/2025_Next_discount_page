@@ -47,7 +47,7 @@ export default function PostDiscountArea({
   return (
     <section className="px-8 pt-4 pb-2">
       <div className="flex items-center justify-between pb-2">
-        <div className="text-lg font-bold">{title}</div>
+        <div className="pb-2 text-lg font-bold">{title}</div>
         <button
           type="button"
           className="m-0 cursor-pointer border-none bg-transparent p-0 text-sm text-neutral-500"

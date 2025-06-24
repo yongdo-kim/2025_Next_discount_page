@@ -25,7 +25,10 @@ export default function PostCardSmall({ post }: { post: PostEntity }) {
             height={180}
           />
           <div className="p-2">
-            <div className="line-clamp-2 font-medium">{post.title}</div>
+            <div className="line-clamp-2 font-bold">{post.title}</div>
+            <div className="line-clamp-1 text-sm text-neutral-500 dark:text-neutral-400">
+              {post.content}
+            </div>
           </div>
         </div>
       </Link>
