@@ -1,3 +1,4 @@
+import Footer from "@/components/footer/footer";
 import NavBar from "@/components/navbar/nav-bar";
 import Carousel from "@/components/ui/carousel";
 import { postKeys } from "@/features/post/infrastructure/contstant/query-keys";
@@ -7,7 +8,6 @@ import { queryClient } from "@/lib/react-query";
 import { HydrationBoundary, dehydrate } from "@tanstack/react-query";
 import clsx from "clsx";
 import PostList from "./post/post-list";
-
 //메인 첫번째 화면이 보이는 곳,
 
 export default async function Page() {
@@ -36,7 +36,7 @@ export default async function Page() {
         itemSize={"middle"}
       />
       <PostList />
-      <footer>FOOTER</footer>
+      <Footer />
     </HydrationBoundary>
   );
 }
