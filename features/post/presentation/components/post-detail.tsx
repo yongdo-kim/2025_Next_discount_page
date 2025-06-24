@@ -64,7 +64,7 @@ export const PostDetail = ({
   }
 
   return (
-    <article className="max-w-screen-lg mx-auto md:px-32 px-4 py-6 ">
+    <article className="max-w-screen-xl mx-auto md:px-32 px-4 py-6 ">
       {/* 태그 */}
       <TagList tags={post.tags} />
 

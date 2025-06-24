@@ -1,4 +1,5 @@
 import NavBar from "@/components/navbar/nav-bar";
+import Carousel from "@/components/ui/carousel";
 import { postKeys } from "@/features/post/infrastructure/contstant/query-keys";
 import { container } from "@/lib/di/dependencies";
 import { queryClient } from "@/lib/react-query";
@@ -19,6 +20,7 @@ export default async function Page() {
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <NavBar className={clsx("w-full border-b-1 dark:border-neutral-800")} />
+      <Carousel />
       <PostList />
       <footer>FOOTER</footer>
     </HydrationBoundary>
