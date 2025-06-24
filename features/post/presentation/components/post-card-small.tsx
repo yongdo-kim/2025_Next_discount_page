@@ -5,7 +5,7 @@ import Link from "next/link";
 import { PostEntity } from "../../domain/entities/post.entity";
 import { postKeys } from "../../infrastructure/contstant/query-keys";
 
-export const PostCardSmall = ({ post }: { post: PostEntity }) => {
+export default function PostCardSmall({ post }: { post: PostEntity }) {
   return (
     <div className="hover:bg-accent h-[180px] w-[180px] cursor-pointer rounded-2xl border">
       <Link href={`/post/${post.id}`}>

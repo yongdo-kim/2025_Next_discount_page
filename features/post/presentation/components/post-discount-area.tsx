@@ -2,18 +2,47 @@
 
 import { PostCategory } from "../../domain/types";
 import { usePosts } from "../hooks/use-posts";
-import { PostCardSmall } from "./post-card-small";
+import PostCardLarge from "./post-card-large";
+import PostCardMiddle from "./post-card-middle";
+import PostCardSmall from "./post-card-small";
+
+type PostDiscountAreaProps = {
+  title: string;
+  category?: PostCategory;
+  itemSize: PostCardSize;
+};
+
+type PostCardSize = "small" | "middle" | "large";
 
 export default function PostDiscountArea({
   title,
   category,
-}: {
-  title: string;
-  category?: PostCategory;
-}) {
+  itemSize,
+}: PostDiscountAreaProps) {
   const { data: posts } = usePosts(category);
 
   const slicedPosts = posts?.slice(0, 3);
+
+  let children;
+  if (itemSize === "small") {
+    children = slicedPosts?.map((post) => (
+      <li key={post.id}>
+        <PostCardSmall post={post} />
+      </li>
+    ));
+  } else if (itemSize === "middle") {
+    children = slicedPosts?.map((post) => (
+      <li key={post.id}>
+        <PostCardMiddle post={post} />
+      </li>
+    ));
+  } else if (itemSize === "large") {
+    children = slicedPosts?.map((post) => (
+      <li key={post.id}>
+        <PostCardLarge post={post} />
+      </li>
+    ));
+  }
 
   return (
     <section className="px-8 pt-4 pb-2">
@@ -29,13 +58,7 @@ export default function PostDiscountArea({
           전체보기
         </button>
       </div>
-      <ul className="scrollbar-hide flex flex-nowrap gap-2">
-        {slicedPosts?.map((post) => (
-          <li key={post.id}>
-            <PostCardSmall post={post} />
-          </li>
-        ))}
-      </ul>
+      <ul className="scrollbar-hide flex flex-nowrap gap-2">{children}</ul>
     </section>
   );
 }

@@ -14,7 +14,7 @@ import Link from "next/link";
 import { PostEntity } from "../../domain/entities/post.entity";
 import { postKeys } from "../../infrastructure/contstant/query-keys";
 
-export const PostCard = ({ post }: { post: PostEntity }) => {
+export default function PostCardLarge({ post }: { post: PostEntity }) {
   // createdAt이 string인 경우 Date 객체로 변환
   const createdAt = post.createdAt ? post.createdAt : new Date();
 
