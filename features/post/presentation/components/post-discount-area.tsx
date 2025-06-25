@@ -21,13 +21,13 @@ export default function PostDiscountArea({
 }: PostDiscountAreaProps) {
   const { data: posts } = usePosts(category);
 
-  const slicedPosts = posts?.slice(0, 10);
+  const slicedPosts = posts?.slice(0, 5);
 
   let children;
   if (itemSize === "small") {
     children = (
-      <div className="grid grid-cols-1 gap-2 md:grid-cols-3 lg:grid-cols-4">
-        {slicedPosts?.slice(0, 4)?.map((post) => (
+      <div className="flex space-x-4 whitespace-nowrap">
+        {slicedPosts?.map((post) => (
           <li key={post.id}>
             <PostCardSmall post={post} />
           </li>
