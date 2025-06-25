@@ -1,45 +1,58 @@
-import { TagEntity } from "@/features/tag/domain/entities/post.entity";
 import { UserEntity } from "@/features/user/domain/entities/user.entity";
 
-//태그도
-interface PostProps {
-  id: string;
+export interface PostProps {
+  id: number;
   title: string;
   content: string;
-  imageUrl: string;
-  user: UserEntity;
-  tags: TagEntity[];
-  createdAt: Date;
-  updatedAt: Date;
+  author: UserEntity;
+  commentsCount: number;
+  createdAt: string;
+  updatedAt: string | null;
+  deletedAt: string | null;
+  viewsCount: number;
+  imageUrls: string[];
+  likesCount: number;
+  isLikedByMe: boolean;
+  isMine: boolean;
+  isReportedByMe: boolean;
+  isBlurredByAI: boolean;
+  isBlockedByMe: boolean;
 }
 
 export class PostEntity {
-  public readonly id: string;
+  public readonly id: number;
   public title: string;
   public content: string;
-  public readonly imageUrl: string;
-  public readonly user: UserEntity;
-  public readonly tags: TagEntity[];
-  public readonly createdAt: Date;
-  public updatedAt: Date;
+  public readonly author: UserEntity;
+  public readonly commentsCount: number;
+  public readonly createdAt: string;
+  public readonly updatedAt: string | null;
+  public readonly deletedAt: string | null;
+  public readonly viewsCount: number;
+  public readonly imageUrls: string[];
+  public readonly likesCount: number;
+  public readonly isLikedByMe: boolean;
+  public readonly isMine: boolean;
+  public readonly isReportedByMe: boolean;
+  public readonly isBlurredByAI: boolean;
+  public readonly isBlockedByMe: boolean;
 
-  constructor({
-    id,
-    title,
-    content,
-    createdAt,
-    updatedAt,
-    imageUrl,
-    user,
-    tags,
-  }: PostProps) {
-    this.id = id;
-    this.title = title;
-    this.content = content;
-    this.imageUrl = imageUrl;
-    this.user = user;
-    this.createdAt = createdAt;
-    this.updatedAt = updatedAt;
-    this.tags = tags;
+  constructor(props: PostProps) {
+    this.id = props.id;
+    this.title = props.title;
+    this.content = props.content;
+    this.author = props.author;
+    this.commentsCount = props.commentsCount;
+    this.createdAt = props.createdAt;
+    this.updatedAt = props.updatedAt;
+    this.deletedAt = props.deletedAt;
+    this.viewsCount = props.viewsCount;
+    this.imageUrls = props.imageUrls;
+    this.likesCount = props.likesCount;
+    this.isLikedByMe = props.isLikedByMe;
+    this.isMine = props.isMine;
+    this.isReportedByMe = props.isReportedByMe;
+    this.isBlurredByAI = props.isBlurredByAI;
+    this.isBlockedByMe = props.isBlockedByMe;
   }
 }
