@@ -13,7 +13,9 @@ export default async function Page() {
   await queryClient.prefetchQuery({
     queryKey: [postKeys.all],
     queryFn: async () => {
-      const posts = await container.postService.getPostList();
+      const posts = await container.postService.getPostPreviews({
+        category: "popular",
+      });
       return JSON.parse(JSON.stringify(posts));
     },
   });

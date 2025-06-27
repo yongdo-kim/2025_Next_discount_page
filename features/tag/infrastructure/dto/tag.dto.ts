@@ -2,10 +2,8 @@ import { z } from "zod";
 import { TagEntity } from "../../domain/entities/post.entity";
 
 export const tagResponseSchema = z.object({
-  id: z.string(),
+  id: z.number(),
   name: z.string(),
-  createdAt: z.string(),
-  updatedAt: z.string(),
 });
 
 //dto

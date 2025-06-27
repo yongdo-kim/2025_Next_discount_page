@@ -2,6 +2,7 @@ import { TagEntity } from "@/features/tag/domain/entities/post.entity";
 import { UserEntity } from "@/features/user/domain/entities/user.entity";
 import { PostEntity } from "../../domain/entities/post.entity";
 import { PostRepository } from "../../domain/repositories/post.repository";
+import { PostCategory } from "../../domain/types";
 
 export class MockPostRepository implements PostRepository {
   //임시로 작업중.
@@ -50,24 +51,40 @@ export class MockPostRepository implements PostRepository {
     ];
     const users = [
       new UserEntity({
-        id: "u1",
+        id: 1,
         nickname: "홍길동",
-        profileImageUrl: "https://randomuser.me/api/portraits/men/1.jpg",
+        name: "홍길동",
+        picture: "https://randomuser.me/api/portraits/men/1.jpg",
+        provider: "local",
+        role: "user",
+        email: "",
       }),
       new UserEntity({
-        id: "u2",
+        id: 2,
         nickname: "김개발",
-        profileImageUrl: "https://randomuser.me/api/portraits/men/2.jpg",
+        name: "김개발",
+        picture: "https://randomuser.me/api/portraits/men/2.jpg",
+        provider: "local",
+        role: "user",
+        email: "",
       }),
       new UserEntity({
-        id: "u3",
+        id: 3,
         nickname: "이디자이너",
-        profileImageUrl: "https://randomuser.me/api/portraits/women/1.jpg",
+        name: "이디자이너",
+        picture: "https://randomuser.me/api/portraits/women/1.jpg",
+        provider: "local",
+        role: "user",
+        email: "",
       }),
       new UserEntity({
-        id: "u4",
+        id: 4,
         nickname: "박테스터",
-        profileImageUrl: "https://randomuser.me/api/portraits/women/2.jpg",
+        name: "박테스터",
+        picture: "https://randomuser.me/api/portraits/women/2.jpg",
+        provider: "local",
+        role: "user",
+        email: "",
       }),
     ];
     const tags = [
@@ -98,30 +115,37 @@ export class MockPostRepository implements PostRepository {
 
       result.push(
         new PostEntity({
-          id: `mock-${i + 3}`,
+          id: i + 3,
           title,
           content,
-          imageUrl,
-          user,
+          imageUrls: [imageUrl],
+          author: user,
+          commentsCount: 0,
+          createdAt: randomPast.toISOString(),
+          updatedAt: randomPast.toISOString(),
+          deletedAt: null,
+          viewsCount: 0,
+          likesCount: 0,
+          isLikedByMe: false,
+          isReportedByMe: false,
+          isBlurredByAI: false,
+          isBlockedByMe: false,
+          isMine: false,
           tags: postTags,
-          createdAt: randomPast,
-          updatedAt: randomPast,
         }),
       );
     }
     return result;
   }
 
-  async getPostList({
-    path,
-    query,
+  async getPostPreviews({
+    category,
   }: {
-    path: string;
-    query?: string;
+    category?: PostCategory;
   }): Promise<PostEntity[]> {
     // 간단한 검색 기능 구현 (선택사항)
-    if (query) {
-      const searchTerm = query.toLowerCase();
+    if (category) {
+      const searchTerm = category.toLowerCase();
       return this.mockPosts.filter(
         (post) =>
           post.title.toLowerCase().includes(searchTerm) ||
@@ -132,7 +156,7 @@ export class MockPostRepository implements PostRepository {
     return this.mockPosts;
   }
 
-  async getPostDetail(id: string): Promise<PostEntity> {
+  async getPostDetail(id: number): Promise<PostEntity> {
     const post = this.mockPosts.find((post) => post.id === id);
     if (!post) {
       throw new Error("Post not found");

@@ -1,3 +1,4 @@
+import { TagEntity } from "@/features/tag/domain/entities/post.entity";
 import { UserEntity } from "@/features/user/domain/entities/user.entity";
 
 export interface PostProps {
@@ -17,6 +18,7 @@ export interface PostProps {
   isReportedByMe: boolean;
   isBlurredByAI: boolean;
   isBlockedByMe: boolean;
+  tags: TagEntity[];
 }
 
 export class PostEntity {
@@ -36,6 +38,7 @@ export class PostEntity {
   public readonly isReportedByMe: boolean;
   public readonly isBlurredByAI: boolean;
   public readonly isBlockedByMe: boolean;
+  public readonly tags: TagEntity[];
 
   constructor(props: PostProps) {
     this.id = props.id;
@@ -54,5 +57,6 @@ export class PostEntity {
     this.isReportedByMe = props.isReportedByMe;
     this.isBlurredByAI = props.isBlurredByAI;
     this.isBlockedByMe = props.isBlockedByMe;
+    this.tags = props.tags;
   }
 }

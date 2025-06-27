@@ -1,6 +1,5 @@
 import { container } from "@/lib/di/dependencies";
 import { queryClient } from "@/lib/react-query";
-import Image from "next/image";
 import Link from "next/link";
 import { PostEntity } from "../../domain/entities/post.entity";
 import { postKeys } from "../../infrastructure/contstant/query-keys";
@@ -17,8 +16,8 @@ export default function PostCardSmall({ post }: { post: PostEntity }) {
             });
           }}
         >
-          <Image
-            src={post.imageUrl || ""}
+          <img
+            src={post.imageUrls[0] || ""}
             className="aspect-auto w-full rounded-t-2xl object-cover"
             alt={post.title}
             width={180}

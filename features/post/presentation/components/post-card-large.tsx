@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { Badge } from "@/components/ui/badge";
 import {
   Card,
@@ -9,7 +10,6 @@ import { container } from "@/lib/di/dependencies";
 import { queryClient } from "@/lib/react-query";
 import { formatDistanceToNow } from "date-fns";
 import { ko } from "date-fns/locale/ko";
-import Image from "next/image";
 import Link from "next/link";
 import { PostEntity } from "../../domain/entities/post.entity";
 import { postKeys } from "../../infrastructure/contstant/query-keys";
@@ -27,7 +27,7 @@ export default function PostCardLarge({ post }: { post: PostEntity }) {
   return (
     <Link href={`/post/${post.id}`}>
       <Card
-        className="p-4 cursor-pointer hover:bg-accent "
+        className="hover:bg-accent cursor-pointer p-4"
         onMouseEnter={() => {
           queryClient.prefetchQuery({
             queryKey: [postKeys.detail(post.id)],
@@ -42,9 +42,9 @@ export default function PostCardLarge({ post }: { post: PostEntity }) {
             </Badge>
           ))}
         </div>
-        <Image
-          src={post.imageUrl || ""}
-          className="rounded-xl aspect-video w-full object-cover"
+        <img
+          src={post.imageUrls[0] || ""}
+          className="aspect-video w-full rounded-xl object-cover"
           alt={post.title}
           width={400}
           height={200}
@@ -59,22 +59,22 @@ export default function PostCardLarge({ post }: { post: PostEntity }) {
           {/* 하단 */}
 
           <CardDescription className="mt-2">
-            <div className="flex justify-between items-center">
+            <div className="flex items-center justify-between">
               <div className="flex items-center justify-center gap-2">
                 <CardDescription>
-                  <Image
-                    src={post.user.profileImageUrl}
-                    alt={post.user.nickname}
-                    className="rounded-full aspect-square"
+                  <img
+                    src={post.author.picture}
+                    alt={post.author.nickname}
+                    className="aspect-square rounded-full"
                     width={20}
                     height={20}
                   />
                 </CardDescription>
-                <div className="text-neutral-800 dark:text-neutral-50 text-sm">
-                  {post.user.nickname}
+                <div className="text-sm text-neutral-800 dark:text-neutral-50">
+                  {post.author.nickname}
                 </div>
               </div>
-              <div className="text-neutral-500 dark:text-neutral-400 text-sm">
+              <div className="text-sm text-neutral-500 dark:text-neutral-400">
                 {timeAgo}
               </div>
             </div>
@@ -83,4 +83,4 @@ export default function PostCardLarge({ post }: { post: PostEntity }) {
       </Card>
     </Link>
   );
-};
+}

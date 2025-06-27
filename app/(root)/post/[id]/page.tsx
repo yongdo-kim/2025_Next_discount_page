@@ -9,7 +9,7 @@ import { notFound } from "next/navigation";
 export default async function PostDetailPage({
   params,
 }: {
-  params: { id: string }; //[id]로 지정한 값이 온다.
+  params: { id: number }; //[id]로 지정한 값이 온다.
 }) {
   const { id } = params;
   try {

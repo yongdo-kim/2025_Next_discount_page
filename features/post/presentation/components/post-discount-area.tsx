@@ -19,7 +19,7 @@ export default function PostDiscountArea({
   category,
   itemSize,
 }: PostDiscountAreaProps) {
-  const { data: posts } = usePosts(category);
+  const { data: posts } = usePosts({ category });
 
   const slicedPosts = posts?.slice(0, 5);
 

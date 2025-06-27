@@ -1,12 +1,7 @@
 import { PostEntity } from "../entities/post.entity";
+import { PostCategory } from "../types";
 
 export interface PostRepository {
-  getPostList({
-    path,
-    query,
-  }: {
-    path: string;
-    query?: string;
-  }): Promise<PostEntity[]>;
-  getPostDetail(id: string): Promise<PostEntity>;
+  getPostPreviews({ category }: { category?: PostCategory }): Promise<PostEntity[]>;
+  getPostDetail(id: number): Promise<PostEntity>;
 }

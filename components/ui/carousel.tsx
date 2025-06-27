@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Autoplay, Pagination } from "swiper/modules";
@@ -21,9 +20,9 @@ export default function Carousel() {
       loop={true}
     >
       <SwiperSlide className="cursor-pointer overflow-hidden">
-        <Image
+        <img
           src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800"
-          className="h-[100px] md:h-[200px] lg:h-[300px] w-full object-cover"
+          className="h-[100px] w-full object-cover md:h-[200px] lg:h-[300px]"
           alt=""
           width={800}
           height={400}

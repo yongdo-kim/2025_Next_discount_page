@@ -1,31 +1,59 @@
+import { TagEntity } from "@/features/tag/domain/entities/post.entity";
 import { tagResponseSchema } from "@/features/tag/infrastructure/dto/tag.dto";
-import { userResponseSchema } from "@/features/user/infrastructure/dto/user.dto";
+import { UserEntity } from "@/features/user/domain/entities/user.entity";
 import { z } from "zod";
 import { PostEntity } from "../../domain/entities/post.entity";
 
+export const userDtoSchema = z.object({
+  id: z.number(),
+  nickname: z.string(),
+  picture: z.string(),
+});
+
 export const postResponseSchema = z.object({
-  id: z.string(),
+  id: z.number(),
   title: z.string(),
   content: z.string(),
-  imageUrl: z.string(),
-  user: userResponseSchema,
-  tags: z.array(tagResponseSchema),
+  author: userDtoSchema,
   createdAt: z.string(),
-  updatedAt: z.string(),
+  viewsCount: z.number(),
+  likesCount: z.number(),
+  isLikedByMe: z.boolean(),
+  isReportedByMe: z.boolean(),
+  commentsCount: z.number(),
+  tags: tagResponseSchema.array(),
 });
 
 //dto
 export type PostDto = z.infer<typeof postResponseSchema>;
 
-export function toEntity(dto: PostDto): PostEntity {
+export function toPostEntity(dto: PostDto): PostEntity {
   return new PostEntity({
     id: dto.id,
     title: dto.title,
     content: dto.content,
-    imageUrl: dto.imageUrl,
-    user: userResponseSchema.parse(dto.user),
-    tags: dto.tags.map((tag) => tagResponseSchema.parse(tag)),
-    createdAt: new Date(dto.createdAt),
-    updatedAt: new Date(dto.updatedAt),
+    author: new UserEntity({
+      id: dto.author.id,
+      email: "",
+      nickname: dto.author.nickname,
+      name: "",
+      picture: dto.author.picture,
+      provider: "",
+      role: "",
+      apple_user_identifier: undefined,
+    }),
+    createdAt: dto.createdAt,
+    updatedAt: null, // 기본값
+    deletedAt: null, // 기본값
+    viewsCount: dto.viewsCount,
+    likesCount: dto.likesCount,
+    isLikedByMe: dto.isLikedByMe,
+    isMine: false, // 기본값
+    isReportedByMe: dto.isReportedByMe,
+    isBlurredByAI: false, // 기본값
+    isBlockedByMe: false, // 기본값
+    commentsCount: dto.commentsCount,
+    imageUrls: [],
+    tags: dto.tags.map((tag) => new TagEntity({ id: tag.id, name: tag.name })),
   });
 }

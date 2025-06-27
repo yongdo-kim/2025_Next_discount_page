@@ -1,11 +1,11 @@
 //태그도
 interface TagProps {
-  id: string;
+  id: number;
   name: string;
 }
 
 export class TagEntity {
-  public readonly id: string;
+  public readonly id: number;
   public readonly name: string;
 
   constructor({ id, name }: TagProps) {

@@ -1,15 +1,20 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 import { Badge } from "@/components/ui/badge";
+import { TagEntity } from "@/features/tag/domain/entities/post.entity";
+import { UserEntity } from "@/features/user/domain/entities/user.entity";
 import { format } from "date-fns";
 import { ko } from "date-fns/locale/ko";
-import Image from "next/image";
 import { PostEntity } from "../../domain/entities/post.entity";
 import { usePostDetail } from "../hooks/use-posts";
+import parse from 'html-react-parser'
+
+
 export const PostDetail = ({
   postId,
   initialPost,
 }: {
-  postId: string;
+  postId: number;
   initialPost?: PostEntity;
 }) => {
   const {
@@ -22,10 +27,10 @@ export const PostDetail = ({
   if (error) return <div>Error</div>;
   if (!post) return <div>no data</div>;
 
-  function TagList({ tags }: { tags: { id: string; name: string }[] }) {
+  function TagList({ tags }: { tags: TagEntity[] }) {
     if (!tags?.length) return null;
     return (
-      <div className="flex flex-wrap gap-2 mt-12">
+      <div className="mt-12 flex flex-wrap gap-2">
         {tags.map((tag) => (
           <Badge variant="outline" key={tag.id}>
             {tag.name}
@@ -39,17 +44,17 @@ export const PostDetail = ({
     user,
     createdAt,
   }: {
-    user: { nickname: string; profileImageUrl: string };
-    createdAt: Date;
+    user: UserEntity;
+    createdAt: string;
   }) {
     return (
-      <div className="flex items-center gap-3 mb-6">
-        <Image
-          src={user.profileImageUrl}
+      <div className="mb-6 flex items-center gap-3">
+        <img
+          src={user.picture}
           alt={user.nickname}
           width={30}
           height={30}
-          className="w-8 h-8 rounded-full object-cover "
+          className="h-8 w-8 rounded-full object-cover"
         />
         <div>
           <div className="font-semibold text-neutral-800 dark:text-neutral-50">
@@ -64,30 +69,34 @@ export const PostDetail = ({
   }
 
   return (
-    <article className="max-w-screen-xl mx-auto md:px-32 px-4 py-6 ">
+    <article className="mx-auto max-w-screen-xl px-4 py-6 md:px-32">
       {/* 태그 */}
       <TagList tags={post.tags} />
 
       {/* 제목 */}
-      <h1 className="text-3xl font-bold mb-2 pt-2">{post.title}</h1>
+      <h1 className="mb-2 pt-2 text-3xl font-bold">{post.title}</h1>
 
       {/* 작성자, 작성일 */}
-      <AuthorInfo user={post.user} createdAt={post.createdAt} />
+      <AuthorInfo user={post.author} createdAt={post.createdAt} />
 
       {/* 대표 이미지 */}
-      <Image
-        src={post.imageUrl}
+      <img
+        src={post.imageUrls[0]}
         alt={post.title}
         width={600}
         height={400}
-        className="rounded-xl object-cover w-full"
+        className="w-full rounded-xl object-cover"
         style={{ maxWidth: "100%", maxHeight: "350px" }}
       />
 
       {/* 본문 */}
-      <div className="prose prose-lg max-w-none text-neutral-900 dark:text-neutral-100 whitespace-pre-line text-lg">
-        {post.content}
+      <div className="prose prose-lg max-w-none text-lg whitespace-pre-line text-neutral-900 dark:text-neutral-100">
+        <PostContent html={post.content} />
       </div>
     </article>
   );
 };
+
+export default function PostContent({ html }: { html: string }) {
+  return <div className="prose max-w-none">{parse(html)}</div>
+}
