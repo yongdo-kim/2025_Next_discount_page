@@ -4,16 +4,13 @@ import { usePostPreviews } from "../hooks/use-posts";
 import PostCardSmall from "./post-card-small";
 
 export default function PostHotArea() {
-  //TODO : post 파라미터 및 limit
   const { data: posts } = usePostPreviews({
     req: { category: "hot", limit: 5 },
   });
 
-  const slicedPosts = posts?.slice(0, 5);
-
   const children = (
     <div className="flex space-x-4 whitespace-nowrap">
-      {slicedPosts?.map((post) => (
+      {posts?.map((post) => (
         <li key={post.id}>
           <PostCardSmall post={post} />
         </li>
@@ -24,8 +21,8 @@ export default function PostHotArea() {
   return (
     <section className="px-8 pt-4 pb-2">
       <div className="flex items-center justify-between justify-items-center pb-2">
-        <div className="pb-2 text-lg font-bold">
-          &quot;가장 인기있는 할인&quot;
+        <div className="pb-2 text-lg font-bold lg:text-2xl">
+          가장 인기있는 할인
         </div>
         <button
           type="button"

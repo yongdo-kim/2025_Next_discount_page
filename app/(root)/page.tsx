@@ -3,6 +3,7 @@ import NavBar from "@/components/navbar/nav-bar";
 import { postKeys } from "@/features/post/infrastructure/contstant/query-keys";
 import PostCarousel from "@/features/post/presentation/components/post-carousel";
 import PostDiscountArea from "@/features/post/presentation/components/post-discount-area";
+import PostHotArea from "@/features/post/presentation/components/post-hot-area";
 import { container } from "@/lib/di/dependencies";
 import { queryClient } from "@/lib/react-query";
 import { HydrationBoundary, dehydrate } from "@tanstack/react-query";
@@ -29,11 +30,8 @@ export default async function Page() {
         <PostCarousel />
       </div>
       <div className="mx-auto max-w-screen-xl">
-        <PostDiscountArea
-          title="가장 인기있는 할인"
-          category="popular"
-          itemSize={"small"}
-        />
+        <PostHotArea />
+
         <PostDiscountArea
           title="마감임박 할인"
           category="popular"
