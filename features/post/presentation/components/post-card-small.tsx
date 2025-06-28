@@ -1,10 +1,10 @@
 import { container } from "@/lib/di/dependencies";
 import { queryClient } from "@/lib/react-query";
 import Link from "next/link";
-import { PostEntity } from "../../domain/entities/post.entity";
+import { PostPreviewEntity } from "../../domain/entities/post-preview.entity";
 import { postKeys } from "../../infrastructure/contstant/query-keys";
 
-export default function PostCardSmall({ post }: { post: PostEntity }) {
+export default function PostCardSmall({ post }: { post: PostPreviewEntity }) {
   return (
     <div className="hover:bg-accent h-full w-[180px] cursor-pointer rounded-2xl border md:h-[240px] md:w-[240px]">
       <Link href={`/post/${post.id}`}>
@@ -17,7 +17,7 @@ export default function PostCardSmall({ post }: { post: PostEntity }) {
           }}
         >
           <img
-            src={post.imageUrls[0] || ""}
+            src={post.thumbnailUrl || ""}
             className="aspect-auto w-full rounded-t-2xl object-cover"
             alt={post.title}
             width={180}

@@ -1,8 +1,9 @@
-import { TagEntity } from "@/features/tag/domain/entities/post.entity";
+import { TagEntity } from "@/features/tag/domain/entities/tag.entity";
 import { tagResponseSchema } from "@/features/tag/infrastructure/dto/tag.dto";
 import { UserEntity } from "@/features/user/domain/entities/user.entity";
 import { z } from "zod";
-import { PostEntity } from "../../domain/entities/post.entity";
+import { PostEntity } from "../../../domain/entities/post.entity";
+import { postSourceResSchema } from "./post-source.res.dto";
 
 export const userDtoSchema = z.object({
   id: z.number(),
@@ -21,7 +22,9 @@ export const postResponseSchema = z.object({
   isLikedByMe: z.boolean(),
   isReportedByMe: z.boolean(),
   commentsCount: z.number(),
+  imageUrl: z.string(),
   tags: tagResponseSchema.array(),
+  source: postSourceResSchema,
 });
 
 //dto
@@ -53,7 +56,8 @@ export function toPostEntity(dto: PostDto): PostEntity {
     isBlurredByAI: false, // 기본값
     isBlockedByMe: false, // 기본값
     commentsCount: dto.commentsCount,
-    imageUrls: [],
+    imageUrl: dto.imageUrl,
     tags: dto.tags.map((tag) => new TagEntity({ id: tag.id, name: tag.name })),
+    source: dto.source,
   });
 }

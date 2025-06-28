@@ -1,4 +1,4 @@
-import { TagEntity } from "../../domain/entities/post.entity";
+import { TagEntity } from "../../domain/entities/tag.entity";
 import { TagRepository } from "../../domain/repositories/tag.repository";
 
 //복수의 useCase 추가 가능

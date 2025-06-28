@@ -1,4 +1,4 @@
-import { TagEntity } from "../../domain/entities/post.entity";
+import { TagEntity } from "../../domain/entities/tag.entity";
 import { TagRepository } from "../../domain/repositories/tag.repository";
 import { tagApi } from "../api/tag.api";
 
@@ -10,7 +10,7 @@ export class HttpTagRepository implements TagRepository {
         new TagEntity({
           id: tag.id,
           name: tag.name,
-        })
+        }),
     );
   }
 }

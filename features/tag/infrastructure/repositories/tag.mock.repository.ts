@@ -1,4 +1,4 @@
-import { TagEntity } from "../../domain/entities/post.entity";
+import { TagEntity } from "../../domain/entities/tag.entity";
 import { TagRepository } from "../../domain/repositories/tag.repository";
 
 export class MockTagRepository implements TagRepository {
@@ -23,7 +23,7 @@ export class MockTagRepository implements TagRepository {
     if (query) {
       const searchTerm = query.toLowerCase();
       return this.mockTags.filter((tag) =>
-        tag.name.toLowerCase().includes(searchTerm)
+        tag.name.toLowerCase().includes(searchTerm),
       );
     }
     return this.mockTags;

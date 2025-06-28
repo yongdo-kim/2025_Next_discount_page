@@ -11,10 +11,10 @@ import { queryClient } from "@/lib/react-query";
 import { formatDistanceToNow } from "date-fns";
 import { ko } from "date-fns/locale/ko";
 import Link from "next/link";
-import { PostEntity } from "../../domain/entities/post.entity";
 import { postKeys } from "../../infrastructure/contstant/query-keys";
+import { PostPreviewEntity } from "../../domain/entities/post-preview.entity";
 
-export default function PostCardLarge({ post }: { post: PostEntity }) {
+export default function PostCardLarge({ post }: { post: PostPreviewEntity }) {
   // createdAt이 string인 경우 Date 객체로 변환
   const createdAt = post.createdAt ? post.createdAt : new Date();
 
@@ -43,7 +43,7 @@ export default function PostCardLarge({ post }: { post: PostEntity }) {
           ))}
         </div>
         <img
-          src={post.imageUrls[0] || ""}
+          src={post.thumbnailUrl || ""}
           className="aspect-video w-full rounded-xl object-cover"
           alt={post.title}
           width={400}

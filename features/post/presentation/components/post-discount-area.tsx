@@ -1,7 +1,7 @@
 "use client";
 
 import { PostCategory } from "../../domain/types";
-import { usePosts } from "../hooks/use-posts";
+import { usePostPreviews } from "../hooks/use-posts";
 import PostCardLarge from "./post-card-large";
 import PostCardMiddle from "./post-card-middle";
 import PostCardSmall from "./post-card-small";
@@ -19,7 +19,7 @@ export default function PostDiscountArea({
   category,
   itemSize,
 }: PostDiscountAreaProps) {
-  const { data: posts } = usePosts({ category });
+  const { data: posts } = usePostPreviews({ category });
 
   const slicedPosts = posts?.slice(0, 5);
 

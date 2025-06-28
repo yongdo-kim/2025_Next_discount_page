@@ -9,14 +9,15 @@ import { notFound } from "next/navigation";
 export default async function PostDetailPage({
   params,
 }: {
-  params: { id: number }; //[id]로 지정한 값이 온다.
+  params: Promise<{ id: string }>;
 }) {
-  const { id } = params;
+  const { id } = await params; // await으로 받아야 함!
+  const numId = Number(id);
   try {
     await queryClient.prefetchQuery({
-      queryKey: postKeys.detail(id),
+      queryKey: postKeys.detail(numId),
       queryFn: async () => {
-        const post = await container.postService.getPostDetail(id);
+        const post = await container.postService.getPostDetail(numId);
         return JSON.parse(JSON.stringify(post));
       },
     });
@@ -27,13 +28,13 @@ export default async function PostDetailPage({
     console.log(error);
   }
 
-  const post = queryClient.getQueryData<PostEntity>(postKeys.detail(id));
+  const post = queryClient.getQueryData<PostEntity>(postKeys.detail(numId));
   const dehydratedState = dehydrate(queryClient);
 
   return (
     <HydrationBoundary state={dehydratedState}>
       <ScrollHideNavbar />
-      <PostDetail postId={id} initialPost={post} />
+      <PostDetail postId={numId} initialPost={post} />
     </HydrationBoundary>
   );
 }

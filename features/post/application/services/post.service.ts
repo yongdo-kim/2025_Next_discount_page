@@ -1,3 +1,4 @@
+import { PostPreviewEntity } from "../../domain/entities/post-preview.entity";
 import { PostEntity } from "../../domain/entities/post.entity";
 import { PostRepository } from "../../domain/repositories/post.repository";
 import { PostCategory } from "../../domain/types";
@@ -10,7 +11,7 @@ export class PostService {
     category,
   }: {
     category?: PostCategory;
-  }): Promise<PostEntity[]> {
+  }): Promise<PostPreviewEntity[]> {
     const posts = await this.postRepository.getPostPreviews({
       category,
     });

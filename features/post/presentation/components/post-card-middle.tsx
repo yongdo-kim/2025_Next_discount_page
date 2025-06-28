@@ -2,10 +2,10 @@
 import { container } from "@/lib/di/dependencies";
 import { queryClient } from "@/lib/react-query";
 import Link from "next/link";
-import { PostEntity } from "../../domain/entities/post.entity";
 import { postKeys } from "../../infrastructure/contstant/query-keys";
+import { PostPreviewEntity } from "../../domain/entities/post-preview.entity";
 
-export default function PostCardMiddle({ post }: { post: PostEntity }) {
+export default function PostCardMiddle({ post }: { post: PostPreviewEntity }) {
   return (
     <div className="hover:bg-accent w-full cursor-pointer rounded-2xl">
       <Link href={`/post/${post.id}`}>
@@ -19,7 +19,7 @@ export default function PostCardMiddle({ post }: { post: PostEntity }) {
         >
           <div className="relative">
             <img
-              src={post.imageUrls[0] || ""}
+              src={post.thumbnailUrl || ""}
               className="rounded-2xl object-cover"
               alt={post.title}
               width={600}

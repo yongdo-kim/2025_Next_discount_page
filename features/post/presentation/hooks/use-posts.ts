@@ -2,12 +2,13 @@
 
 import { container } from "@/lib/di/dependencies";
 import { useQuery } from "@tanstack/react-query";
-import { PostEntity } from "../../domain/entities/post.entity";
+import { PostPreviewEntity } from "../../domain/entities/post-preview.entity";
 import { PostCategory } from "../../domain/types";
 import { postKeys } from "../../infrastructure/contstant/query-keys";
+import { PostEntity } from "../../domain/entities/post.entity";
 
-export const usePosts = ({ category }: { category?: string }) => {
-  return useQuery<PostEntity[]>({
+export const usePostPreviews = ({ category }: { category?: string }) => {
+  return useQuery<PostPreviewEntity[]>({
     queryKey: [postKeys.all, category],
     queryFn: () =>
       container.postService.getPostPreviews({

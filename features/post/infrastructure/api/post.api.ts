@@ -1,7 +1,8 @@
 // features/post/infrastructure/api/post.api.ts
 import { apiClient } from "@/lib/api/client";
 import { PostCategory } from "../../domain/types";
-import { postResponseSchema } from "../dto/post.dto";
+import { postPreviewResSchema } from "../dto/res/post-preview.res.dto";
+import { postResponseSchema } from "../dto/res/post.res.dto";
 
 export const postApi = {
   async getPosts({ category }: { category?: PostCategory }) {
@@ -12,8 +13,7 @@ export const postApi = {
   async getPostPreviews({ category }: { category?: PostCategory }) {
     const response = await apiClient.get("/posts/previews", category);
     const posts = response["posts"];
-    console.log(posts);
-    return postResponseSchema.array().parse(posts);
+    return postPreviewResSchema.array().parse(posts);
   },
 
   async getPostDetail(id: number) {

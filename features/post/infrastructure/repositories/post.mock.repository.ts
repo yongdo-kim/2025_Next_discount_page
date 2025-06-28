@@ -1,12 +1,14 @@
-import { TagEntity } from "@/features/tag/domain/entities/post.entity";
+import { TagEntity } from "@/features/tag/domain/entities/tag.entity";
 import { UserEntity } from "@/features/user/domain/entities/user.entity";
 import { PostEntity } from "../../domain/entities/post.entity";
 import { PostRepository } from "../../domain/repositories/post.repository";
 import { PostCategory } from "../../domain/types";
+import { PostPreviewEntity } from "../../domain/entities/post-preview.entity";
 
 export class MockPostRepository implements PostRepository {
   //임시로 작업중.
   private mockPosts: PostEntity[] = [];
+  private mockPostPreviews: PostPreviewEntity[] = [];
 
   constructor() {
     this.mockPosts.push(...this.generateMockPosts(100));
@@ -88,12 +90,12 @@ export class MockPostRepository implements PostRepository {
       }),
     ];
     const tags = [
-      new TagEntity({ id: "1", name: "점심" }),
-      new TagEntity({ id: "2", name: "저녁" }),
-      new TagEntity({ id: "3", name: "개발" }),
-      new TagEntity({ id: "4", name: "일상" }),
-      new TagEntity({ id: "5", name: "카페" }),
-      new TagEntity({ id: "6", name: "스터디" }),
+      new TagEntity({ id: 1, name: "점심" }),
+      new TagEntity({ id: 2, name: "저녁" }),
+      new TagEntity({ id: 3, name: "개발" }),
+      new TagEntity({ id: 4, name: "일상" }),
+      new TagEntity({ id: 5, name: "카페" }),
+      new TagEntity({ id: 6, name: "스터디" }),
     ];
 
     const result: PostEntity[] = [];
@@ -118,7 +120,7 @@ export class MockPostRepository implements PostRepository {
           id: i + 3,
           title,
           content,
-          imageUrls: [imageUrl],
+          imageUrl,
           author: user,
           commentsCount: 0,
           createdAt: randomPast.toISOString(),
@@ -132,6 +134,10 @@ export class MockPostRepository implements PostRepository {
           isBlockedByMe: false,
           isMine: false,
           tags: postTags,
+          source: {
+            scrapingSourceUrl: "https://naver.com",
+            originSourceUrl: "https://naver.com",
+          },
         }),
       );
     }
@@ -142,18 +148,18 @@ export class MockPostRepository implements PostRepository {
     category,
   }: {
     category?: PostCategory;
-  }): Promise<PostEntity[]> {
+  }): Promise<PostPreviewEntity[]> {
     // 간단한 검색 기능 구현 (선택사항)
     if (category) {
       const searchTerm = category.toLowerCase();
-      return this.mockPosts.filter(
+      return this.mockPostPreviews.filter(
         (post) =>
           post.title.toLowerCase().includes(searchTerm) ||
           post.content.toLowerCase().includes(searchTerm),
       );
     }
     console.log(this.mockPosts);
-    return this.mockPosts;
+    return this.mockPostPreviews;
   }
 
   async getPostDetail(id: number): Promise<PostEntity> {

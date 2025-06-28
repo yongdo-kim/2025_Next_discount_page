@@ -1,14 +1,13 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 import { Badge } from "@/components/ui/badge";
-import { TagEntity } from "@/features/tag/domain/entities/post.entity";
+import { TagEntity } from "@/features/tag/domain/entities/tag.entity";
 import { UserEntity } from "@/features/user/domain/entities/user.entity";
 import { format } from "date-fns";
 import { ko } from "date-fns/locale/ko";
+import parse from "html-react-parser";
 import { PostEntity } from "../../domain/entities/post.entity";
 import { usePostDetail } from "../hooks/use-posts";
-import parse from 'html-react-parser'
-
 
 export const PostDetail = ({
   postId,
@@ -32,7 +31,11 @@ export const PostDetail = ({
     return (
       <div className="mt-12 flex flex-wrap gap-2">
         {tags.map((tag) => (
-          <Badge variant="outline" key={tag.id}>
+          <Badge
+            variant="outline"
+            key={tag.id}
+            className="md:text-md lg:text-lg"
+          >
             {tag.name}
           </Badge>
         ))}
@@ -48,7 +51,7 @@ export const PostDetail = ({
     createdAt: string;
   }) {
     return (
-      <div className="mb-6 flex items-center gap-3">
+      <div className="mt-4 mb-4 flex items-center gap-3">
         <img
           src={user.picture}
           alt={user.nickname}
@@ -81,22 +84,37 @@ export const PostDetail = ({
 
       {/* 대표 이미지 */}
       <img
-        src={post.imageUrls[0]}
+        src={post.imageUrl}
         alt={post.title}
         width={600}
         height={400}
-        className="w-full rounded-xl object-cover"
+        className="mt-8 mb-8 w-full rounded-xl object-cover"
         style={{ maxWidth: "100%", maxHeight: "350px" }}
       />
 
       {/* 본문 */}
-      <div className="prose prose-lg max-w-none text-lg whitespace-pre-line text-neutral-900 dark:text-neutral-100">
+      <div className="w-full text-lg whitespace-pre-line text-neutral-900 dark:text-neutral-100">
         <PostContent html={post.content} />
+      </div>
+
+      {/* 자료출처 */}
+      <div>
+        <p>
+          자료출처:{" "}
+          <a
+            href={post.source?.scrapingSourceUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-400 underline hover:text-blue-500"
+          >
+            {post.source?.scrapingSourceUrl}
+          </a>
+        </p>
       </div>
     </article>
   );
 };
 
 export default function PostContent({ html }: { html: string }) {
-  return <div className="prose max-w-none">{parse(html)}</div>
+  return <div className="mt-16">{parse(html)}</div>;
 }

@@ -1,8 +1,7 @@
 import { TagEntity } from "@/features/tag/domain/entities/tag.entity";
 import { UserEntity } from "@/features/user/domain/entities/user.entity";
-import { PostSourceEntity } from "./post-source.entity";
 
-export interface PostProps {
+export interface PostPreviewProps {
   id: number;
   title: string;
   content: string;
@@ -12,7 +11,7 @@ export interface PostProps {
   updatedAt: string | null;
   deletedAt: string | null;
   viewsCount: number;
-  imageUrl: string;
+  thumbnailUrl: string;
   likesCount: number;
   isLikedByMe: boolean;
   isMine: boolean;
@@ -20,10 +19,9 @@ export interface PostProps {
   isBlurredByAI: boolean;
   isBlockedByMe: boolean;
   tags: TagEntity[];
-  source: PostSourceEntity;
 }
 
-export class PostEntity {
+export class PostPreviewEntity {
   public readonly id: number;
   public title: string;
   public content: string;
@@ -33,7 +31,7 @@ export class PostEntity {
   public readonly updatedAt: string | null;
   public readonly deletedAt: string | null;
   public readonly viewsCount: number;
-  public readonly imageUrl: string;
+  public readonly thumbnailUrl: string;
   public readonly likesCount: number;
   public readonly isLikedByMe: boolean;
   public readonly isMine: boolean;
@@ -41,9 +39,8 @@ export class PostEntity {
   public readonly isBlurredByAI: boolean;
   public readonly isBlockedByMe: boolean;
   public readonly tags: TagEntity[];
-  public readonly source: PostSourceEntity;
 
-  constructor(props: PostProps) {
+  constructor(props: PostPreviewProps) {
     this.id = props.id;
     this.title = props.title;
     this.content = props.content;
@@ -53,7 +50,6 @@ export class PostEntity {
     this.updatedAt = props.updatedAt;
     this.deletedAt = props.deletedAt;
     this.viewsCount = props.viewsCount;
-    this.imageUrl = props.imageUrl;
     this.likesCount = props.likesCount;
     this.isLikedByMe = props.isLikedByMe;
     this.isMine = props.isMine;
@@ -61,6 +57,6 @@ export class PostEntity {
     this.isBlurredByAI = props.isBlurredByAI;
     this.isBlockedByMe = props.isBlockedByMe;
     this.tags = props.tags;
-    this.source = props.source;
+    this.thumbnailUrl = props.thumbnailUrl;
   }
 }
