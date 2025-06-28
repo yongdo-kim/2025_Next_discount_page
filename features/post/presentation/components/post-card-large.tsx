@@ -30,7 +30,7 @@ export default function PostCardLarge({ post }: { post: PostPreviewEntity }) {
   return (
     <Link href={`/post/${post.id}`}>
       <Card
-        className="hover:bg-accent cursor-pointer p-4"
+        className="hover:bg-accent h-full cursor-pointer p-4"
         onMouseEnter={() => {
           queryClient.prefetchQuery({
             queryKey: [postKeys.detail(post.id)],
@@ -39,11 +39,16 @@ export default function PostCardLarge({ post }: { post: PostPreviewEntity }) {
         }}
       >
         <div className="flex items-center gap-2">
-          {post.tags.map((tag) => (
-            <Badge variant="outline" className="text-xs" key={tag.id}>
+          {post.tags?.slice(0, 3).map((tag) => (
+            <Badge variant="outline" className="text-md" key={tag.id}>
               {tag.name}
             </Badge>
           ))}
+          {post.tags?.length === 0 && (
+            <Badge variant="outline" className="text-md">
+              {"#"}
+            </Badge>
+          )}
         </div>
         <img
           src={post.thumbnailUrl || ""}

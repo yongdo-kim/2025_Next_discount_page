@@ -3,6 +3,6 @@ export type PostCategory =
   | "game"
   | "food"
   | "popular"
-  | "last-minute"
+  | "time-limit"
   | "hot"
   | "new";

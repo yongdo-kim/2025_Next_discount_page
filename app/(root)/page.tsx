@@ -4,6 +4,7 @@ import { postKeys } from "@/features/post/infrastructure/contstant/query-keys";
 import PostCarousel from "@/features/post/presentation/components/post-carousel";
 import PostDiscountArea from "@/features/post/presentation/components/post-discount-area";
 import PostHotArea from "@/features/post/presentation/components/post-hot-area";
+import PostPreviewGameArea from "@/features/post/presentation/components/post-preview-game-area";
 import { container } from "@/lib/di/dependencies";
 import { queryClient } from "@/lib/react-query";
 import { HydrationBoundary, dehydrate } from "@tanstack/react-query";
@@ -31,12 +32,7 @@ export default async function Page() {
       </div>
       <div className="mx-auto max-w-screen-xl">
         <PostHotArea />
-
-        <PostDiscountArea
-          title="마감임박 할인"
-          category="popular"
-          itemSize={"middle"}
-        />
+        <PostPreviewGameArea />
         <PostDiscountArea
           title="지금 할인 중"
           category="popular"
