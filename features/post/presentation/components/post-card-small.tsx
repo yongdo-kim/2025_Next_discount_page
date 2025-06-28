@@ -1,10 +1,14 @@
+/* eslint-disable @next/next/no-img-element */
 import { container } from "@/lib/di/dependencies";
 import { queryClient } from "@/lib/react-query";
+import { htmlToText } from "html-to-text";
 import Link from "next/link";
 import { PostPreviewEntity } from "../../domain/entities/post-preview.entity";
 import { postKeys } from "../../infrastructure/contstant/query-keys";
 
 export default function PostCardSmall({ post }: { post: PostPreviewEntity }) {
+  const content = htmlToText(post.content);
+
   return (
     <div className="hover:bg-accent h-full w-[180px] cursor-pointer rounded-2xl border md:h-[240px] md:w-[240px]">
       <Link href={`/post/${post.id}`}>
@@ -26,7 +30,7 @@ export default function PostCardSmall({ post }: { post: PostPreviewEntity }) {
           <div className="p-2">
             <div className="line-clamp-2 font-bold">{post.title}</div>
             <div className="line-clamp-1 text-sm text-neutral-500 dark:text-neutral-400">
-              {post.content}
+              {content}
             </div>
           </div>
         </div>
