@@ -6,7 +6,12 @@ import "swiper/css/pagination";
 import { Autoplay, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-export default function Carousel() {
+type CarouselProps = {
+  title: string;
+  thumbnailUrl: string;
+}[];
+
+export default function Carousel({ data }: { data: CarouselProps }) {
   return (
     <Swiper
       modules={[Autoplay, Pagination]}
@@ -20,33 +25,23 @@ export default function Carousel() {
       slidesPerView={1}
       loop={true}
     >
-      <SwiperSlide className="cursor-pointer overflow-hidden">
-        <img
-          src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800"
-          className="h-[100px] w-full object-cover md:h-[200px] lg:h-[300px]"
-          alt=""
-          width={800}
-          height={400}
-        />
-      </SwiperSlide>
-      {/* <SwiperSlide>
-        <Image
-          src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?w=800"
-          className="h-[150px] w-full rounded-full object-cover sm:h-[250px] sm:rounded-none md:h-[300px] lg:max-h-[400px]"
-          alt=""
-          width={800}
-          height={400}
-        />
-      </SwiperSlide>
-      <SwiperSlide>
-        <Image
-          src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800"
-          className="h-[150px] w-full rounded-full object-cover sm:h-[250px] sm:rounded-none md:h-[300px] lg:max-h-[400px]"
-          alt=""
-          width={800}
-          height={400}
-        />
-      </SwiperSlide> */}
+      {data.map((item) => (
+        <SwiperSlide className="cursor-pointer overflow-hidden" key={item.title}>
+          <div className="relative">
+            <img
+              src={item.thumbnailUrl || ""}
+              className="aspect-video h-[300px] w-full object-cover"
+              alt={item.title}
+              width={600}
+              height={400}
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/40 to-transparent" />
+            <div className="absolute right-0 bottom-0 p-6 text-white">
+              <div className="text-3xl font-bold">{item.title}</div>
+            </div>
+          </div>
+        </SwiperSlide>
+      ))}
     </Swiper>
   );
 }

@@ -4,8 +4,11 @@ import { queryClient } from "@/lib/react-query";
 import Link from "next/link";
 import { postKeys } from "../../infrastructure/contstant/query-keys";
 import { PostPreviewEntity } from "../../domain/entities/post-preview.entity";
+import { htmlToText } from "html-to-text";
 
 export default function PostCardMiddle({ post }: { post: PostPreviewEntity }) {
+  const content = htmlToText(post.content);
+
   return (
     <div className="hover:bg-accent w-full cursor-pointer rounded-2xl">
       <Link href={`/post/${post.id}`}>
@@ -31,7 +34,7 @@ export default function PostCardMiddle({ post }: { post: PostPreviewEntity }) {
                 {post.title}
               </div>
               <div className="line-clamp-2 text-sm font-medium text-neutral-200">
-                {post.content}
+                {content}
               </div>
             </div>
           </div>

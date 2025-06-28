@@ -43,7 +43,7 @@ export class PostPreviewEntity {
   constructor(props: PostPreviewProps) {
     this.id = props.id;
     this.title = props.title;
-    this.content = props.content;
+    this.content = props.content.replace(/^[`']{3}html\s*/im, "").replace(/^[`']{3}\s*$/gm, "").trim();
     this.author = props.author;
     this.commentsCount = props.commentsCount;
     this.createdAt = props.createdAt;

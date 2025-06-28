@@ -34,21 +34,21 @@ export default function ScrollHideNavbar() {
     <>
       <div
         className={clsx(
-          "fixed left-0 w-full z-50 transition-all duration-300 ",
-          show ? "top-[50px]" : "top-0"
+          "fixed left-0 z-50 w-full transition-all duration-300",
+          show ? "top-[50px] px-4 py-3" : "top-0 px-0 py-0",
         )}
       >
         <Progress
           value={scrollProgress}
-          className="h-1 w-full rounded-none dark:bg-neutral-800 bg-slate-50 [&>div]:bg-emerald-500"
+          className="h-1 w-full rounded-none bg-slate-50 dark:bg-neutral-800 [&>div]:bg-emerald-500"
         />
       </div>
 
-      <div className="fixed top-0 left-0 w-full z-40">
+      <div className="fixed top-0 left-0 z-40 w-full">
         <NavBar
           className={clsx(
-            "w-full transition-transform duration-300 shadow h-[50px]",
-            show ? "translate-y-0" : "-translate-y-full"
+            "w-full shadow transition-transform duration-300",
+            show ? "translate-y-0" : "-translate-y-full",
           )}
         />
       </div>

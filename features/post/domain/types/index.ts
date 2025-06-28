@@ -1,1 +1,8 @@
-export type PostCategory = "all" | "game" | "food" | "popular" | "last-minute";
+export type PostCategory =
+  | "all"
+  | "game"
+  | "food"
+  | "popular"
+  | "last-minute"
+  | "hot"
+  | "new";

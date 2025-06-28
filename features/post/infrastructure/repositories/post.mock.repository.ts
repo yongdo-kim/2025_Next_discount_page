@@ -1,9 +1,9 @@
 import { TagEntity } from "@/features/tag/domain/entities/tag.entity";
 import { UserEntity } from "@/features/user/domain/entities/user.entity";
+import { GetPostPreviewsReqDto } from "@/features/user/infrastructure/dto/requests/post-preview.req.dto";
+import { PostPreviewEntity } from "../../domain/entities/post-preview.entity";
 import { PostEntity } from "../../domain/entities/post.entity";
 import { PostRepository } from "../../domain/repositories/post.repository";
-import { PostCategory } from "../../domain/types";
-import { PostPreviewEntity } from "../../domain/entities/post-preview.entity";
 
 export class MockPostRepository implements PostRepository {
   //임시로 작업중.
@@ -145,13 +145,13 @@ export class MockPostRepository implements PostRepository {
   }
 
   async getPostPreviews({
-    category,
+    req,
   }: {
-    category?: PostCategory;
+    req: GetPostPreviewsReqDto;
   }): Promise<PostPreviewEntity[]> {
     // 간단한 검색 기능 구현 (선택사항)
-    if (category) {
-      const searchTerm = category.toLowerCase();
+    if (req.category) {
+      const searchTerm = req.category.toLowerCase();
       return this.mockPostPreviews.filter(
         (post) =>
           post.title.toLowerCase().includes(searchTerm) ||

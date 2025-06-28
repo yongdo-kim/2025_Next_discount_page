@@ -3,7 +3,7 @@ import z from "zod";
 
 export const postSourceResSchema = z.object({
   scrapingSourceUrl: z.string(),
-  originSourceUrl: z.string().optional(),
+  originSourceUrl: z.string().optional().nullable(),
 });
 
 //dto

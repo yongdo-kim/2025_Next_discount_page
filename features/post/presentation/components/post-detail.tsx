@@ -48,7 +48,7 @@ export const PostDetail = ({
     labelColor = "text-neutral-500",
     linkColor = "text-blue-400 underline hover:text-blue-500",
   }: {
-    url?: string;
+    url?: string | null;
     labelColor?: string;
     linkColor?: string;
   }) {
@@ -105,7 +105,7 @@ export const PostDetail = ({
   }
 
   return (
-    <article className="mx-auto max-w-screen-xl px-4 py-6 md:px-32">
+    <article className="mx-auto mt-16 max-w-screen-xl px-4 py-6 md:px-32">
       {/* 태그 */}
       <TagList tags={post.tags} />
 
@@ -117,14 +117,31 @@ export const PostDetail = ({
 
       {/* 대표 이미지 */}
       <div className="mt-8 mb-8">
-        <img
-          src={post.imageUrl}
-          alt={post.title}
-          width={600}
-          height={400}
-          className="mb-2 w-full rounded-xl object-cover"
-          style={{ maxWidth: "100%", maxHeight: "350px" }}
-        />
+        {post.source?.originSourceUrl ? (
+          <a
+            href={post.source.originSourceUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img
+              src={post.imageUrl}
+              alt={post.title}
+              width={600}
+              height={400}
+              className="mb-2 w-full rounded-xl object-cover transition hover:opacity-80"
+              style={{ maxWidth: "100%", maxHeight: "350px" }}
+            />
+          </a>
+        ) : (
+          <img
+            src={post.imageUrl}
+            alt={post.title}
+            width={600}
+            height={400}
+            className="mb-2 w-full rounded-xl object-cover"
+            style={{ maxWidth: "100%", maxHeight: "350px" }}
+          />
+        )}
         {/* 대표이미지-링크 */}
         <SourceLink
           url={post.source?.originSourceUrl}
@@ -139,7 +156,7 @@ export const PostDetail = ({
       </div>
 
       {/* 자료출처 */}
-      <div className="border-t pt-4">
+      <div className="border-t pt-4 pb-32">
         <SourceLink url={post.source?.scrapingSourceUrl} />
       </div>
     </article>
@@ -147,5 +164,15 @@ export const PostDetail = ({
 };
 
 export default function PostContent({ html }: { html: string }) {
-  return <div className="mt-16">{parse(html)}</div>;
+  const newHTMl = html
+    .replace(/^[`']{3}html\s*/im, "") // 맨 앞 ```html 또는 '''html 제거
+    .replace(/^[`']{3}\s*$/gm, "") // 맨 뒤 ``` 또는 ''' 제거
+    .trim();
+  return (
+    <div className="mt-16 max-w-none whitespace-pre-line">
+      <div className="[&_*]:border [&_a]:text-blue-400 [&_a]:underline [&_img]:mx-auto [&_img]:h-auto [&_img]:max-w-full [&_table]:border-collapse [&_td]:p-2 [&_th]:p-2">
+        {parse(newHTMl)}
+      </div>
+    </div>
+  );
 }

@@ -16,10 +16,11 @@ type PostCardSize = "small" | "middle" | "large";
 
 export default function PostDiscountArea({
   title,
-  category,
   itemSize,
 }: PostDiscountAreaProps) {
-  const { data: posts } = usePostPreviews({ category });
+  const { data: posts } = usePostPreviews({
+    req: { category: "new", limit: 5 },
+  });
 
   const slicedPosts = posts?.slice(0, 5);
 

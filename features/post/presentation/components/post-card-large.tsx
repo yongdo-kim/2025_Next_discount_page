@@ -10,11 +10,14 @@ import { container } from "@/lib/di/dependencies";
 import { queryClient } from "@/lib/react-query";
 import { formatDistanceToNow } from "date-fns";
 import { ko } from "date-fns/locale/ko";
+import { htmlToText } from "html-to-text";
 import Link from "next/link";
-import { postKeys } from "../../infrastructure/contstant/query-keys";
 import { PostPreviewEntity } from "../../domain/entities/post-preview.entity";
+import { postKeys } from "../../infrastructure/contstant/query-keys";
 
 export default function PostCardLarge({ post }: { post: PostPreviewEntity }) {
+  const content = htmlToText(post.content);
+
   // createdAt이 string인 경우 Date 객체로 변환
   const createdAt = post.createdAt ? post.createdAt : new Date();
 
@@ -53,9 +56,7 @@ export default function PostCardLarge({ post }: { post: PostPreviewEntity }) {
           {/* 상단 */}
           <CardTitle className="line-clamp-1 font-bold">{post.title}</CardTitle>
           {/* 중단 */}
-          <CardDescription className="line-clamp-2">
-            {post.content}
-          </CardDescription>
+          <CardDescription className="line-clamp-2">{content}</CardDescription>
           {/* 하단 */}
 
           <CardDescription className="mt-2">

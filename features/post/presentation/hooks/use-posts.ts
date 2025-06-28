@@ -1,18 +1,18 @@
 "use client";
 
+import { GetPostPreviewsReqDto } from "@/features/user/infrastructure/dto/requests/post-preview.req.dto";
 import { container } from "@/lib/di/dependencies";
 import { useQuery } from "@tanstack/react-query";
 import { PostPreviewEntity } from "../../domain/entities/post-preview.entity";
-import { PostCategory } from "../../domain/types";
-import { postKeys } from "../../infrastructure/contstant/query-keys";
 import { PostEntity } from "../../domain/entities/post.entity";
+import { postKeys } from "../../infrastructure/contstant/query-keys";
 
-export const usePostPreviews = ({ category }: { category?: string }) => {
+export const usePostPreviews = ({ req }: { req: GetPostPreviewsReqDto }) => {
   return useQuery<PostPreviewEntity[]>({
-    queryKey: [postKeys.all, category],
+    queryKey: [postKeys.all, req],
     queryFn: () =>
       container.postService.getPostPreviews({
-        category: category as PostCategory,
+        req,
       }),
     throwOnError: true, //에러바운더리에 연락
   });

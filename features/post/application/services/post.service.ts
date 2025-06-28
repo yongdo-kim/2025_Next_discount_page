@@ -1,19 +1,19 @@
+import { GetPostPreviewsReqDto } from "@/features/user/infrastructure/dto/requests/post-preview.req.dto";
 import { PostPreviewEntity } from "../../domain/entities/post-preview.entity";
 import { PostEntity } from "../../domain/entities/post.entity";
 import { PostRepository } from "../../domain/repositories/post.repository";
-import { PostCategory } from "../../domain/types";
 
 //복수의 useCase 추가 가능
 export class PostService {
   constructor(private postRepository: PostRepository) {}
 
   async getPostPreviews({
-    category,
+    req,
   }: {
-    category?: PostCategory;
+    req: GetPostPreviewsReqDto;
   }): Promise<PostPreviewEntity[]> {
     const posts = await this.postRepository.getPostPreviews({
-      category,
+      req,
     });
     return posts;
   }
