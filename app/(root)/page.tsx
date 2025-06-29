@@ -4,6 +4,7 @@ import { categoryKeys } from "@/features/category/infrastructure/contstant/query
 import CategoryCarousel from "@/features/category/presentation/components/category-carousel";
 import DiscountByCategoryArea from "@/features/category/presentation/components/category-discount-area";
 import NewCategoryDiscountArea from "@/features/category/presentation/components/category-new-area";
+import CategoryRandomArea from "@/features/category/presentation/components/category-random-area";
 import { container } from "@/lib/di/dependencies";
 import { queryClient } from "@/lib/react-query";
 import { HydrationBoundary, dehydrate } from "@tanstack/react-query";
@@ -33,8 +34,9 @@ export default async function Page() {
       <NavBar className={clsx("w-full border-b-1 dark:border-neutral-800")} />
       <div className="">{/* <PostCarousel /> */}</div>
       <div className="mx-auto max-w-screen-xl">
-        <CategoryCarousel/>
+        <CategoryCarousel />
         <NewCategoryDiscountArea />
+        <CategoryRandomArea />
         <DiscountByCategoryArea />
       </div>
 

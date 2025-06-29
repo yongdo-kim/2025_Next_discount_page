@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 
+import Link from "next/link";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Autoplay, Pagination } from "swiper/modules";
@@ -27,19 +28,21 @@ export default function Carousel({ data }: { data: CarouselProps }) {
     >
       {data.map((item) => (
         <SwiperSlide className="cursor-pointer overflow-hidden" key={item.title}>
-          <div className="relative">
-            <img
-              src={item.thumbnailUrl || ""}
-              className="aspect-video h-[300px] w-full object-cover"
-              alt={item.title}
-              width={600}
-              height={400}
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/40 to-transparent" />
-            <div className="absolute right-0 bottom-0 p-6 text-white">
-              <div className="text-3xl font-bold">{item.title}</div>
+          <Link href={`/category/${item.title}`}>
+            <div className="relative">
+              <img
+                src={item.thumbnailUrl || ""}
+                className="aspect-video h-[300px] w-full object-cover"
+                alt={item.title}
+                width={600}
+                height={400}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/40 to-transparent" />
+              <div className="absolute right-0 bottom-0 p-6 text-white">
+                <div className="text-3xl font-bold">{item.title}</div>
+              </div>
             </div>
-          </div>
+          </Link>
         </SwiperSlide>
       ))}
     </Swiper>
