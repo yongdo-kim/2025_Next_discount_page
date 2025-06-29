@@ -5,16 +5,27 @@ import { Button } from "@/components/ui/button";
 import { usePostPreviews } from "../hooks/use-posts";
 import PostCardLarge from "./post-card-large";
 
-export default function PostPreviewGameArea() {
+export default function PostPreviewCategoryArea({
+  categoryId,
+  title,
+  limit = 5,
+}: {
+  categoryId: number;
+  title: string;
+  limit?: number;
+}) {
   const { data: posts } = usePostPreviews({
-    req: { category: "game", limit: 6 },
+    req: {
+      categoryId,
+      limit,
+    },
   });
 
   return (
-    <section className="pt-4 pb-2 pl-8">
-      <div className="flex items-center justify-between justify-items-center pb-2">
+    <section className="">
+      <div className="flex items-center justify-between justify-items-center">
         <Badge variant="outline" className="text-2xl text-green-400">
-          게임 정보
+          {title}
         </Badge>
         <Button
           variant="outline"
@@ -24,7 +35,7 @@ export default function PostPreviewGameArea() {
           전체보기
         </Button>
       </div>
-      <ul className="scrollbar-hide grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3">
+      <ul className="scrollbar-hide grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
         {posts?.map((post) => (
           <li key={post.id}>
             <PostCardLarge post={post} />

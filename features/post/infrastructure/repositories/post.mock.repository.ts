@@ -150,12 +150,9 @@ export class MockPostRepository implements PostRepository {
     req: GetPostPreviewsReqDto;
   }): Promise<PostPreviewEntity[]> {
     // 간단한 검색 기능 구현 (선택사항)
-    if (req.category) {
-      const searchTerm = req.category.toLowerCase();
+    if (req.categoryId) {
       return this.mockPostPreviews.filter(
-        (post) =>
-          post.title.toLowerCase().includes(searchTerm) ||
-          post.content.toLowerCase().includes(searchTerm),
+        (post) => post.category.id === req.categoryId,
       );
     }
     console.log(this.mockPosts);

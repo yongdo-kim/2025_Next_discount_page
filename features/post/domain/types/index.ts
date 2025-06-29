@@ -1,8 +1,4 @@
-export type PostCategory =
-  | "all"
-  | "game"
-  | "food"
-  | "popular"
-  | "time-limit"
-  | "hot"
-  | "new";
+export type PostCategory = {
+    id: number;
+    name: string;
+}

@@ -1,6 +1,4 @@
-import { PostCategory } from "@/features/post/domain/types";
-
 export interface GetPostPreviewsReqDto {
-  category: PostCategory;
+  categoryId?: number;
   limit?: number;
 }

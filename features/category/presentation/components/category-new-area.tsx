@@ -1,21 +1,26 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { usePostPreviews } from "../hooks/use-posts";
-import PostCardSmall from "./post-card-small";
+import PostCardSmall from "@/features/post/presentation/components/post-card-small";
+import { usePostPreviews } from "@/features/post/presentation/hooks/use-posts";
 
-export default function PostHotArea() {
-  const { data: posts } = usePostPreviews({
-    req: { category: "hot", limit: 5 },
+export default function CategoryNewArea() {
+  const { data: categories } = usePostPreviews({
+    req: {
+      limit: 5,
+    },
   });
 
   const children = (
     <div className="flex space-x-4 whitespace-nowrap">
-      {posts?.map((post) => (
-        <li key={post.id}>
-          <PostCardSmall post={post} />
-        </li>
-      ))}
+      {categories?.map((post) => {
+        if (!post) return null;
+        return (
+          <li key={post.id}>
+            <PostCardSmall post={post} />
+          </li>
+        );
+      })}
     </div>
   );
 

@@ -1,3 +1,4 @@
+import { categoryResponseSchema } from "@/features/category/infrastructure/dto/category.dto";
 import { PostPreviewEntity } from "@/features/post/domain/entities/post-preview.entity";
 import { TagEntity } from "@/features/tag/domain/entities/tag.entity";
 import { tagResponseSchema } from "@/features/tag/infrastructure/dto/tag.dto";
@@ -18,6 +19,7 @@ export const postPreviewResSchema = z.object({
   commentsCount: z.number(),
   thumbnailUrl: z.string().optional(),
   tags: tagResponseSchema.array(),
+  category: categoryResponseSchema,
 });
 
 //dto
@@ -51,5 +53,6 @@ export function toPostPreviewEntity(dto: PostPreviewDto): PostPreviewEntity {
     commentsCount: dto.commentsCount,
     tags: dto.tags.map((tag) => new TagEntity({ id: tag.id, name: tag.name })),
     thumbnailUrl: dto.thumbnailUrl || "",
+    category: dto.category,
   });
 }

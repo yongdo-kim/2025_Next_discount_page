@@ -1,5 +1,6 @@
 import { TagEntity } from "@/features/tag/domain/entities/tag.entity";
 import { UserEntity } from "@/features/user/domain/entities/user.entity";
+import { PostCategory } from "../types";
 
 export interface PostPreviewProps {
   id: number;
@@ -19,6 +20,7 @@ export interface PostPreviewProps {
   isBlurredByAI: boolean;
   isBlockedByMe: boolean;
   tags: TagEntity[];
+  category: PostCategory;
 }
 
 export class PostPreviewEntity {
@@ -39,6 +41,7 @@ export class PostPreviewEntity {
   public readonly isBlurredByAI: boolean;
   public readonly isBlockedByMe: boolean;
   public readonly tags: TagEntity[];
+  public readonly category: PostCategory;
 
   constructor(props: PostPreviewProps) {
     this.id = props.id;
@@ -57,6 +60,7 @@ export class PostPreviewEntity {
     this.isBlurredByAI = props.isBlurredByAI;
     this.isBlockedByMe = props.isBlockedByMe;
     this.tags = props.tags;
+    this.category = props.category;
     this.thumbnailUrl = props.thumbnailUrl;
   }
 }
