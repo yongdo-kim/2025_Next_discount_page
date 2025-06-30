@@ -7,7 +7,7 @@ import { usePostPreviews } from "@/features/post/presentation/hooks/use-posts";
 export default function CategoryRandomArea() {
   const { data: categories } = usePostPreviews({
     req: {
-      limit: 5,
+      limit: 4,
     },
   });
 
@@ -25,11 +25,11 @@ export default function CategoryRandomArea() {
   );
 
   return (
-    <section className="pt-4 pb-2 pl-8">
-      <div className="flex items-center justify-between justify-items-center pb-2">
+    <section className="pt-4 pb-6 pl-8">
+      <div className="flex items-center justify-between justify-items-center pb-6">
         <div className="flex pb-2 text-lg font-bold lg:text-3xl">
-          <div>랜덤 </div>
-          <div className="px-2 text-red-400"> 추천</div>
+          <div>테마별 </div>
+          <div className="px-2 text-blue-400"> 특가 추천</div>
         </div>
         <Button
           variant="outline"

@@ -8,7 +8,7 @@ import { postKeys } from "../../infrastructure/contstant/query-keys";
 
 export default function PostCardSmall({ post }: { post: PostPreviewEntity }) {
   return (
-    <div className="cursor-pointer md:h-[240px] md:w-[240px]">
+    <div className="group cursor-pointer md:h-[240px] md:w-[240px]">
       <Link href={`/post/${post.id}`}>
         <div
           onMouseEnter={() => {
@@ -17,10 +17,11 @@ export default function PostCardSmall({ post }: { post: PostPreviewEntity }) {
               queryFn: () => container.postService.getPostDetail(post.id),
             });
           }}
+          className="overflow-hidden rounded-2xl"
         >
           <img
             src={post.thumbnailUrl || ""}
-            className="aspect-auto h-[180px] w-full rounded-2xl object-cover"
+            className="aspect-auto h-[180px] w-full rounded-2xl object-cover transition-transform duration-300 group-hover:scale-105"
             alt={post.title}
             width={180}
             height={200}
