@@ -5,15 +5,15 @@ export class MockTagRepository implements TagRepository {
   //임시로 작업중.
   private mockTags: TagEntity[] = [
     new TagEntity({
-      id: "1",
+      id: 1,
       name: "테스트 태그 1",
     }),
     new TagEntity({
-      id: "2",
+      id: 2,
       name: "테스트 태그 2",
     }),
     new TagEntity({
-      id: "3",
+      id: 3,
       name: "테스트 태그 3",
     }),
   ];
