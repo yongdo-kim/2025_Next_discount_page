@@ -6,7 +6,7 @@ export class CategoryService {
   constructor(private categoryRepository: CategoryRepository) {}
 
   async getCategories(): Promise<CategoryEntity[]> {
-    const categories = await this.categoryRepository.getCategories("/categories");
+    const categories = await this.categoryRepository.getCategories();
     return categories;
   }
 }

@@ -12,6 +12,7 @@ import clsx from "clsx";
 //메인 첫번째 화면이 보이는 곳,
 
 export default async function Page() {
+  
   const categories = await container.categoryService.getCategories();
 
   // 카테고리별로 prefetchQuery 실행 (병렬 처리)

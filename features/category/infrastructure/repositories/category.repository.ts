@@ -3,8 +3,8 @@ import { CategoryRepository } from "../../domain/repositories/category.repositor
 import { categoryApi } from "../api/category.api";
 
 export class HttpCategoryRepository implements CategoryRepository {
-  async getCategories(path: string, query?: string): Promise<CategoryEntity[]> {
-    const categories = await categoryApi.getCategories(path, query);
+  async getCategories(query?: string): Promise<CategoryEntity[]> {
+    const categories = await categoryApi.getCategories(query);
     return categories.map(
       (category) =>
         new CategoryEntity({
