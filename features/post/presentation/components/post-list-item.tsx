@@ -1,0 +1,104 @@
+/* eslint-disable @next/next/no-img-element */
+import { Badge } from "@/components/ui/badge";
+import {
+  Card,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { container } from "@/lib/di/dependencies";
+import { queryClient } from "@/lib/react-query";
+import { formatDistanceToNow } from "date-fns";
+import { ko } from "date-fns/locale/ko";
+import { htmlToText } from "html-to-text";
+import Link from "next/link";
+import { PostPreviewEntity } from "../../domain/entities/post-preview.entity";
+import { postKeys } from "../../infrastructure/contstant/query-keys";
+
+export default function PostListItem({ post }: { post: PostPreviewEntity }) {
+  const content = htmlToText(post.content).replace(/\n/g, " ");
+  // createdAt이 string인 경우 Date 객체로 변환
+  const createdAt = post.createdAt ? post.createdAt : new Date();
+
+  // 현재 시간과의 차이를 계산 (예: "2시간 전")
+  const timeAgo = formatDistanceToNow(createdAt, {
+    addSuffix: true,
+    locale: ko, // 한국어 설정
+  });
+
+  return (
+    <Link href={`/post/${post.id}`}>
+      <Card
+        className="hover:bg-accent h-full cursor-pointer gap-3 p-2"
+        onMouseEnter={() => {
+          queryClient.prefetchQuery({
+            queryKey: [postKeys.detail(post.id)],
+            queryFn: () => container.postService.getPostDetail(post.id),
+          });
+        }}
+      >
+        <BadgeList post={post} />
+
+        <CardHeader className="px-2">
+          <div className="flex justify-between">
+            <div>
+              <CardTitle className="pb-2 font-bold">{post.title}</CardTitle>
+              <CardDescription className="line-clamp-3 w-2/3">
+                {content}
+              </CardDescription>
+              <CardDescription className="mt-2">
+                <div className="flex items-center">
+                  <div className="flex items-center justify-center gap-2">
+                    <CardDescription>
+                      <img
+                        src={post.author.picture}
+                        alt={post.author.nickname}
+                        className="aspect-square rounded-full"
+                        width={20}
+                        height={20}
+                      />
+                    </CardDescription>
+                    <div className="text-sm text-neutral-800 dark:text-neutral-50">
+                      {post.author.nickname}
+                    </div>
+                  </div>
+                  <div className="pl-2 text-xs text-neutral-500 dark:text-neutral-400">
+                    {timeAgo}
+                  </div>
+                </div>
+              </CardDescription>
+            </div>
+            <img
+              src={post.thumbnailUrl || ""}
+              className="aspect-video rounded-xl object-cover"
+              alt={post.title}
+              width={150}
+              height={100}
+            />
+          </div>
+        </CardHeader>
+      </Card>
+    </Link>
+  );
+}
+
+const BadgeList = ({ post }: { post: PostPreviewEntity }) => {
+  return (
+    <div className="flex items-center pt-1 pl-1">
+      {post.tags?.map((tag) => (
+        <Badge
+          variant="outline"
+          className="text-xs text-neutral-400"
+          key={tag.id}
+        >
+          {tag.name}
+        </Badge>
+      ))}
+      {post.tags?.length === 0 && (
+        <Badge variant="outline" className="text-xs text-neutral-400">
+          {"#"}
+        </Badge>
+      )}
+    </div>
+  );
+};

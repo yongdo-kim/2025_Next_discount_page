@@ -12,3 +12,4 @@ export const useFetchCategories = () => {
     throwOnError: true, //에러바운더리에 연락
   });
 };
+

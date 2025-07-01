@@ -32,7 +32,7 @@ export default function Carousel({ data }: { data: CarouselProps }) {
           className="cursor-pointer overflow-hidden"
           key={item.title}
         >
-          <Link href={`/category/${item.title}`}>
+          <Link href={`/categories/${item.title}`}>
             <div className="relative">
               <img
                 src={item.thumbnailUrl || ""}

@@ -34,7 +34,7 @@ const MenuAll = () => (
 const MenuItem = ({ category }: { category: CategoryEntity }) => {
   return (
     <Link
-      href={`/category/${category.id}`}
+      href={`/categories/${category.id}`}
       className="block w-full cursor-pointer p-2 text-xl font-bold hover:rounded-xl hover:bg-neutral-700"
     >
       {category.name}
