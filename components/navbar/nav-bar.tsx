@@ -1,8 +1,6 @@
 "use client";
 import Image from "next/image";
-import { FiSearch } from "react-icons/fi";
 import ThemeToggleButton from "../theme-toggle-button";
-import { Input } from "../ui/input";
 interface NavBarProps {
   className?: string;
 }
@@ -25,13 +23,6 @@ export default function NavBar({ className = "" }: NavBarProps) {
           <div className="ml-2">할인탐정</div>
         </span>
         <div className="flex items-center space-x-2">
-          <div className="relative">
-            <FiSearch className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-gray-400" />
-            <Input
-              placeholder="할인 검색"
-              className="w-full pl-9 focus-visible:ring-2 focus-visible:ring-amber-200 focus-visible:ring-offset-2 dark:focus-visible:ring-amber-500"
-            />
-          </div>
           <ThemeToggleButton />
         </div>
       </div>

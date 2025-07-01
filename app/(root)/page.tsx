@@ -1,5 +1,7 @@
 import Footer from "@/components/footer/footer";
+import MenuTab from "@/components/navbar/menu-tab";
 import NavBar from "@/components/navbar/nav-bar";
+import SearchBar from "@/components/ui/search-bar";
 import { categoryKeys } from "@/features/category/infrastructure/contstant/query-keys";
 import CategoryCarousel from "@/features/category/presentation/components/category-carousel";
 import DiscountByCategoryArea from "@/features/category/presentation/components/category-discount-area";
@@ -12,7 +14,6 @@ import clsx from "clsx";
 //메인 첫번째 화면이 보이는 곳,
 
 export default async function Page() {
-  
   const categories = await container.categoryService.getCategories();
 
   // 카테고리별로 prefetchQuery 실행 (병렬 처리)
@@ -33,12 +34,23 @@ export default async function Page() {
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <NavBar className={clsx("w-full border-b-1 dark:border-neutral-800")} />
-      <div className="">{/* <PostCarousel /> */}</div>
-      <div className="mx-auto max-w-screen-xl">
+
+      <div className="">
+        <SearchBar />
         <CategoryCarousel />
-        <NewCategoryDiscountArea />
-        <CategoryRandomArea />
-        <DiscountByCategoryArea />
+
+        <div className="flex">
+          <div className="hidden lg:block">
+            <MenuTab />
+          </div>
+          <div className="mx-auto max-w-screen-xl">
+            <div className="flex flex-col">
+              <NewCategoryDiscountArea />
+              <CategoryRandomArea />
+              <DiscountByCategoryArea />
+            </div>
+          </div>
+        </div>
       </div>
 
       <Footer />

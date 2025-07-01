@@ -6,6 +6,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import { Autoplay, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Badge } from "./badge";
 
 type CarouselProps = {
   title: string;
@@ -27,7 +28,10 @@ export default function Carousel({ data }: { data: CarouselProps }) {
       loop={true}
     >
       {data.map((item) => (
-        <SwiperSlide className="cursor-pointer overflow-hidden" key={item.title}>
+        <SwiperSlide
+          className="cursor-pointer overflow-hidden"
+          key={item.title}
+        >
           <Link href={`/category/${item.title}`}>
             <div className="relative">
               <img
@@ -37,9 +41,14 @@ export default function Carousel({ data }: { data: CarouselProps }) {
                 width={600}
                 height={400}
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/40 to-transparent" />
+              <div className="absolute inset-0" />
               <div className="absolute right-0 bottom-0 p-6 text-white">
-                <div className="text-3xl font-bold">{item.title}</div>
+                <Badge
+                  variant="secondary"
+                  className="px-4 py-2 text-3xl font-bold"
+                >
+                  {item.title}
+                </Badge>
               </div>
             </div>
           </Link>
