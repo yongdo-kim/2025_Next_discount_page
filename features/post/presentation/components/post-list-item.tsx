@@ -27,7 +27,7 @@ export default function PostListItem({ post }: { post: PostPreviewEntity }) {
   });
 
   return (
-    <Link href={`/post/${post.id}`}>
+    <Link href={`/posts/${post.id}`}>
       <Card
         className="hover:bg-accent h-full cursor-pointer gap-3 p-2"
         onMouseEnter={() => {
