@@ -27,7 +27,7 @@ export default function CategoryCarousel() {
     return {
       title: postQuery.data?.[0].title,
       thumbnailUrl: postQuery.data?.[0].thumbnailUrl,
-      // link:postQuery.data?.[0].source,
+      id: postQuery.data?.[0].id,
     };
   });
 

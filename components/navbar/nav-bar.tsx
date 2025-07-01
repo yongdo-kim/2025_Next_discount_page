@@ -20,7 +20,7 @@ export default function NavBar({ className = "" }: NavBarProps) {
             height={32}
             className="rounded-full border border-amber-200 bg-amber-100 p-1"
           />
-          <div className="ml-2">할인탐정</div>
+          <div className="ml-3 font-bold">할인탐정</div>
         </span>
         <div className="flex items-center space-x-2">
           <ThemeToggleButton />

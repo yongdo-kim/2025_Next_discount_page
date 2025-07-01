@@ -12,7 +12,7 @@ export default function CategoryNewArea() {
   });
 
   const children = (
-    <div className="flex space-x-4 whitespace-nowrap">
+    <div className="grid grid-cols-1 space-x-4 whitespace-nowrap md:grid-cols-3 lg:grid-cols-5">
       {categories?.map((post) => {
         if (!post) return null;
         return (
@@ -27,7 +27,7 @@ export default function CategoryNewArea() {
   return (
     <section className="pt-4 pb-2 pl-8">
       <div className="flex items-center justify-between justify-items-center pb-2">
-        <div className="flex pb-2 text-lg font-bold lg:text-3xl">
+        <div className="flex pb-2 text-xl font-bold md:text-2xl lg:text-3xl">
           <div>오늘의 </div>
           <div className="px-2 text-red-400"> 따끈한 할인</div>
         </div>

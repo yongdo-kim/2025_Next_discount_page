@@ -34,21 +34,20 @@ export default async function Page() {
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <NavBar className={clsx("w-full border-b-1 dark:border-neutral-800")} />
+      {/* 서치바 */}
+      <SearchBar />
+      {/* 캐러셀 */}
+      <CategoryCarousel />
 
-      <div className="">
-        <SearchBar />
-        <CategoryCarousel />
-
-        <div className="flex">
-          <div className="hidden lg:block">
-            <MenuTab />
-          </div>
-          <div className="mx-auto max-w-screen-xl">
-            <div className="flex flex-col">
-              <NewCategoryDiscountArea />
-              <CategoryRandomArea />
-              <DiscountByCategoryArea />
-            </div>
+      <div className="flex">
+        <div className="hidden lg:block">
+          <MenuTab />
+        </div>
+        <div className="mx-auto max-w-screen-xl">
+          <div className="flex flex-col">
+            <NewCategoryDiscountArea />
+            <CategoryRandomArea />
+            <DiscountByCategoryArea />
           </div>
         </div>
       </div>

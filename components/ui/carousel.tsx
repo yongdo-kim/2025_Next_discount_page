@@ -11,6 +11,7 @@ import { Badge } from "./badge";
 type CarouselProps = {
   title: string;
   thumbnailUrl: string;
+  id: number;
 }[];
 
 export default function Carousel({ data }: { data: CarouselProps }) {
@@ -32,20 +33,20 @@ export default function Carousel({ data }: { data: CarouselProps }) {
           className="cursor-pointer overflow-hidden"
           key={item.title}
         >
-          <Link href={`/categories/${item.title}`}>
+          <Link href={`/posts/${item.id}`}>
             <div className="relative">
               <img
                 src={item.thumbnailUrl || ""}
-                className="aspect-video h-[300px] w-full object-cover"
+                className="md:[h-250px] lg:[h-300px] aspect-video h-[200px] w-full object-cover"
                 alt={item.title}
                 width={600}
                 height={400}
               />
               <div className="absolute inset-0" />
-              <div className="absolute right-0 bottom-0 p-6 text-white">
+              <div className="absolute right-0 bottom-0.5 p-6 text-white">
                 <Badge
                   variant="secondary"
-                  className="px-4 py-2 text-3xl font-bold"
+                  className="text-md px-4 py-2 font-bold md:text-2xl lg:text-3xl"
                 >
                   {item.title}
                 </Badge>
