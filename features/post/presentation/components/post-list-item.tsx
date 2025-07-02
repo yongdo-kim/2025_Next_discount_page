@@ -29,7 +29,7 @@ export default function PostListItem({ post }: { post: PostPreviewEntity }) {
   return (
     <Link href={`/posts/${post.id}`}>
       <Card
-        className="hover:bg-accent h-full cursor-pointer gap-3 p-2"
+        className="hover:bg-accent w-full max-w-lg cursor-pointer p-2"
         onMouseEnter={() => {
           queryClient.prefetchQuery({
             queryKey: [postKeys.detail(post.id)],
@@ -37,15 +37,17 @@ export default function PostListItem({ post }: { post: PostPreviewEntity }) {
           });
         }}
       >
-        <BadgeList post={post} />
-
-        <CardHeader className="px-2">
-          <div className="flex justify-between">
-            <div>
+        <CardHeader className="w-full px-2">
+          <div className="flex min-w-0 items-center justify-between">
+            <div className="flex min-w-0 flex-1 flex-col justify-between">
+              <BadgeList post={post} />
+              {/* 타이틀 */}
               <CardTitle className="pb-2 font-bold">{post.title}</CardTitle>
-              <CardDescription className="line-clamp-3 w-2/3">
+              {/* 설명 */}
+              <CardDescription className="line-clamp-2">
                 {content}
               </CardDescription>
+              {/* 작성자 */}
               <CardDescription className="mt-2">
                 <div className="flex items-center">
                   <div className="flex items-center justify-center gap-2">
@@ -68,9 +70,11 @@ export default function PostListItem({ post }: { post: PostPreviewEntity }) {
                 </div>
               </CardDescription>
             </div>
+            {/* 이미지 */}
+
             <img
               src={post.thumbnailUrl || ""}
-              className="aspect-video rounded-xl object-cover"
+              className="ml-2 h-[100px] w-[120px] rounded-xl object-cover"
               alt={post.title}
               width={150}
               height={100}
@@ -84,7 +88,7 @@ export default function PostListItem({ post }: { post: PostPreviewEntity }) {
 
 const BadgeList = ({ post }: { post: PostPreviewEntity }) => {
   return (
-    <div className="flex items-center pt-1 pl-1">
+    <div className="m-0 flex items-center pb-4">
       {post.tags?.map((tag) => (
         <Badge
           variant="outline"
