@@ -9,7 +9,7 @@ import { PostEntity } from "../../domain/entities/post.entity";
 import { postKeys } from "../../infrastructure/contstant/query-keys";
 
 //카테코리에 엮여서 전달한다고 판단. 
-export const usePostPreviews = ({ req }: { req: GetPostPreviewsReqDto }) => {
+export const usePostPreviews = ({ req, enabled }: { req: GetPostPreviewsReqDto, enabled?: boolean }) => {
   return useQuery<PostPreviewEntity[]>({
     queryKey: [categoryKeys.all, req.categoryId, req.limit],
     queryFn: () =>
@@ -17,6 +17,7 @@ export const usePostPreviews = ({ req }: { req: GetPostPreviewsReqDto }) => {
         req,
       }),
     throwOnError: true, //에러바운더리에 연락
+    enabled,
   });
 };
 

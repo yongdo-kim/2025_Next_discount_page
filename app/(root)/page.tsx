@@ -1,13 +1,9 @@
 import Footer from "@/components/footer/footer";
 import MenuTab from "@/components/navbar/menu-tab";
 import NavBar from "@/components/navbar/nav-bar";
-import { Divider } from "@/components/ui/divider";
-import SearchBar from "@/components/ui/search-bar";
 import { categoryKeys } from "@/features/category/infrastructure/contstant/query-keys";
 import CategoryCarousel from "@/features/category/presentation/components/category-carousel";
-import CategoryDiscountArea from "@/features/category/presentation/components/category-discount-area";
-import NewCategoryDiscountArea from "@/features/category/presentation/components/category-new-area";
-import CategoryRandomArea from "@/features/category/presentation/components/category-random-area";
+import CategorySection from "@/features/category/presentation/components/category-section";
 import { container } from "@/lib/di/dependencies";
 import { queryClient } from "@/lib/react-query";
 import { HydrationBoundary, dehydrate } from "@tanstack/react-query";
@@ -35,22 +31,12 @@ export default async function Page() {
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <NavBar className={clsx("w-full border-b-1 dark:border-neutral-800")} />
-      {/* 서치바 */}
-      <SearchBar />
       {/* 캐러셀 */}
       <CategoryCarousel />
       {/* 메뉴탭 : 데스크탑인 경우 양옆, 모바일이라면 세로.  */}
       <div className="lg:flex lg:flex-row">
         <MenuTab />
-        <section className="mx-auto max-w-screen-xl">
-          <div className="flex flex-col">
-            <NewCategoryDiscountArea />
-            <Divider />
-            <CategoryRandomArea />
-            <Divider />
-            <CategoryDiscountArea />
-          </div>
-        </section>
+        <CategorySection />
       </div>
 
       <Footer />

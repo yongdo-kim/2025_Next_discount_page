@@ -2,6 +2,7 @@
 import { CategoryEntity } from "@/features/category/domain/entities/category.entity";
 import { useFetchCategories } from "@/features/category/presentation/hooks/use-fetch-categories";
 import Link from "next/link";
+import { useRouter, useSearchParams } from "next/navigation";
 import { Badge } from "../ui/badge";
 
 export default function MenuTab() {
@@ -47,13 +48,19 @@ const MenuAllDesktop = () => (
 );
 
 const MenuItemDesktop = ({ category }: { category: CategoryEntity }) => {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  const handleClick = () => {
+    const params = new URLSearchParams(searchParams);
+    params.set("category", category.id.toString()); // 쿼리스트링에 category 추가/변경
+    router.replace(`?${params.toString()}`);
+  };
+
   return (
-    <Link
-      href={`/categories/${category.id}`}
-      className="block w-full cursor-pointer p-2 text-xl font-bold hover:rounded-xl hover:bg-neutral-700"
-    >
+    <Badge variant="outline" className="text-sm" onClick={handleClick}>
       {category.name}
-    </Link>
+    </Badge>
   );
 };
 
@@ -66,11 +73,22 @@ const MenuAllMobile = () => (
 );
 
 const MenuItemMobile = ({ category }: { category: CategoryEntity }) => {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  const handleClick = () => {
+    const params = new URLSearchParams(searchParams);
+    params.set("category", category.id.toString()); // 쿼리스트링에 category 추가/변경
+    router.replace(`?${params.toString()}`);
+  };
+
   return (
-    <Link href={`/categories/${category.id}`} className="cursor-pointer">
-      <Badge variant="outline" className="text-sm">
-        {category.name}
-      </Badge>
-    </Link>
+    <Badge
+      variant="outline"
+      className="cursor-pointer text-sm"
+      onClick={handleClick}
+    >
+      {category.name}
+    </Badge>
   );
 };
