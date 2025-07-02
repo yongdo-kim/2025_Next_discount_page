@@ -5,6 +5,7 @@ import SearchBar from "@/components/ui/search-bar";
 import { categoryKeys } from "@/features/category/infrastructure/contstant/query-keys";
 import CategoryCarousel from "@/features/category/presentation/components/category-carousel";
 import NewCategoryDiscountArea from "@/features/category/presentation/components/category-new-area";
+import CategoryRandomArea from "@/features/category/presentation/components/category-random-area";
 import { container } from "@/lib/di/dependencies";
 import { queryClient } from "@/lib/react-query";
 import { HydrationBoundary, dehydrate } from "@tanstack/react-query";
@@ -42,6 +43,8 @@ export default async function Page() {
         <section className="mx-auto max-w-screen-xl">
           <div className="flex flex-col">
             <NewCategoryDiscountArea />
+            <div className="border-b-1 border-green-800 px-16 pt-2 pb-2"></div>
+            <CategoryRandomArea />
             {/* <CategoryRandomArea />
             <DiscountByCategoryArea /> */}
           </div>

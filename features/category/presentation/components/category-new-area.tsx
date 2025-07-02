@@ -35,7 +35,7 @@ export default function NewCategoryDiscountArea() {
           coloredTitle=" 따끈한 할인"
           color="text-red-400"
         />
-        <SeeAllButton href="/" />
+        <SeeAllButton href="/" className="p-2 text-sm" />
       </div>
       <PostCardSmallList />
     </section>

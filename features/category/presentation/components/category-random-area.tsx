@@ -1,6 +1,7 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
+import MainTitle from "@/components/main-title";
+import SeeAllButton from "@/components/see-all-button";
 import PostCardMiddle from "@/features/post/presentation/components/post-card-middle";
 import { usePostPreviews } from "@/features/post/presentation/hooks/use-posts";
 
@@ -11,8 +12,8 @@ export default function CategoryRandomArea() {
     },
   });
 
-  const children = (
-    <div className="flex space-x-4 whitespace-nowrap">
+  const PostCardMiddleList = () => (
+    <ul className="grid grid-cols-1 gap-y-4 px-4 md:grid-cols-4 lg:grid-cols-5">
       {categories?.map((post) => {
         if (!post) return null;
         return (
@@ -21,25 +22,20 @@ export default function CategoryRandomArea() {
           </li>
         );
       })}
-    </div>
+    </ul>
   );
 
   return (
-    <section className="pt-4 pb-6 pl-8">
-      <div className="flex items-center justify-between justify-items-center pb-6">
-        <div className="flex pb-2 text-lg font-bold lg:text-3xl">
-          <div>테마별 </div>
-          <div className="px-2 text-blue-400"> 특가 추천</div>
-        </div>
-        <Button
-          variant="outline"
-          onClick={() => {}}
-          className="m-0 cursor-pointer text-lg"
-        >
-          전체보기
-        </Button>
+    <section className="pt-4 pb-2">
+      <div className="flex justify-between px-4 pb-4">
+        <MainTitle
+          title="테마별"
+          coloredTitle=" 특가 추천"
+          color="text-blue-400"
+        />
+        <SeeAllButton href="/" className="p-2 text-sm" />
       </div>
-      <ul className="scrollbar-hide">{children}</ul>
+      <PostCardMiddleList />
     </section>
   );
 }
