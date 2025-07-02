@@ -1,7 +1,6 @@
 "use client";
 
 import MainTitle from "@/components/main-title";
-import SeeAllButton from "@/components/see-all-button";
 import { usePostPreviews } from "../hooks/use-posts";
 import PostCardLarge from "./post-card-large";
 
@@ -24,10 +23,9 @@ export default function PostPreviewCategoryArea({
   return (
     <>
       <div className="flex justify-between px-4 pb-4">
-        <MainTitle title={title} coloredTitle="" />
-        <SeeAllButton href="/" className="p-2 text-sm" />
+        <MainTitle title={title} coloredTitle="" showIcon={true} />
       </div>
-      <ul className="grid grid-cols-1 gap-4 px-4 md:grid-cols-2 lg:grid-cols-3">
+      <ul className="grid grid-cols-1 gap-4 px-4 md:grid-cols-3 lg:grid-cols-3">
         {posts?.map((post) => (
           <li key={post.id}>
             <PostCardLarge post={post} />

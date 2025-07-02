@@ -66,18 +66,20 @@ function DesktopCard({ post }: { post: PostPreviewEntity }) {
             });
           }}
         >
-          <div className="relative h-[400px] transition-transform duration-300 group-hover:scale-105">
+          <div className="relative h-[300px] transition-transform duration-300 group-hover:scale-105 lg:h-[400px]">
             <img
               src={post.thumbnailUrl || ""}
-              className="h-[400px] rounded-2xl object-cover"
+              className="h-[300px] rounded-2xl object-cover lg:h-[400px]"
               alt={post.title}
               width={700}
-              height={400}
+              height={300}
             />
             <div className="absolute inset-0 rounded-2xl bg-gradient-to-t from-black/70 to-transparent" />
-            <div className="absolute right-0 bottom-0 left-0 p-4 text-white">
-              <div className="line-clamp-1 text-xl font-bold">{post.title}</div>
-              <div className="line-clamp-1 w-[200px] text-lg font-medium text-neutral-300">
+            <div className="absolute right-0 bottom-0 left-0 p-2 text-white">
+              <div className="line-clamp-1 text-lg font-bold lg:text-xl">
+                {post.title}
+              </div>
+              <div className="line-clamp-1 w-[200px] text-base font-medium text-neutral-300 lg:text-lg">
                 {content}
               </div>
             </div>

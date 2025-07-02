@@ -1,20 +1,19 @@
 "use client";
 
 import MainTitle from "@/components/main-title";
-import SeeAllButton from "@/components/see-all-button";
 import PostCardSmall from "@/features/post/presentation/components/post-card-small";
 import { usePostPreviews } from "@/features/post/presentation/hooks/use-posts";
 
 export default function NewCategoryDiscountArea() {
   const { data: categories } = usePostPreviews({
     req: {
-      limit: 5,
+      limit: 8,
     },
   });
 
   const PostCardSmallList = () => {
     return (
-      <ul className="grid grid-cols-1 gap-y-4 px-4 whitespace-nowrap md:grid-cols-4 lg:grid-cols-5">
+      <ul className="grid grid-cols-1 gap-4 gap-y-4 px-4 whitespace-nowrap md:grid-cols-4 lg:grid-cols-5">
         {categories?.map((post) => {
           if (!post) return null;
           return (
@@ -35,7 +34,6 @@ export default function NewCategoryDiscountArea() {
           coloredTitle=" 따끈한 할인"
           color="text-red-400"
         />
-        <SeeAllButton href="/" className="p-2 text-sm" />
       </div>
       <PostCardSmallList />
     </section>

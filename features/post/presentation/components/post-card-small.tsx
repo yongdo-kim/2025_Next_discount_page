@@ -7,11 +7,11 @@ export default function PostCardSmall({ post }: { post: PostPreviewEntity }) {
   return (
     <>
       {/* 모바일 전용 */}
-      <div className="block sm:hidden">
+      <div className="block md:hidden">
         <MobileCard post={post} />
       </div>
       {/* 데스크탑 전용 */}
-      <div className="hidden sm:block">
+      <div className="hidden md:block">
         <DesktopCard post={post} />
       </div>
     </>
@@ -66,7 +66,7 @@ function DesktopCard({ post }: { post: PostPreviewEntity }) {
           <div className="overflow-hidden rounded-2xl">
             <img
               src={post.thumbnailUrl || ""}
-              className="w-full rounded-2xl object-cover transition-transform duration-300 group-hover:scale-105"
+              className="h-[160px] w-[200px] rounded-2xl object-cover transition-transform duration-300 group-hover:scale-105 lg:h-[200px] lg:w-[250px]"
               alt={post.title}
               width={180}
               height={120}
@@ -74,20 +74,24 @@ function DesktopCard({ post }: { post: PostPreviewEntity }) {
           </div>
           {/* 내용 */}
           <div className="p-2">
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 pt-1">
               {post.tags.length > 0 ? (
                 post.tags.slice(0, 2).map((tag) => (
-                  <Badge variant="outline" key={tag.id} className="text-md">
+                  <Badge
+                    variant="outline"
+                    key={tag.id}
+                    className="text-sm lg:text-base"
+                  >
                     {tag.name}
                   </Badge>
                 ))
               ) : (
-                <Badge variant="outline" className="text-md">
+                <Badge variant="outline" className="text-sm">
                   {"#"}
                 </Badge>
               )}
             </div>
-            <div className="line-clamp-1 pt-2 text-lg font-bold">
+            <div className="text-md line-clamp-1 pt-2 font-bold whitespace-normal lg:text-xl">
               {post.title}
             </div>
           </div>

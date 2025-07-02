@@ -87,7 +87,7 @@ export default function MenuTab() {
               category={category}
               selected={selectedCategoryId === category.id}
               onClick={createHandleCategoryClick(category.id)}
-              className="w-full text-sm"
+              className="w-full md:text-xs"
             />
           ))}
         </aside>

@@ -9,7 +9,7 @@ export default function CategoryDiscountArea() {
   const { data: categories } = useFetchCategories();
 
   return (
-    <section className="pt-4 pb-2">
+    <section className="pt-8 pb-2">
       <div className="flex justify-between px-4 pb-4">
         <MainTitle
           title="테마별"
