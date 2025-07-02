@@ -5,7 +5,7 @@ export default function MainTitle({
 }: {
   title: string;
   coloredTitle: string;
-  color: string;
+  color?: string;
 }) {
   return (
     <div className="flex pb-2 text-xl font-bold md:text-2xl lg:text-3xl">

@@ -1,9 +1,11 @@
 import Footer from "@/components/footer/footer";
 import MenuTab from "@/components/navbar/menu-tab";
 import NavBar from "@/components/navbar/nav-bar";
+import { Divider } from "@/components/ui/divider";
 import SearchBar from "@/components/ui/search-bar";
 import { categoryKeys } from "@/features/category/infrastructure/contstant/query-keys";
 import CategoryCarousel from "@/features/category/presentation/components/category-carousel";
+import CategoryDiscountArea from "@/features/category/presentation/components/category-discount-area";
 import NewCategoryDiscountArea from "@/features/category/presentation/components/category-new-area";
 import CategoryRandomArea from "@/features/category/presentation/components/category-random-area";
 import { container } from "@/lib/di/dependencies";
@@ -43,10 +45,10 @@ export default async function Page() {
         <section className="mx-auto max-w-screen-xl">
           <div className="flex flex-col">
             <NewCategoryDiscountArea />
-            <div className="border-b-1 border-green-800 px-16 pt-2 pb-2"></div>
+            <Divider />
             <CategoryRandomArea />
-            {/* <CategoryRandomArea />
-            <DiscountByCategoryArea /> */}
+            <Divider />
+            <CategoryDiscountArea />
           </div>
         </section>
       </div>

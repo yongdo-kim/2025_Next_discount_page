@@ -1,5 +1,7 @@
 "use client";
 
+import MainTitle from "@/components/main-title";
+import { Divider } from "@/components/ui/divider";
 import { useFetchCategories } from "@/features/category/presentation/hooks/use-fetch-categories";
 import PostPreviewCategoryArea from "../../../post/presentation/components/post-preview-category";
 
@@ -7,20 +9,24 @@ export default function CategoryDiscountArea() {
   const { data: categories } = useFetchCategories();
 
   return (
-    <section className="pt-4 pb-2 pl-8">
-      <div className="flex text-lg font-bold lg:text-3xl">
-        <div>테마별 </div>
-        <div className="px-2 text-green-400">할인</div>
+    <section className="pt-4 pb-2">
+      <div className="flex justify-between px-4 pb-4">
+        <MainTitle
+          title="테마별"
+          coloredTitle=" 할인"
+          color="text-emerald-500"
+        />
       </div>
-      <div className="pb-4">
-        {categories?.map((category) => (
+
+      {categories?.map((category) => (
+        <div key={category.id}>
           <PostPreviewCategoryArea
-            key={category.id}
             categoryId={category.id}
             title={category.name}
           />
-        ))}
-      </div>
+          <Divider className="mt-8 mb-8" />
+        </div>
+      ))}
     </section>
   );
 }

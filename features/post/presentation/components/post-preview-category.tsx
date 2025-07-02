@@ -1,6 +1,7 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
+import MainTitle from "@/components/main-title";
+import SeeAllButton from "@/components/see-all-button";
 import { usePostPreviews } from "../hooks/use-posts";
 import PostCardLarge from "./post-card-large";
 
@@ -21,24 +22,18 @@ export default function PostPreviewCategoryArea({
   });
 
   return (
-    <section className="pt-8">
-      <div className="flex items-center justify-items-center space-x-4 pb-4">
-        <div className="pl-1 text-2xl font-bold">{title}</div>
-        <Button
-          variant="outline"
-          onClick={() => {}}
-          className="m-0 cursor-pointer text-lg hover:text-emerald-400"
-        >
-          전체보기
-        </Button>
+    <>
+      <div className="flex justify-between px-4 pb-4">
+        <MainTitle title={title} coloredTitle="" />
+        <SeeAllButton href="/" className="p-2 text-sm" />
       </div>
-      <ul className="scrollbar-hide grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+      <ul className="grid grid-cols-1 gap-4 px-4 md:grid-cols-2 lg:grid-cols-3">
         {posts?.map((post) => (
           <li key={post.id}>
             <PostCardLarge post={post} />
           </li>
         ))}
       </ul>
-    </section>
+    </>
   );
 }
