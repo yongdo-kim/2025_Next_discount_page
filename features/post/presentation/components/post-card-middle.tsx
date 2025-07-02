@@ -11,7 +11,7 @@ export default function PostCardMiddle({ post }: { post: PostPreviewEntity }) {
 
   return (
     <div className="hover:bg-accent group w-full cursor-pointer rounded-2xl">
-      <Link href={`/post/${post.id}`}>
+      <Link href={`/posts/${post.id}`}>
         <div
           onMouseEnter={() => {
             queryClient.prefetchQuery({

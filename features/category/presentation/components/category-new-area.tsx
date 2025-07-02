@@ -1,45 +1,43 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
+import MainTitle from "@/components/main-title";
+import SeeAllButton from "@/components/see-all-button";
 import PostCardSmall from "@/features/post/presentation/components/post-card-small";
 import { usePostPreviews } from "@/features/post/presentation/hooks/use-posts";
 
-export default function CategoryNewArea() {
+export default function NewCategoryDiscountArea() {
   const { data: categories } = usePostPreviews({
     req: {
       limit: 5,
     },
   });
 
-  const children = (
-    <div className="grid grid-cols-1 space-x-4 whitespace-nowrap md:grid-cols-3 lg:grid-cols-5">
-      {categories?.map((post) => {
-        if (!post) return null;
-        return (
-          <li key={post.id}>
-            <PostCardSmall post={post} />
-          </li>
-        );
-      })}
-    </div>
-  );
+  const PostCardSmallList = () => {
+    return (
+      <ul className="grid grid-cols-1 gap-y-4 px-4 whitespace-nowrap md:grid-cols-4 lg:grid-cols-5">
+        {categories?.map((post) => {
+          if (!post) return null;
+          return (
+            <li key={post.id}>
+              <PostCardSmall post={post} />
+            </li>
+          );
+        })}
+      </ul>
+    );
+  };
 
   return (
-    <section className="pt-4 pb-2 pl-8">
-      <div className="flex items-center justify-between justify-items-center pb-2">
-        <div className="flex pb-2 text-xl font-bold md:text-2xl lg:text-3xl">
-          <div>오늘의 </div>
-          <div className="px-2 text-red-400"> 따끈한 할인</div>
-        </div>
-        <Button
-          variant="outline"
-          onClick={() => {}}
-          className="m-0 cursor-pointer text-lg"
-        >
-          전체보기
-        </Button>
+    <section className="pt-4 pb-2">
+      <div className="flex justify-between px-4 pb-4">
+        <MainTitle
+          title="오늘의"
+          coloredTitle=" 따끈한 할인"
+          color="text-red-400"
+        />
+        <SeeAllButton href="/" />
       </div>
-      <ul className="scrollbar-hide">{children}</ul>
+      <PostCardSmallList />
     </section>
   );
 }
