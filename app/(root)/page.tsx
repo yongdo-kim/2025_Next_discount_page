@@ -25,7 +25,7 @@ export default async function Page() {
   await Promise.all([
     categories?.map((category: CategoryEntity) =>
       queryClient.prefetchQuery({
-        queryKey: [categoryKeys.all, category.id],
+        queryKey: [categoryKeys.detail(category.id, null)],
         queryFn: async () => {
           const posts = await container.postService.getPostPreviews({
             req: { categoryId: category.id, limit: null },
@@ -44,7 +44,7 @@ export default async function Page() {
     }),
     //오늘의 따끈한 할인 호출
     queryClient.prefetchQuery({
-      queryKey: [categoryKeys.all, null, 8],
+      queryKey: [categoryKeys.detail(null, 8)],
       queryFn: async () => {
         const posts = await container.postService.getPostPreviews({
           req: { limit: 8, categoryId: null },
@@ -52,11 +52,9 @@ export default async function Page() {
         return JSON.parse(JSON.stringify(posts));
       },
     }),
-    //테마별 특구가 추천 
   ]);
 
-  //여기 대기시간 5초 코드 : loading.tsx가 발동함을 확인함.
-  //await new Promise((resolve) => setTimeout(resolve, 500));
+  //await이 다 완료된 UI를 호출한다.
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>

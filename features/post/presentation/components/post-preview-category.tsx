@@ -7,16 +7,14 @@ import PostCardLarge from "./post-card-large";
 export default function PostPreviewCategoryArea({
   categoryId,
   title,
-  limit = 5,
 }: {
   categoryId: number;
   title: string;
-  limit?: number;
 }) {
   const { data: posts } = usePostPreviews({
     req: {
       categoryId,
-      limit,
+      limit: null,
     },
   });
 

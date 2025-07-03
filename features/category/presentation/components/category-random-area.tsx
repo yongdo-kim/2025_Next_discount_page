@@ -7,11 +7,6 @@ import { useCategoryPostPreviews } from "@/features/post/presentation/hooks/use-
 export default function CategoryRandomArea() {
   const { data: posts } = useCategoryPostPreviews();
 
-  // const width = useWindowWidth();
-  // // sm, md는 4개, lg 이상은 5개, 모바일(640 미만)도 4개
-  // let count = 4;
-  // if (width >= 1024) count = 5;
-
   const PostCardMiddleList = () => (
     <ul className="grid grid-cols-1 gap-4 gap-y-4 px-4 pb-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
       {posts?.slice(0, 4).map((post) => {
