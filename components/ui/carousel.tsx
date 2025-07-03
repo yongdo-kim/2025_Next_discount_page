@@ -37,7 +37,7 @@ export default function Carousel({ data }: { data: CarouselProps }) {
             <div className="relative">
               <img
                 src={item.thumbnailUrl || ""}
-                className="md:[h-250px] lg:[h-300px] h-[300px] w-full object-cover"
+                className="h-[180px] w-full rounded-md object-cover"
                 alt={item.title}
                 width={600}
                 height={400}

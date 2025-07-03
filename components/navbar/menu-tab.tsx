@@ -18,30 +18,12 @@ function MenuItem({ category, selected, onClick, className }: MenuItemProps) {
       variant={selected ? "default" : "outline"}
       className={cn(
         "rounded-full font-medium",
-        selected &&
-          "border-2 border-emerald-400 bg-transparent text-emerald-400",
+        selected && "border border-emerald-400 bg-transparent text-emerald-400",
         className,
       )}
       onClick={onClick}
     >
       {category.name}
-    </Badge>
-  );
-}
-
-type MenuAllProps = {
-  onClick: () => void;
-  className?: string;
-};
-
-function MenuAll({ onClick, className }: MenuAllProps) {
-  return (
-    <Badge
-      variant="outline"
-      className={className ?? "text-sm"}
-      onClick={onClick}
-    >
-      전체보기
     </Badge>
   );
 }
@@ -65,13 +47,6 @@ export default function MenuTab() {
 
   const selectedCategoryId = Number(selectedId);
 
-  // 전체보기 클릭 시 쿼리스트링 제거
-  const handleAllClick = () => {
-    const params = new URLSearchParams(searchParams);
-    params.delete("category");
-    router.replace(`?${params.toString()}`);
-  };
-
   // 카테고리 클릭 핸들러 생성
   const createHandleCategoryClick = (id: number) => () => {
     if (id === 0) {
@@ -87,14 +62,14 @@ export default function MenuTab() {
     <>
       {/* 데스크탑 */}
       <div className="hidden lg:flex">
-        <aside className="flex w-[200px] flex-col items-center space-y-4 px-4 pt-4">
+        <aside className="mx-auto flex w-[200px] flex-col items-center space-y-6 px-4 py-4">
           {sorted.map((category) => (
             <MenuItem
               key={category.id}
               category={category}
               selected={selectedCategoryId === category.id}
               onClick={createHandleCategoryClick(category.id)}
-              className="w-[150px] rounded-sm text-xl"
+              className="text-md hover:bg-accent w-[150px] cursor-pointer items-start rounded-sm border-0 p-3 font-bold"
             />
           ))}
         </aside>
@@ -102,7 +77,6 @@ export default function MenuTab() {
       {/* 모바일 */}
       <div className="block lg:hidden">
         <div className="flex flex-wrap gap-3 px-4 pt-4 pb-4">
-          <MenuAll onClick={handleAllClick} />
           {sorted.map((category) => (
             <MenuItem
               key={category.id}

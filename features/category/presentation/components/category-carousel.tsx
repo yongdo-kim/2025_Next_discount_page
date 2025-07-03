@@ -31,5 +31,9 @@ export default function CategoryCarousel() {
     };
   });
 
-  return <Carousel data={results.filter((result) => result !== null)} />;
+  return (
+    <div className="mx-auto max-w-screen-xl px-4 pb-8 md:px-4 lg:px-16">
+      <Carousel data={results.filter((result) => result !== null)} />
+    </div>
+  );
 }

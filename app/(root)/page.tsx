@@ -34,7 +34,7 @@ export default async function Page() {
       {/* 캐러셀 */}
       <CategoryCarousel />
       {/* 메뉴탭 : 데스크탑인 경우 양옆, 모바일이라면 세로.  */}
-      <div className="lg:flex max-w-screen-lg mx-auto">
+      <div className="lg:flex max-w-screen-xl mx-auto">
         <MenuTab />
         <CategorySection />
       </div>
