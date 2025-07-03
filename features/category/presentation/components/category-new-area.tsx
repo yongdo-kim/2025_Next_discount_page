@@ -13,7 +13,7 @@ export default function NewCategoryDiscountArea() {
 
   const PostCardSmallList = () => {
     return (
-      <ul className="grid grid-cols-1 gap-4 gap-y-4 px-4 whitespace-nowrap md:grid-cols-4 lg:grid-cols-5">
+      <ul className="grid grid-cols-1 gap-4 gap-y-4 px-4 whitespace-nowrap md:grid-cols-4 lg:grid-cols-4">
         {categories?.map((post) => {
           if (!post) return null;
           return (

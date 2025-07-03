@@ -25,7 +25,7 @@ export default function PostPreviewCategoryArea({
       <div className="flex justify-between px-4 pb-4">
         <MainTitle title={title} coloredTitle="" showIcon={true} />
       </div>
-      <ul className="grid grid-cols-1 gap-4 px-4 md:grid-cols-3 lg:grid-cols-3">
+      <ul className="grid grid-cols-1 gap-4 px-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3">
         {posts?.map((post) => (
           <li key={post.id}>
             <PostCardLarge post={post} />
