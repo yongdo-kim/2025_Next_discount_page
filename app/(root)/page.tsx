@@ -14,7 +14,7 @@ export default async function Page() {
   const categories = await container.categoryService.getCategories();
 
   // 카테고리별로 prefetchQuery 실행 (병렬 처리)
-  await Promise.all(
+  await Promise.all([
     categories.map((category) =>
       queryClient.prefetchQuery({
         queryKey: [categoryKeys.all, category.id],
@@ -26,7 +26,17 @@ export default async function Page() {
         },
       }),
     ),
-  );
+    queryClient.prefetchQuery({
+      queryKey: [categoryKeys.banners],
+      queryFn: async () => {
+        const posts = await container.postService.getCategoryPostPreviews();
+        return JSON.parse(JSON.stringify(posts));
+      },
+    }),
+  ]);
+
+  //여기 대기시간 5초 코드 : loading.tsx가 발동함을 확인함.
+  await new Promise((resolve) => setTimeout(resolve, 500));
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>

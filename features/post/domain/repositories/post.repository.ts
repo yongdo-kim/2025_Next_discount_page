@@ -9,4 +9,5 @@ export interface PostRepository {
     req: GetPostPreviewsReqDto;
   }): Promise<PostPreviewEntity[]>;
   getPostDetail(id: number): Promise<PostEntity>;
+  getCategoryPostPreviews(): Promise<PostPreviewEntity[]>;
 }

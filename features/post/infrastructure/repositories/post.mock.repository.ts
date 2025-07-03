@@ -13,6 +13,9 @@ export class MockPostRepository implements PostRepository {
   constructor() {
     this.mockPosts.push(...this.generateMockPosts(100));
   }
+  getCategoryPostPreviews(): Promise<PostPreviewEntity[]> {
+    return Promise.resolve([]);
+  }
 
   private generateMockPosts(count: number): PostEntity[] {
     const titles = [

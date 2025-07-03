@@ -1,40 +1,18 @@
 "use client";
 
 import Carousel from "@/components/ui/carousel";
-import { categoryKeys } from "@/features/category/infrastructure/contstant/query-keys";
-import { useFetchCategories } from "@/features/category/presentation/hooks/use-fetch-categories";
-import { container } from "@/lib/di/dependencies";
-import { useQueries } from "@tanstack/react-query";
+import { useCategoryPostPreviews } from "@/features/post/presentation/hooks/use-posts";
 import "swiper/css";
 import "swiper/css/pagination";
 
 export default function CategoryCarousel() {
-  const { data: categories } = useFetchCategories();
+  const { data: posts } = useCategoryPostPreviews();
 
-  //map 돌면서 병렬로 실행
-  const postQueries = useQueries({
-    queries:
-      categories?.map((category) => ({
-        queryKey: [categoryKeys.all, category.id],
-        queryFn: () =>
-          container.postService.getPostPreviews({
-            req: { categoryId: category.id, limit: 5 },
-          }),
-      })) ?? [],
-  });
-  const results = postQueries.map((postQuery) => {
-    if (!postQuery.data) return null;
-    return {
-      title: postQuery.data?.[0].title,
-      thumbnailUrl: postQuery.data?.[0].thumbnailUrl,
-      id: postQuery.data?.[0].id,
-    };
-  });
-  
+  if (!posts) return null;
 
   return (
     <div className="mx-auto max-w-screen-xl px-4 pb-8 md:px-4 lg:px-16">
-      <Carousel data={results.filter((result) => result !== null)} />
+      <Carousel data={posts.filter((result) => result !== null)} />
     </div>
   );
 }

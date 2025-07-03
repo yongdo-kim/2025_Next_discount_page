@@ -35,4 +35,10 @@ export const postApi = {
     const response = await apiClient.get("/posts/categories");
     return postResponseSchema.array().parse(response);
   },
+  //카테고리별 포스트 가져오기
+  async getCategoryPostPreviews() {
+    const response = await apiClient.get("/posts/previews/by-category");
+    const posts = response["posts"];
+    return postPreviewResSchema.array().parse(posts);
+  },
 };

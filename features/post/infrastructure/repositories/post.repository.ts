@@ -19,4 +19,8 @@ export class HttpPostRepository implements PostRepository {
     const post = await postApi.getPostDetail(id);
     return toPostEntity(post);
   }
+  async getCategoryPostPreviews(): Promise<PostPreviewEntity[]> {
+    const posts = await postApi.getCategoryPostPreviews();
+    return posts.map((post) => toPostPreviewEntity(post));
+  }
 }

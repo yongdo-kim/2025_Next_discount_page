@@ -21,4 +21,8 @@ export class PostService {
     const post = await this.postRepository.getPostDetail(id);
     return post;
   }
+  async getCategoryPostPreviews(): Promise<PostPreviewEntity[]> {
+    const post = await this.postRepository.getCategoryPostPreviews();
+    return post;
+  }
 }

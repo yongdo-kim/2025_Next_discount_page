@@ -8,8 +8,14 @@ import { PostPreviewEntity } from "../../domain/entities/post-preview.entity";
 import { PostEntity } from "../../domain/entities/post.entity";
 import { postKeys } from "../../infrastructure/contstant/query-keys";
 
-//카테코리에 엮여서 전달한다고 판단. 
-export const usePostPreviews = ({ req, enabled }: { req: GetPostPreviewsReqDto, enabled?: boolean }) => {
+//카테코리에 엮여서 전달한다고 판단.
+export const usePostPreviews = ({
+  req,
+  enabled,
+}: {
+  req: GetPostPreviewsReqDto;
+  enabled?: boolean;
+}) => {
   return useQuery<PostPreviewEntity[]>({
     queryKey: [categoryKeys.all, req.categoryId, req.limit],
     queryFn: () =>
@@ -34,6 +40,14 @@ export const usePostDetail = ({
       return container.postService.getPostDetail(id);
     },
     initialData: initialPost,
+    throwOnError: true, //에러바운더리에 연락
+  });
+};
+
+export const useCategoryPostPreviews = () => {
+  return useQuery<PostPreviewEntity[]>({
+    queryKey: [categoryKeys.banners],
+    queryFn: () => container.postService.getCategoryPostPreviews(),
     throwOnError: true, //에러바운더리에 연락
   });
 };
