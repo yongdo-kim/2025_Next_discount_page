@@ -23,8 +23,8 @@ export default function CategorySection() {
   });
 
   return (
-    <section className="mx-auto max-w-screen-xl lg:flex lg:flex-row">
-      <div className="flex flex-col">
+    <section className="flex-1">
+      <div className="">
         {selectedId ? (
           // 선택된 카테고리만 보여주는 UI
           <PostListArea previews={previews || []} />

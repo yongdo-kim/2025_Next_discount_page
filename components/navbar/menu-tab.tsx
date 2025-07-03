@@ -1,6 +1,7 @@
 "use client";
 import { CategoryEntity } from "@/features/category/domain/entities/category.entity";
 import { useFetchCategories } from "@/features/category/presentation/hooks/use-fetch-categories";
+import { cn } from "@/lib/utils"; // 실제 경로에 맞게 import
 import { useRouter, useSearchParams } from "next/navigation";
 import { Badge } from "../ui/badge";
 
@@ -15,13 +16,12 @@ function MenuItem({ category, selected, onClick, className }: MenuItemProps) {
   return (
     <Badge
       variant={selected ? "default" : "outline"}
-      className={
-        className ??
-        "rounded-full text-sm font-medium" +
-          (selected
-            ? "border-3 border-emerald-400 bg-transparent text-emerald-400"
-            : "")
-      }
+      className={cn(
+        "rounded-full font-medium",
+        selected &&
+          "border-2 border-emerald-400 bg-transparent text-emerald-400",
+        className,
+      )}
       onClick={onClick}
     >
       {category.name}
@@ -52,8 +52,15 @@ export default function MenuTab() {
   const selectedId = searchParams.get("category");
 
   const { data: categories } = useFetchCategories();
+  const seeAllCategory = new CategoryEntity({
+    id: 0,
+    name: "전체보기",
+  });
   const sorted = categories
-    ? [...categories].sort((a, b) => a.name.localeCompare(b.name, "ko"))
+    ? [
+        seeAllCategory,
+        ...[...categories].sort((a, b) => a.name.localeCompare(b.name, "ko")),
+      ]
     : [];
 
   const selectedCategoryId = Number(selectedId);
@@ -67,6 +74,10 @@ export default function MenuTab() {
 
   // 카테고리 클릭 핸들러 생성
   const createHandleCategoryClick = (id: number) => () => {
+    if (id === 0) {
+      router.replace(`/`);
+      return;
+    }
     const params = new URLSearchParams(searchParams);
     params.set("category", id.toString());
     router.replace(`?${params.toString()}`);
@@ -75,19 +86,15 @@ export default function MenuTab() {
   return (
     <>
       {/* 데스크탑 */}
-      <div className="hidden lg:block">
+      <div className="hidden lg:flex">
         <aside className="flex w-[200px] flex-col items-center space-y-4 px-4 pt-4">
-          <MenuAll
-            onClick={handleAllClick}
-            className="w-full p-2 text-xl font-bold hover:rounded-xl hover:bg-neutral-700"
-          />
           {sorted.map((category) => (
             <MenuItem
               key={category.id}
               category={category}
               selected={selectedCategoryId === category.id}
               onClick={createHandleCategoryClick(category.id)}
-              className="w-full md:text-xs"
+              className="w-[150px] rounded-sm text-xl"
             />
           ))}
         </aside>

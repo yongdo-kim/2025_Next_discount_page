@@ -13,9 +13,9 @@ export default function PostListArea({
   }
 
   return (
-    <div>
-      <MainTitle title={name} coloredTitle="" className="px-4 pb-4" />
-      <div className="mx-6 flex flex-col space-y-4">
+    <div className="max-w-screen-xl mx-auto">
+      <MainTitle title={name} coloredTitle="" className="p-4" />
+      <div className="mx-6 flex flex-col space-y-4 mt-4">
         {previews?.map((preview) => (
           <PostListItem key={preview.id} post={preview} />
         ))}

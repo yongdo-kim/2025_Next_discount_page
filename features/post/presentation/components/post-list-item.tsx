@@ -29,7 +29,7 @@ export default function PostListItem({ post }: { post: PostPreviewEntity }) {
   return (
     <Link href={`/posts/${post.id}`}>
       <Card
-        className="hover:bg-accent w-full max-w-lg cursor-pointer p-2"
+        className="hover:bg-accent w-full cursor-pointer p-2"
         onMouseEnter={() => {
           queryClient.prefetchQuery({
             queryKey: [postKeys.detail(post.id)],
