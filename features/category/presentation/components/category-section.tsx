@@ -18,7 +18,7 @@ export default function CategorySection() {
   );
 
   const { data: previews } = usePostPreviews({
-    req: { categoryId: selectedCategory?.id },
+    req: { categoryId: selectedCategory?.id || null, limit: null },
     enabled: !!selectedCategory,
   });
 

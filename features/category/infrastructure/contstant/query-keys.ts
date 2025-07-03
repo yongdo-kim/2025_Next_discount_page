@@ -2,5 +2,6 @@
 export const categoryKeys = {
   all: ["categories"] as const,
   detail: (id: number) => ["categories", id] as const,
+  limit: (id: number) => ["categories", null, id] as const,
   banners: ["categories", "banners"] as const,
 };

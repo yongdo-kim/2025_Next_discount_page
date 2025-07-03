@@ -1,4 +1,4 @@
 export interface GetPostPreviewsReqDto {
-  categoryId?: number;
-  limit?: number;
+  categoryId: number | null;
+  limit: number | null;
 }

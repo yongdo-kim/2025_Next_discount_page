@@ -18,10 +18,12 @@ export const usePostPreviews = ({
 }) => {
   return useQuery<PostPreviewEntity[]>({
     queryKey: [categoryKeys.all, req.categoryId, req.limit],
-    queryFn: () =>
-      container.postService.getPostPreviews({
+    queryFn: () => {
+      console.log("req", req);
+      return container.postService.getPostPreviews({
         req,
-      }),
+      });
+    },
     throwOnError: true, //에러바운더리에 연락
     enabled,
   });

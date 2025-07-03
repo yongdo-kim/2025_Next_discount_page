@@ -1,6 +1,7 @@
 import Footer from "@/components/footer/footer";
 import MenuTab from "@/components/navbar/menu-tab";
 import NavBar from "@/components/navbar/nav-bar";
+import { CategoryEntity } from "@/features/category/domain/entities/category.entity";
 import { categoryKeys } from "@/features/category/infrastructure/contstant/query-keys";
 import CategoryCarousel from "@/features/category/presentation/components/category-carousel";
 import CategorySection from "@/features/category/presentation/components/category-section";
@@ -11,21 +12,29 @@ import clsx from "clsx";
 //메인 첫번째 화면이 보이는 곳,
 
 export default async function Page() {
-  const categories = await container.categoryService.getCategories();
+  //처음에 카테고리 리스트는 받아야함.
+  const categories = await queryClient.fetchQuery({
+    queryKey: [categoryKeys.all],
+    queryFn: async () => {
+      const categories = await container.categoryService.getCategories();
+      return JSON.parse(JSON.stringify(categories));
+    },
+  });
 
-  // 카테고리별로 prefetchQuery 실행 (병렬 처리)
+  // 카테고리별 아이템
   await Promise.all([
-    categories.map((category) =>
+    categories?.map((category: CategoryEntity) =>
       queryClient.prefetchQuery({
         queryKey: [categoryKeys.all, category.id],
         queryFn: async () => {
           const posts = await container.postService.getPostPreviews({
-            req: { categoryId: category.id },
+            req: { categoryId: category.id, limit: null },
           });
           return JSON.parse(JSON.stringify(posts));
         },
       }),
     ),
+    // 배너 호출
     queryClient.prefetchQuery({
       queryKey: [categoryKeys.banners],
       queryFn: async () => {
@@ -33,10 +42,21 @@ export default async function Page() {
         return JSON.parse(JSON.stringify(posts));
       },
     }),
+    //오늘의 따끈한 할인 호출
+    queryClient.prefetchQuery({
+      queryKey: [categoryKeys.all, null, 8],
+      queryFn: async () => {
+        const posts = await container.postService.getPostPreviews({
+          req: { limit: 8, categoryId: null },
+        });
+        return JSON.parse(JSON.stringify(posts));
+      },
+    }),
+    //테마별 특구가 추천 
   ]);
 
   //여기 대기시간 5초 코드 : loading.tsx가 발동함을 확인함.
-  await new Promise((resolve) => setTimeout(resolve, 500));
+  //await new Promise((resolve) => setTimeout(resolve, 500));
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>

@@ -8,6 +8,7 @@ export default function NewCategoryDiscountArea() {
   const { data: categories } = usePostPreviews({
     req: {
       limit: 8,
+      categoryId: null,
     },
   });
 
@@ -27,17 +28,15 @@ export default function NewCategoryDiscountArea() {
   };
 
   return (
-    categories && (
-      <section className="pt-4 pb-2">
-        <div className="flex justify-between px-4 pb-4">
-          <MainTitle
-            title="오늘의"
-            coloredTitle=" 따끈한 할인"
-            color="text-red-400"
-          />
-        </div>
-        <PostCardSmallList />
-      </section>
-    )
+    <section className="pt-4 pb-2">
+      <div className="flex justify-between px-4 pb-4">
+        <MainTitle
+          title="오늘의"
+          coloredTitle=" 따끈한 할인"
+          color="text-red-400"
+        />
+      </div>
+      <PostCardSmallList />
+    </section>
   );
 }
