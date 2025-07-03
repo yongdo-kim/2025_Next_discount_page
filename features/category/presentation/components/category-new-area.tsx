@@ -27,15 +27,17 @@ export default function NewCategoryDiscountArea() {
   };
 
   return (
-    <section className="pt-4 pb-2">
-      <div className="flex justify-between px-4 pb-4">
-        <MainTitle
-          title="오늘의"
-          coloredTitle=" 따끈한 할인"
-          color="text-red-400"
-        />
-      </div>
-      <PostCardSmallList />
-    </section>
+    categories && (
+      <section className="pt-4 pb-2">
+        <div className="flex justify-between px-4 pb-4">
+          <MainTitle
+            title="오늘의"
+            coloredTitle=" 따끈한 할인"
+            color="text-red-400"
+          />
+        </div>
+        <PostCardSmallList />
+      </section>
+    )
   );
 }

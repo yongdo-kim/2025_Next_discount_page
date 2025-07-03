@@ -30,6 +30,7 @@ export default function CategoryCarousel() {
       id: postQuery.data?.[0].id,
     };
   });
+  
 
   return (
     <div className="mx-auto max-w-screen-xl px-4 pb-8 md:px-4 lg:px-16">
