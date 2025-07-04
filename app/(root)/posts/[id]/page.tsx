@@ -10,9 +10,10 @@ import { notFound } from "next/navigation";
 export async function generateMetadata({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }): Promise<Metadata> {
-  const numId = Number(params.id);
+  const { id } = await params;
+  const numId = Number(id);
   try {
     const post = await container.postService.getPostDetail(numId);
     return {
@@ -47,7 +48,7 @@ export default async function PostDetailPage({
 }: {
   params: Promise<{ id: string }>;
 }) {
-  const { id } = await params; // await으로 받아야 함!
+  const { id } = await params;
   const numId = Number(id);
   try {
     await queryClient.prefetchQuery({
