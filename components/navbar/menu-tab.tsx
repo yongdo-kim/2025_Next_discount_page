@@ -39,10 +39,17 @@ export default function MenuTab() {
     name: "전체보기",
   });
   const sorted = categories
-    ? [
-        seeAllCategory,
-        ...[...categories].sort((a, b) => a.name.localeCompare(b.name, "ko")),
-      ]
+    ? (() => {
+        // '기타' 카테고리 분리
+        const etcCategory = categories.find((c) => c.name === "기타");
+        const rest = categories.filter((c) => c.name !== "기타");
+        const sortedRest = [...rest].sort((a, b) =>
+          a.name.localeCompare(b.name, "ko"),
+        );
+        return etcCategory
+          ? [seeAllCategory, ...sortedRest, etcCategory]
+          : [seeAllCategory, ...sortedRest];
+      })()
     : [];
 
   const selectedCategoryId = Number(selectedId);

@@ -23,7 +23,7 @@ export default function CategorySection() {
   });
 
   return (
-    <section className="flex-1 max-w-screen-lg mx-auto">
+    <section className="mx-auto max-w-screen-lg flex-1">
       <div className="">
         {selectedId ? (
           // 선택된 카테고리만 보여주는 UI

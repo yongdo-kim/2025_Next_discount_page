@@ -21,8 +21,8 @@ export default function CategoryRandomArea() {
   );
 
   return (
-    <section className="pt-4 pb-2 md:pt-8">
-      <div className="flex justify-between px-4 pb-4">
+    <section className="pt-4 pb-2 md:pt-8 md:pb-8">
+      <div className="flex justify-between px-4 pb-4 pt-4">
         <MainTitle
           title="테마별"
           coloredTitle=" 특가 추천"

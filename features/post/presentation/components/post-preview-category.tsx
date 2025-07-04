@@ -1,6 +1,7 @@
 "use client";
 
 import MainTitle from "@/components/main-title";
+import { Divider } from "@/components/ui/divider";
 import { usePostPreviews } from "../hooks/use-posts";
 import PostCardLarge from "./post-card-large";
 
@@ -18,18 +19,21 @@ export default function PostPreviewCategoryArea({
     },
   });
 
+  if (!posts || posts.length === 0) return null;
+
   return (
     <>
       <div className="flex justify-between px-4 pb-4">
         <MainTitle title={title} coloredTitle="" showIcon={true} />
       </div>
       <ul className="grid grid-cols-1 gap-4 px-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3">
-        {posts?.map((post) => (
+        {posts.map((post) => (
           <li key={post.id}>
             <PostCardLarge post={post} />
           </li>
         ))}
       </ul>
+      <Divider className="mt-8 mb-8" />
     </>
   );
 }

@@ -14,7 +14,7 @@ export default function NewCategoryDiscountArea() {
 
   const PostCardSmallList = () => {
     return (
-      <ul className="grid grid-cols-1 gap-4 gap-y-4 px-4 whitespace-nowrap md:grid-cols-4 lg:grid-cols-4">
+      <ul className="grid grid-cols-1 gap-4 gap-y-4 px-4 whitespace-nowrap md:grid-cols-3 lg:grid-cols-4">
         {categories?.map((post) => {
           if (!post) return null;
           return (
@@ -28,8 +28,8 @@ export default function NewCategoryDiscountArea() {
   };
 
   return (
-    <section className="pt-4 pb-2">
-      <div className="flex justify-between px-4 pb-4">
+    <section className="pt-4 pb-2 md:pb-8">
+      <div className="flex justify-between px-4 pb-4 md:pb-8">
         <MainTitle
           title="오늘의"
           coloredTitle=" 따끈한 할인"

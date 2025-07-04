@@ -62,8 +62,8 @@ function DesktopCard({ post }: { post: PostPreviewEntity }) {
     <div className="group w-full cursor-pointer">
       <Link href={`/posts/${post.id}`}>
         <div className="flex flex-col">
-          {/* 이미지 */}
-          <div className="overflow-hidden rounded-2xl">
+          {/* 이미지 + 뱃지/타이틀 오버레이 */}
+          <div className="relative overflow-hidden rounded-2xl">
             <img
               src={post.thumbnailUrl || ""}
               className="h-[160px] w-[200px] rounded-2xl object-cover transition-transform duration-300 group-hover:scale-105 lg:h-[200px] lg:w-[250px]"
@@ -71,28 +71,31 @@ function DesktopCard({ post }: { post: PostPreviewEntity }) {
               width={180}
               height={120}
             />
-          </div>
-          {/* 내용 */}
-          <div className="p-2">
-            <div className="flex items-center gap-2 pt-1">
-              {post.tags.length > 0 ? (
-                post.tags.slice(0, 2).map((tag) => (
+            {/* 오버레이: 뱃지 + 타이틀 */}
+            <div className="absolute top-0 left-0 flex h-full w-full flex-col justify-between bg-black/40 p-3">
+              <div className="flex items-center gap-2">
+                {post.tags.length > 0 ? (
+                  post.tags.slice(0, 2).map((tag) => (
+                    <Badge
+                      variant="outline"
+                      key={tag.id}
+                      className="border-none bg-white/80 text-xs text-black shadow lg:text-sm"
+                    >
+                      {tag.name}
+                    </Badge>
+                  ))
+                ) : (
                   <Badge
                     variant="outline"
-                    key={tag.id}
-                    className="text-sm lg:text-base"
+                    className="border-none bg-white/80 text-xs text-black shadow"
                   >
-                    {tag.name}
+                    {"#"}
                   </Badge>
-                ))
-              ) : (
-                <Badge variant="outline" className="text-sm">
-                  {"#"}
-                </Badge>
-              )}
-            </div>
-            <div className="text-md line-clamp-1 pt-2 font-bold whitespace-normal lg:text-xl">
-              {post.title}
+                )}
+              </div>
+              <div className="line-clamp-2 text-2xl font-bold whitespace-normal text-white drop-shadow">
+                {post.title}
+              </div>
             </div>
           </div>
         </div>

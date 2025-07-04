@@ -15,7 +15,15 @@ import Link from "next/link";
 import { PostPreviewEntity } from "../../domain/entities/post-preview.entity";
 import { postKeys } from "../../infrastructure/contstant/query-keys";
 
-export default function PostCardLarge({ post }: { post: PostPreviewEntity }) {
+export default function PostCardLarge({
+  post,
+  isAuthorVisible = true,
+  isDescVisible = true,
+}: {
+  post: PostPreviewEntity;
+  isAuthorVisible?: boolean;
+  isDescVisible?: boolean;
+}) {
   const content = htmlToText(post.content);
 
   // createdAt이 string인 경우 Date 객체로 변환
@@ -59,32 +67,40 @@ export default function PostCardLarge({ post }: { post: PostPreviewEntity }) {
         />
         <CardHeader className="px-2">
           {/* 상단 */}
-          <CardTitle className="line-clamp-1 font-bold">{post.title}</CardTitle>
+          <CardTitle className="line-clamp-2 text-lg font-bold whitespace-normal">
+            {post.title}
+          </CardTitle>
           {/* 중단 */}
-          <CardDescription className="line-clamp-2">{content}</CardDescription>
+          {isDescVisible && (
+            <CardDescription className="line-clamp-2">
+              {content}
+            </CardDescription>
+          )}
           {/* 하단 */}
 
-          <CardDescription className="mt-2">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center justify-center gap-2">
-                <CardDescription>
-                  <img
-                    src={post.author.picture}
-                    alt={post.author.nickname}
-                    className="aspect-square rounded-full"
-                    width={20}
-                    height={20}
-                  />
-                </CardDescription>
-                <div className="text-sm text-neutral-800 dark:text-neutral-50">
-                  {post.author.nickname}
+          {isAuthorVisible && (
+            <CardDescription className="mt-2">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center justify-center gap-2">
+                  <CardDescription>
+                    <img
+                      src={post.author.picture}
+                      alt={post.author.nickname}
+                      className="aspect-square rounded-full"
+                      width={20}
+                      height={20}
+                    />
+                  </CardDescription>
+                  <div className="text-sm text-neutral-800 dark:text-neutral-50">
+                    {post.author.nickname}
+                  </div>
+                </div>
+                <div className="text-sm text-neutral-500 dark:text-neutral-400">
+                  {timeAgo}
                 </div>
               </div>
-              <div className="text-sm text-neutral-500 dark:text-neutral-400">
-                {timeAgo}
-              </div>
-            </div>
-          </CardDescription>
+            </CardDescription>
+          )}
         </CardHeader>
       </Card>
     </Link>

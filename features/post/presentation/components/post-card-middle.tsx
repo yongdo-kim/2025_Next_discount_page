@@ -66,10 +66,10 @@ function DesktopCard({ post }: { post: PostPreviewEntity }) {
             });
           }}
         >
-          <div className="relative h-[300px] transition-transform duration-300 group-hover:scale-105 lg:h-[400px]">
+          <div className="relative h-[280px] transition-transform duration-300 group-hover:scale-105 lg:h-[380px]">
             <img
               src={post.thumbnailUrl || ""}
-              className="h-[300px] rounded-2xl object-cover lg:h-[400px]"
+              className="h-[280px] rounded-2xl object-cover lg:h-[380px]"
               alt={post.title}
               width={700}
               height={300}
