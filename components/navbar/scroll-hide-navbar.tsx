@@ -31,7 +31,7 @@ export default function ScrollHideNavbar() {
   }, []);
 
   return (
-    <>
+    <div>
       <div
         className={clsx(
           "fixed left-0 z-50 w-full transition-all duration-300",
@@ -52,6 +52,6 @@ export default function ScrollHideNavbar() {
           )}
         />
       </div>
-    </>
+    </div>
   );
 }

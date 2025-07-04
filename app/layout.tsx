@@ -2,6 +2,7 @@ import "@/assets/styles/globals.css";
 import { APP_DESCRIPTION, APP_NAME, SERVER_URL } from "@/lib/constants";
 import { Inter } from "next/font/google";
 import { Providers } from "./provider";
+import { Toaster } from "sonner";
 //폰트
 const inter = Inter({ subsets: ["latin"] });
 
@@ -29,6 +30,7 @@ export default function RootLayout({
         className={`${inter.className} bg-white antialiased dark:bg-neutral-900`}
       >
         <Providers>{children}</Providers>
+        <Toaster />
       </body>
     </html>
   );

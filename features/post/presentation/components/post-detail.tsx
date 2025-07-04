@@ -6,6 +6,7 @@ import { UserEntity } from "@/features/user/domain/entities/user.entity";
 import { format } from "date-fns";
 import { ko } from "date-fns/locale/ko";
 import parse from "html-react-parser";
+import { toast } from "sonner";
 import { PostEntity } from "../../domain/entities/post.entity";
 import { usePostDetail } from "../hooks/use-posts";
 
@@ -43,15 +44,7 @@ export const PostDetail = ({
     );
   }
   // 파일 상단 혹은 별도 파일에 선언
-  function SourceLink({
-    url,
-    labelColor = "text-neutral-500",
-    linkColor = "text-blue-400 underline hover:text-blue-500",
-  }: {
-    url?: string | null;
-    labelColor?: string;
-    linkColor?: string;
-  }) {
+  function SourceLink({ url }: { url?: string | null }) {
     if (!url) return null;
 
     const MAX_LENGTH = 40;
@@ -60,18 +53,36 @@ export const PostDetail = ({
       displayUrl = url.slice(0, 30) + "..." + url.slice(-8);
     }
 
+    // 클립보드 복사
+    const handleCopy = () => {
+      navigator.clipboard.writeText(url);
+      toast("URL이 클립보드에 복사되었습니다.");
+    };
+
     return (
-      <div>
-        <span className={labelColor}>자료출처:</span>
+      <div className="flex items-center rounded-lg bg-neutral-50 py-3 shadow-sm dark:bg-neutral-900">
+        {/* 아이콘 */}
+
+        <span className="mr-2 text-sm font-semibold text-neutral-600 dark:text-neutral-300">
+          자료출처
+        </span>
         <a
           href={url}
           target="_blank"
           rel="noopener noreferrer"
-          className={linkColor}
+          className="truncate text-sm font-medium text-emerald-500 underline hover:text-emerald-600"
           title={url}
         >
           {displayUrl}
         </a>
+        <button
+          onClick={handleCopy}
+          className="ml-2 rounded bg-neutral-200 px-2 py-1 text-xs font-semibold text-neutral-600 hover:bg-blue-100 hover:text-blue-600 dark:bg-neutral-800 dark:text-neutral-300 dark:hover:bg-blue-900"
+          title="복사"
+          type="button"
+        >
+          복사
+        </button>
       </div>
     );
   }
@@ -123,14 +134,50 @@ export const PostDetail = ({
             target="_blank"
             rel="noopener noreferrer"
           >
-            <img
-              src={post.imageUrl}
-              alt={post.title}
-              width={600}
-              height={400}
-              className="mb-2 w-full rounded-xl object-cover transition hover:opacity-80"
+            <div
+              className="relative mb-2 w-full"
               style={{ maxWidth: "100%", maxHeight: "350px" }}
-            />
+            >
+              <img
+                src={post.imageUrl}
+                alt={post.title}
+                width={600}
+                height={400}
+                className="w-full rounded-xl object-cover"
+                style={{ maxWidth: "100%", maxHeight: "350px" }}
+              />
+              {/* 검정 오버레이 */}
+              <div className="absolute top-0 left-0 h-full w-full rounded-xl bg-black opacity-40" />
+              {/* 바로가기 아이콘 */}
+              <a
+                href={post.source.originSourceUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="absolute right-3 bottom-3 flex items-center justify-center rounded-full bg-black/70 px-4 py-2 transition hover:bg-black/90"
+                aria-label="원본 사이트로 이동"
+              >
+                {/* 외부링크(새창) 아이콘 SVG */}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="22"
+                  height="22"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="white"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="mr-1"
+                >
+                  <path d="M18 13v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                  <polyline points="15 3 21 3 21 9" />
+                  <line x1="10" y1="14" x2="21" y2="3" />
+                </svg>
+                <span className="ml-1 text-xl font-semibold text-white">
+                  바로가기
+                </span>
+              </a>
+            </div>
           </a>
         ) : (
           <img
@@ -143,11 +190,7 @@ export const PostDetail = ({
           />
         )}
         {/* 대표이미지-링크 */}
-        <SourceLink
-          url={post.source?.originSourceUrl}
-          labelColor="text-neutral-500"
-          linkColor="text-neutral-300 underline hover:text-neutral-400"
-        />
+        <SourceLink url={post.source?.originSourceUrl} />
       </div>
 
       {/* 본문 */}
