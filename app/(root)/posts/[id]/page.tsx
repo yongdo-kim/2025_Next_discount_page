@@ -5,7 +5,43 @@ import { PostDetail } from "@/features/post/presentation/components/post-detail"
 import { container } from "@/lib/di/dependencies";
 import { queryClient } from "@/lib/react-query";
 import { HydrationBoundary, dehydrate } from "@tanstack/react-query";
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+export async function generateMetadata({
+  params,
+}: {
+  params: { id: string };
+}): Promise<Metadata> {
+  const numId = Number(params.id);
+  try {
+    const post = await container.postService.getPostDetail(numId);
+    return {
+      title: post.title ? `${post.title} | 할인탐정` : "할인탐정",
+      description: post.content || "할인 정보 상세",
+      openGraph: {
+        title: post.title,
+        description: post.content,
+        images: post.source.originSourceUrl
+          ? [{ url: post.source.originSourceUrl }]
+          : [],
+      },
+      twitter: {
+        card: "summary_large_image",
+        title: post.title,
+        description: post.content,
+        images: post.source.originSourceUrl
+          ? [{ url: post.source.originSourceUrl }]
+          : [],
+      },
+    };
+  } catch {
+    return {
+      title: "게시글을 찾을 수 없습니다 | 할인탐정",
+      description: "존재하지 않는 게시글입니다.",
+    };
+  }
+}
+
 export default async function PostDetailPage({
   params,
 }: {

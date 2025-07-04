@@ -35,7 +35,7 @@ export default function ScrollHideNavbar() {
       <div
         className={clsx(
           "fixed left-0 z-50 w-full transition-all duration-300",
-          show ? "top-[50px] px-4 py-3" : "top-0 px-0 py-0",
+          show ? "top-[50px] py-3" : "top-0 py-0",
         )}
       >
         <Progress
