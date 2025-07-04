@@ -6,22 +6,9 @@ export default function Footer() {
 
   return (
     <footer className="mx-auto max-w-screen-lg">
-      <div className="flex flex-col items-end">
+      <div className="flex flex-col items-end px-8">
         <div className="grid grid-cols-1 justify-end gap-8 md:grid-cols-2">
           {/* 서비스 안내 */}
-          <div>
-            <h4 className="mb-4 font-semibold">서비스</h4>
-            <ul className="space-y-2 text-gray-400">
-              <li>
-                <Link
-                  href="/about"
-                  className="transition-colors hover:text-white"
-                >
-                  서비스 소개
-                </Link>
-              </li>
-            </ul>
-          </div>
 
           {/* 고객 지원 */}
           <div>

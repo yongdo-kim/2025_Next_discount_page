@@ -1,4 +1,5 @@
 "use client";
+import NavBar from "@/components/navbar/nav-bar";
 import { useState } from "react";
 
 export default function ContactPage() {
@@ -36,43 +37,48 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="mx-auto max-w-lg p-6">
-      <h1 className="mb-6 text-2xl font-bold">문의하기</h1>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div>
-          <label className="mb-1 block font-semibold">제목</label>
-          <input
-            type="text"
-            className="w-full rounded border px-3 py-2 focus:ring focus:outline-none"
-            value={subject}
-            onChange={(e) => setSubject(e.target.value)}
-            required
-            placeholder="문의 제목을 입력하세요"
-          />
+    <>
+      <NavBar />
+      <div className="flex min-h-screen">
+        <div className="mx-auto w-full max-w-lg p-6">
+          <h1 className="mb-6 text-2xl font-bold">문의하기</h1>
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div>
+              <label className="mb-1 block font-semibold">제목</label>
+              <input
+                type="text"
+                className="w-full rounded border px-3 py-2 focus:ring focus:outline-none"
+                value={subject}
+                onChange={(e) => setSubject(e.target.value)}
+                required
+                placeholder="문의 제목을 입력하세요"
+              />
+            </div>
+            <div>
+              <label className="mb-1 block font-semibold">내용</label>
+              <textarea
+                className="h-40 w-full resize-none rounded border px-3 py-2 focus:ring focus:outline-none"
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+                required
+                placeholder="문의하고 싶은 내용을 입력하세요"
+              />
+            </div>
+            <button
+              type="submit"
+              className="w-full rounded bg-emerald-500 py-2 font-bold text-white hover:bg-emerald-600 disabled:opacity-60"
+              disabled={loading}
+            >
+              {loading ? "전송 중..." : "문의 보내기"}
+            </button>
+            {result && (
+              <div className="mt-4 text-center text-sm text-emerald-600">
+                {result}
+              </div>
+            )}
+          </form>
         </div>
-        <div>
-          <label className="mb-1 block font-semibold">내용</label>
-          <textarea
-            className="h-40 w-full resize-none rounded border px-3 py-2 focus:ring focus:outline-none"
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-            required
-            placeholder="문의하고 싶은 내용을 입력하세요"
-          />
-        </div>
-        <button
-          type="submit"
-          className="w-full rounded bg-emerald-500 py-2 font-bold text-white hover:bg-emerald-600 disabled:opacity-60"
-          disabled={loading}
-        >
-          {loading ? "전송 중..." : "문의 보내기"}
-        </button>
-        {result && (
-          <div className="mt-4 text-center text-sm text-emerald-600">
-            {result}
-          </div>
-        )}
-      </form>
-    </div>
+      </div>
+    </>
   );
 }
