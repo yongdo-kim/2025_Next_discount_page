@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
+import MainTitle from "@/components/main-title";
 import { Badge } from "@/components/ui/badge";
 import { TagEntity } from "@/features/tag/domain/entities/tag.entity";
 import { UserEntity } from "@/features/user/domain/entities/user.entity";
@@ -135,7 +136,7 @@ export const PostDetail = ({
             rel="noopener noreferrer"
           >
             <div
-              className="relative mb-2 w-full"
+              className="group relative mb-2 w-full overflow-hidden"
               style={{ maxWidth: "100%", maxHeight: "350px" }}
             >
               <img
@@ -143,7 +144,7 @@ export const PostDetail = ({
                 alt={post.title}
                 width={600}
                 height={400}
-                className="w-full rounded-xl object-cover"
+                className="w-full rounded-xl object-cover transition-transform duration-300 group-hover:scale-105"
                 style={{ maxWidth: "100%", maxHeight: "350px" }}
               />
               {/* 검정 오버레이 */}
@@ -213,7 +214,8 @@ export default function PostContent({ html }: { html: string }) {
     .trim();
   return (
     <div className="mt-16 max-w-none whitespace-pre-line">
-      <div className="[&_*]:border [&_a]:text-blue-400 [&_a]:underline [&_img]:mx-auto [&_img]:h-auto [&_img]:max-w-full [&_table]:border-collapse [&_td]:p-2 [&_th]:p-2">
+      <MainTitle title={"정리"} coloredTitle="" showIcon={false} />
+      <div className="my-4 py-8 [&_*]:border [&_a]:text-blue-400 [&_a]:underline [&_img]:mx-auto [&_img]:h-auto [&_img]:max-w-full [&_table]:border-collapse [&_td]:p-2 [&_th]:p-2">
         {parse(newHTMl)}
       </div>
     </div>
