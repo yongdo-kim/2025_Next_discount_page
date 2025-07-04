@@ -1,0 +1,38 @@
+import { NextRequest, NextResponse } from "next/server";
+import nodemailer from "nodemailer";
+
+export async function POST(req: NextRequest) {
+  try {
+    const { subject, message } = await req.json();
+    if (!subject || !message) {
+      return NextResponse.json(
+        { error: "제목과 내용을 모두 입력해주세요." },
+        { status: 400 },
+      );
+    }
+
+    // Gmail SMTP 설정
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.GMAIL_APP_USER, // 운영자 이메일 (env에 저장)
+        pass: process.env.GMAIL_APP_PASSWORD, // 앱 비밀번호 (env에 저장)
+      },
+    });
+
+    const mailOptions = {
+      from: "익명의 유저",
+      to: "naristudio2023@gmail.com",
+      subject: `[할인탐정 문의] ${subject}`,
+      text: message,
+    };
+
+    await transporter.sendMail(mailOptions);
+    return NextResponse.json({ success: true });
+  } catch (err) {
+    return NextResponse.json(
+      { error: `메일 전송에 실패했습니다. ${err}` },
+      { status: 500 },
+    );
+  }
+}

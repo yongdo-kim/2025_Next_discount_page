@@ -7,3 +7,5 @@ export const APP_DESCRIPTION =
 export const SERVER_URL =
   process.env.NEXT_PUBLIC_SERVER_URL || "http://localhost:3010";
 export const IS_TESTMODE = process.env.NEXT_PUBLIC_IS_TESTMODE == "test";
+export const GMAIL_APP_USER = process.env.GMAIL_APP_USER;
+export const GMAIL_APP_PASSWORD = process.env.GMAIL_APP_PASSWORD;
