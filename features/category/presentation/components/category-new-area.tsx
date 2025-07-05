@@ -3,6 +3,10 @@
 import MainTitle from "@/components/main-title";
 import PostCardSmall from "@/features/post/presentation/components/post-card-small";
 import { usePostPreviews } from "@/features/post/presentation/hooks/use-posts";
+// import dynamic from "next/dynamic";
+// const AdSenseBanner = dynamic(() => import("@/components/AdSenseBanner"), {
+//   ssr: false,
+// });
 
 export default function NewCategoryDiscountArea() {
   const { data: categories } = usePostPreviews({
@@ -37,6 +41,7 @@ export default function NewCategoryDiscountArea() {
         />
       </div>
       <PostCardSmallList />
+      {/* <AdSenseBanner /> */}
     </section>
   );
 }

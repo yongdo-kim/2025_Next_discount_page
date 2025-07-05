@@ -19,7 +19,6 @@ export const usePostPreviews = ({
   return useQuery<PostPreviewEntity[]>({
     queryKey: [categoryKeys.detail(req.categoryId, req.limit)],
     queryFn: () => {
-      console.log("req", req);
       return container.postService.getPostPreviews({
         req,
       });
