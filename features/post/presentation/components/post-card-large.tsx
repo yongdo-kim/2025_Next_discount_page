@@ -14,6 +14,7 @@ import { htmlToText } from "html-to-text";
 import Link from "next/link";
 import { PostPreviewEntity } from "../../domain/entities/post-preview.entity";
 import { postKeys } from "../../infrastructure/contstant/query-keys";
+import Image from "next/image";
 
 export default function PostCardLarge({
   post,
@@ -83,8 +84,8 @@ export default function PostCardLarge({
               <div className="flex items-center justify-between">
                 <div className="flex items-center justify-center gap-2">
                   <CardDescription>
-                    <img
-                      src={post.author.picture}
+                    <Image
+                      src="/discount-character.webp"
                       alt={post.author.nickname}
                       className="aspect-square rounded-full"
                       width={20}

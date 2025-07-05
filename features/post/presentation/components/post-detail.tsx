@@ -110,7 +110,12 @@ export const PostDetail = ({
   }) {
     return (
       <div className="mt-4 mb-4 flex items-center gap-3">
-        <Image src={user.picture} alt={user.nickname} width={13} height={20} />
+        <Image
+          src="/discount-character.webp"
+          alt={user.nickname}
+          width={13}
+          height={20}
+        />
 
         <div>
           <div className="font-semibold text-neutral-800 dark:text-neutral-50">
