@@ -1,7 +1,7 @@
+import withBundleAnalyzer from "@next/bundle-analyzer";
 import type { NextConfig } from "next";
-import withBundleAnalyzer from '@next/bundle-analyzer';
 const bundleAnalyzer = withBundleAnalyzer({
-  enabled: process.env.ANALYZE === 'true',
+  enabled: process.env.ANALYZE === "true",
 });
 
 const nextConfig: NextConfig = {
@@ -39,4 +39,3 @@ const nextConfig: NextConfig = {
 
 // TypeScript 환경에서 export default 유지
 export default bundleAnalyzer(nextConfig);
-
