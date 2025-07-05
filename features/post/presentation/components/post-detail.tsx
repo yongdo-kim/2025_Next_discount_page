@@ -4,15 +4,15 @@ import MainTitle from "@/components/main-title";
 import { Badge } from "@/components/ui/badge";
 import { TagEntity } from "@/features/tag/domain/entities/tag.entity";
 import { UserEntity } from "@/features/user/domain/entities/user.entity";
+import { sendGAEvent } from "@/lib/ga";
 import { format } from "date-fns";
 import { ko } from "date-fns/locale/ko";
 import parse from "html-react-parser";
+import Image from "next/image";
+import { useEffect } from "react";
 import { toast } from "sonner";
 import { PostEntity } from "../../domain/entities/post.entity";
 import { usePostDetail } from "../hooks/use-posts";
-
-import { sendGAEvent } from "@/lib/ga";
-import { useEffect } from "react";
 
 export const PostDetail = ({
   postId,
@@ -110,13 +110,8 @@ export const PostDetail = ({
   }) {
     return (
       <div className="mt-4 mb-4 flex items-center gap-3">
-        <img
-          src={user.picture}
-          alt={user.nickname}
-          width={30}
-          height={30}
-          className="h-8 w-8 rounded-full object-cover"
-        />
+        <Image src={user.picture} alt={user.nickname} width={13} height={20} />
+
         <div>
           <div className="font-semibold text-neutral-800 dark:text-neutral-50">
             {user.nickname}
