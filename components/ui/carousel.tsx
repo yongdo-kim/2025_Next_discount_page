@@ -42,6 +42,7 @@ export default function Carousel({ data }: { data: CarouselProps }) {
                 alt={item.title}
                 width={600}
                 height={400}
+                loading="eager"
               />
               <div className="absolute inset-0" />
               <div className="absolute right-0 bottom-0.5 p-6 text-white">
