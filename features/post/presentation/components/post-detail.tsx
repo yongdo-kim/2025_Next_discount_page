@@ -13,6 +13,7 @@ import { useEffect } from "react";
 import { toast } from "sonner";
 import { PostEntity } from "../../domain/entities/post.entity";
 import { usePostDetail } from "../hooks/use-posts";
+import SmartImage from "@/components/ui/smart-image";
 
 export const PostDetail = ({
   postId,
@@ -154,7 +155,7 @@ export const PostDetail = ({
               )
             }
           >
-            <img
+            <SmartImage
               src={post.imageUrl}
               alt={post.title}
               width={600}
@@ -201,7 +202,7 @@ export const PostDetail = ({
             </button>
           </div>
         ) : (
-          <img
+          <SmartImage
             src={post.imageUrl}
             alt={post.title}
             width={600}

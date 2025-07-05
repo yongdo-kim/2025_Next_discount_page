@@ -1,4 +1,4 @@
-/* eslint-disable @next/next/no-img-element */
+import SmartImage from "@/components/ui/smart-image";
 import { container } from "@/lib/di/dependencies";
 import { queryClient } from "@/lib/react-query";
 import { htmlToText } from "html-to-text";
@@ -29,7 +29,7 @@ function MobileCard({ post }: { post: PostPreviewEntity }) {
       <Link href={`/posts/${post.id}`}>
         <div>
           <div className="relative transition-transform duration-300 group-hover:scale-105">
-            <img
+            <SmartImage
               src={post.thumbnailUrl || ""}
               className="h-[180px] w-full rounded-2xl object-cover"
               alt={post.title}
@@ -67,7 +67,7 @@ function DesktopCard({ post }: { post: PostPreviewEntity }) {
           }}
         >
           <div className="relative h-[280px] transition-transform duration-300 group-hover:scale-105 lg:h-[380px]">
-            <img
+            <SmartImage
               src={post.thumbnailUrl || ""}
               className="h-[280px] rounded-2xl object-cover lg:h-[380px]"
               alt={post.title}

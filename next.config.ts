@@ -1,15 +1,42 @@
 import type { NextConfig } from "next";
+import withBundleAnalyzer from '@next/bundle-analyzer';
+const bundleAnalyzer = withBundleAnalyzer({
+  enabled: process.env.ANALYZE === 'true',
+});
 
 const nextConfig: NextConfig = {
   images: {
     domains: [
-      "encrypted-tbn3.gstatic.com",
+      "img.lotteeatz.com",
+      "i.ytimg.com",
+      "shared.fastly.steamstatic.com",
+      "st.kakaocdn.net",
+      "/common/image/masterpage/preview-thumbnail.png",
+      "i2.ruliweb.com",
+      "image3.compuzone.co.kr",
+      "hpsimg.gsretail.com",
+      "www.jp.square-enix.com",
+      "res.kurly.com",
+      "d2x8kymwjom7h7.cloudfront.net",
+      "www.gamewoori.com",
+      "daewonshop.cdn-nhncommerce.com",
+      "campaign-cdn.pstatic.net",
+      "images.ctfassets.net",
+      "img.ruliweb.com",
+      "shared.akamai.steamstatic.com",
+      "financial.pstatic.net",
       "images.unsplash.com",
-      "randomuser.me",
-      "nari-s3.s3.us-east-1.amazonaws.com",
-      "localhost",
+      "contents.lotteon.com",
+      "i1.ruliweb.com",
+      "cdn-ao.adison.co",
+      "ae01.alicdn.com",
+      "cdn.akamai.steamstatic.com",
+      "store.nintendo.co.kr",
+      "directg.net",
     ],
   },
 };
 
-export default nextConfig;
+// TypeScript 환경에서 export default 유지
+export default bundleAnalyzer(nextConfig);
+

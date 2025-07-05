@@ -2,6 +2,7 @@
 "use client";
 
 import Link from "next/link";
+import SmartImage from "./smart-image";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Autoplay, Pagination } from "swiper/modules";
@@ -35,7 +36,7 @@ export default function Carousel({ data }: { data: CarouselProps }) {
         >
           <Link href={`/posts/${item.id}`}>
             <div className="relative">
-              <img
+              <SmartImage
                 src={item.thumbnailUrl || ""}
                 className="h-[180px] w-full rounded-md object-cover"
                 alt={item.title}

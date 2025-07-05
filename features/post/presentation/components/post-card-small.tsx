@@ -2,6 +2,7 @@
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
 import { PostPreviewEntity } from "../../domain/entities/post-preview.entity";
+import SmartImage from "@/components/ui/smart-image";
 
 export default function PostCardSmall({ post }: { post: PostPreviewEntity }) {
   return (
@@ -23,7 +24,7 @@ function MobileCard({ post }: { post: PostPreviewEntity }) {
       <div className="flex w-full cursor-pointer flex-row">
         {/* 이미지 */}
         <div className="h-20 w-24 flex-shrink-0 rounded-2xl">
-          <img
+          <SmartImage
             src={post.thumbnailUrl || ""}
             className="h-full w-full rounded-2xl object-cover"
             alt={post.title}
@@ -63,10 +64,10 @@ function DesktopCard({ post }: { post: PostPreviewEntity }) {
       <Link href={`/posts/${post.id}`}>
         <div className="flex flex-col">
           {/* 이미지 + 뱃지/타이틀 오버레이 */}
-          <div className="relative overflow-hidden rounded-2xl">
-            <img
+          <div className="relative overflow-hidden rounded-2xl ">
+            <SmartImage
               src={post.thumbnailUrl || ""}
-              className="h-[160px] w-[200px] rounded-2xl object-cover transition-transform duration-300 group-hover:scale-105 lg:h-[200px] lg:w-[250px]"
+              className="h-[160px] w-[200px] sm:h-[160px] sm:w-[300px] rounded-2xl object-cover transition-transform duration-300 group-hover:scale-105 lg:h-[200px] lg:w-[250px]"
               alt={post.title}
               width={180}
               height={120}

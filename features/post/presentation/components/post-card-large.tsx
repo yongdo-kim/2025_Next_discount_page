@@ -15,6 +15,7 @@ import Link from "next/link";
 import { PostPreviewEntity } from "../../domain/entities/post-preview.entity";
 import { postKeys } from "../../infrastructure/contstant/query-keys";
 import Image from "next/image";
+import SmartImage from "@/components/ui/smart-image";
 
 export default function PostCardLarge({
   post,
@@ -59,7 +60,7 @@ export default function PostCardLarge({
             </Badge>
           )}
         </div>
-        <img
+        <SmartImage
           src={post.thumbnailUrl || ""}
           className="aspect-video w-full rounded-xl object-cover"
           alt={post.title}

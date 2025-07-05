@@ -14,6 +14,7 @@ import { htmlToText } from "html-to-text";
 import Link from "next/link";
 import { PostPreviewEntity } from "../../domain/entities/post-preview.entity";
 import { postKeys } from "../../infrastructure/contstant/query-keys";
+import SmartImage from "@/components/ui/smart-image";
 
 export default function PostListItem({ post }: { post: PostPreviewEntity }) {
   const content = htmlToText(post.content).replace(/\n/g, " ");
@@ -52,7 +53,7 @@ export default function PostListItem({ post }: { post: PostPreviewEntity }) {
                 <div className="flex items-center">
                   <div className="flex items-center justify-center gap-2">
                     <CardDescription>
-                      <img
+                      <SmartImage
                         src={post.author.picture}
                         alt={post.author.nickname}
                         className="aspect-square rounded-full"
@@ -71,8 +72,7 @@ export default function PostListItem({ post }: { post: PostPreviewEntity }) {
               </CardDescription>
             </div>
             {/* 이미지 */}
-
-            <img
+            <SmartImage
               src={post.thumbnailUrl || ""}
               className="ml-2 h-[100px] w-[120px] rounded-xl object-cover"
               alt={post.title}
