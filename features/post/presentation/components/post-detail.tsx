@@ -130,56 +130,63 @@ export const PostDetail = ({
       {/* 대표 이미지 */}
       <div className="mt-8 mb-8">
         {post.source?.originSourceUrl ? (
-          <a
-            href={post.source.originSourceUrl}
-            target="_blank"
-            rel="noopener noreferrer"
+          <div
+            className="group relative mb-2 w-full cursor-pointer overflow-hidden"
+            style={{ maxWidth: "100%", maxHeight: "350px" }}
+            onClick={() =>
+              window.open(
+                post.source.originSourceUrl ?? "",
+                "_blank",
+                "noopener,noreferrer",
+              )
+            }
           >
-            <div
-              className="group relative mb-2 w-full overflow-hidden"
+            <img
+              src={post.imageUrl}
+              alt={post.title}
+              width={600}
+              height={400}
+              className="w-full rounded-xl object-cover transition-transform duration-300 group-hover:scale-105"
               style={{ maxWidth: "100%", maxHeight: "350px" }}
+            />
+            {/* 검정 오버레이 */}
+            <div className="absolute top-0 left-0 h-full w-full rounded-xl bg-black opacity-40" />
+            {/* 바로가기 아이콘 */}
+            <button
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                window.open(
+                  post.source.originSourceUrl ?? "",
+                  "_blank",
+                  "noopener,noreferrer",
+                );
+              }}
+              className="absolute right-3 bottom-3 flex items-center justify-center rounded-full bg-black/70 px-4 py-2 transition hover:bg-black/90"
+              aria-label="원본 사이트로 이동"
             >
-              <img
-                src={post.imageUrl}
-                alt={post.title}
-                width={600}
-                height={400}
-                className="w-full rounded-xl object-cover transition-transform duration-300 group-hover:scale-105"
-                style={{ maxWidth: "100%", maxHeight: "350px" }}
-              />
-              {/* 검정 오버레이 */}
-              <div className="absolute top-0 left-0 h-full w-full rounded-xl bg-black opacity-40" />
-              {/* 바로가기 아이콘 */}
-              <a
-                href={post.source.originSourceUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="absolute right-3 bottom-3 flex items-center justify-center rounded-full bg-black/70 px-4 py-2 transition hover:bg-black/90"
-                aria-label="원본 사이트로 이동"
+              {/* 외부링크(새창) 아이콘 SVG */}
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="22"
+                height="22"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="white"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="mr-1"
               >
-                {/* 외부링크(새창) 아이콘 SVG */}
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="22"
-                  height="22"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="white"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="mr-1"
-                >
-                  <path d="M18 13v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                  <polyline points="15 3 21 3 21 9" />
-                  <line x1="10" y1="14" x2="21" y2="3" />
-                </svg>
-                <span className="ml-1 text-xl font-semibold text-white">
-                  바로가기
-                </span>
-              </a>
-            </div>
-          </a>
+                <path d="M18 13v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                <polyline points="15 3 21 3 21 9" />
+                <line x1="10" y1="14" x2="21" y2="3" />
+              </svg>
+              <span className="ml-1 text-xl font-semibold text-white">
+                바로가기
+              </span>
+            </button>
+          </div>
         ) : (
           <img
             src={post.imageUrl}
