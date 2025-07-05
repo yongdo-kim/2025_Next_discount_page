@@ -1,7 +1,8 @@
 "use client";
 import { CategoryEntity } from "@/features/category/domain/entities/category.entity";
 import { useFetchCategories } from "@/features/category/presentation/hooks/use-fetch-categories";
-import { cn } from "@/lib/utils"; // 실제 경로에 맞게 import
+import { cn } from "@/lib/utils"; 
+import { sendGAEvent } from "@/lib/ga"; 
 import { useRouter, useSearchParams } from "next/navigation";
 import { Badge } from "../ui/badge";
 
@@ -56,6 +57,12 @@ export default function MenuTab() {
 
   // 카테고리 클릭 핸들러 생성
   const createHandleCategoryClick = (id: number) => () => {
+    // 카테고리 클릭 시 구글 애널리틱스 이벤트 전송
+    sendGAEvent("category_click", {
+      category_id: id,
+      category_name: categories?.find((c) => c.id === id)?.name ?? "전체",
+    });
+
     if (id === 0) {
       router.replace(`/`);
       return;

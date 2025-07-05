@@ -11,6 +11,9 @@ import { toast } from "sonner";
 import { PostEntity } from "../../domain/entities/post.entity";
 import { usePostDetail } from "../hooks/use-posts";
 
+import { sendGAEvent } from "@/lib/ga";
+import { useEffect } from "react";
+
 export const PostDetail = ({
   postId,
   initialPost,
@@ -23,6 +26,16 @@ export const PostDetail = ({
     error,
     isLoading,
   } = usePostDetail({ id: postId, initialPost });
+  // 상세 페이지 진입 시 GA 이벤트 전송
+  useEffect(() => {
+    sendGAEvent("post_detail_view_init", {
+      post_id: postId,
+      post_title: post?.title,
+      author_id: post?.author?.id,
+      author_nickname: post?.author?.nickname,
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [postId]);
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error</div>;
