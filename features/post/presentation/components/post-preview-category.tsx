@@ -15,7 +15,7 @@ export default function PostPreviewCategoryArea({
   const { data: posts } = usePostPreviews({
     req: {
       categoryId,
-      limit: null,
+      limit: 9,
     },
   });
 

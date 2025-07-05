@@ -9,7 +9,7 @@ import {
   Utensils,
 } from "lucide-react";
 
-export function getCategoryIcon(
+export function CategoryIcon(
   category: string,
   props?: { size?: number; color?: string },
 ) {

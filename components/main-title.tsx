@@ -1,4 +1,4 @@
-import { getCategoryIcon } from "./getCategoryIcon";
+import { CategoryIcon } from "./category-Icon";
 
 export default function MainTitle({
   title,
@@ -20,7 +20,7 @@ export default function MainTitle({
       {/* 아이콘 (showIcon이 true일 때만) */}
       {showIcon && (
         <span className="mr-2 flex items-center">
-          {getCategoryIcon(title, { size: 24 })}
+          {CategoryIcon(title, { size: 24 })}
         </span>
       )}
       <div>{title}</div>

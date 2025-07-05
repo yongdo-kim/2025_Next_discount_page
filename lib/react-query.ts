@@ -1,19 +1,13 @@
 // lib/react-query.ts
 import { QueryCache, QueryClient } from "@tanstack/react-query";
 
-// 전역 에러 타입 정의
-// type CustomError = {
-//   message: string;
-//   code?: string;
-//   status?: number;
-// };
-
 // 전역 QueryClient 인스턴스 생성
 export const queryClient = new QueryClient({
   queryCache: new QueryCache({
     onError: (error, query) => {
       // 특정 쿼리에서 전역 에러 핸들링을 건너뛰려면 meta.skipGlobalError 사용
       if (query.meta?.skipGlobalError) return;
+      console.log(error);
 
       //const err = error as CustomError;
 
