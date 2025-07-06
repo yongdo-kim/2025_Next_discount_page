@@ -1,3 +1,4 @@
+import { GMAIL_APP_PASSWORD, GMAIL_APP_USER } from "@/lib/constants";
 import { NextRequest, NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 
@@ -15,14 +16,14 @@ export async function POST(req: NextRequest) {
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
-        user: process.env.GMAIL_APP_USER, // 운영자 이메일 (env에 저장)
-        pass: process.env.GMAIL_APP_PASSWORD, // 앱 비밀번호 (env에 저장)
+        user: GMAIL_APP_USER,
+        pass: GMAIL_APP_PASSWORD,
       },
     });
 
     const mailOptions = {
       from: "익명의 유저",
-      to: "naristudio2023@gmail.com",
+      to: GMAIL_APP_USER,
       subject: `[할인탐정 문의] ${subject}`,
       text: message,
     };
