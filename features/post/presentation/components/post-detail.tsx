@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 "use client";
 import MainTitle from "@/components/main-title";
 import { Badge } from "@/components/ui/badge";
