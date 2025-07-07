@@ -32,8 +32,9 @@ export default function AuthCallbackPage() {
           const user = await container.userService.getMe();
           useUserStore.setState({ user });
 
-          // TODO: 전역 상태에 유저 정보 저장 등
-          router.replace(ROUTES.HOME);
+          setTimeout(() => {
+            router.replace(ROUTES.HOME);
+          }, 0);
         } catch (err) {
           console.error(err);
           alert(

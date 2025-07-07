@@ -8,7 +8,19 @@ export const apiClient = {
       fullUrl +=
         query.startsWith("?") || query.startsWith("&") ? query : `?${query}`;
     }
-    const response = await fetch(fullUrl, options);
+    const defaultHeaders = {
+      "Content-Type": "application/json",
+      "x-client-id": "web",
+    };
+    const mergedOptions: RequestInit = {
+      ...options,
+      headers: {
+        ...defaultHeaders,
+        ...(options && options.headers ? options.headers : {}),
+      },
+      credentials: "include",
+    };
+    const response = await fetch(fullUrl, mergedOptions);
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }

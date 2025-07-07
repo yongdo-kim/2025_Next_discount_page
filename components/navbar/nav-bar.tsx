@@ -9,9 +9,11 @@ import Link from "next/link";
 import { ROUTES } from "@/lib/routes";
 import { useEffect, useState } from "react";
 import { Button } from "../ui/button";
+import { useUserStore } from "@/features/users/presentation/store/user.store";
 
 export default function NavBar({ className = "" }: NavBarProps) {
   const [showBack, setShowBack] = useState(false);
+  const user = useUserStore((state) => state.user);
 
   useEffect(() => {
     // 클라이언트에서만 실행
@@ -50,9 +52,18 @@ export default function NavBar({ className = "" }: NavBarProps) {
           <div className="ml-3 font-bold">할인탐정</div>
         </span>
         <div className="flex items-center space-x-2">
-          <Button variant="outline" className="cursor-pointer" asChild>
-            <Link href={ROUTES.SIGN_IN}>로그인</Link>
-          </Button>
+          {user ? (
+            <div className="flex items-center space-x-2">
+              <span className="font-semibold text-amber-700 dark:text-amber-300">
+                {user.nickname || user.name}
+              </span>
+              {/* 로그아웃/프로필 등 추가 가능 */}
+            </div>
+          ) : (
+            <Button variant="outline" className="cursor-pointer" asChild>
+              <Link href={ROUTES.SIGN_IN}>로그인</Link>
+            </Button>
+          )}
         </div>
       </div>
     </nav>
