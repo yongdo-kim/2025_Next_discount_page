@@ -1,5 +1,5 @@
 import { TagEntity } from "@/features/tag/domain/entities/tag.entity";
-import { UserEntity } from "@/features/user/domain/entities/user.entity";
+import { UserEntity } from "@/features/users/domain/entities/user.entity";
 import { PostCategory } from "../types";
 
 export interface PostPreviewProps {
@@ -46,7 +46,10 @@ export class PostPreviewEntity {
   constructor(props: PostPreviewProps) {
     this.id = props.id;
     this.title = props.title;
-    this.content = props.content.replace(/^[`']{3}html\s*/im, "").replace(/^[`']{3}\s*$/gm, "").trim();
+    this.content = props.content
+      .replace(/^[`']{3}html\s*/im, "")
+      .replace(/^[`']{3}\s*$/gm, "")
+      .trim();
     this.author = props.author;
     this.commentsCount = props.commentsCount;
     this.createdAt = props.createdAt;

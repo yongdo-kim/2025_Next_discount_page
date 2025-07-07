@@ -1,4 +1,4 @@
-import { GetPostPreviewsReqDto } from "@/features/user/infrastructure/dto/requests/post-preview.req.dto";
+import { PostPreviewsReqDto } from "../../infrastructure/dto/requests/post-preview.req.dto";
 import { PostPreviewEntity } from "../entities/post-preview.entity";
 import { PostEntity } from "../entities/post.entity";
 
@@ -6,7 +6,7 @@ export interface PostRepository {
   getPostPreviews({
     req,
   }: {
-    req: GetPostPreviewsReqDto;
+    req: PostPreviewsReqDto;
   }): Promise<PostPreviewEntity[]>;
   getPostDetail(id: number): Promise<PostEntity>;
   getCategoryPostPreviews(): Promise<PostPreviewEntity[]>;

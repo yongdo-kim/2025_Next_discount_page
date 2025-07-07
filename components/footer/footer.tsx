@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import { ROUTES } from "@/lib/routes";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -16,7 +17,7 @@ export default function Footer() {
             <ul className="space-y-2 text-gray-400">
               <li>
                 <Link
-                  href="/contact"
+                  href={ROUTES.CONTACT}
                   className="transition-colors hover:text-white"
                 >
                   문의하기

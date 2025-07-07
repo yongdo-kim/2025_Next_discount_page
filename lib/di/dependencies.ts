@@ -8,12 +8,16 @@ import { HttpPostRepository } from "@/features/post/infrastructure/repositories/
 import { TagService } from "@/features/tag/application/services/tag.service";
 import { MockTagRepository } from "@/features/tag/infrastructure/repositories/tag.mock.repository";
 import { HttpTagRepository } from "@/features/tag/infrastructure/repositories/tag.repository";
+import { UsersService } from "@/features/users/application/services/users.service";
+import { MockUsersRepository } from "@/features/users/infrastructure/repositories/users.mock.repository";
+import { HttpUsersRepository } from "@/features/users/infrastructure/repositories/users.repository";
 import { IS_TESTMODE } from "../constants";
 
 type Services = {
   postService: PostService;
   tagService: TagService;
   categoryService: CategoryService;
+  userService: UsersService;
   // 향후 추가될 서비스들...
 };
 
@@ -34,14 +38,19 @@ const createServices = (): Services => {
     MockCategoryRepository,
     HttpCategoryRepository,
   );
+  const userRepository = createRepository(
+    MockUsersRepository,
+    HttpUsersRepository,
+  );
 
   return {
     postService: new PostService(postRepository),
     tagService: new TagService(tagRepository),
     categoryService: new CategoryService(categoryRepository),
-    // 향후 추가될 서비스들...
+    userService: new UsersService(userRepository),
   };
 };
+
 const services = createServices();
 export const container = {
   ...services,

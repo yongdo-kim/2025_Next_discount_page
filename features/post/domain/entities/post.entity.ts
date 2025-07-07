@@ -1,5 +1,5 @@
 import { TagEntity } from "@/features/tag/domain/entities/tag.entity";
-import { UserEntity } from "@/features/user/domain/entities/user.entity";
+import { UserEntity } from "@/features/users/domain/entities/user.entity";
 import { PostSourceEntity } from "./post-source.entity";
 
 export interface PostProps {

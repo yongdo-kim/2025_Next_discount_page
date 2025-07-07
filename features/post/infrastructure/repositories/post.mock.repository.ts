@@ -1,9 +1,9 @@
 import { TagEntity } from "@/features/tag/domain/entities/tag.entity";
-import { UserEntity } from "@/features/user/domain/entities/user.entity";
-import { GetPostPreviewsReqDto } from "@/features/user/infrastructure/dto/requests/post-preview.req.dto";
+import { UserEntity } from "@/features/users/domain/entities/user.entity";
 import { PostPreviewEntity } from "../../domain/entities/post-preview.entity";
 import { PostEntity } from "../../domain/entities/post.entity";
 import { PostRepository } from "../../domain/repositories/post.repository";
+import { PostPreviewsReqDto } from "../dto/requests/post-preview.req.dto";
 
 export class MockPostRepository implements PostRepository {
   //임시로 작업중.
@@ -150,7 +150,7 @@ export class MockPostRepository implements PostRepository {
   async getPostPreviews({
     req,
   }: {
-    req: GetPostPreviewsReqDto;
+    req: PostPreviewsReqDto;
   }): Promise<PostPreviewEntity[]> {
     // 간단한 검색 기능 구현 (선택사항)
     if (req.categoryId) {

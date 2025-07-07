@@ -1,5 +1,4 @@
-export const API_BASE_URL =
-  process.env.NEXT_PUBLIC_API_BASE_URL
+export const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 export const APP_NAME = process.env.NEXT_PUBLIC_APP_NAME || "할인탐정";
 export const APP_DESCRIPTION =
   process.env.NEXT_PUBLIC_APP_DESCRIPTION ||
@@ -9,3 +8,6 @@ export const SERVER_URL =
 export const IS_TESTMODE = process.env.NEXT_PUBLIC_IS_TESTMODE == "test";
 export const GMAIL_APP_USER = process.env.GMAIL_APP_USER;
 export const GMAIL_APP_PASSWORD = process.env.GMAIL_APP_PASSWORD;
+export const GOOGLE_CLIENT_ID = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID;
+export const REDIRECT_URI = process.env.NEXT_PUBLIC_REDIRECT_URI;
+

@@ -1,11 +1,14 @@
 "use client";
 import Image from "next/image";
-import ThemeToggleButton from "../theme-toggle-button";
+import { MdArrowBack } from "react-icons/md";
 interface NavBarProps {
   className?: string;
 }
 
+import Link from "next/link";
+import { ROUTES } from "@/lib/routes";
 import { useEffect, useState } from "react";
+import { Button } from "../ui/button";
 
 export default function NavBar({ className = "" }: NavBarProps) {
   const [showBack, setShowBack] = useState(false);
@@ -30,20 +33,7 @@ export default function NavBar({ className = "" }: NavBarProps) {
             className="mr-2 flex items-center md:hidden"
             aria-label="뒤로가기"
           >
-            <svg
-              width="28"
-              height="28"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M15 19l-7-7 7-7"
-              />
-            </svg>
+            <MdArrowBack size={28} />
           </button>
         )}
         <span
@@ -60,7 +50,9 @@ export default function NavBar({ className = "" }: NavBarProps) {
           <div className="ml-3 font-bold">할인탐정</div>
         </span>
         <div className="flex items-center space-x-2">
-          <ThemeToggleButton />
+          <Button variant="outline" className="cursor-pointer" asChild>
+            <Link href={ROUTES.SIGN_IN}>로그인</Link>
+          </Button>
         </div>
       </div>
     </nav>

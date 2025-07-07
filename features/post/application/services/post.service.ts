@@ -1,4 +1,4 @@
-import { GetPostPreviewsReqDto } from "@/features/user/infrastructure/dto/requests/post-preview.req.dto";
+import { GetPostPreviewsReqDto } from "@/features/users/infrastructure/dto/requests/post-preview.req.dto";
 import { PostPreviewEntity } from "../../domain/entities/post-preview.entity";
 import { PostEntity } from "../../domain/entities/post.entity";
 import { PostRepository } from "../../domain/repositories/post.repository";
