@@ -1,7 +1,7 @@
-import { GetPostPreviewsReqDto } from "@/features/users/infrastructure/dto/requests/post-preview.req.dto";
 import { PostPreviewEntity } from "../../domain/entities/post-preview.entity";
 import { PostEntity } from "../../domain/entities/post.entity";
 import { PostRepository } from "../../domain/repositories/post.repository";
+import { PostPreviewsReqDto } from "../../infrastructure/dto/requests/post-preview.req.dto";
 
 //복수의 useCase 추가 가능
 export class PostService {
@@ -10,7 +10,7 @@ export class PostService {
   async getPostPreviews({
     req,
   }: {
-    req: GetPostPreviewsReqDto;
+    req: PostPreviewsReqDto;
   }): Promise<PostPreviewEntity[]> {
     const posts = await this.postRepository.getPostPreviews({
       req,

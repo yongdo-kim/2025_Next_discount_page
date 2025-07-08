@@ -1,4 +1,6 @@
 import "@/assets/styles/globals.css";
+import Footer from "@/components/footer/footer";
+import NavBar from "@/components/navbar/nav-bar";
 import { APP_DESCRIPTION, APP_NAME, SERVER_URL } from "@/lib/constants";
 import { Inter } from "next/font/google";
 import Script from "next/script";
@@ -56,7 +58,11 @@ export default function RootLayout({
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2398130378795170"
           crossOrigin="anonymous"
         />
-        <Providers>{children}</Providers>
+        <Providers>
+          <NavBar />
+          {children}
+          <Footer />
+        </Providers>
         <Toaster />
       </body>
     </html>

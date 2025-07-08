@@ -1,5 +1,4 @@
 "use client";
-import NavBar from "@/components/navbar/nav-bar";
 import { useState } from "react";
 
 export default function ContactPage() {
@@ -38,7 +37,6 @@ export default function ContactPage() {
 
   return (
     <>
-      <NavBar />
       <div className="flex min-h-screen">
         <div className="mx-auto w-full max-w-lg p-6">
           <h1 className="mb-6 text-2xl font-bold">문의하기</h1>

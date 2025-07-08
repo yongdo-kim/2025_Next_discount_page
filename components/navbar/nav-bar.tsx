@@ -5,11 +5,11 @@ interface NavBarProps {
   className?: string;
 }
 
-import Link from "next/link";
+import { useUserStore } from "@/features/users/presentation/store/user.store";
 import { ROUTES } from "@/lib/routes";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Button } from "../ui/button";
-import { useUserStore } from "@/features/users/presentation/store/user.store";
 
 export default function NavBar({ className = "" }: NavBarProps) {
   const [showBack, setShowBack] = useState(false);
@@ -58,9 +58,20 @@ export default function NavBar({ className = "" }: NavBarProps) {
                 {user.nickname || user.name}
               </span>
               {/* 로그아웃/프로필 등 추가 가능 */}
+              <Button
+                variant="outline"
+                className="cursor-pointer"
+                onClick={() => {}}
+              >
+                로그아웃
+              </Button>
             </div>
           ) : (
-            <Button variant="outline" className="cursor-pointer" asChild>
+            <Button
+              variant="outline"
+              className="cursor-pointer text-xs sm:text-base"
+              asChild
+            >
               <Link href={ROUTES.SIGN_IN}>로그인</Link>
             </Button>
           )}
