@@ -2,16 +2,16 @@
 import { apiClient } from "@/lib/api/client";
 import { PostCategory } from "../../domain/types";
 import { PostPreviewsReqDto } from "../dto/requests/post-preview.req.dto";
-import { postPreviewResSchema } from "../dto/responses/post-preview.res.dto";
-import { postResponseSchema } from "../dto/responses/post.res.dto";
+import { PostPreviewsResponse } from "../dto/responses/post-preview.res.dto";
+import { PostResponse, PostsResponse } from "../dto/responses/post.res.dto";
 
 export const postApi = {
   async getPosts({ category }: { category?: PostCategory }) {
-    const response = await apiClient.get(
+    const response = await apiClient.get<PostsResponse>(
       "/posts",
       category?.id ? `?categoryId=${category.id}` : "",
     );
-    return postResponseSchema.array().parse(response);
+    return response;
   },
 
   async getPostPreviews({ req }: { req: PostPreviewsReqDto }) {
@@ -20,25 +20,28 @@ export const postApi = {
     if (req.limit) params.append("limit", req.limit.toString());
 
     const query = params.toString() ? `?${params.toString()}` : "";
-    const response = await apiClient.get("/posts/previews" + query);
-    const posts = response["posts"];
-    return postPreviewResSchema.array().parse(posts);
+    const response = await apiClient.get<PostPreviewsResponse>(
+      "/posts/previews" + query,
+    );
+    return response.posts;
   },
 
   async getPostDetail(id: number) {
-    const response = await apiClient.get(`/posts/${id}`);
-    return postResponseSchema.parse(response);
+    const response = await apiClient.get<PostResponse>(`/posts/${id}`);
+    return response;
   },
 
   //카테고리 가져오기
   async getPostCategories() {
-    const response = await apiClient.get("/posts/categories");
-    return postResponseSchema.array().parse(response);
+    const response =
+      await apiClient.get<PostPreviewsResponse>("/posts/categories");
+    return response.posts;
   },
   //카테고리별 포스트 가져오기
   async getCategoryPostPreviews() {
-    const response = await apiClient.get("/posts/previews/by-category");
-    const posts = response["posts"];
-    return postPreviewResSchema.array().parse(posts);
+    const response = await apiClient.get<PostPreviewsResponse>(
+      "/posts/previews/by-category",
+    );
+    return response.posts;
   },
 };

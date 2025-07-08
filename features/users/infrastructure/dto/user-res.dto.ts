@@ -1,60 +1,30 @@
 import { UserEntity } from "../../domain/entities/user.entity";
 
-export class UserDto {
-  id: number;
-  email: string;
-  nickname: string;
-  name: string;
-  picture: string;
-  provider: string;
-  role: string;
-  apple_user_identifier?: string;
+import { z } from "zod";
 
-  constructor(params: {
-    id: number;
-    email: string;
-    nickname: string;
-    name: string;
-    picture: string;
-    provider: string;
-    role: string;
-    apple_user_identifier?: string;
-  }) {
-    this.id = params.id;
-    this.email = params.email;
-    this.nickname = params.nickname;
-    this.name = params.name;
-    this.picture = params.picture;
-    this.provider = params.provider;
-    this.role = params.role;
-    this.apple_user_identifier = params.apple_user_identifier;
-  }
+export const userResSchema = z.object({
+  id: z.number(),
+  email: z.string(),
+  nickname: z.string(),
+  name: z.string(),
+  picture: z.string(),
+  provider: z.string(),
+  role: z.string(),
+  apple_user_identifier: z.string().optional(),
+});
 
-  static fromDomain(user: UserEntity): UserDto {
-    const dto = new UserDto({
-      id: user.id,
-      email: user.email,
-      nickname: user.nickname,
-      name: user.name,
-      picture: user.picture,
-      provider: user.provider,
-      role: user.role,
-      apple_user_identifier: user.apple_user_identifier,
-    });
-    return dto;
-  }
+export type UserDto = z.infer<typeof userResSchema>;
 
-  toDomain(): UserEntity {
-    const user = new UserEntity({
-      id: this.id,
-      email: this.email,
-      nickname: this.nickname,
-      name: this.name,
-      picture: this.picture,
-      provider: this.provider,
-      role: this.role,
-      apple_user_identifier: this.apple_user_identifier,
-    });
-    return user;
-  }
+export function toUserEntity(dto: UserDto): UserEntity {
+  const user = new UserEntity({
+    id: dto.id,
+    email: dto.email,
+    nickname: dto.nickname,
+    name: dto.name,
+    picture: dto.picture,
+    provider: dto.provider,
+    role: dto.role,
+    apple_user_identifier: dto.apple_user_identifier,
+  });
+  return user;
 }

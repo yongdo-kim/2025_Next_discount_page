@@ -22,7 +22,7 @@ export const postPreviewResSchema = z.object({
   category: categoryResponseSchema,
 });
 
-//dto
+export type PostPreviewsResponse = { posts: z.infer<typeof postPreviewResSchema>[] }; //json 반환타입을 위해 키를 추가
 export type PostPreviewDto = z.infer<typeof postPreviewResSchema>;
 
 export function toPostPreviewEntity(dto: PostPreviewDto): PostPreviewEntity {

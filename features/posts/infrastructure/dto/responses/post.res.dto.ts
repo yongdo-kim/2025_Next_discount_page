@@ -28,6 +28,8 @@ export const postResponseSchema = z.object({
 });
 
 //dto
+export type PostsResponse = z.infer<typeof postResponseSchema>[];
+export type PostResponse = z.infer<typeof postResponseSchema>;
 export type PostDto = z.infer<typeof postResponseSchema>;
 
 export function toPostEntity(dto: PostDto): PostEntity {
