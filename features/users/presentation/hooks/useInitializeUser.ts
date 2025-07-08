@@ -9,6 +9,9 @@ export function useInitializeUser() {
   useEffect(() => {
     container.userService.getMe()
       .then(setUser)
-      .catch(() => setUser(null));
+      .catch(()=>{
+        console.log("user not found");
+        return setUser(null)
+      });
   }, [setUser]);
 }

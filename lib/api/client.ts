@@ -92,7 +92,6 @@ async function request<T>(
         // 토큰 갱신 성공 시 원래 요청을 한 번만 재시도
         return request(method, url, { query, body, options }, false);
       } catch (e) {
-        console.error("refresh-token failed", e);
         Sentry.captureException(e);
         throw e;
       }
