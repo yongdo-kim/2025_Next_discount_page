@@ -1,3 +1,4 @@
+import type { ApiError } from "@/features/common/types/api-error";
 import { API_BASE_URL } from "../constants";
 
 //헤더
@@ -7,6 +8,19 @@ const defaultHeaders = {
 };
 
 // fetch 공통 함수
+function isApiError(obj: unknown): obj is ApiError {
+  return (
+    typeof obj === "object" &&
+    obj !== null &&
+    "code" in obj &&
+    "title" in obj &&
+    "desc" in obj &&
+    typeof (obj as Partial<ApiError>).code === "string" &&
+    typeof (obj as Partial<ApiError>).title === "string" &&
+    typeof (obj as Partial<ApiError>).desc === "string"
+  );
+}
+
 async function request(
   method: string,
   url: string,
@@ -38,18 +52,20 @@ async function request(
 
   const response = await fetch(fullUrl, mergedOptions);
 
-  if (!response.ok) {
-    throw new Error(`HTTP error! status: ${response.status}`);
-  }
-
   // DELETE 요청은 보통 응답이 empty일 수 있으니, 처리
   if (response.status === 204) return null;
-  const text = await response.text();
-  try {
-    return text ? JSON.parse(text) : null;
-  } catch {
-    return text;
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    // 서버 표준 에러 포맷이면 그대로 throw
+    if (isApiError(data)) {
+      throw data;
+    }
+    // 그 외는 일반 에러로 throw
+    throw new Error(`HTTP error! status: ${response.status}`);
   }
+  return data;
 }
 
 export const apiClient = {
