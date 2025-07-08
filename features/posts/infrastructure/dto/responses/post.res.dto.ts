@@ -1,12 +1,17 @@
-import { categoryResponseSchema } from "@/features/category/infrastructure/dto/category.dto";
-import { PostPreviewEntity } from "@/features/post/domain/entities/post-preview.entity";
-import { TagEntity } from "@/features/tag/domain/entities/tag.entity";
-import { tagResponseSchema } from "@/features/tag/infrastructure/dto/tag.dto";
+import { TagEntity } from "@/features/tags/domain/entities/tag.entity";
+import { tagResponseSchema } from "@/features/tags/infrastructure/dto/tag.dto";
 import { UserEntity } from "@/features/users/domain/entities/user.entity";
 import { z } from "zod";
-import { userDtoSchema } from "./post.res.dto";
+import { PostEntity } from "../../../domain/entities/post.entity";
+import { postSourceResSchema } from "./post-source.res.dto";
 
-export const postPreviewResSchema = z.object({
+export const userDtoSchema = z.object({
+  id: z.number(),
+  nickname: z.string(),
+  picture: z.string(),
+});
+
+export const postResponseSchema = z.object({
   id: z.number(),
   title: z.string(),
   content: z.string(),
@@ -17,16 +22,16 @@ export const postPreviewResSchema = z.object({
   isLikedByMe: z.boolean(),
   isReportedByMe: z.boolean(),
   commentsCount: z.number(),
-  thumbnailUrl: z.string().optional(),
+  imageUrl: z.string(),
   tags: tagResponseSchema.array(),
-  category: categoryResponseSchema,
+  source: postSourceResSchema,
 });
 
 //dto
-export type PostPreviewDto = z.infer<typeof postPreviewResSchema>;
+export type PostDto = z.infer<typeof postResponseSchema>;
 
-export function toPostPreviewEntity(dto: PostPreviewDto): PostPreviewEntity {
-  return new PostPreviewEntity({
+export function toPostEntity(dto: PostDto): PostEntity {
+  return new PostEntity({
     id: dto.id,
     title: dto.title,
     content: dto.content,
@@ -51,8 +56,8 @@ export function toPostPreviewEntity(dto: PostPreviewDto): PostPreviewEntity {
     isBlurredByAI: false, // 기본값
     isBlockedByMe: false, // 기본값
     commentsCount: dto.commentsCount,
+    imageUrl: dto.imageUrl,
     tags: dto.tags.map((tag) => new TagEntity({ id: tag.id, name: tag.name })),
-    thumbnailUrl: dto.thumbnailUrl || "",
-    category: dto.category,
+    source: dto.source,
   });
 }

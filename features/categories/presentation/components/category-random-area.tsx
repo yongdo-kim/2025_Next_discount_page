@@ -1,8 +1,8 @@
 "use client";
 
 import MainTitle from "@/components/main-title";
-import PostCardMiddle from "@/features/post/presentation/components/post-card-middle";
-import { useCategoryPostPreviews } from "@/features/post/presentation/hooks/use-posts";
+import PostCardMiddle from "@/features/posts/presentation/components/post-card-middle";
+import { useCategoryPostPreviews } from "@/features/posts/presentation/hooks/use-posts";
 
 export default function CategoryRandomArea() {
   const { data: posts } = useCategoryPostPreviews();
@@ -22,7 +22,7 @@ export default function CategoryRandomArea() {
 
   return (
     <section className="pt-4 pb-2 md:pt-8 md:pb-8">
-      <div className="flex justify-between px-4 pb-4 pt-4">
+      <div className="flex justify-between px-4 pt-4 pb-4">
         <MainTitle
           title="테마별"
           coloredTitle=" 특가 추천"

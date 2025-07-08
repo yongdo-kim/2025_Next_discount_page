@@ -1,8 +1,8 @@
 "use client";
 
 import MainTitle from "@/components/main-title";
-import { useFetchCategories } from "@/features/category/presentation/hooks/use-fetch-categories";
-import PostPreviewCategoryArea from "../../../post/presentation/components/post-preview-category";
+import { useFetchCategories } from "@/features/categories/presentation/hooks/use-fetch-categories";
+import PostPreviewCategoryArea from "../../../posts/presentation/components/post-preview-category";
 
 export default function CategoryDiscountArea() {
   const { data: categories } = useFetchCategories();
@@ -25,7 +25,6 @@ export default function CategoryDiscountArea() {
             categoryId={category.id}
             title={category.name}
           />
-         
         </div>
       ))}
     </section>

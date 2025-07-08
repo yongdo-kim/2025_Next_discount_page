@@ -5,6 +5,7 @@ interface NavBarProps {
   className?: string;
 }
 
+import { useLogout } from "@/features/auth/presentation/hooks/useLogout";
 import { useUserStore } from "@/features/users/presentation/store/user.store";
 import { ROUTES } from "@/lib/routes";
 import Link from "next/link";
@@ -14,6 +15,8 @@ import { Button } from "../ui/button";
 export default function NavBar({ className = "" }: NavBarProps) {
   const [showBack, setShowBack] = useState(false);
   const user = useUserStore((state) => state.user);
+
+  const { logout } = useLogout();
 
   useEffect(() => {
     // 클라이언트에서만 실행
@@ -61,7 +64,7 @@ export default function NavBar({ className = "" }: NavBarProps) {
               <Button
                 variant="outline"
                 className="cursor-pointer"
-                onClick={() => {}}
+                onClick={logout}
               >
                 로그아웃
               </Button>

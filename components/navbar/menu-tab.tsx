@@ -1,8 +1,8 @@
 "use client";
-import { CategoryEntity } from "@/features/category/domain/entities/category.entity";
-import { useFetchCategories } from "@/features/category/presentation/hooks/use-fetch-categories";
-import { cn } from "@/lib/utils"; 
-import { sendGAEvent } from "@/lib/ga"; 
+import { CategoryEntity } from "@/features/categories/domain/entities/category.entity";
+import { useFetchCategories } from "@/features/categories/presentation/hooks/use-fetch-categories";
+import { sendGAEvent } from "@/lib/ga";
+import { cn } from "@/lib/utils";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Badge } from "../ui/badge";
 

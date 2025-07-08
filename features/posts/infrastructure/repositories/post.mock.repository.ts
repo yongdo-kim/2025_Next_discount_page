@@ -1,4 +1,4 @@
-import { TagEntity } from "@/features/tag/domain/entities/tag.entity";
+import { TagEntity } from "@/features/tags/domain/entities/tag.entity";
 import { UserEntity } from "@/features/users/domain/entities/user.entity";
 import { PostPreviewEntity } from "../../domain/entities/post-preview.entity";
 import { PostEntity } from "../../domain/entities/post.entity";

@@ -1,8 +1,8 @@
 import MenuTab from "@/components/navbar/menu-tab";
-import { CategoryEntity } from "@/features/category/domain/entities/category.entity";
-import { categoryKeys } from "@/features/category/infrastructure/contstant/query-keys";
-import CategoryCarousel from "@/features/category/presentation/components/category-carousel";
-import CategorySection from "@/features/category/presentation/components/category-section";
+import { CategoryEntity } from "@/features/categories/domain/entities/category.entity";
+import { categoryKeys } from "@/features/categories/infrastructure/contstant/query-keys";
+import CategoryCarousel from "@/features/categories/presentation/components/category-carousel";
+import CategorySection from "@/features/categories/presentation/components/category-section";
 import { container } from "@/lib/di/dependencies";
 import { queryClient } from "@/lib/react-query";
 import { HydrationBoundary, dehydrate } from "@tanstack/react-query";

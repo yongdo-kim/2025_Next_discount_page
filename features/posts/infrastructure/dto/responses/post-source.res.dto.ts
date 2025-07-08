@@ -1,4 +1,4 @@
-import { PostSourceEntity } from "@/features/post/domain/entities/post-source.entity";
+import { PostSourceEntity } from "@/features/posts/domain/entities/post-source.entity";
 import z from "zod";
 
 export const postSourceResSchema = z.object({

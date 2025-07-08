@@ -1,7 +1,7 @@
 import ScrollHideNavbar from "@/components/navbar/scroll-hide-navbar";
-import { PostEntity } from "@/features/post/domain/entities/post.entity";
-import { postKeys } from "@/features/post/infrastructure/contstant/query-keys";
-import { PostDetail } from "@/features/post/presentation/components/post-detail";
+import { PostEntity } from "@/features/posts/domain/entities/post.entity";
+import { postKeys } from "@/features/posts/infrastructure/contstant/query-keys";
+import { PostDetail } from "@/features/posts/presentation/components/post-detail";
 import { container } from "@/lib/di/dependencies";
 import { queryClient } from "@/lib/react-query";
 import { HydrationBoundary, dehydrate } from "@tanstack/react-query";

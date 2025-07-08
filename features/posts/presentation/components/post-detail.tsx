@@ -2,7 +2,7 @@
 import MainTitle from "@/components/main-title";
 import { Badge } from "@/components/ui/badge";
 import SmartImage from "@/components/ui/smart-image";
-import { TagEntity } from "@/features/tag/domain/entities/tag.entity";
+import { TagEntity } from "@/features/tags/domain/entities/tag.entity";
 import { UserEntity } from "@/features/users/domain/entities/user.entity";
 import { sendGAEvent } from "@/lib/ga";
 import { format } from "date-fns";

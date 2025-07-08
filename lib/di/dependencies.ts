@@ -1,13 +1,16 @@
 // lib/di/dependencies.ts
-import { CategoryService } from "@/features/category/application/services/category.service";
-import { MockCategoryRepository } from "@/features/category/infrastructure/repositories/category.mock.repository";
-import { HttpCategoryRepository } from "@/features/category/infrastructure/repositories/category.repository";
-import { PostService } from "@/features/post/application/services/post.service";
-import { MockPostRepository } from "@/features/post/infrastructure/repositories/post.mock.repository";
-import { HttpPostRepository } from "@/features/post/infrastructure/repositories/post.repository";
-import { TagService } from "@/features/tag/application/services/tag.service";
-import { MockTagRepository } from "@/features/tag/infrastructure/repositories/tag.mock.repository";
-import { HttpTagRepository } from "@/features/tag/infrastructure/repositories/tag.repository";
+import { AuthService } from "@/features/auth/application/services/auth.service";
+import { MockAuthRepository } from "@/features/auth/infrastructure/repositories/auth.mock.repository";
+import { HttpAuthRepository } from "@/features/auth/infrastructure/repositories/auth.repository";
+import { CategoryService } from "@/features/categories/application/services/category.service";
+import { MockCategoryRepository } from "@/features/categories/infrastructure/repositories/category.mock.repository";
+import { HttpCategoryRepository } from "@/features/categories/infrastructure/repositories/category.repository";
+import { PostService } from "@/features/posts/application/services/post.service";
+import { MockPostRepository } from "@/features/posts/infrastructure/repositories/post.mock.repository";
+import { HttpPostRepository } from "@/features/posts/infrastructure/repositories/post.repository";
+import { TagService } from "@/features/tags/application/services/tag.service";
+import { MockTagRepository } from "@/features/tags/infrastructure/repositories/tag.mock.repository";
+import { HttpTagRepository } from "@/features/tags/infrastructure/repositories/tag.repository";
 import { UsersService } from "@/features/users/application/services/users.service";
 import { MockUsersRepository } from "@/features/users/infrastructure/repositories/users.mock.repository";
 import { HttpUsersRepository } from "@/features/users/infrastructure/repositories/users.repository";
@@ -18,6 +21,7 @@ type Services = {
   tagService: TagService;
   categoryService: CategoryService;
   userService: UsersService;
+  authService: AuthService;
   // 향후 추가될 서비스들...
 };
 
@@ -42,12 +46,14 @@ const createServices = (): Services => {
     MockUsersRepository,
     HttpUsersRepository,
   );
+  const authService = createRepository(MockAuthRepository, HttpAuthRepository);
 
   return {
     postService: new PostService(postRepository),
     tagService: new TagService(tagRepository),
     categoryService: new CategoryService(categoryRepository),
     userService: new UsersService(userRepository),
+    authService: new AuthService(authService),
   };
 };
 

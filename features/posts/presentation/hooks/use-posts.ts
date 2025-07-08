@@ -1,6 +1,6 @@
 "use client";
 
-import { categoryKeys } from "@/features/category/infrastructure/contstant/query-keys";
+import { categoryKeys } from "@/features/categories/infrastructure/contstant/query-keys";
 import { container } from "@/lib/di/dependencies";
 import { useQuery } from "@tanstack/react-query";
 import { PostPreviewEntity } from "../../domain/entities/post-preview.entity";

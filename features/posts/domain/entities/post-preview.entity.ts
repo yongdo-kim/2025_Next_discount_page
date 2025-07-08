@@ -1,8 +1,8 @@
-import { TagEntity } from "@/features/tag/domain/entities/tag.entity";
+import { TagEntity } from "@/features/tags/domain/entities/tag.entity";
 import { UserEntity } from "@/features/users/domain/entities/user.entity";
-import { PostSourceEntity } from "./post-source.entity";
+import { PostCategory } from "../types";
 
-export interface PostProps {
+export interface PostPreviewProps {
   id: number;
   title: string;
   content: string;
@@ -12,7 +12,7 @@ export interface PostProps {
   updatedAt: string | null;
   deletedAt: string | null;
   viewsCount: number;
-  imageUrl: string;
+  thumbnailUrl: string;
   likesCount: number;
   isLikedByMe: boolean;
   isMine: boolean;
@@ -20,10 +20,10 @@ export interface PostProps {
   isBlurredByAI: boolean;
   isBlockedByMe: boolean;
   tags: TagEntity[];
-  source: PostSourceEntity;
+  category: PostCategory;
 }
 
-export class PostEntity {
+export class PostPreviewEntity {
   public readonly id: number;
   public title: string;
   public content: string;
@@ -33,7 +33,7 @@ export class PostEntity {
   public readonly updatedAt: string | null;
   public readonly deletedAt: string | null;
   public readonly viewsCount: number;
-  public readonly imageUrl: string;
+  public readonly thumbnailUrl: string;
   public readonly likesCount: number;
   public readonly isLikedByMe: boolean;
   public readonly isMine: boolean;
@@ -41,19 +41,21 @@ export class PostEntity {
   public readonly isBlurredByAI: boolean;
   public readonly isBlockedByMe: boolean;
   public readonly tags: TagEntity[];
-  public readonly source: PostSourceEntity;
+  public readonly category: PostCategory;
 
-  constructor(props: PostProps) {
+  constructor(props: PostPreviewProps) {
     this.id = props.id;
     this.title = props.title;
-    this.content = props.content;
+    this.content = props.content
+      .replace(/^[`']{3}html\s*/im, "")
+      .replace(/^[`']{3}\s*$/gm, "")
+      .trim();
     this.author = props.author;
     this.commentsCount = props.commentsCount;
     this.createdAt = props.createdAt;
     this.updatedAt = props.updatedAt;
     this.deletedAt = props.deletedAt;
     this.viewsCount = props.viewsCount;
-    this.imageUrl = props.imageUrl;
     this.likesCount = props.likesCount;
     this.isLikedByMe = props.isLikedByMe;
     this.isMine = props.isMine;
@@ -61,6 +63,7 @@ export class PostEntity {
     this.isBlurredByAI = props.isBlurredByAI;
     this.isBlockedByMe = props.isBlockedByMe;
     this.tags = props.tags;
-    this.source = props.source;
+    this.category = props.category;
+    this.thumbnailUrl = props.thumbnailUrl;
   }
 }

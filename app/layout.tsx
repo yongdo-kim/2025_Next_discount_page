@@ -6,6 +6,7 @@ import { Inter } from "next/font/google";
 import Script from "next/script";
 import { Toaster } from "sonner";
 import { Providers } from "./provider";
+import { useInitializeUser } from "@/features/users/presentation/hooks/useInitializeUser";
 // 개발 환경에서만 why-did-you-render 활성화
 if (typeof window !== "undefined" && process.env.NODE_ENV === "development") {
   import("../why-did-you-render");
@@ -35,6 +36,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
   return (
     <html lang="en" suppressHydrationWarning>
       <body
