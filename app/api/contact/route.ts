@@ -1,6 +1,7 @@
 import { GMAIL_APP_PASSWORD, GMAIL_APP_USER } from "@/lib/constants";
 import { NextRequest, NextResponse } from "next/server";
 import nodemailer from "nodemailer";
+import * as Sentry from "@sentry/nextjs";
 
 export async function POST(req: NextRequest) {
   try {
@@ -31,6 +32,7 @@ export async function POST(req: NextRequest) {
     await transporter.sendMail(mailOptions);
     return NextResponse.json({ success: true });
   } catch (err) {
+    Sentry.captureException(err);
     return NextResponse.json(
       { error: `메일 전송에 실패했습니다. ${err}` },
       { status: 500 },

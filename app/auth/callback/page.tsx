@@ -5,6 +5,7 @@ import { container } from "@/lib/di/dependencies";
 import { ROUTES } from "@/lib/routes";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import * as Sentry from "@sentry/nextjs";
 
 export default function AuthCallbackPage() {
   const router = useRouter();
@@ -36,7 +37,7 @@ export default function AuthCallbackPage() {
             router.replace(ROUTES.HOME);
           }, 0);
         } catch (err) {
-          console.error(err);
+          Sentry.captureException(err); 
           alert(
             err instanceof Error
               ? err.message
