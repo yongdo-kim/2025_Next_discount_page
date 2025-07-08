@@ -58,7 +58,7 @@ export default function AuthCallbackPage() {
 
   return (
     <div className="flex min-h-screen items-center justify-center">
-      <div>로그인 처리 중...</div>
+      <div>로그인 중</div>
     </div>
   );
 }

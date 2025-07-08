@@ -8,4 +8,8 @@ export const UsersApi = {
     console.log("userResponse", response);
     return new UserDto(response);
   },
+  //로그아웃
+  async logout() {
+    await apiClient.post("/users/logout");
+  },
 };
