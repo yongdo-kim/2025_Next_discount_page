@@ -1,7 +1,7 @@
 "use client";
 import { container } from "@/lib/di/dependencies";
 import { useEffect } from "react";
-import { useUserStore } from "../store/user.store";
+import { useUserStore } from "@/features/users/presentation/store/user.store";
 
 export function useInitializeUser() {
   const setUser = useUserStore((s) => s.setUser);

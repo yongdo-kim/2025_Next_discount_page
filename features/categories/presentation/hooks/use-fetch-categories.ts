@@ -2,8 +2,8 @@
 
 import { container } from "@/lib/di/dependencies";
 import { useQuery } from "@tanstack/react-query";
-import { CategoryEntity } from "../../domain/entities/category.entity";
-import { categoryKeys } from "../../infrastructure/contstant/query-keys";
+import { CategoryEntity } from "@/features/categories/domain/entities/category.entity";
+import { categoryKeys } from "@/features/categories/infrastructure/contstant/query-keys";
 
 export const useFetchCategories = () => {
   return useQuery<CategoryEntity[]>({

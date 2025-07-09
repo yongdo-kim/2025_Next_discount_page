@@ -1,6 +1,7 @@
+import { PostCategory } from "@/features/posts/domain/types";
 import { TagEntity } from "@/features/tags/domain/entities/tag.entity";
 import { UserEntity } from "@/features/users/domain/entities/user.entity";
-import { PostCategory } from "../types";
+
 
 export interface PostPreviewProps {
   id: number;

@@ -1,9 +1,9 @@
 import { TagEntity } from "@/features/tags/domain/entities/tag.entity";
 import { UserEntity } from "@/features/users/domain/entities/user.entity";
-import { PostPreviewEntity } from "../../domain/entities/post-preview.entity";
-import { PostEntity } from "../../domain/entities/post.entity";
-import { PostRepository } from "../../domain/repositories/post.repository";
-import { PostPreviewsReqDto } from "../dto/requests/post-preview.req.dto";
+import { PostPreviewEntity } from "@/features/posts/domain/entities/post-preview.entity";
+import { PostEntity } from "@/features/posts/domain/entities/post.entity";
+import { PostRepository } from "@/features/posts/domain/repositories/post.repository";
+import { PostPreviewsReqDto } from "@/features/posts/infrastructure/dto/requests/post-preview.req.dto";
 
 export class MockPostRepository implements PostRepository {
   //임시로 작업중.

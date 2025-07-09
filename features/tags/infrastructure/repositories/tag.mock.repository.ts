@@ -1,5 +1,5 @@
-import { TagEntity } from "../../domain/entities/tag.entity";
-import { TagRepository } from "../../domain/repositories/tag.repository";
+import { TagEntity } from "@/features/tags/domain/entities/tag.entity";
+import { TagRepository } from "@/features/tags/domain/repositories/tag.repository";
 
 export class MockTagRepository implements TagRepository {
   //임시로 작업중.

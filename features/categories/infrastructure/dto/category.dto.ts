@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { CategoryEntity } from "../../domain/entities/category.entity";
+import { CategoryEntity } from "@/features/categories/domain/entities/category.entity";
 
 export const categoryResponseSchema = z.object({
   id: z.number(),

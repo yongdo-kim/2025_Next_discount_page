@@ -1,6 +1,6 @@
 // features/post/infrastructure/api/post.api.ts
+import { CategoryDto } from "@/features/categories/infrastructure/dto/category.dto";
 import { apiClient } from "@/lib/api/client";
-import { CategoryDto } from "../dto/category.dto";
 
 export const categoryApi = {
   async getCategories(query?: string) {

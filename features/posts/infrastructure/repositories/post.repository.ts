@@ -1,11 +1,11 @@
-import { PostPreviewEntity } from "../../domain/entities/post-preview.entity";
-import { PostEntity } from "../../domain/entities/post.entity";
-import { PostRepository } from "../../domain/repositories/post.repository";
+import { PostPreviewEntity } from "@/features/posts/domain/entities/post-preview.entity";
+import { PostEntity } from "@/features/posts/domain/entities/post.entity";
+import { PostRepository } from "@/features/posts/domain/repositories/post.repository";
 
-import { toPostPreviewEntity } from "../dto/responses/post-preview.res.dto";
-import { toPostEntity } from "../dto/responses/post.res.dto";
-import { PostPreviewsReqDto } from "../dto/requests/post-preview.req.dto";
-import { postApi } from "../api/post.api";
+import { toPostPreviewEntity } from "@/features/posts/infrastructure/dto/responses/post-preview.res.dto";
+import { toPostEntity } from "@/features/posts/infrastructure/dto/responses/post.res.dto";
+import { PostPreviewsReqDto } from "@/features/posts/infrastructure/dto/requests/post-preview.req.dto";
+import { postApi } from "@/features/posts/infrastructure/api/post.api";
 
 export class HttpPostRepository implements PostRepository {
   async getPostPreviews({

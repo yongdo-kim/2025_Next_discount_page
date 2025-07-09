@@ -1,6 +1,5 @@
-// features/post/infrastructure/api/post.api.ts
+import { TagDto } from "@/features/tags/infrastructure/dto/tag.dto";
 import { apiClient } from "@/lib/api/client";
-import { TagDto } from "../dto/tag.dto";
 
 export const tagApi = {
   async getTags(path: string, query?: string) {

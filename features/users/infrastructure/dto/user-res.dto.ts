@@ -1,4 +1,4 @@
-import { UserEntity } from "../../domain/entities/user.entity";
+import { UserEntity } from "@/features/users/domain/entities/user.entity";
 
 import { z } from "zod";
 

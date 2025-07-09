@@ -1,5 +1,5 @@
-import { CategoryEntity } from "../../domain/entities/category.entity";
-import { CategoryRepository } from "../../domain/repositories/category.repository";
+import { CategoryEntity } from "@/features/categories/domain/entities/category.entity";
+import { CategoryRepository } from "@/features/categories/domain/repositories/category.repository";
 
 export class MockCategoryRepository implements CategoryRepository {
   //임시로 작업중.

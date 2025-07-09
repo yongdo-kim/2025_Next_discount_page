@@ -1,8 +1,9 @@
 import type { ApiError } from "@/features/common/types/api-error";
-import { API_BASE_URL } from "../constants";
+
 
 import { API_ERROR_CODES } from "@/features/common/constants/api-error-codes";
 import * as Sentry from "@sentry/nextjs";
+import { API_BASE_URL } from "@/lib/constants";
 //헤더
 const defaultHeaders = {
   "Content-Type": "application/json",

@@ -1,9 +1,10 @@
+import { PostEntity } from "@/features/posts/domain/entities/post.entity";
+import { postSourceResSchema } from "@/features/posts/infrastructure/dto/responses/post-source.res.dto";
 import { TagEntity } from "@/features/tags/domain/entities/tag.entity";
 import { tagResponseSchema } from "@/features/tags/infrastructure/dto/tag.dto";
 import { UserEntity } from "@/features/users/domain/entities/user.entity";
 import { z } from "zod";
-import { PostEntity } from "../../../domain/entities/post.entity";
-import { postSourceResSchema } from "./post-source.res.dto";
+
 
 export const userDtoSchema = z.object({
   id: z.number(),

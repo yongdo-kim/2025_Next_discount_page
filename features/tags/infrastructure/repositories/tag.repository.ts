@@ -1,6 +1,6 @@
-import { TagEntity } from "../../domain/entities/tag.entity";
-import { TagRepository } from "../../domain/repositories/tag.repository";
-import { tagApi } from "../api/tag.api";
+import { TagEntity } from "@/features/tags/domain/entities/tag.entity";
+import { TagRepository } from "@/features/tags/domain/repositories/tag.repository";
+import { tagApi } from "@/features/tags/infrastructure/api/tag.api";
 
 export class HttpTagRepository implements TagRepository {
   async getTags(path: string, query?: string): Promise<TagEntity[]> {

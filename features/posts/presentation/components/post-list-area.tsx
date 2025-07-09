@@ -1,6 +1,7 @@
 import MainTitle from "@/components/main-title";
-import { PostPreviewEntity } from "../../domain/entities/post-preview.entity";
-import PostListItem from "./post-list-item";
+import { PostPreviewEntity } from "@/features/posts/domain/entities/post-preview.entity";
+import PostListItem from "@/features/posts/presentation/components/post-list-item";
+
 
 export default function PostListArea({
   previews,

@@ -1,5 +1,5 @@
+import { TagEntity } from "@/features/tags/domain/entities/tag.entity";
 import { z } from "zod";
-import { TagEntity } from "../../domain/entities/tag.entity";
 
 export const tagResponseSchema = z.object({
   id: z.number(),

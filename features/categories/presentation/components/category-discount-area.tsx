@@ -2,7 +2,7 @@
 
 import MainTitle from "@/components/main-title";
 import { useFetchCategories } from "@/features/categories/presentation/hooks/use-fetch-categories";
-import PostPreviewCategoryArea from "../../../posts/presentation/components/post-preview-category";
+import PostPreviewCategoryArea from "@/features/posts/presentation/components/post-preview-category";
 
 export default function CategoryDiscountArea() {
   const { data: categories } = useFetchCategories();

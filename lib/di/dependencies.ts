@@ -14,7 +14,7 @@ import { HttpTagRepository } from "@/features/tags/infrastructure/repositories/t
 import { UsersService } from "@/features/users/application/services/users.service";
 import { MockUsersRepository } from "@/features/users/infrastructure/repositories/users.mock.repository";
 import { HttpUsersRepository } from "@/features/users/infrastructure/repositories/users.repository";
-import { IS_TESTMODE } from "../constants";
+import { IS_TESTMODE } from "@/lib/constants";
 
 type Services = {
   postService: PostService;

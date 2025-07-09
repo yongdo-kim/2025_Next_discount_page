@@ -1,5 +1,5 @@
-import { CategoryEntity } from "../../domain/entities/category.entity";
-import { CategoryRepository } from "../../domain/repositories/category.repository";
+import { CategoryEntity } from "@/features/categories/domain/entities/category.entity";
+import { CategoryRepository } from "@/features/categories/domain/repositories/category.repository";
 
 //복수의 useCase 추가 가능
 export class CategoryService {

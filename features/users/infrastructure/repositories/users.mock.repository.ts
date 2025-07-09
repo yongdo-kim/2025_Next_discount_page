@@ -1,5 +1,5 @@
-import { UsersRepository } from "../../domain/entities/repositories/user.repository";
-import { UserEntity } from "../../domain/entities/user.entity";
+import { UsersRepository } from "@/features/users/domain/entities/repositories/user.repository";
+import { UserEntity } from "@/features/users/domain/entities/user.entity";
 
 export class MockUsersRepository implements UsersRepository {
   async getMe(): Promise<UserEntity> {

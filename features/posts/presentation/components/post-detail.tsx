@@ -11,7 +11,7 @@ import parse from "html-react-parser";
 import Image from "next/image";
 import { useEffect } from "react";
 import { toast } from "sonner";
-import { PostEntity } from "../../domain/entities/post.entity";
+import { PostEntity } from "@/features/posts/domain/entities/post.entity";
 import { usePostDetail } from "../hooks/use-posts";
 
 export const PostDetail = ({

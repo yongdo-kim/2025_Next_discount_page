@@ -1,5 +1,5 @@
-import { TagEntity } from "../../domain/entities/tag.entity";
-import { TagRepository } from "../../domain/repositories/tag.repository";
+import { TagEntity } from "@/features/tags/domain/entities/tag.entity";
+import { TagRepository } from "@/features/tags/domain/repositories/tag.repository";
 
 //복수의 useCase 추가 가능
 export class TagService {

@@ -3,10 +3,10 @@
 import { categoryKeys } from "@/features/categories/infrastructure/contstant/query-keys";
 import { container } from "@/lib/di/dependencies";
 import { useQuery } from "@tanstack/react-query";
-import { PostPreviewEntity } from "../../domain/entities/post-preview.entity";
-import { PostEntity } from "../../domain/entities/post.entity";
-import { postKeys } from "../../infrastructure/contstant/query-keys";
-import { PostPreviewsReqDto } from "../../infrastructure/dto/requests/post-preview.req.dto";
+import { PostPreviewEntity } from "@/features/posts/domain/entities/post-preview.entity";
+import { PostEntity } from "@/features/posts/domain/entities/post.entity";
+import { postKeys } from "@/features/posts/infrastructure/contstant/query-keys";
+import { PostPreviewsReqDto } from "@/features/posts/infrastructure/dto/requests/post-preview.req.dto";
 
 //카테코리에 엮여서 전달한다고 판단.
 export const usePostPreviews = ({

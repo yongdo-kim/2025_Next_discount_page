@@ -1,10 +1,10 @@
 import { categoryResponseSchema } from "@/features/categories/infrastructure/dto/category.dto";
 import { PostPreviewEntity } from "@/features/posts/domain/entities/post-preview.entity";
+import { userDtoSchema } from "@/features/posts/infrastructure/dto/responses/post.res.dto";
 import { TagEntity } from "@/features/tags/domain/entities/tag.entity";
 import { tagResponseSchema } from "@/features/tags/infrastructure/dto/tag.dto";
 import { UserEntity } from "@/features/users/domain/entities/user.entity";
 import { z } from "zod";
-import { userDtoSchema } from "./post.res.dto";
 
 export const postPreviewResSchema = z.object({
   id: z.number(),

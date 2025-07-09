@@ -1,6 +1,6 @@
-import { PostPreviewsReqDto } from "../../infrastructure/dto/requests/post-preview.req.dto";
-import { PostPreviewEntity } from "../entities/post-preview.entity";
-import { PostEntity } from "../entities/post.entity";
+import { PostPreviewsReqDto } from "@/features/posts/infrastructure/dto/requests/post-preview.req.dto";
+import { PostPreviewEntity } from "@/features/posts/domain/entities/post-preview.entity";
+import { PostEntity } from "@/features/posts/domain/entities/post.entity";
 
 export interface PostRepository {
   getPostPreviews({

@@ -1,7 +1,7 @@
-import { PostPreviewEntity } from "../../domain/entities/post-preview.entity";
-import { PostEntity } from "../../domain/entities/post.entity";
-import { PostRepository } from "../../domain/repositories/post.repository";
-import { PostPreviewsReqDto } from "../../infrastructure/dto/requests/post-preview.req.dto";
+import { PostPreviewEntity } from "@/features/posts/domain/entities/post-preview.entity";
+import { PostEntity } from "@/features/posts/domain/entities/post.entity";
+import { PostRepository } from "@/features/posts/domain/repositories/post.repository";
+import { PostPreviewsReqDto } from "@/features/posts/infrastructure/dto/requests/post-preview.req.dto";
 
 //복수의 useCase 추가 가능
 export class PostService {

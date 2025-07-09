@@ -1,9 +1,8 @@
-// features/post/infrastructure/api/post.api.ts
+import { PostPreviewsResponse } from "@/features/posts/infrastructure/dto/responses/post-preview.res.dto";
+import { PostResponse, PostsResponse } from "@/features/posts/infrastructure/dto/responses/post.res.dto";
 import { apiClient } from "@/lib/api/client";
-import { PostCategory } from "../../domain/types";
-import { PostPreviewsReqDto } from "../dto/requests/post-preview.req.dto";
-import { PostPreviewsResponse } from "../dto/responses/post-preview.res.dto";
-import { PostResponse, PostsResponse } from "../dto/responses/post.res.dto";
+import { PostCategory } from "@/features/posts/domain/types";
+import { PostPreviewsReqDto } from "@/features/posts/infrastructure/dto/requests/post-preview.req.dto";
 
 export const postApi = {
   async getPosts({ category }: { category?: PostCategory }) {

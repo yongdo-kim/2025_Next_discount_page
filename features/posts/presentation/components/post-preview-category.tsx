@@ -2,8 +2,8 @@
 
 import MainTitle from "@/components/main-title";
 import { Divider } from "@/components/ui/divider";
-import { usePostPreviews } from "../hooks/use-posts";
-import PostCardLarge from "./post-card-large";
+import { usePostPreviews } from "@/features/posts/presentation/hooks/use-posts";
+import PostCardLarge from "@/features/posts/presentation/components/post-card-large";
 
 export default function PostPreviewCategoryArea({
   categoryId,
