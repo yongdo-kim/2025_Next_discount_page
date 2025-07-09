@@ -1,9 +1,8 @@
 import type { ApiError } from "@/features/common/types/api-error";
 
-
 import { API_ERROR_CODES } from "@/features/common/constants/api-error-codes";
-import * as Sentry from "@sentry/nextjs";
 import { API_BASE_URL } from "@/lib/constants";
+import * as Sentry from "@sentry/nextjs";
 //헤더
 const defaultHeaders = {
   "Content-Type": "application/json",
@@ -85,7 +84,8 @@ async function request<T>(
     !response.ok &&
     response.status === 401 &&
     isApiError(data) &&
-    data.code === API_ERROR_CODES.NOT_FOUND_ACCESS_TOKEN
+    (data.code === API_ERROR_CODES.NOT_FOUND_ACCESS_TOKEN ||
+      data.code === API_ERROR_CODES.EXPIRED_ACCESS_TOKEN)
   ) {
     if (retry) {
       try {
