@@ -1,5 +1,5 @@
 import { AuthRepository } from "@/features/auth/domain/repositories/auth.repository";
-import { authApi } from "../api/auth.api";
+import { authApi } from "@/features/auth/infrastructure/api/auth.api";
 
 export class HttpAuthRepository implements AuthRepository {
   async logout(): Promise<void> {
