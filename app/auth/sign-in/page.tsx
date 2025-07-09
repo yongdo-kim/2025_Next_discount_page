@@ -26,7 +26,7 @@ export default function SignInPage() {
             </div>
             <Button
               onClick={() => googleLogin()}
-              className="mb-2 w-full cursor-pointer p-6 text-xl font-semibold"
+              className="mb-2 w-60 cursor-pointer p-6 text-xl font-semibold"
               variant="outline"
               type="button"
             >
