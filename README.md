@@ -57,7 +57,7 @@ discount_next/
 
 ### 백엔드
 - **NestJS** – 주요 API 및 서버 기능 담당
-- **FastAPI** – 웹 스크래핑 전용 서버로 활용.
+- **FastAPI** – 웹 스크래핑 전용 서버로 활용
 
 ---
 
