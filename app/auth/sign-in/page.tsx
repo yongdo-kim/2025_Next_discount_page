@@ -8,7 +8,7 @@ export default function SignInPage() {
   const { googleLogin } = useGoogleLogin();
 
   return (
-    <div className="my-auto flex h-full flex-col justify-between bg-amber-600">
+    <div className="my-auto flex h-full flex-col justify-between">
       <div className="flex flex-1 items-center justify-center">
         <div className="mx-auto flex w-full max-w-screen-lg flex-col items-center rounded-lg p-8 shadow-md">
           <Image
