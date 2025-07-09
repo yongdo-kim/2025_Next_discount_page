@@ -14,7 +14,7 @@ import { HttpTagRepository } from "@/features/tags/infrastructure/repositories/t
 import { UsersService } from "@/features/users/application/services/users.service";
 import { MockUsersRepository } from "@/features/users/infrastructure/repositories/users.mock.repository";
 import { HttpUsersRepository } from "@/features/users/infrastructure/repositories/users.repository";
-import { IS_TESTMODE } from "@/lib/constants";
+import { ENV } from "@/lib/constants";
 
 type Services = {
   postService: PostService;
@@ -29,7 +29,7 @@ const createRepository = <T>(
   MockRepo: new () => T,
   HttpRepo: new () => T,
 ): T => {
-  return IS_TESTMODE ? new MockRepo() : new HttpRepo();
+  return ENV === "test" ? new MockRepo() : new HttpRepo();
 };
 
 const createServices = (): Services => {

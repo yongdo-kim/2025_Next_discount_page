@@ -6,7 +6,7 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="max-w-screen-lg border-neutral-600 bg-neutral-800 pt-4">
+    <footer className="mx-auto w-full max-w-screen-lg border-neutral-600 pt-4">
       <div className="flex flex-col items-end px-8">
         <div>
           <h4 className="mb-4 font-semibold">고객 지원</h4>
