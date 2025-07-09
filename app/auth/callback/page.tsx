@@ -74,8 +74,12 @@ export default function AuthCallbackPage() {
             할인은 우리가 수사합니다. <br />
             진짜 혜택만을 추적해 보여주는 스마트 쇼핑 도우미입니다
           </div>
-          <div className="mb-2 text-center text-lg text-neutral-100">로그인 중이에요</div>
-          <div className="text-center text-lg text-neutral-100">잠시만 기다려주세요</div>
+          <div className="mb-2 text-center text-lg text-neutral-100">
+            로그인 중이에요
+          </div>
+          <div className="text-center text-lg text-neutral-100">
+            잠시만 기다려주세요
+          </div>
         </div>
       </div>
     </div>

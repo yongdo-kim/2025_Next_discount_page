@@ -57,9 +57,12 @@ export default function NavBar({ className = "" }: NavBarProps) {
         <div className="flex items-center space-x-2">
           {user ? (
             <div className="flex items-center space-x-2">
-              <span className="font-semibold text-amber-700 dark:text-amber-300">
-                {user.nickname || user.name}
-              </span>
+              <Link href={ROUTES.MY_PAGE}>
+                <span className="text-sm font-bold">
+                  {user.nickname || user.name}
+                </span>
+                <span className="text-sm">님</span>
+              </Link>
               {/* 로그아웃/프로필 등 추가 가능 */}
               <Button
                 variant="outline"
