@@ -35,11 +35,10 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${inter.className} bg-white antialiased dark:bg-neutral-900`}
+        className={`${inter.className} bg-white antialiased dark:bg-neutral-900 flex flex-col min-h-screen`}
       >
         {/* Clarity Analytics 스크립트 */}
         <Script id="clarity-analytics" strategy="afterInteractive">
@@ -61,7 +60,7 @@ export default function RootLayout({
         />
         <Providers>
           <NavBar />
-          {children}
+          <main className="flex flex-1 flex-col">{children}</main>
           <Footer />
         </Providers>
         <Toaster />
