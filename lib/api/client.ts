@@ -59,6 +59,7 @@ async function request<T>(
   retry = true,
 ): Promise<T> {
   let fullUrl = `${API_BASE_URL}${url}`;
+  let data;
   if (query && query.trim() !== "") {
     fullUrl +=
       query.startsWith("?") || query.startsWith("&") ? query : `?${query}`;
@@ -72,12 +73,31 @@ async function request<T>(
   };
 
   if (body !== undefined && method !== "GET") {
-    mergedOptions.body = JSON.stringify(body);
+    if (body instanceof FormData) {
+      // FormData: 파일 업로드(혹은 멀티파트)
+      mergedOptions.body = body;
+      if (mergedOptions.headers && typeof mergedOptions.headers === "object") {
+        delete (mergedOptions.headers as Record<string, string>)[
+          "Content-Type"
+        ];
+      }
+    } else {
+      // 일반 JSON
+      mergedOptions.body = JSON.stringify(body);
+      if (mergedOptions.headers && typeof mergedOptions.headers === "object") {
+        mergedOptions.headers = {
+          ...mergedOptions.headers,
+          "Content-Type": "application/json",
+        };
+      }
+    }
   }
 
   const response = await fetch(fullUrl, mergedOptions);
 
-  const data = await response.json();
+  if (response.status !== 204) {
+    data = await response.json();
+  }
 
   // 401 + NOT_FOUND_ACCESS_TOKEN 인터셉터 처리
   if (

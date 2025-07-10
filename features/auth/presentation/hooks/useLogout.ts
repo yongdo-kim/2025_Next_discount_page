@@ -1,17 +1,17 @@
-import { useUserStore } from "@/features/users/presentation/store/user.store";
+import { usersKeys } from "@/features/users/infrastructure/contstant/query-keys";
 import { container } from "@/lib/di/dependencies";
+import { queryClient } from "@/lib/react-query";
 import * as Sentry from "@sentry/nextjs";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
 export function useLogout() {
   const router = useRouter();
-  const clearUser = useUserStore((s) => s.clearUser);
 
   const logout = async () => {
     try {
       await container.authService.logout();
-      clearUser();
+      queryClient.invalidateQueries({ queryKey: usersKeys.me });
       toast.success("로그아웃 되었습니다.");
       router.replace("/");
     } catch (e) {

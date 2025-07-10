@@ -11,6 +11,4 @@ export class UsersService {
   async updateMe(data: UserUpdateReqDto): Promise<UserEntity> {
     return this.usersRepository.updateMe(data);
   }
-
-  // 추가적인 유저 관련 use case 메서드 작성 가능
 }

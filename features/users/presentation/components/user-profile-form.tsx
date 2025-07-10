@@ -12,7 +12,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useMe } from "@/features/users/presentation/hooks/useMe";
 import { useUpdateMe } from "@/features/users/presentation/hooks/useUpdateMe";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { MdCameraAlt } from "react-icons/md";
 import { toast } from "sonner";
@@ -23,39 +23,43 @@ export default function UserProfileForm() {
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const { register, handleSubmit, setValue, watch, reset } = useForm({
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null); // 미리보기용
+
+  const { register, handleSubmit, reset, watch } = useForm({
     defaultValues: {
       nickname: user?.nickname ?? "",
-      picture: user?.picture ?? "",
+      image: undefined,
     },
   });
 
-  // 초기값을 await 이후 받아야하므로, 사용한다.
+  //데이터 초기화
   useEffect(() => {
     if (user) {
       reset({
         nickname: user.nickname ?? "",
-        picture: user.picture ?? "",
+        image: undefined,
       });
+      setPreviewUrl(user.picture ?? null);
     }
   }, [user, reset]);
 
-  const nickname = watch("nickname");
-  const picture = watch("picture");
-
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
+  // 파일 미리보기
+  const imageFiles = watch("image");
+  useEffect(() => {
+    const fileObj = imageFiles?.[0];
+    if (!fileObj) {
+      setPreviewUrl(user?.picture ?? null);
+      return;
+    }
     const reader = new FileReader();
     reader.onload = (ev) => {
-      if (ev.target?.result)
-        setValue("picture", ev.target.result as string, { shouldDirty: true });
+      if (ev.target?.result) setPreviewUrl(ev.target.result as string);
     };
-    reader.readAsDataURL(file);
-  };
+    reader.readAsDataURL(fileObj);
+  }, [imageFiles, user?.picture]);
 
-  const onSubmit = async (data: { nickname: string; picture: string }) => {
-    await updateMe(data);
+  const onSubmit = async (data: { nickname: string; image?: FileList }) => {
+    await updateMe({ nickname: data.nickname, image: data.image?.[0] });
     toast("회원정보가 저장되었습니다.");
   };
 
@@ -94,7 +98,10 @@ export default function UserProfileForm() {
                   aria-label="프로필 사진 변경"
                 >
                   <Avatar className="h-20 w-20">
-                    <AvatarImage src={user?.picture} alt={user?.nickname} />
+                    <AvatarImage
+                      src={previewUrl || user?.picture}
+                      alt={user?.nickname}
+                    />
                     <AvatarFallback>{user?.nickname?.[0]}</AvatarFallback>
                   </Avatar>
                   <span className="absolute right-0 bottom-0 flex h-8 w-8 items-center justify-center rounded-full border border-neutral-200 bg-white shadow-md transition-colors group-hover:bg-emerald-100">
@@ -102,11 +109,14 @@ export default function UserProfileForm() {
                   </span>
                 </button>
                 <input
-                  ref={fileInputRef}
                   type="file"
                   accept="image/*"
                   className="hidden"
-                  onChange={handleFileChange}
+                  {...register("image")}
+                  ref={(e) => {
+                    register("image").ref(e);
+                    fileInputRef.current = e;
+                  }}
                 />
               </div>
             </div>

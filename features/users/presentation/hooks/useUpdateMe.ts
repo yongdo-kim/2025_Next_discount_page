@@ -7,8 +7,10 @@ import { useMutation } from "@tanstack/react-query";
 export function useUpdateMe() {
   return useMutation({
     mutationKey: [usersKeys.me],
-    mutationFn: (data: UserUpdateReqDto) =>
-      container.userService.updateMe(data),
+    mutationFn: (data: UserUpdateReqDto) => {
+      console.log("data", data);
+      return container.userService.updateMe(data);
+    },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: usersKeys.me });
     },
