@@ -10,28 +10,35 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useMe } from "@/features/users/presentation/hooks/useInitializeUser";
-import { useRef } from "react";
+import { useMe } from "@/features/users/presentation/hooks/useMe";
+import { useUpdateMe } from "@/features/users/presentation/hooks/useUpdateMe";
+import { useEffect, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { MdCameraAlt } from "react-icons/md";
+import { toast } from "sonner";
 
 export default function UserProfileForm() {
   const { data: user } = useMe();
+  const { mutateAsync: updateMe, isPending } = useUpdateMe();
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const {
-    register,
-    handleSubmit,
-    setValue,
-    watch,
-    formState: { isSubmitting },
-  } = useForm({
+  const { register, handleSubmit, setValue, watch, reset } = useForm({
     defaultValues: {
       nickname: user?.nickname ?? "",
       picture: user?.picture ?? "",
     },
   });
+
+  // 초기값을 await 이후 받아야하므로, 사용한다.
+  useEffect(() => {
+    if (user) {
+      reset({
+        nickname: user.nickname ?? "",
+        picture: user.picture ?? "",
+      });
+    }
+  }, [user, reset]);
 
   const nickname = watch("nickname");
   const picture = watch("picture");
@@ -48,8 +55,8 @@ export default function UserProfileForm() {
   };
 
   const onSubmit = async (data: { nickname: string; picture: string }) => {
-    await new Promise((res) => setTimeout(res, 1000));
-    alert("회원정보가 저장되었습니다.");
+    await updateMe(data);
+    toast("회원정보가 저장되었습니다.");
   };
 
   if (!user) return null;
@@ -131,8 +138,12 @@ export default function UserProfileForm() {
           </CardContent>
           <CardFooter>
             <div className="mt-8 flex w-full justify-end">
-              <Button type="submit" disabled={isSubmitting} className="w-full">
-                {isSubmitting ? "저장 중..." : "저장하기"}
+              <Button
+                type="submit"
+                disabled={isPending}
+                className="w-full cursor-pointer hover:text-emerald-800"
+              >
+                {isPending ? "저장 중..." : "저장하기"}
               </Button>
             </div>
           </CardFooter>

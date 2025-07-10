@@ -2,10 +2,16 @@ import { UsersRepository } from "@/features/users/domain/entities/repositories/u
 import { UserEntity } from "@/features/users/domain/entities/user.entity";
 import { UsersApi } from "@/features/users/infrastructure/api/users.api";
 import { toUserEntity } from "@/features/users/infrastructure/dto/user-res.dto";
-
+import { UserUpdateReqDto } from "@/features/users/infrastructure/dto/user-update.req.dto";
+  
 export class HttpUsersRepository implements UsersRepository {
   async getMe(): Promise<UserEntity> {
     const userDto = await UsersApi.getMe();
+    return toUserEntity(userDto);
+  }
+
+  async updateMe(data: UserUpdateReqDto): Promise<UserEntity> {
+    const userDto = await UsersApi.updateMe(data);
     return toUserEntity(userDto);
   }
 }

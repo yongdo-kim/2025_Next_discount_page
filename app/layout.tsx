@@ -1,7 +1,7 @@
 import "@/assets/styles/globals.css";
 import Footer from "@/components/footer/footer";
 import NavBar from "@/components/navbar/nav-bar";
-import { APP_DESCRIPTION, APP_NAME, SERVER_URL, ENV } from "@/lib/constants";
+import { APP_DESCRIPTION, APP_NAME, ENV, SERVER_URL } from "@/lib/constants";
 import { Inter } from "next/font/google";
 import Script from "next/script";
 import { Toaster } from "sonner";
@@ -53,18 +53,18 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${inter.className} bg-white antialiased dark:bg-neutral-900 flex flex-col min-h-screen`}
+        className={`${inter.className} flex min-h-screen flex-col bg-white antialiased dark:bg-neutral-900`}
       >
         {/* Clarity Analytics 스크립트 */}
         <ClarityAnalyticsScript />
         {/* Google AdSense 스크립트 */}
-        <Script
+        {/* <Script
           id="adsbygoogle"
           strategy="afterInteractive"
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2398130378795170"
           crossOrigin="anonymous"
-        />
+        /> */}
         <Providers>
           <NavBar />
           <main className="flex flex-1 flex-col">{children}</main>

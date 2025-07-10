@@ -6,15 +6,15 @@ interface NavBarProps {
 }
 
 import { useLogout } from "@/features/auth/presentation/hooks/useLogout";
-import { useUserStore } from "@/features/users/presentation/store/user.store";
 import { ROUTES } from "@/lib/routes";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Button } from "../ui/button";
+import { useMe } from "@/features/users/presentation/hooks/useMe";
 
 export default function NavBar({ className = "" }: NavBarProps) {
   const [showBack, setShowBack] = useState(false);
-  const user = useUserStore((state) => state.user);
+  const { data: user } = useMe();
 
   const { logout } = useLogout();
 
@@ -59,7 +59,7 @@ export default function NavBar({ className = "" }: NavBarProps) {
             <div className="flex items-center space-x-2">
               <Link href={ROUTES.MY_PAGE}>
                 <span className="text-sm font-bold">
-                  {user.nickname || user.name}
+                  {user?.nickname || user?.name}
                 </span>
                 <span className="text-sm">님</span>
               </Link>
