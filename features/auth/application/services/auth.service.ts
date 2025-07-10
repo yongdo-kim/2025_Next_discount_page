@@ -6,4 +6,8 @@ export class AuthService {
   logout() {
     return this.authRepository.logout();
   }
+
+  refreshToken() {
+    return this.authRepository.refreshToken();
+  }
 }

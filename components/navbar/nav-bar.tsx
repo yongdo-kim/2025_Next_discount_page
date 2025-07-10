@@ -1,24 +1,24 @@
 "use client";
 import Image from "next/image";
-import { MdArrowBack } from "react-icons/md";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import { MdArrowBack } from "react-icons/md";
 interface NavBarProps {
   className?: string;
 }
 
 import { useLogout } from "@/features/auth/presentation/hooks/useLogout";
+import { useMe } from "@/features/users/presentation/hooks/useMe";
 import { ROUTES } from "@/lib/routes";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Button } from "../ui/button";
-import { useMe } from "@/features/users/presentation/hooks/useMe";
 
 export default function NavBar({ className = "" }: NavBarProps) {
   const [showBack, setShowBack] = useState(false);
   const { data: user, error } = useMe();
   const { mutate: logout, isPending } = useLogout();
 
-  useEffect(() => { 
+  useEffect(() => {
     // 클라이언트에서만 실행
     if (typeof window !== "undefined") {
       const isRoot = window.location.pathname === "/";
@@ -66,12 +66,15 @@ export default function NavBar({ className = "" }: NavBarProps) {
               {/* 로그아웃/프로필 등 추가 가능 */}
               <Button
                 variant="outline"
-                className="cursor-pointer flex items-center"
+                className="flex cursor-pointer items-center"
                 onClick={() => logout()}
                 disabled={isPending}
               >
                 {isPending ? (
-                  <AiOutlineLoading3Quarters className="animate-spin mr-2" size={18} />
+                  <AiOutlineLoading3Quarters
+                    className="mr-2 animate-spin"
+                    size={18}
+                  />
                 ) : null}
                 로그아웃
               </Button>
