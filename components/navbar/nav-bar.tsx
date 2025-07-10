@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
 import { MdArrowBack } from "react-icons/md";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 interface NavBarProps {
   className?: string;
 }
@@ -14,11 +15,10 @@ import { useMe } from "@/features/users/presentation/hooks/useMe";
 
 export default function NavBar({ className = "" }: NavBarProps) {
   const [showBack, setShowBack] = useState(false);
-  const { data: user } = useMe();
+  const { data: user, error } = useMe();
+  const { mutate: logout, isPending } = useLogout();
 
-  const { logout } = useLogout();
-
-  useEffect(() => {
+  useEffect(() => { 
     // 클라이언트에서만 실행
     if (typeof window !== "undefined") {
       const isRoot = window.location.pathname === "/";
@@ -55,7 +55,7 @@ export default function NavBar({ className = "" }: NavBarProps) {
           <div className="ml-3 font-bold">할인탐정</div>
         </span>
         <div className="flex items-center space-x-2">
-          {user ? (
+          {user && !error ? (
             <div className="flex items-center space-x-2">
               <Link href={ROUTES.MY_PAGE}>
                 <span className="text-sm font-bold">
@@ -66,9 +66,13 @@ export default function NavBar({ className = "" }: NavBarProps) {
               {/* 로그아웃/프로필 등 추가 가능 */}
               <Button
                 variant="outline"
-                className="cursor-pointer"
-                onClick={logout}
+                className="cursor-pointer flex items-center"
+                onClick={() => logout()}
+                disabled={isPending}
               >
+                {isPending ? (
+                  <AiOutlineLoading3Quarters className="animate-spin mr-2" size={18} />
+                ) : null}
                 로그아웃
               </Button>
             </div>
