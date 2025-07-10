@@ -6,13 +6,6 @@ import { Inter } from "next/font/google";
 import Script from "next/script";
 import { Toaster } from "sonner";
 import { Providers } from "./provider";
-// 개발 환경에서만 why-did-you-render 활성화
-if (typeof window !== "undefined" && ENV === "development") {
-  import("../why-did-you-render");
-  import("react-render-visualizer").then((module) => {
-    module.default();
-  });
-}
 
 //폰트
 const inter = Inter({ subsets: ["latin"] });
