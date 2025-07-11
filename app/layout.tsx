@@ -62,14 +62,13 @@ export default async function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <GoogleAdSenseScript />
+        <meta name="google-adsense-account" content="ca-pub-2398130378795170" />
       </head>
       <body
         className={`${inter.className} flex min-h-screen flex-col bg-white antialiased dark:bg-neutral-900`}
       >
         {/* 기능적인 측면 */}
         <ClarityAnalyticsScript />
-       
 
         {/* UI 측면 */}
         <Providers>
