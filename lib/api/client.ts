@@ -129,12 +129,45 @@ async function request<T>(
 }
 
 export const apiClient = {
-  get: <T>(url: string, query?: string, options?: RequestInit) =>
-    request<T>("GET", url, { query, options }),
-  post: <T>(url: string, body?: unknown, options?: RequestInit) =>
-    request<T>("POST", url, { body, options }),
-  put: <T>(url: string, body?: unknown, options?: RequestInit) =>
-    request<T>("PUT", url, { body, options }),
-  delete: <T>(url: string, body?: unknown, options?: RequestInit) =>
-    request<T>("DELETE", url, { body, options }),
+  get: <T>({
+    url,
+    query,
+    headers,
+    options,
+  }: {
+    url: string;
+    query?: string;
+    headers?: Record<string, string>;
+    options?: RequestInit;
+  }) =>
+    request<T>("GET", url, {
+      query,
+      options: {
+        ...(options || {}),
+        headers: {
+          ...(headers || {}),
+          ...((options && options.headers) || {}),
+        },
+      },
+    }),
+  post: <T>({
+    url,
+    body,
+    options,
+  }: {
+    url: string;
+    body?: unknown;
+    options?: RequestInit;
+  }) => request<T>("POST", url, { body, options }),
+  put: <T>({
+    url,
+    body,
+    options,
+  }: {
+    url: string;
+    body?: unknown;
+    options?: RequestInit;
+  }) => request<T>("PUT", url, { body, options }),
+  delete: <T>({ url, options }: { url: string; options?: RequestInit }) =>
+    request<T>("DELETE", url, { options }),
 };

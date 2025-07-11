@@ -7,7 +7,7 @@ export class AuthService {
     return this.authRepository.logout();
   }
 
-  refreshToken() {
-    return this.authRepository.refreshToken();
+  refreshToken(refreshToken?: string): Promise<string | null> {
+    return this.authRepository.refreshToken(refreshToken);
   }
 }

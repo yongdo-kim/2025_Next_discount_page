@@ -4,7 +4,10 @@ import { apiClient } from "@/lib/api/client";
 
 export const categoryApi = {
   async getCategories(query?: string) {
-    const response = await apiClient.get<CategoryDto[]>("/categories", query);
+    const response = await apiClient.get<CategoryDto[]>({
+      url: "/categories",
+      query,
+    });
     return response;
   },
 };

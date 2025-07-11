@@ -1,20 +1,10 @@
-import { useUserStore } from "@/features/users/presentation/store/user.store";
+import { authKeys } from "@/features/auth/infrastructure/contstant/query-keys";
 import { container } from "@/lib/di/dependencies";
-import { useEffect } from "react";
+import { useQuery } from "@tanstack/react-query";
 
 export function useRefreshToken() {
-  const setUserId = useUserStore((s) => s.setUserId);
-
-  useEffect(() => {
-    container.authService
-      .refreshToken()
-      .then((userId) => {
-        console.log("refresh token success", userId);
-        return setUserId(userId);
-      })
-      .catch(() => {
-        console.log("refresh token failed");
-        return setUserId(null);
-      });
-  }, [setUserId]);
+  useQuery({
+    queryKey: authKeys.refreshToken,
+    queryFn: () => container.authService.refreshToken(),
+  });
 }

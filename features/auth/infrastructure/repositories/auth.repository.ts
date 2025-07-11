@@ -6,8 +6,8 @@ export class HttpAuthRepository implements AuthRepository {
     await authApi.logout();
   }
 
-  async refreshToken(): Promise<string | null> {
-    const response = await authApi.refreshToken();
+  async refreshToken(refreshToken?: string): Promise<string | null> {
+    const response = await authApi.refreshToken(refreshToken);
     return response;
   }
 }

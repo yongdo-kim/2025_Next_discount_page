@@ -6,7 +6,6 @@ import CategorySection from "@/features/categories/presentation/components/categ
 import { container } from "@/lib/di/dependencies";
 import { queryClient } from "@/lib/react-query";
 import { HydrationBoundary, dehydrate } from "@tanstack/react-query";
-//메인 첫번째 화면이 보이는 곳,
 
 export default async function Page() {
   //처음에 카테고리 리스트는 받아야함.
@@ -19,8 +18,8 @@ export default async function Page() {
   });
 
   // 카테고리별 아이템
-  await Promise.all([
-    categories?.map((category: CategoryEntity) =>
+  const prefetches = [
+    ...(categories?.map((category: CategoryEntity) =>
       queryClient.prefetchQuery({
         queryKey: [categoryKeys.detail(category.id, null)],
         queryFn: async () => {
@@ -30,8 +29,7 @@ export default async function Page() {
           return JSON.parse(JSON.stringify(posts));
         },
       }),
-    ),
-    // 배너 호출
+    ) || []),
     queryClient.prefetchQuery({
       queryKey: [categoryKeys.banners],
       queryFn: async () => {
@@ -39,7 +37,6 @@ export default async function Page() {
         return JSON.parse(JSON.stringify(posts));
       },
     }),
-    //오늘의 따끈한 할인 호출
     queryClient.prefetchQuery({
       queryKey: [categoryKeys.detail(null, 8)],
       queryFn: async () => {
@@ -49,9 +46,9 @@ export default async function Page() {
         return JSON.parse(JSON.stringify(posts));
       },
     }),
-  ]);
+  ];
 
-  //await이 다 완료된 UI를 호출한다.
+  await Promise.all(prefetches);
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>

@@ -5,8 +5,8 @@ import { toUserEntity } from "@/features/users/infrastructure/dto/user-res.dto";
 import { UserUpdateReqDto } from "@/features/users/infrastructure/dto/user-update.req.dto";
   
 export class HttpUsersRepository implements UsersRepository {
-  async getMe(): Promise<UserEntity> {
-    const userDto = await UsersApi.getMe();
+  async getMe(accessToken?: string): Promise<UserEntity> {
+    const userDto = await UsersApi.getMe(accessToken);
     return toUserEntity(userDto);
   }
 

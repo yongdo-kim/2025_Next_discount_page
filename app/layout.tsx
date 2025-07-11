@@ -1,6 +1,7 @@
 import "@/assets/styles/globals.css";
 import Footer from "@/components/footer/footer";
 import NavBar from "@/components/navbar/nav-bar";
+import { getUserFromCookies } from "@/lib/auth/getUserFromCookies";
 import { APP_DESCRIPTION, APP_NAME, ENV, SERVER_URL } from "@/lib/constants";
 import { Inter } from "next/font/google";
 import Script from "next/script";
@@ -38,28 +39,38 @@ function ClarityAnalyticsScript() {
   );
 }
 
-export default function RootLayout({
+function GoogleAdSenseScript() {
+  return (
+    <Script
+      id="adsbygoogle"
+      strategy="afterInteractive"
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2398130378795170"
+      crossOrigin="anonymous"
+    />
+  );
+}
+
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // 서버에서 미리 인증 유저 정보 가져오기
+  const user = await getUserFromCookies();
+
   return (
     <html lang="en" suppressHydrationWarning>
       <body
         className={`${inter.className} flex min-h-screen flex-col bg-white antialiased dark:bg-neutral-900`}
       >
-        {/* Clarity Analytics 스크립트 */}
+        {/* 기능적인 측면 */}
         <ClarityAnalyticsScript />
-        {/* Google AdSense 스크립트 */}
-        {/* <Script
-          id="adsbygoogle"
-          strategy="afterInteractive"
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2398130378795170"
-          crossOrigin="anonymous"
-        /> */}
+        <GoogleAdSenseScript />
+
+        {/* UI 측면 */}
         <Providers>
-          <NavBar />
+          <NavBar ssrUser={user} />
           <main className="flex flex-1 flex-col">{children}</main>
           <Footer />
         </Providers>

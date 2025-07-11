@@ -1,5 +1,4 @@
 "use client";
-import { useUserStore } from "@/features/users/presentation/store/user.store";
 import { API_BASE_URL } from "@/lib/constants";
 import { container } from "@/lib/di/dependencies";
 import { ROUTES } from "@/lib/routes";
@@ -31,12 +30,8 @@ export default function AuthCallbackPage() {
           if (!loginRes.ok) throw new Error("로그인 처리 중 오류");
 
           // 로그인 성공 후 유저 정보 조회, 쿠키의 jwt를 자동으로 전송
-          const user = await container.userService.getMe();
-          useUserStore.setState({ user });
-
-          setTimeout(() => {
-            router.replace(ROUTES.HOME);
-          }, 0);
+          await container.userService.getMe();
+          window.location.replace(ROUTES.HOME);
         } catch (err) {
           Sentry.captureException(err);
           alert(

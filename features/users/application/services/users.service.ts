@@ -5,8 +5,8 @@ import { UserUpdateReqDto } from "@/features/users/infrastructure/dto/user-updat
 export class UsersService {
   constructor(private usersRepository: UsersRepository) {}
 
-  async getMe(): Promise<UserEntity> {
-    return this.usersRepository.getMe();
+  async getMe(accessToken?: string): Promise<UserEntity> {
+    return this.usersRepository.getMe(accessToken);
   }
   async updateMe(data: UserUpdateReqDto): Promise<UserEntity> {
     return this.usersRepository.updateMe(data);

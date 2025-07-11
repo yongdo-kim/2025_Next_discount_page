@@ -3,6 +3,6 @@ import { UserUpdateReqDto } from "@/features/users/infrastructure/dto/user-updat
 
 
 export interface UsersRepository {
-  getMe(): Promise<UserEntity>;
+  getMe(accessToken?: string): Promise<UserEntity>;
   updateMe(data: UserUpdateReqDto): Promise<UserEntity>;
 } 

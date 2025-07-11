@@ -2,7 +2,6 @@
 import { Progress } from "@/components/ui/progress";
 import clsx from "clsx";
 import { useEffect, useRef, useState } from "react";
-import NavBar from "./nav-bar";
 
 export default function ScrollHideNavbar() {
   const [show, setShow] = useState(true);
@@ -45,12 +44,12 @@ export default function ScrollHideNavbar() {
       </div>
 
       <div className="fixed top-0 left-0 z-40 w-full">
-        <NavBar
+        {/* <NavBar
           className={clsx(
             "w-full shadow transition-transform duration-300",
             show ? "translate-y-0" : "-translate-y-full",
           )}
-        />
+        /> */}
       </div>
     </div>
   );
