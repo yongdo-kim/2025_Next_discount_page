@@ -52,6 +52,7 @@ export default async function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         <meta name="google-adsense-account" content="ca-pub-2398130378795170" />
+        <meta name="google-site-verification" content="n27T5OoBWUN8J3TDTK8w8fBs5ZkZFPZ2Co5B_lefBeU" />
       </head>
       <body
         className={`${inter.className} flex min-h-screen flex-col bg-white antialiased dark:bg-neutral-900`}
