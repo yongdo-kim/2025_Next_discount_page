@@ -39,17 +39,6 @@ function ClarityAnalyticsScript() {
   );
 }
 
-function GoogleAdSenseScript() {
-  return (
-    <Script
-      id="adsbygoogle"
-      strategy="afterInteractive"
-      async
-      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2398130378795170"
-      crossOrigin="anonymous"
-    />
-  );
-}
 
 export default async function RootLayout({
   children,
