@@ -158,7 +158,6 @@ export class MockPostRepository implements PostRepository {
         (post) => post.category.id === req.categoryId,
       );
     }
-    console.log(this.mockPosts);
     return this.mockPostPreviews;
   }
 

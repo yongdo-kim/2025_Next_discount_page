@@ -10,7 +10,6 @@ export const UsersApi = {
       url: "/users/me",
       options,
     });
-    console.log(response);
     return response;
   },
   async updateMe(data: UserUpdateReqDto): Promise<UserDto> {

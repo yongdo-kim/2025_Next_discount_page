@@ -31,10 +31,8 @@ export const authApi = {
     }
 
     if (response && "accessToken" in response) {
-      console.log("accessToken", response.accessToken);
       return response.accessToken;
     } else {
-      console.log("memberId", response.memberId);
       return response.memberId;
     }
   },

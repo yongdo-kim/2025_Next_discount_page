@@ -8,7 +8,6 @@ export function useUpdateMe() {
   return useMutation({
     mutationKey: [usersKeys.me],
     mutationFn: (data: UserUpdateReqDto) => {
-      console.log("data", data);
       return container.userService.updateMe(data);
     },
     onSuccess: () => {

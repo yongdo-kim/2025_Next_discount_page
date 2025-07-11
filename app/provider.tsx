@@ -1,6 +1,7 @@
 "use client";
 
 import { Toaster } from "@/components/ui/sonner";
+import { RefreshTokenEffect } from "@/features/auth/presentation/hooks/useRefreshToken";
 import { GOOGLE_CLIENT_ID } from "@/lib/constants";
 import { queryClient } from "@/lib/react-query";
 import { GoogleOAuthProvider } from "@react-oauth/google";
@@ -12,6 +13,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
   return (
     <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID!}>
       <QueryClientProvider client={queryClient}>
+        <RefreshTokenEffect />
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"

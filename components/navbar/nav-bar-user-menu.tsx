@@ -13,7 +13,6 @@ export default function NavBarUserMenu({
   ssrUser: UserDto | null;
 }) {
   const { data: user } = useMe(!!ssrUser);
-  console.log("useMe", user);
   const currentUser = user ?? ssrUser;
 
   return (

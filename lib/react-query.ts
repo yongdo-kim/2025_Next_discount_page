@@ -7,7 +7,6 @@ export const queryClient = new QueryClient({
     onError: (error, query) => {
       // 특정 쿼리에서 전역 에러 핸들링을 건너뛰려면 meta.skipGlobalError 사용
       if (query.meta?.skipGlobalError) return;
-      console.log(error);
 
       //const err = error as CustomError;
 

@@ -6,5 +6,15 @@ export function useRefreshToken() {
   useQuery({
     queryKey: authKeys.refreshToken,
     queryFn: () => container.authService.refreshToken(),
+    staleTime: Infinity, // 한 번만 실행
+    refetchOnWindowFocus: false,
+    refetchOnMount: false, // 필요에 따라 true로
+    retry: false,
   });
 }
+
+
+export const RefreshTokenEffect = () => {
+  useRefreshToken();
+  return null;
+};
