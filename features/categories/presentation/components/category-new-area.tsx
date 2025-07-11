@@ -1,5 +1,6 @@
 "use client";
 
+import AdSenseBanner from "@/components/ad-sense-banner";
 import MainTitle from "@/components/main-title";
 import PostCardSmall from "@/features/posts/presentation/components/post-card-small";
 import { usePostPreviews } from "@/features/posts/presentation/hooks/use-posts";
@@ -41,7 +42,7 @@ export default function NewCategoryDiscountArea() {
         />
       </div>
       <PostCardSmallList />
-      {/* <AdSenseBanner /> */}
+      <AdSenseBanner />
     </section>
   );
 }
