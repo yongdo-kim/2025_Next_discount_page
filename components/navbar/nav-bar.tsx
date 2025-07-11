@@ -10,7 +10,7 @@ type NavBarProps = {
 export default function NavBar({ className = "", ssrUser }: NavBarProps) {
   return (
     <nav className={className}>
-      <div className="mx-auto flex max-w-screen-xl items-center justify-between bg-white px-4 py-6 lg:px-16 dark:bg-neutral-900">
+      <div className="container mx-auto flex items-center justify-between bg-white px-4 py-6 lg:px-16 dark:bg-neutral-900">
         {/* 모바일 뒤로가기 아이콘 */}
         {/* {showBack && (
           <button

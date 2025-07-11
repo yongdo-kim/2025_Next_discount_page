@@ -24,7 +24,7 @@ export default function CategorySection() {
 
   return (
     <section className="mx-auto max-w-screen-lg flex-1">
-      <div className="">
+      <>
         {selectedId ? (
           // 선택된 카테고리만 보여주는 UI
           <PostListArea previews={previews || []} />
@@ -38,7 +38,7 @@ export default function CategorySection() {
             <CategoryDiscountArea />
           </>
         )}
-      </div>
+      </>
     </section>
   );
 }
