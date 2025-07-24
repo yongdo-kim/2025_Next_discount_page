@@ -1,7 +1,7 @@
 "use client";
 
 import MainTitle from "@/components/MainTitle";
-import PostCardMiddle from "@/features/posts/presentation/components/post-card-middle";
+import PostCardMiddle from "@/features/posts/presentation/components/PostCardMiddle";
 import { useCategoryPostPreviews } from "@/features/posts/presentation/hooks/use-posts";
 
 export default function CategoryRandomArea() {

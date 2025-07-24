@@ -1,6 +1,6 @@
 "use client";
 import MainTitle from "@/components/MainTitle";
-import PostCardSmall from "@/features/posts/presentation/components/post-card-small";
+import PostCardSmall from "@/features/posts/presentation/components/PostCardSmall";
 import { usePostPreviews } from "@/features/posts/presentation/hooks/use-posts";
 // import dynamic from "next/dynamic";
 // const AdSenseBanner = dynamic(() => import("@/components/AdSenseBanner"), {

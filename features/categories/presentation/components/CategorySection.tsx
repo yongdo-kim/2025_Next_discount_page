@@ -1,9 +1,9 @@
 "use client";
 import { Divider } from "@/components/ui/divider";
-import CategoryDiscountArea from "@/features/categories/presentation/components/category-discount-area";
-import NewCategoryDiscountArea from "@/features/categories/presentation/components/category-new-area";
-import CategoryRandomArea from "@/features/categories/presentation/components/category-random-area";
-import PostListArea from "@/features/posts/presentation/components/post-list-area";
+import CategoryDiscountArea from "@/features/categories/presentation/components/CategoryDiscountArea";
+import NewCategoryDiscountArea from "@/features/categories/presentation/components/CategoryNewArea";
+import CategoryRandomArea from "@/features/categories/presentation/components/CategoryRandomArea";
+import PostListArea from "@/features/posts/presentation/components/PostListArea";
 import { usePostPreviews } from "@/features/posts/presentation/hooks/use-posts";
 import { useSearchParams } from "next/navigation";
 import { useFetchCategories } from "../hooks/use-fetch-categories";
