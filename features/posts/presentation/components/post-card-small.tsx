@@ -1,5 +1,5 @@
 import { Badge } from "@/components/ui/badge";
-import SmartImage from "@/components/ui/smart-image";
+import SmartImage from "@/components/ui/SmartImage";
 import Link from "next/link";
 import { PostPreviewEntity } from "@/features/posts/domain/entities/post-preview.entity";
 

@@ -14,7 +14,7 @@ import Link from "next/link";
 import { PostPreviewEntity } from "@/features/posts/domain/entities/post-preview.entity";
 import { postKeys } from "@/features/posts/infrastructure/contstant/query-keys";
 import Image from "next/image";
-import SmartImage from "@/components/ui/smart-image";
+import SmartImage from "@/components/ui/SmartImage";
 
 export default function PostCardLarge({
   post,

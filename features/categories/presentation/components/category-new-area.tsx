@@ -1,5 +1,5 @@
 "use client";
-import MainTitle from "@/components/main-title";
+import MainTitle from "@/components/MainTitle";
 import PostCardSmall from "@/features/posts/presentation/components/post-card-small";
 import { usePostPreviews } from "@/features/posts/presentation/hooks/use-posts";
 // import dynamic from "next/dynamic";

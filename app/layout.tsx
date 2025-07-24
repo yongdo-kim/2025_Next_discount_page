@@ -1,12 +1,12 @@
 import "@/assets/styles/globals.css";
-import Footer from "@/components/footer/footer";
-import NavBar from "@/components/navbar/nav-bar";
+import NavBar from "@/components/navbar/NavBar";
 import { getUserFromCookies } from "@/lib/auth/getUserFromCookies";
 import { APP_DESCRIPTION, APP_NAME, ENV, SERVER_URL } from "@/lib/constants";
 import { Inter } from "next/font/google";
 import Script from "next/script";
 import { Toaster } from "sonner";
 import { Providers } from "./provider";
+import Footer from "@/components/footer/footer";
 
 //폰트
 const inter = Inter({ subsets: ["latin"] });

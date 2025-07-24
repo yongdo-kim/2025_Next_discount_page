@@ -1,7 +1,7 @@
 "use client";
-import MainTitle from "@/components/main-title";
+import MainTitle from "@/components/MainTitle";
 import { Badge } from "@/components/ui/badge";
-import SmartImage from "@/components/ui/smart-image";
+import SmartImage from "@/components/ui/SmartImage";
 import { TagEntity } from "@/features/tags/domain/entities/tag.entity";
 import { UserEntity } from "@/features/users/domain/entities/user.entity";
 import { sendGAEvent } from "@/lib/ga";

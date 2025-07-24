@@ -2,7 +2,7 @@
 "use client";
 
 import { Component, ErrorInfo, ReactNode } from "react";
-import { ErrorFallback } from "./error-fallback";
+import { ErrorFallback } from "./ErrorFallback";
 
 interface Props {
   children: ReactNode;

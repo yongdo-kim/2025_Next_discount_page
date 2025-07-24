@@ -1,4 +1,4 @@
-import SmartImage from "@/components/ui/smart-image";
+import SmartImage from "@/components/ui/SmartImage";
 import { PostPreviewEntity } from "@/features/posts/domain/entities/post-preview.entity";
 import { postKeys } from "@/features/posts/infrastructure/contstant/query-keys";
 import { container } from "@/lib/di/dependencies";

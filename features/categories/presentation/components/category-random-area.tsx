@@ -1,6 +1,6 @@
 "use client";
 
-import MainTitle from "@/components/main-title";
+import MainTitle from "@/components/MainTitle";
 import PostCardMiddle from "@/features/posts/presentation/components/post-card-middle";
 import { useCategoryPostPreviews } from "@/features/posts/presentation/hooks/use-posts";
 

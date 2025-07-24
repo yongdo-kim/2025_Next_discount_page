@@ -12,7 +12,7 @@ import { ko } from "date-fns/locale/ko";
 import { htmlToText } from "html-to-text";
 import Link from "next/link";
 import { PostPreviewEntity } from "@/features/posts/domain/entities/post-preview.entity";
-import SmartImage from "@/components/ui/smart-image";
+import SmartImage from "@/components/ui/SmartImage";
 import { postKeys } from "@/features/posts/infrastructure/contstant/query-keys";
 
 export default function PostListItem({ post }: { post: PostPreviewEntity }) {

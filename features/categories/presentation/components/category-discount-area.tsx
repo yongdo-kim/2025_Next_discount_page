@@ -1,6 +1,6 @@
 "use client";
 
-import MainTitle from "@/components/main-title";
+import MainTitle from "@/components/MainTitle";
 import { useFetchCategories } from "@/features/categories/presentation/hooks/use-fetch-categories";
 import PostPreviewCategoryArea from "@/features/posts/presentation/components/post-preview-category";
 
