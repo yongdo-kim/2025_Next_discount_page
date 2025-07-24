@@ -2,13 +2,13 @@ import { initializeApp, getApps } from "firebase/app";
 import { getAnalytics, isSupported as isAnalyticsSupported } from "firebase/analytics";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCmhqEnNos698lFARZgM2-QbqJ2l8Gi_l4",
-  authDomain: "find-discount-189ec.firebaseapp.com",
-  projectId: "find-discount-189ec",
-  storageBucket: "find-discount-189ec.firebasestorage.app",
-  messagingSenderId: "382872862619",
-  appId: "1:382872862619:web:609c30ca39c2fabddc2b3e",
-  measurementId: "G-7MSFKE0YV8"
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY!,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN!,
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID!,
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET!,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID!,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID!,
+  measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID!
 };
 
 const app = !getApps().length ? initializeApp(firebaseConfig) : getApps()[0];

@@ -10,7 +10,6 @@ import { Providers } from "./provider";
 
 //폰트
 const inter = Inter({ subsets: ["latin"] });
-
 //브라우져 탭 이름 변경
 export const metadata = {
   title: {
