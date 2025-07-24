@@ -1,4 +1,4 @@
-import NavBarUserMenu from "@/components/navbar/nav-bar-user-menu";
+import NavBarUserMenu from "@/components/navbar/NavBarUserMenu";
 import { UserDto } from "@/features/users/infrastructure/dto/user-res.dto";
 import Image from "next/image";
 import Link from "next/link";

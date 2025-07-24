@@ -1,4 +1,4 @@
-import { CategoryIcon } from "./category-Icon";
+import { CategoryIcon } from "@/components/CategoryIcon";
 
 export default function MainTitle({
   title,

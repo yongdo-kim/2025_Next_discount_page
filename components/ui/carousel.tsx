@@ -1,12 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import SmartImage from "./smart-image";
+import SmartImage from "@/components/ui/SmartImage";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Autoplay, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Badge } from "./badge";
+import { Badge } from "@/components/ui/badge";
 
 type CarouselProps = {
   title: string;

@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import LogoutButton from "@/features/auth/presentation/logout-button";
+import LogoutButton from "@/features/auth/presentation/LogoutButton";
 import { UserDto } from "@/features/users/infrastructure/dto/user-res.dto";
 import { useMe } from "@/features/users/presentation/hooks/useMe";
 import { ROUTES } from "@/lib/routes";

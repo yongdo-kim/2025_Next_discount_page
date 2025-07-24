@@ -1,5 +1,5 @@
 import { usersKeys } from "@/features/users/infrastructure/contstant/query-keys";
-import UserProfileForm from "@/features/users/presentation/components/user-profile-form";
+import UserProfileForm from "@/features/users/presentation/components/UserProfileForm";
 import { container } from "@/lib/di/dependencies";
 import {
   HydrationBoundary,
