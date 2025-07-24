@@ -6,7 +6,6 @@ import { PostRepository } from "@/features/posts/domain/repositories/post.reposi
 import { PostPreviewsReqDto } from "@/features/posts/infrastructure/dto/requests/post-preview.req.dto";
 
 export class MockPostRepository implements PostRepository {
-  //임시로 작업중.
   private mockPosts: PostEntity[] = [];
   private mockPostPreviews: PostPreviewEntity[] = [];
 

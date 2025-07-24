@@ -25,7 +25,7 @@ type Services = {
   // 향후 추가될 서비스들...
 };
 
-const createRepository = <T>(
+const createRepository = <T extends object>(
   MockRepo: new () => T,
   HttpRepo: new () => T,
 ): T => {
