@@ -12,8 +12,11 @@ export default async function Page() {
   const categories = await queryClient.fetchQuery({
     queryKey: [categoryKeys.all],
     queryFn: async () => {
-      const categories = await container.categoryService.getCategories();
-      return JSON.parse(JSON.stringify(categories));
+      try {
+        return await container.categoryService.getCategories();
+      } catch (error) {
+        return []; // 기본값 반환
+      }
     },
   });
 
