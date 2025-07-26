@@ -1,8 +1,8 @@
 import NavBarUserMenu from "@/components/navbar/NavBarUserMenu";
+import MobileBackButton from "@/components/navbar/MobileBackButton";
 import { UserDto } from "@/features/users/infrastructure/dto/user-res.dto";
 import Image from "next/image";
 import Link from "next/link";
-
 type NavBarProps = {
   ssrUser: UserDto | null;
   className?: string;
@@ -12,16 +12,7 @@ export default function NavBar({ className = "", ssrUser }: NavBarProps) {
     <nav className={className}>
       <div className="container mx-auto flex items-center justify-between bg-white px-4 py-6 lg:px-16 dark:bg-neutral-900">
         {/* 모바일 뒤로가기 아이콘 */}
-        {/* {showBack && (
-          <button
-            type="button"
-            onClick={() => window.history.back()}
-            className="mr-2 flex items-center md:hidden"
-            aria-label="뒤로가기"
-          >
-            <MdArrowBack size={28} />
-          </button>
-        )} */}
+        <MobileBackButton />
         <Link href="/" className="flex cursor-pointer text-lg font-bold">
           <Image
             src="/logo.png"
