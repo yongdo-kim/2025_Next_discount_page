@@ -1,6 +1,6 @@
 import { CategoryEntity } from "@/features/categories/domain/entities/category.entity";
 import { categoryKeys } from "@/features/categories/infrastructure/contstant/query-keys";
-import CategorySection from "@/features/categories/presentation/components/CategorySection";
+import CategorySectionClient from "@/features/categories/presentation/components/section/CategorySectionClient";
 import { container } from "@/lib/di/dependencies";
 import { queryClient } from "@/lib/react-query";
 import { HydrationBoundary, dehydrate } from "@tanstack/react-query";
@@ -52,7 +52,7 @@ export default async function CategorySectionServer() {
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <CategorySection />
+      <CategorySectionClient />
     </HydrationBoundary>
   );
 }

@@ -1,11 +1,11 @@
 "use client";
+import { Badge } from "@/components/ui/badge";
 import { CategoryEntity } from "@/features/categories/domain/entities/category.entity";
-import { useFetchCategories } from "@/features/categories/presentation/hooks/use-fetch-categories";
 import { sendGAEvent } from "@/lib/ga";
 import { cn } from "@/lib/utils";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useMemo } from "react";
-import { Badge } from "../ui/badge";
+
 
 type MenuItemProps = {
   category: CategoryEntity;
@@ -31,12 +31,16 @@ function MenuItem({ category, selected, onClick, className }: MenuItemProps) {
 }
 
 const SHOW_ALL_CATEGORY = new CategoryEntity({ id: 0, name: "전체보기" });
-export default function MenuTab() {
+
+type MenuTabClientProps = {
+  categories: CategoryEntity[];
+};
+
+export default function MenuTabClient({ categories }: MenuTabClientProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const selectedId = searchParams.get("category");
 
-  const { data: categories } = useFetchCategories();
   const sorted = useMemo(() => {
     if (!categories) return [];
 

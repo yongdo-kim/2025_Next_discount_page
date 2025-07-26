@@ -5,7 +5,7 @@ import { useCategoryPostPreviews } from "@/features/posts/presentation/hooks/use
 import "swiper/css";
 import "swiper/css/pagination";
 
-export default function CategoryCarousel() {
+export default function CategoryCarouselClient() {
   const { data: posts } = useCategoryPostPreviews();
 
   if (!posts) return null;

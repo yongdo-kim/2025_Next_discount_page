@@ -1,10 +1,10 @@
-import { Suspense } from "react";
-import MenuTabServer from "@/components/navbar/MenuTabServer";
+import MenuTabServer from "@/components/navbar/menuTab/MenuTabServer";
+import CategoryCarouselServer from "@/features/categories/presentation/components/carousel/CategoryCarouselServer";
+import CategorySectionServer from "@/features/categories/presentation/components/section/CategorySectionServer";
 import CategoryCarouselSkeleton from "@/components/skeletons/CategoryCarouselSkeleton";
 import CategorySectionSkeleton from "@/components/skeletons/CategorySectionSkeleton";
 import MenuTabSkeleton from "@/components/skeletons/MenuTabSkeleton";
-import CategoryCarouselServer from "@/components/server/CategoryCarouselServer";
-import CategorySectionServer from "@/components/server/CategorySectionServer";
+import { Suspense } from "react";
 
 export default async function Page() {
   return (
@@ -13,7 +13,7 @@ export default async function Page() {
       <Suspense fallback={<CategoryCarouselSkeleton />}>
         <CategoryCarouselServer />
       </Suspense>
-      
+
       {/* 메뉴탭 : 데스크탑인 경우 양옆, 모바일이라면 세로.  */}
       <div className="container mx-auto lg:flex">
         <Suspense fallback={<MenuTabSkeleton />}>
