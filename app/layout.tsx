@@ -1,42 +1,19 @@
 import "@/assets/styles/globals.css";
 import NavBar from "@/components/navbar/NavBar";
 import { getUserFromCookies } from "@/lib/auth/getUserFromCookies";
-import { APP_DESCRIPTION, APP_NAME, ENV, SERVER_URL } from "@/lib/constants";
 import { Inter } from "next/font/google";
-import Script from "next/script";
 import { Toaster } from "sonner";
 import { Providers } from "./provider";
 import Footer from "@/components/footer/footer";
+import { createBaseMetadata } from "@/lib/metadata/base-metadata";
+import ClarityScript from "@/components/analytics/ClarityScript";
+import GoogleAdsenseScript from "@/components/analytics/GoogleAdsenseScript";
 
-//폰트
+// 폰트 설정
 const inter = Inter({ subsets: ["latin"] });
-//브라우져 탭 이름 변경
-export const metadata = {
-  title: {
-    default: APP_NAME,
-    template: `%s | ${APP_NAME}`,
-  },
-  description: APP_DESCRIPTION,
-  metadataBase: new URL(SERVER_URL),
-  icons: {
-    icon: "/favicon.ico",
-  },
-};
 
-function ClarityAnalyticsScript() {
-  if (ENV !== "production") return null;
-  return (
-    <Script id="clarity-analytics" strategy="afterInteractive">
-      {`
-        (function(c,l,a,r,i,t,y){
-          c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-          t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-          y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-        })(window, document, "clarity", "script", "sa0b71ttyt");
-      `}
-    </Script>
-  );
-}
+// 메타데이터 설정
+export const metadata = createBaseMetadata();
 
 export default async function RootLayout({
   children,
@@ -47,25 +24,17 @@ export default async function RootLayout({
   const user = await getUserFromCookies();
 
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="ko" suppressHydrationWarning>
       <head>
-        <meta
-          name="google-site-verification"
-          content="n27T5OoBWUN8J3TDTK8w8fBs5ZkZFPZ2Co5B_lefBeU"
-        />
-        <script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2398130378795170"
-          crossOrigin="anonymous"
-        ></script>
+        <GoogleAdsenseScript />
       </head>
       <body
         className={`${inter.className} flex min-h-screen flex-col bg-white antialiased dark:bg-neutral-900`}
       >
-        {/* 기능적인 측면 */}
-        <ClarityAnalyticsScript />
+        {/* Analytics Scripts */}
+        <ClarityScript />
 
-        {/* UI 측면 */}
+        {/* App Layout */}
         <Providers>
           <NavBar ssrUser={user} />
           <main className="flex flex-1 flex-col">{children}</main>

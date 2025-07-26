@@ -8,19 +8,18 @@ import { queryClient } from "@/lib/react-query";
 import { HydrationBoundary, dehydrate } from "@tanstack/react-query";
 
 export default async function Page() {
-  //처음에 카테고리 리스트는 받아야함.
   const categories = await queryClient.fetchQuery({
     queryKey: [categoryKeys.all],
     queryFn: async () => {
       try {
-        return await container.categoryService.getCategories();
+        const result = await container.categoryService.getCategories();
+        return JSON.parse(JSON.stringify(result));
       } catch (error) {
-        return []; // 기본값 반환
+        return []; 
       }
     },
   });
 
-  // 카테고리별 아이템
   const prefetches = [
     ...(categories?.map((category: CategoryEntity) =>
       queryClient.prefetchQuery({
@@ -55,7 +54,6 @@ export default async function Page() {
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      {/* 캐러셀 */}
       <CategoryCarousel />
       {/* 메뉴탭 : 데스크탑인 경우 양옆, 모바일이라면 세로.  */}
       <div className="container mx-auto lg:flex">

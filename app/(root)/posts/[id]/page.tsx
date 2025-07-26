@@ -67,10 +67,13 @@ export default async function PostDetailPage({
   const post = queryClient.getQueryData<PostEntity>(postKeys.detail(numId));
   const dehydratedState = dehydrate(queryClient);
 
+  // 클래스 인스턴스를 plain object로 변환
+  const serializedPost = post ? JSON.parse(JSON.stringify(post)) : null;
+
   return (
     <HydrationBoundary state={dehydratedState}>
       <ScrollHideNavbar />
-      <PostDetail postId={numId} initialPost={post} />
+      <PostDetail postId={numId} initialPost={serializedPost} />
     </HydrationBoundary>
   );
 }
