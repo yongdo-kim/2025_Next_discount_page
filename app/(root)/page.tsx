@@ -8,17 +8,15 @@ import { queryClient } from "@/lib/react-query";
 import { HydrationBoundary, dehydrate } from "@tanstack/react-query";
 
 export default async function Page() {
-  const categories = await queryClient.fetchQuery({
-    queryKey: [categoryKeys.all],
-    queryFn: async () => {
-      try {
-        const result = await container.categoryService.getCategories();
-        return JSON.parse(JSON.stringify(result));
-      } catch (error) {
-        return []; 
-      }
-    },
-  });
+  const categories = await queryClient
+    .fetchQuery({
+      queryKey: [categoryKeys.all],
+      queryFn: async () => {
+        const categories = await container.categoryService.getCategories();
+        return JSON.parse(JSON.stringify(categories));
+      },
+    })
+    .catch(() => [] as CategoryEntity[]);
 
   const prefetches = [
     ...(categories?.map((category: CategoryEntity) =>
