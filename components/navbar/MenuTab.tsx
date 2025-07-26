@@ -4,6 +4,7 @@ import { useFetchCategories } from "@/features/categories/presentation/hooks/use
 import { sendGAEvent } from "@/lib/ga";
 import { cn } from "@/lib/utils";
 import { useRouter, useSearchParams } from "next/navigation";
+import { useMemo } from "react";
 import { Badge } from "../ui/badge";
 
 type MenuItemProps = {
@@ -29,31 +30,28 @@ function MenuItem({ category, selected, onClick, className }: MenuItemProps) {
   );
 }
 
+const SHOW_ALL_CATEGORY = new CategoryEntity({ id: 0, name: "전체보기" });
 export default function MenuTab() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const selectedId = searchParams.get("category");
 
   const { data: categories } = useFetchCategories();
-  const seeAllCategory = new CategoryEntity({
-    id: 0,
-    name: "전체보기",
-  });
-  const sorted = categories
-    ? (() => {
-        // '기타' 카테고리 분리
-        const etcCategory = categories.find((c) => c.name === "기타");
-        const rest = categories.filter((c) => c.name !== "기타");
-        const sortedRest = [...rest].sort((a, b) =>
-          a.name.localeCompare(b.name, "ko"),
-        );
-        return etcCategory
-          ? [seeAllCategory, ...sortedRest, etcCategory]
-          : [seeAllCategory, ...sortedRest];
-      })()
-    : [];
+  const sorted = useMemo(() => {
+    if (!categories) return [];
 
-  const selectedCategoryId = Number(selectedId);
+    const etcCategory = categories.find((c) => c.name === "기타");
+    const rest = categories.filter((c) => c.name !== "기타");
+    const sortedRest = [...rest].sort((a, b) =>
+      a.name.localeCompare(b.name, "ko"),
+    );
+
+    return etcCategory
+      ? [SHOW_ALL_CATEGORY, ...sortedRest, etcCategory]
+      : [SHOW_ALL_CATEGORY, ...sortedRest];
+  }, [categories]); // categories가 변경될 때만 재계산
+
+  const selectedCategoryId = Number(selectedId) || 0;
 
   // 카테고리 클릭 핸들러 생성
   const createHandleCategoryClick = (id: number) => () => {
