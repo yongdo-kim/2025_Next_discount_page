@@ -1,7 +1,5 @@
-// lib/react-query.ts
 import { QueryCache, QueryClient } from "@tanstack/react-query";
 
-// 전역 QueryClient 인스턴스 생성
 export const queryClient = new QueryClient({
   queryCache: new QueryCache({
     onError: (error, query) => {
