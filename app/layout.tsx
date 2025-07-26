@@ -1,8 +1,7 @@
 import "@/assets/styles/globals.css";
 import ClarityScript from "@/components/analytics/ClarityScript";
 import GoogleAdsenseScript from "@/components/analytics/GoogleAdsenseScript";
-
-import Footer from "@/components/footer/footer";
+import Footer from "@/components/footer/Footer";
 import NavBar from "@/components/navbar/NavBar";
 import { getUserFromCookies } from "@/lib/auth/getUserFromCookies";
 import { createBaseMetadata } from "@/lib/metadata/base-metadata";
@@ -12,6 +11,11 @@ import { Providers } from "./provider";
 
 const inter = Inter({ subsets: ["latin"] });
 export const metadata = createBaseMetadata();
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+};
 export default async function RootLayout({
   children,
 }: Readonly<{
