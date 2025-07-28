@@ -1,4 +1,4 @@
-import { Badge } from "@/components/ui/badge";
+import { Badge } from "@/components/ui/Badge";
 import SmartImage from "@/components/ui/SmartImage";
 import Link from "next/link";
 import { PostPreviewEntity } from "@/features/posts/domain/entities/post-preview.entity";

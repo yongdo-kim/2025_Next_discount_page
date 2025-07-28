@@ -1,6 +1,6 @@
 "use client";
 
-import { Toaster } from "@/components/ui/sonner";
+import { Toaster } from "@/components/ui/Sonner";
 import { RefreshTokenEffect } from "@/features/auth/presentation/hooks/useRefreshToken";
 import { GOOGLE_CLIENT_ID } from "@/lib/constants";
 import { queryClient } from "@/lib/react-query";

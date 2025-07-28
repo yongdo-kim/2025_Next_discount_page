@@ -1,5 +1,5 @@
 "use client";
-import { Badge } from "@/components/ui/badge";
+import { Badge } from "@/components/ui/Badge";
 import { CategoryEntity } from "@/features/categories/domain/entities/category.entity";
 import { sendGAEvent } from "@/lib/ga";
 import { cn } from "@/lib/utils";

@@ -1,5 +1,5 @@
 "use client";
-import { Divider } from "@/components/ui/divider";
+import { Divider } from "@/components/ui/Divider";
 import CategoryDiscountArea from "@/features/categories/presentation/components/CategoryDiscountArea";
 import NewCategoryDiscountArea from "@/features/categories/presentation/components/CategoryNewArea";
 import CategoryRandomArea from "@/features/categories/presentation/components/CategoryRandomArea";

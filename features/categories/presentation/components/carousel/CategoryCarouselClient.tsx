@@ -1,6 +1,6 @@
 "use client";
 
-import Carousel from "@/components/ui/carousel";
+import Carousel from "@/components/ui/Carousel";
 import { useCategoryPostPreviews } from "@/features/posts/presentation/hooks/use-posts";
 import "swiper/css";
 import "swiper/css/pagination";

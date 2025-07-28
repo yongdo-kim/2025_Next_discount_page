@@ -1,5 +1,5 @@
 import { FiSearch } from "react-icons/fi";
-import { Input } from "./input";
+import { Input } from "./Input";
 export default function SearchBar() {
   return (
     <div className="m-4 p-4">
