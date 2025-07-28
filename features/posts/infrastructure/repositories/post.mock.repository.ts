@@ -1,19 +1,94 @@
-import { TagEntity } from "@/features/tags/domain/entities/tag.entity";
-import { UserEntity } from "@/features/users/domain/entities/user.entity";
 import { PostPreviewEntity } from "@/features/posts/domain/entities/post-preview.entity";
 import { PostEntity } from "@/features/posts/domain/entities/post.entity";
 import { PostRepository } from "@/features/posts/domain/repositories/post.repository";
 import { PostPreviewsReqDto } from "@/features/posts/infrastructure/dto/requests/post-preview.req.dto";
+import { TagEntity } from "@/features/tags/domain/entities/tag.entity";
+import { UserEntity } from "@/features/users/domain/entities/user.entity";
 
 export class MockPostRepository implements PostRepository {
   private mockPosts: PostEntity[] = [];
   private mockPostPreviews: PostPreviewEntity[] = [];
+  private mockCategoryPostPreviews: PostPreviewEntity[] = [];
 
   constructor() {
-    this.mockPosts.push(...this.generateMockPosts(100));
+    this.mockPosts.push(...this.generateMockPosts(10));
+    this.mockPostPreviews.push(...this.generateMockPostPreviews(500));
+    this.mockCategoryPostPreviews.push(...this.generateMockCategoryPostPreviews(100));
   }
   getCategoryPostPreviews(): Promise<PostPreviewEntity[]> {
-    return Promise.resolve([]);
+    // 카테고리별 특별 프로모션 포스트들 (배너용)
+    const bannerPosts = this.mockCategoryPostPreviews;
+    return Promise.resolve(bannerPosts);
+  }
+  private generateMockCategoryPostPreviews(count: number): PostPreviewEntity[] {
+    const categories = [
+      { id: 1, name: "전자제품" },
+      { id: 2, name: "의류" },
+      { id: 3, name: "음식" },
+      { id: 4, name: "도서" },
+      { id: 5, name: "생활용품" },
+    ];
+
+    const bannerTitles = [
+      "🔥 한정 특가! 삼성 갤럭시 최대 할인",
+      "⚡ 오늘만! 나이키 운동화 반값 세일",
+      "⭐ 스타벅스 원두 할인 + 무료배송",
+      "💎 다이슨 청소기 역대급 특가",
+      "🎯 애플 아이폰 최저가 보장",
+      "🛍️ 유니클로 전 상품 30% 할인",
+      "📚 교보문고 베스트셀러 50% 세일",
+      "🏠 생활용품 대전 최대 70% 할인",
+      "⌚ 갤럭시 워치 런칭 기념 특가",
+      "👟 아디다스 신발 컬렉션 할인",
+    ];
+
+    const result: PostPreviewEntity[] = [];
+    
+    for (let i = 0; i < count; i++) {
+      const category = categories[Math.floor(Math.random() * categories.length)];
+      const title = bannerTitles[Math.floor(Math.random() * bannerTitles.length)] + ` #${i + 1}`;
+      
+      const now = new Date();
+      const randomPast = new Date(
+        now.getTime() - Math.random() * 24 * 60 * 60 * 1000, // 최근 24시간
+      );
+
+      result.push(
+        new PostPreviewEntity({
+          id: 10000 + i,
+          title,
+          content: `${title}에 대한 상세 할인 정보입니다. 놓치면 후회하는 특가!`,
+          author: new UserEntity({
+            id: 1,
+            nickname: "할인탐정",
+            name: "할인탐정",
+            picture: "https://randomuser.me/api/portraits/men/1.jpg",
+            provider: "local",
+            role: "user",
+            email: "",
+          }),
+          commentsCount: Math.floor(Math.random() * 200) + 50, // 50-250 댓글
+          createdAt: randomPast.toISOString(),
+          updatedAt: randomPast.toISOString(),
+          deletedAt: null,
+          viewsCount: Math.floor(Math.random() * 5000) + 1000, // 1000-6000 조회수
+          thumbnailUrl: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=400",
+          likesCount: Math.floor(Math.random() * 300) + 100, // 100-400 좋아요
+          isLikedByMe: false,
+          isMine: false,
+          isReportedByMe: false,
+          isBlurredByAI: false,
+          isBlockedByMe: false,
+          tags: [],
+          category: {
+            id: category.id,
+            name: category.name,
+          },
+        }),
+      );
+    }
+
+    return result;
   }
 
   private generateMockPosts(count: number): PostEntity[] {
@@ -146,18 +221,106 @@ export class MockPostRepository implements PostRepository {
     return result;
   }
 
+  private generateMockPostPreviews(count: number): PostPreviewEntity[] {
+    const categories = [
+      { id: 1, name: "전자제품" },
+      { id: 2, name: "의류" },
+      { id: 3, name: "음식" },
+      { id: 4, name: "도서" },
+      { id: 5, name: "생활용품" },
+    ];
+
+    const titles = [
+      "삼성 갤럭시 최대 30% 할인",
+      "나이키 운동화 특가 세일",
+      "스타벅스 원두 반값 할인",
+      "베스트셀러 도서 50% 할인",
+      "다이슨 청소기 특가 이벤트",
+      "애플 아이폰 할인 혜택",
+      "아디다스 의류 세일",
+      "교보문고 도서 할인전",
+    ];
+
+    const users = [
+      new UserEntity({
+        id: 1,
+        nickname: "할인탐정",
+        name: "할인탐정",
+        picture: "https://randomuser.me/api/portraits/men/1.jpg",
+        provider: "local",
+        role: "user",
+        email: "",
+      }),
+    ];
+
+    const result: PostPreviewEntity[] = [];
+    for (let i = 0; i < count; i++) {
+      const category =
+        categories[Math.floor(Math.random() * categories.length)];
+      const title =
+        titles[Math.floor(Math.random() * titles.length)] + ` #${i + 1}`;
+      const user = users[0];
+
+      const now = new Date();
+      const randomPast = new Date(
+        now.getTime() - Math.random() * 30 * 24 * 60 * 60 * 1000, // 최근 30일
+      );
+
+      result.push(
+        new PostPreviewEntity({
+          id: i + 1,
+          title,
+          content: `${title}에 대한 상세 내용입니다.`,
+          author: user,
+          commentsCount: Math.floor(Math.random() * 20),
+          createdAt: randomPast.toISOString(),
+          updatedAt: randomPast.toISOString(),
+          deletedAt: null,
+          viewsCount: Math.floor(Math.random() * 1000),
+          thumbnailUrl: `https://upload.wikimedia.org/wikipedia/ko/thumb/e/eb/%ED%8F%AC%EC%BC%93%EB%AA%AC%EC%8A%A4%ED%84%B0_%EB%A0%88%EB%93%9C%C2%B7%EA%B7%B8%EB%A6%B0%EC%9D%98_%ED%99%8D%EB%B3%B4_%EC%9E%91%ED%92%88%EC%97%90_%EB%AC%98%EC%82%AC_%EB%90%9C_%ED%94%BC%EC%B9%B4%EC%B8%84.png/250px-%ED%8F%AC%EC%BC%93%EB%AA%AC%EC%8A%A4%ED%84%B0_%EB%A0%88%EB%93%9C%C2%B7%EA%B7%B8%EB%A6%B0%EC%9D%98_%ED%99%8D%EB%B3%B4_%EC%9E%91%ED%92%88%EC%97%90_%EB%AC%98%EC%82%AC_%EB%90%9C_%ED%94%BC%EC%B9%B4%EC%B8%84.png`,
+          likesCount: Math.floor(Math.random() * 50),
+          isLikedByMe: false,
+          isMine: false,
+          isReportedByMe: false,
+          isBlurredByAI: false,
+          isBlockedByMe: false,
+          tags: [],
+          category: {
+            id: category.id,
+            name: category.name,
+          },
+        }),
+      );
+    }
+    return result;
+  }
+
   async getPostPreviews({
     req,
   }: {
     req: PostPreviewsReqDto;
   }): Promise<PostPreviewEntity[]> {
-    // 간단한 검색 기능 구현 (선택사항)
+    let result = this.mockPostPreviews;
+    
+    // 카테고리 필터링
     if (req.categoryId) {
-      return this.mockPostPreviews.filter(
-        (post) => post.category.id === req.categoryId,
-      );
+      result = result.filter((post) => post.category.id === req.categoryId);
     }
-    return this.mockPostPreviews;
+    
+    // ID 기준 내림차순 정렬 (최신순)
+    result = result.sort((a, b) => b.id - a.id);
+    
+    // 커서 기반 페이지네이션
+    if (req.cursor) {
+      // cursor보다 작은 ID만 가져오기 (다음 페이지)
+      result = result.filter((post) => post.id < req.cursor!);
+    }
+    
+    // limit 적용
+    const limit = req.limit || result.length;
+    result = result.slice(0, limit);
+    
+    return result;
   }
 
   async getPostDetail(id: number): Promise<PostEntity> {

@@ -1,14 +1,13 @@
 "use client";
 
 import { categoryKeys } from "@/features/categories/infrastructure/contstant/query-keys";
-import { container } from "@/lib/di/dependencies";
-import { useQuery } from "@tanstack/react-query";
 import { PostPreviewEntity } from "@/features/posts/domain/entities/post-preview.entity";
 import { PostEntity } from "@/features/posts/domain/entities/post.entity";
 import { postKeys } from "@/features/posts/infrastructure/contstant/query-keys";
 import { PostPreviewsReqDto } from "@/features/posts/infrastructure/dto/requests/post-preview.req.dto";
+import { container } from "@/lib/di/dependencies";
+import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 
-//카테코리에 엮여서 전달한다고 판단.
 export const usePostPreviews = ({
   req,
   enabled,
@@ -17,13 +16,13 @@ export const usePostPreviews = ({
   enabled?: boolean;
 }) => {
   return useQuery<PostPreviewEntity[]>({
-    queryKey: [categoryKeys.detail(req.categoryId, req.limit)],
+    queryKey: [categoryKeys.postPreviews(req.categoryId, req.limit)],
     queryFn: () => {
       return container.postService.getPostPreviews({
         req,
       });
     },
-    throwOnError: true, //에러바운더리에 연락
+
     enabled,
   });
 };
@@ -41,7 +40,6 @@ export const usePostDetail = ({
       return container.postService.getPostDetail(id);
     },
     initialData: initialPost,
-    throwOnError: true, //에러바운더리에 연락
   });
 };
 
@@ -49,6 +47,32 @@ export const useCategoryPostPreviews = () => {
   return useQuery<PostPreviewEntity[]>({
     queryKey: [categoryKeys.banners],
     queryFn: () => container.postService.getCategoryPostPreviews(),
-    throwOnError: true, //에러바운더리에 연락
+  });
+};
+
+export const useInfinitePostPreviews = ({
+  categoryId,
+  limit = 10,
+}: {
+  categoryId?: number | null;
+  limit?: number;
+}) => {
+  return useInfiniteQuery({
+    queryKey: [categoryKeys.infinite, categoryId, limit],
+    queryFn: ({ pageParam }) =>
+      container.postService.getPostPreviews({
+        req: {
+          categoryId: categoryId || null,
+          limit,
+          cursor: pageParam, // 첫 페이지는 undefined, 다음 페이지부터는 마지막 아이템의 ID
+        },
+      }),
+    initialPageParam: undefined as number | undefined,
+    getNextPageParam: (lastPage) => {
+      // 마지막 페이지 데이터가 limit보다 적으면 더 이상 데이터가 없음
+      if (lastPage.length < limit) return undefined;
+      // 마지막 아이템의 ID를 다음 페이지의 커서로 사용
+      return lastPage[lastPage.length - 1]?.id;
+    },
   });
 };

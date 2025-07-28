@@ -17,6 +17,7 @@ export const postApi = {
     const params = new URLSearchParams();
     if (req.categoryId) params.append("categoryId", req.categoryId.toString());
     if (req.limit) params.append("limit", req.limit.toString());
+    if (req.cursor) params.append("cursor", req.cursor.toString());
 
     const query = params.toString() ? `?${params.toString()}` : "";
     const response = await apiClient.get<PostPreviewsResponse>({

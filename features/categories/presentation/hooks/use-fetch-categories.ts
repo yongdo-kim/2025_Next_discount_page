@@ -9,6 +9,5 @@ export const useFetchCategories = () => {
   return useQuery<CategoryEntity[]>({
     queryKey: [categoryKeys.all],
     queryFn: () => container.categoryService.getCategories(),
-    throwOnError: true, //에러바운더리에 연락
   });
 };

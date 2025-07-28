@@ -9,6 +9,5 @@ export const useFetchTags = () => {
   return useQuery<TagEntity[]>({
     queryKey: [tagKeys.all],
     queryFn: () => container.tagService.getTags(),
-    throwOnError: true, //에러바운더리에 연락
   });
 };

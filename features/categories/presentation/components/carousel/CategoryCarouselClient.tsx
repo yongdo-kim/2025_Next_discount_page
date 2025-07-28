@@ -11,7 +11,7 @@ export default function CategoryCarouselClient() {
   if (!posts) return null;
 
   return (
-    <div className="container mx-auto px-4 pb-8 md:px-4 lg:px-16">
+    <div className="container mx-auto pb-8">
       <Carousel data={posts.filter((result) => result !== null)} />
     </div>
   );
