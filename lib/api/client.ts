@@ -2,7 +2,7 @@ import type { ApiError } from "@/features/common/types/api-error";
 
 import { API_ERROR_CODES } from "@/features/common/constants/api-error-codes";
 import { API_BASE_URL } from "@/lib/constants";
-import * as Sentry from "@sentry/nextjs";
+import { captureException } from "@sentry/nextjs";
 //헤더
 const defaultHeaders = {
   "Content-Type": "application/json",
@@ -113,7 +113,7 @@ async function request<T>(
         // 토큰 갱신 성공 시 원래 요청을 한 번만 재시도
         return request(method, url, { query, body, options }, false);
       } catch (e) {
-        Sentry.captureException(e);
+        captureException(e);
         throw e;
       }
     }

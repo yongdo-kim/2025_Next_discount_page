@@ -1,5 +1,5 @@
 "use client";
-import * as Sentry from "@sentry/nextjs";
+import { captureException } from "@sentry/nextjs";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 
@@ -35,7 +35,7 @@ export default function ContactPage() {
         setResult(resData.error || "전송에 실패했습니다. 다시 시도해주세요.");
       }
     } catch (error) {
-      Sentry.captureException(error);
+      captureException(error);
       setResult("전송 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.");
     }
   };

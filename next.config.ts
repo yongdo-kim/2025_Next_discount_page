@@ -36,6 +36,14 @@ const nextConfig: NextConfig = {
       "directg.net",
     ],
   },
+  modularizeImports: {
+    "lucide-react": {
+      transform: "lucide-react/dist/esm/icons/{{kebabCase member}}",
+    },
+  },
+  experimental: {
+    optimizePackageImports: ["lucide-react"],
+  },
 };
 
 // TypeScript 환경에서 export default 유지
