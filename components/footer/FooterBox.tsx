@@ -2,7 +2,7 @@
 import { ROUTES } from "@/lib/routes";
 import Link from "next/link";
 
-export default function Footer() {
+export default function FooterBox() {
   const currentYear = new Date().getFullYear();
 
   return (
