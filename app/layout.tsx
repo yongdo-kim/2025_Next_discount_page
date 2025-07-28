@@ -1,13 +1,13 @@
 import "@/assets/styles/globals.css";
 import ClarityScript from "@/components/analytics/ClarityScript";
 import GoogleAdsenseScript from "@/components/analytics/GoogleAdsenseScript";
-import Footer from "@/components/footer/Footer";
 import NavBar from "@/components/navbar/NavBar";
 import { getUserFromCookies } from "@/lib/auth/getUserFromCookies";
 import { createBaseMetadata } from "@/lib/metadata/base-metadata";
 import { Inter } from "next/font/google";
 import { Toaster } from "sonner";
 import { Providers } from "./provider";
+import Footer from "@/components/footer/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 export const metadata = createBaseMetadata();
