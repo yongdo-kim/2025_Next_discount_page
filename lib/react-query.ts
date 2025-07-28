@@ -1,4 +1,5 @@
 import { QueryCache, QueryClient } from "@tanstack/react-query";
+import { toast } from "sonner";
 
 export const queryClient = new QueryClient({
   queryCache: new QueryCache({
@@ -8,7 +9,6 @@ export const queryClient = new QueryClient({
 
       // 클라이언트에서만 toast 표시
       if (typeof window !== "undefined") {
-        const { toast } = require("sonner");
         toast.error(error.message || "알 수 없는 오류가 발생했습니다.");
       }
     },
