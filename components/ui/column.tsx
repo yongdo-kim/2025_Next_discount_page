@@ -1,4 +1,5 @@
 import React from "react";
+import { cn } from "@/lib/utils";
 
 export const Column = ({
   children,
@@ -11,7 +12,7 @@ export const Column = ({
   //children의 컨텐츠 만큼 차지하려면 inline-flex
 
   return (
-    <div className={`flex flex-col ${className}`} {...rest}>
+    <div className={cn("flex flex-col", className)} {...rest}>
       {children}
     </div>
   );

@@ -1,4 +1,5 @@
 import { CategoryIcon } from "@/components/CategoryIcon";
+import { cn } from "@/lib/utils";
 
 export default function MainTitle({
   title,
@@ -15,7 +16,7 @@ export default function MainTitle({
 }) {
   return (
     <div
-      className={`flex items-center pb-2 text-xl font-bold md:text-2xl lg:text-3xl ${className ?? ""}`}
+      className={cn("flex items-center pb-2 text-xl font-bold md:text-2xl lg:text-3xl", className)}
     >
       {/* 아이콘 (showIcon이 true일 때만) */}
       {showIcon && (
@@ -24,7 +25,7 @@ export default function MainTitle({
         </span>
       )}
       <div>{title}</div>
-      <div className={`px-2 ${color}`}> {coloredTitle}</div>
+      <div className={cn("px-2", color)}> {coloredTitle}</div>
     </div>
   );
 }

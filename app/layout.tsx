@@ -4,6 +4,7 @@ import GoogleAdsenseScript from "@/components/analytics/GoogleAdsenseScript";
 import NavBar from "@/components/navbar/NavBar";
 import { getUserFromCookies } from "@/lib/auth/getUserFromCookies";
 import { createBaseMetadata } from "@/lib/metadata/base-metadata";
+import { cn } from "@/lib/utils";
 import { Inter } from "next/font/google";
 import { Toaster } from "sonner";
 import { Providers } from "./provider";
@@ -30,7 +31,7 @@ export default async function RootLayout({
         <GoogleAdsenseScript />
       </head>
       <body
-        className={`${inter.className} flex min-h-screen flex-col bg-white antialiased dark:bg-neutral-900`}
+        className={cn(inter.className, "flex min-h-screen flex-col bg-white antialiased dark:bg-neutral-900")}
       >
         {/* 기능적인 측면 */}
         <ClarityScript />

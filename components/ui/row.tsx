@@ -1,4 +1,5 @@
 import React from "react";
+import { cn } from "@/lib/utils";
 export const Row = ({
   children,
   className,
@@ -8,7 +9,7 @@ export const Row = ({
   className?: string;
 } & React.ButtonHTMLAttributes<HTMLDivElement>) => {
   return (
-    <div className={`flex flex-row ${className} `} {...rest}>
+    <div className={cn("flex flex-row", className)} {...rest}>
       {children}
     </div>
   );
