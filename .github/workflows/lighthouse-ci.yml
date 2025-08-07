@@ -9,7 +9,7 @@ on:
 jobs:
   lighthouse:
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -26,12 +26,16 @@ jobs:
       - name: Build project
         run: npm run build
         
-      - name: Run Lighthouse CI
-        run: |
-          npm run lighthouse:ci
-          if [ $? -ne 0 ]; then
-            echo "❌ Lighthouse CI failed - Performance standards not met"
-            exit 1
-          fi
+      - name: Start server
+        run: npm run prod &
         env:
-          LHCI_GITHUB_APP_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_ENV: production
+
+      - name: Wait for server to be ready
+        run: npx wait-on http://localhost:3000
+
+      - name: Run Lighthouse collect
+        run: npx lhci collect
+
+      - name: Run Lighthouse assert
+        run: npx lhci assert
