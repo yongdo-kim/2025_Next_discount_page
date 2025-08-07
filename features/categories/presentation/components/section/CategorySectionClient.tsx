@@ -1,5 +1,5 @@
 "use client";
-import { Divider } from "@/components/ui/divider";
+import { Divider } from "@/components/ui/Divider";
 import CategoryDiscountArea from "@/features/categories/presentation/components/CategoryDiscountArea";
 import NewCategoryDiscountArea from "@/features/categories/presentation/components/CategoryNewArea";
 import CategoryRandomArea from "@/features/categories/presentation/components/CategoryRandomArea";
@@ -16,13 +16,12 @@ export default function CategorySectionClient() {
     (category) => category.id === Number(selectedId),
   );
 
-
   return (
     <section className="mx-auto max-w-screen-lg flex-1">
       <>
         {selectedId ? (
           // 선택된 카테고리만 보여주는 UI
-          <PostListArea 
+          <PostListArea
             categoryId={selectedCategory?.id || null}
             categoryName={selectedCategory?.name}
           />

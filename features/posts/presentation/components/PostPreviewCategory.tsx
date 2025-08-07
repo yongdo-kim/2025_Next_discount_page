@@ -1,9 +1,9 @@
 "use client";
 
 import MainTitle from "@/components/MainTitle";
-import { Divider } from "@/components/ui/divider";
-import { usePostPreviews } from "@/features/posts/presentation/hooks/use-posts";
+import { Divider } from "@/components/ui/Divider";
 import PostCardLarge from "@/features/posts/presentation/components/PostCardLarge";
+import { usePostPreviews } from "@/features/posts/presentation/hooks/use-posts";
 
 export default function PostPreviewCategoryArea({
   categoryId,
