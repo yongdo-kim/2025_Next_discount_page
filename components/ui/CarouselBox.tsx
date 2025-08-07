@@ -14,7 +14,7 @@ type CarouselProps = {
   id: number;
 }[];
 
-export default function Carousel({ data }: { data: CarouselProps }) {
+export default function CarouselBox({ data }: { data: CarouselProps }) {
   return (
     <Swiper
       modules={[Autoplay, Pagination]}

@@ -1,7 +1,7 @@
 "use client";
 
 import MainTitle from "@/components/MainTitle";
-import { Divider } from "@/components/ui/Divider";
+import DividerLine from "@/components/ui/DividerLine";
 import PostCardLarge from "@/features/posts/presentation/components/PostCardLarge";
 import { usePostPreviews } from "@/features/posts/presentation/hooks/use-posts";
 
@@ -33,7 +33,7 @@ export default function PostPreviewCategoryArea({
           </li>
         ))}
       </ul>
-      <Divider className="mt-8 mb-8" />
+      <DividerLine className="mt-8 mb-8" />
     </>
   );
 }

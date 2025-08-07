@@ -1,5 +1,5 @@
 "use client";
-import { Divider } from "@/components/ui/Divider";
+import DividerLine from "@/components/ui/DividerLine";
 import CategoryDiscountArea from "@/features/categories/presentation/components/CategoryDiscountArea";
 import NewCategoryDiscountArea from "@/features/categories/presentation/components/CategoryNewArea";
 import CategoryRandomArea from "@/features/categories/presentation/components/CategoryRandomArea";
@@ -29,9 +29,9 @@ export default function CategorySectionClient() {
           // 전체 UI
           <>
             <NewCategoryDiscountArea />
-            <Divider />
+            <DividerLine />
             <CategoryRandomArea />
-            <Divider />
+            <DividerLine />
             <CategoryDiscountArea />
           </>
         )}

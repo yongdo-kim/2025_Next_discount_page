@@ -1,9 +1,9 @@
 import { cn } from "@/lib/utils";
 
-type DividerProps = {
+type DividerLineProps = {
   className?: string;
 };
 
-export const Divider = ({ className }: DividerProps) => {
+export default function DividerLine({ className }: DividerLineProps) {
   return <div className={cn("mx-4 h-px bg-neutral-700", className)}></div>;
-};
+}
