@@ -1,24 +1,28 @@
-import { categoryKeys } from "@/features/categories/infrastructure/contstant/query-keys";
 import CategoryCarousel from "@/features/categories/presentation/components/carousel/CategoryCarouselClient";
+import { PostPreviewEntity } from "@/features/posts/domain/entities/post-preview.entity";
 import { container } from "@/lib/di/dependencies";
-import { queryClient } from "@/lib/react-query";
-import { HydrationBoundary, dehydrate } from "@tanstack/react-query";
+import { unstable_cache } from "next/cache";
+
+
+const getCachedCategoryPosts = unstable_cache(
+  async (): Promise<PostPreviewEntity[]> => {
+    try {
+      const posts = await container.postService.getCategoryPostPreviews();
+      return JSON.parse(JSON.stringify(posts));
+    } catch (error) {
+      console.error('Failed to fetch category posts:', error);
+      return [];
+    }
+  },
+  ['category-carousel-posts'],
+  {
+    revalidate: 3600, // 1시간마다 재검증
+    tags: ['posts', 'carousel']
+  }
+);
 
 export default async function CategoryCarouselServer() {
-  // 카테고리 포스트 프리뷰 데이터 프리페치
-  await queryClient
-    .fetchQuery({
-      queryKey: [categoryKeys.banners],
-      queryFn: async () => {
-        const posts = await container.postService.getCategoryPostPreviews();
-        return JSON.parse(JSON.stringify(posts));
-      },
-    })
-    .catch(() => []);
+  const posts = await getCachedCategoryPosts();
 
-  return (
-    <HydrationBoundary state={dehydrate(queryClient)}>
-      <CategoryCarousel />
-    </HydrationBoundary>
-  );
+  return <CategoryCarousel posts={posts} />;
 }

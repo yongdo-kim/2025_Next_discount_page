@@ -10,7 +10,6 @@ import { ThemeProvider } from "next-themes";
 import dynamic from "next/dynamic";
 import ClarityScript from "@/components/analytics/ClarityScript";
 
-
 const ReactQueryDevtools = dynamic(
   () => import("@tanstack/react-query-devtools").then((mod) => ({
     default: mod.ReactQueryDevtools,

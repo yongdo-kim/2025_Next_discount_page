@@ -1,25 +1,29 @@
 import MenuTabClient from "@/components/navbar/menuTab/MenuTabClient";
 import { CategoryEntity } from "@/features/categories/domain/entities/category.entity";
-import { categoryKeys } from "@/features/categories/infrastructure/contstant/query-keys";
 import { container } from "@/lib/di/dependencies";
-import { queryClient } from "@/lib/react-query";
-import { HydrationBoundary, dehydrate } from "@tanstack/react-query";
+import { unstable_cache } from "next/cache";
+
+// ISR을 위한 캐시된 카테고리 데이터 함수
+const getCachedCategories = unstable_cache(
+  async (): Promise<CategoryEntity[]> => {
+    try {
+      const categories = await container.categoryService.getCategories();
+      return JSON.parse(JSON.stringify(categories));
+    } catch (error) {
+      console.error('Failed to fetch categories:', error);
+      return [];
+    }
+  },
+  ['menu-tab-categories'],
+  {
+    revalidate: 3600, // 1시간마다 재검증
+    tags: ['categories']
+  }
+);
 
 export default async function MenuTabServer() {
-  // 카테고리 데이터 프리페치
-  const categories = await queryClient
-    .fetchQuery({
-      queryKey: [categoryKeys.all],
-      queryFn: async () => {
-        const categories = await container.categoryService.getCategories();
-        return JSON.parse(JSON.stringify(categories));
-      },
-    })
-    .catch(() => [] as CategoryEntity[]);
+  // ISR로 캐시된 카테고리 데이터 가져오기
+  const categories = await getCachedCategories();
 
-  return (
-    <HydrationBoundary state={dehydrate(queryClient)}>
-      <MenuTabClient categories={categories} />
-    </HydrationBoundary>
-  );
+  return <MenuTabClient categories={categories} />;
 }
