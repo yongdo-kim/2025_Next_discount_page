@@ -2,71 +2,99 @@
   {
     "name": "minScore",
     "expected": 0.8,
-    "actual": 0.79,
+    "actual": 0.5,
     "values": [
-      0.79
+      0.5
     ],
     "operator": ">=",
     "passed": false,
     "auditProperty": "performance",
     "auditId": "categories",
-    "level": "warn",
-    "url": "http://localhost:3000/"
+    "level": "error",
+    "url": "https://discount.kingnaristudio.store/"
   },
   {
     "name": "minScore",
     "expected": 0.8,
-    "actual": 0.71,
+    "actual": 0.57,
     "values": [
-      0.71
+      0.57
     ],
     "operator": ">=",
     "passed": false,
     "auditProperty": "best-practices",
     "auditId": "categories",
-    "level": "warn",
-    "url": "http://localhost:3000/"
+    "level": "error",
+    "url": "https://discount.kingnaristudio.store/"
+  },
+  {
+    "name": "minScore",
+    "expected": 0.9,
+    "actual": 0.89,
+    "values": [
+      0.89
+    ],
+    "operator": ">=",
+    "passed": false,
+    "auditProperty": "accessibility",
+    "auditId": "categories",
+    "level": "error",
+    "url": "https://discount.kingnaristudio.store/contact"
   },
   {
     "name": "minScore",
     "expected": 0.8,
-    "actual": 0.71,
+    "actual": 0.75,
     "values": [
-      0.71
+      0.75
     ],
     "operator": ">=",
     "passed": false,
     "auditProperty": "best-practices",
     "auditId": "categories",
-    "level": "warn",
-    "url": "http://localhost:3000/contact"
+    "level": "error",
+    "url": "https://discount.kingnaristudio.store/contact"
   },
   {
     "name": "minScore",
     "expected": 0.8,
-    "actual": 0.71,
+    "actual": 0.75,
     "values": [
-      0.71
+      0.75
     ],
     "operator": ">=",
     "passed": false,
     "auditProperty": "best-practices",
     "auditId": "categories",
-    "level": "warn",
-    "url": "http://localhost:3000/my-page"
+    "level": "error",
+    "url": "https://discount.kingnaristudio.store/my-page"
   },
   {
     "name": "minScore",
     "expected": 0.8,
-    "actual": 0.71,
+    "actual": 0.69,
     "values": [
-      0.71
+      0.69
+    ],
+    "operator": ">=",
+    "passed": false,
+    "auditProperty": "performance",
+    "auditId": "categories",
+    "level": "error",
+    "url": "https://discount.kingnaristudio.store/auth/sign-in"
+  },
+  {
+    "name": "minScore",
+    "expected": 0.8,
+    "actual": 0.75,
+    "values": [
+      0.75
     ],
     "operator": ">=",
     "passed": false,
     "auditProperty": "best-practices",
     "auditId": "categories",
-    "level": "warn",
-    "url": "http://localhost:3000/auth/sign-in"
+    "level": "error",
+    "url": "https://discount.kingnaristudio.store/auth/sign-in"
   }
 ]

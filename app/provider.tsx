@@ -8,6 +8,7 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { ThemeProvider } from "next-themes";
 import dynamic from "next/dynamic";
+import ClarityScript from "@/components/analytics/ClarityScript";
 
 
 const ReactQueryDevtools = dynamic(
@@ -29,7 +30,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
           disableTransitionOnChange
         >
           {children}
-
+          <ClarityScript />
           {process.env.NODE_ENV === "development" && <ReactQueryDevtools />}
         </ThemeProvider>
         <Toaster />

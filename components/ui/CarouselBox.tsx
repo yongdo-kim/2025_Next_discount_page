@@ -15,6 +15,7 @@ type CarouselProps = {
 }[];
 
 export default function CarouselBox({ data }: { data: CarouselProps }) {
+  
   return (
     <Swiper
       modules={[Autoplay, Pagination]}
@@ -28,7 +29,7 @@ export default function CarouselBox({ data }: { data: CarouselProps }) {
       slidesPerView={1}
       loop={true}
     >
-      {data.map((item) => (
+      {data.map((item, index) => (
         <SwiperSlide
           className="cursor-pointer overflow-hidden"
           key={item.title}
@@ -41,7 +42,7 @@ export default function CarouselBox({ data }: { data: CarouselProps }) {
                 alt={item.title}
                 width={600}
                 height={400}
-                loading="eager"
+                priority={index === 0}
               />
               <div className="absolute inset-0" />
               <div className="absolute right-0 bottom-0.5 p-6 text-white">

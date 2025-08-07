@@ -44,12 +44,13 @@ function isAllowedDomain(url: string) {
 interface SmartImageProps
   extends Omit<
     React.ImgHTMLAttributes<HTMLImageElement>,
-    "src" | "width" | "height"
+    "src" | "width" | "height" | "loading"
   > {
   src: string;
   width: number;
   height: number;
   alt: string; // alt는 필수로 강제
+  priority?: boolean;
   imageProps?: Omit<ImageProps, "src" | "width" | "height" | "alt">;
 }
 
@@ -58,6 +59,7 @@ const SmartImage: React.FC<SmartImageProps> = ({
   width,
   height,
   alt,
+  priority = false,
   imageProps,
   ...rest
 }) => {
@@ -68,12 +70,22 @@ const SmartImage: React.FC<SmartImageProps> = ({
         width={width}
         height={height}
         alt={alt}
+        priority={priority}
         {...imageProps}
         {...rest}
       />
     );
   }
-  return <img src={src} width={width} height={height} alt={alt} {...rest} />;
+  return (
+    <img 
+      src={src} 
+      width={width} 
+      height={height} 
+      alt={alt} 
+      loading={priority ? "eager" : "lazy"}
+      {...rest} 
+    />
+  );
 };
 
 export default SmartImage;
