@@ -2,10 +2,10 @@ module.exports = {
   ci: {
     collect: {
       url: [
-        'http://localhost:3000',
-        'http://localhost:3000/contact',
-        'http://localhost:3000/my-page',
-        'http://localhost:3000/auth/sign-in'
+        'https://discount.kingnaristudio.store',
+        'https://discount.kingnaristudio.store/contact',
+        'https://discount.kingnaristudio.store/my-page',
+        'https://discount.kingnaristudio.store/auth/sign-in'
       ],
       startServerCommand: 'npm run build && npm run prod', //프로덕션 성능 측정.
       startServerReadyPattern: 'Ready on',
