@@ -1,6 +1,6 @@
 "use client";
 import MainTitle from "@/components/MainTitle";
-import { Badge } from "@/components/ui/badge";
+import { Badge } from "@/components/shadcn/badge";
 import SmartImage from "@/components/ui/SmartImage";
 import { PostEntity } from "@/features/posts/domain/entities/post.entity";
 import { TagEntity } from "@/features/tags/domain/entities/tag.entity";

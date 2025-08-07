@@ -1,10 +1,10 @@
-import { Badge } from "@/components/ui/badge";
+import { Badge } from "@/components/shadcn/badge";
 import {
   Card,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/Card";
+} from "@/components/shadcn/card";
 import SmartImage from "@/components/ui/SmartImage";
 import { PostPreviewEntity } from "@/features/posts/domain/entities/post-preview.entity";
 import { postKeys } from "@/features/posts/infrastructure/contstant/query-keys";

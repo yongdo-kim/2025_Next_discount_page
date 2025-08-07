@@ -1,6 +1,6 @@
 "use client";
 
-import { Badge } from "@/components/ui/badge";
+import { Badge } from "@/components/shadcn/badge";
 import SmartImage from "@/components/ui/SmartImage";
 import Link from "next/link";
 import "swiper/css";

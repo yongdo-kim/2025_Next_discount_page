@@ -1,7 +1,7 @@
 "use client";
 
 import MainTitle from "@/components/MainTitle";
-import { Divider } from "@/components/ui/Divider";
+import { Divider } from "@/components/ui/divider";
 import { usePostPreviews } from "@/features/posts/presentation/hooks/use-posts";
 import PostCardLarge from "@/features/posts/presentation/components/PostCardLarge";
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/shadcn/button";
 import { useLogout } from "@/features/auth/presentation/hooks/useLogout";
 
 export default function LogoutButton() {

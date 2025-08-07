@@ -1,15 +1,15 @@
 "use client";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/Avatar";
-import { Button } from "@/components/ui/button";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/shadcn/avatar";
+import { Button } from "@/components/shadcn/button";
 import {
   Card,
   CardContent,
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/Card";
-import { Input } from "@/components/ui/Input";
-import { Label } from "@/components/ui/Label";
+} from "@/components/shadcn/card";
+import { Input } from "@/components/shadcn/input";
+import { Label } from "@/components/shadcn/label";
 import { useMe } from "@/features/users/presentation/hooks/useMe";
 import { useUpdateMe } from "@/features/users/presentation/hooks/useUpdateMe";
 import { useEffect, useRef, useState } from "react";

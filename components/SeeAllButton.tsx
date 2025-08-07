@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 import Link from "next/link";
-import { Button } from "./ui/button";
+import { Button } from "./shadcn/button";
 
 interface SeeAllButtonProps {
   href: string;

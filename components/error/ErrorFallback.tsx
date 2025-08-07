@@ -1,6 +1,6 @@
 // components/error-boundary/ErrorFallback.tsx
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/Alert";
-import { Button } from "@/components/ui/button";
+import { Alert, AlertDescription, AlertTitle } from "@/components/shadcn/alert";
+import { Button } from "@/components/shadcn/button";
 import { AlertCircle, RefreshCw } from "lucide-react";
 
 interface ErrorFallbackProps {
