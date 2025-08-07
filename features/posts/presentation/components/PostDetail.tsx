@@ -1,7 +1,8 @@
 "use client";
 import MainTitle from "@/components/MainTitle";
-import { Badge } from "@/components/ui/Badge";
+import { Badge } from "@/components/ui/badge";
 import SmartImage from "@/components/ui/SmartImage";
+import { PostEntity } from "@/features/posts/domain/entities/post.entity";
 import { TagEntity } from "@/features/tags/domain/entities/tag.entity";
 import { UserEntity } from "@/features/users/domain/entities/user.entity";
 import { sendGAEvent } from "@/lib/ga";
@@ -11,7 +12,6 @@ import parse from "html-react-parser";
 import Image from "next/image";
 import { useEffect } from "react";
 import { toast } from "sonner";
-import { PostEntity } from "@/features/posts/domain/entities/post.entity";
 import { usePostDetail } from "../hooks/use-posts";
 
 export const PostDetail = ({

@@ -1,20 +1,20 @@
-import { Badge } from "@/components/ui/Badge";
+import { Badge } from "@/components/ui/badge";
 import {
   Card,
   CardDescription,
   CardHeader,
   CardTitle,
 } from "@/components/ui/Card";
+import SmartImage from "@/components/ui/SmartImage";
+import { PostPreviewEntity } from "@/features/posts/domain/entities/post-preview.entity";
+import { postKeys } from "@/features/posts/infrastructure/contstant/query-keys";
 import { container } from "@/lib/di/dependencies";
 import { queryClient } from "@/lib/react-query";
 import { formatDistanceToNow } from "date-fns";
 import { ko } from "date-fns/locale/ko";
 import { htmlToText } from "html-to-text";
-import Link from "next/link";
-import { PostPreviewEntity } from "@/features/posts/domain/entities/post-preview.entity";
-import { postKeys } from "@/features/posts/infrastructure/contstant/query-keys";
 import Image from "next/image";
-import SmartImage from "@/components/ui/SmartImage";
+import Link from "next/link";
 
 export default function PostCardLarge({
   post,

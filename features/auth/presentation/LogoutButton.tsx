@@ -1,11 +1,11 @@
 "use client";
 
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/ui/button";
 import { useLogout } from "@/features/auth/presentation/hooks/useLogout";
 
 export default function LogoutButton() {
   const { mutate: logout, isPending } = useLogout();
-    
+
   return (
     <Button
       variant="outline"

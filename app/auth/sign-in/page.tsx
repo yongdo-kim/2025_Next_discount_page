@@ -1,5 +1,5 @@
 "use client";
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/ui/button";
 import { useGoogleLogin } from "@/features/auth/presentation/hooks/useGoogleLogin";
 import Image from "next/image";
 import { FcGoogle } from "react-icons/fc";

@@ -1,6 +1,6 @@
-import Link from "next/link";
-import { Button } from "./ui/Button";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
+import { Button } from "./ui/button";
 
 interface SeeAllButtonProps {
   href: string;

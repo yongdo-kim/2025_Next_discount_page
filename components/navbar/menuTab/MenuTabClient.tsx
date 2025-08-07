@@ -1,11 +1,10 @@
 "use client";
-import { Badge } from "@/components/ui/Badge";
+import { Badge } from "@/components/ui/badge";
 import { CategoryEntity } from "@/features/categories/domain/entities/category.entity";
 import { sendGAEvent } from "@/lib/ga";
 import { cn } from "@/lib/utils";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useMemo } from "react";
-
 
 type MenuItemProps = {
   category: CategoryEntity;
