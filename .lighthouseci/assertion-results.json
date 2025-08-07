@@ -1,1 +1,72 @@
-[]
+[
+  {
+    "name": "minScore",
+    "expected": 0.8,
+    "actual": 0.79,
+    "values": [
+      0.79
+    ],
+    "operator": ">=",
+    "passed": false,
+    "auditProperty": "performance",
+    "auditId": "categories",
+    "level": "warn",
+    "url": "http://localhost:3000/"
+  },
+  {
+    "name": "minScore",
+    "expected": 0.8,
+    "actual": 0.71,
+    "values": [
+      0.71
+    ],
+    "operator": ">=",
+    "passed": false,
+    "auditProperty": "best-practices",
+    "auditId": "categories",
+    "level": "warn",
+    "url": "http://localhost:3000/"
+  },
+  {
+    "name": "minScore",
+    "expected": 0.8,
+    "actual": 0.71,
+    "values": [
+      0.71
+    ],
+    "operator": ">=",
+    "passed": false,
+    "auditProperty": "best-practices",
+    "auditId": "categories",
+    "level": "warn",
+    "url": "http://localhost:3000/contact"
+  },
+  {
+    "name": "minScore",
+    "expected": 0.8,
+    "actual": 0.71,
+    "values": [
+      0.71
+    ],
+    "operator": ">=",
+    "passed": false,
+    "auditProperty": "best-practices",
+    "auditId": "categories",
+    "level": "warn",
+    "url": "http://localhost:3000/my-page"
+  },
+  {
+    "name": "minScore",
+    "expected": 0.8,
+    "actual": 0.71,
+    "values": [
+      0.71
+    ],
+    "operator": ">=",
+    "passed": false,
+    "auditProperty": "best-practices",
+    "auditId": "categories",
+    "level": "warn",
+    "url": "http://localhost:3000/auth/sign-in"
+  }
+]

@@ -1,8 +1,13 @@
 module.exports = {
   ci: {
     collect: {
-      url: ['http://localhost:3000'],
-      startServerCommand: 'npm run build && npm run prod',
+      url: [
+        'http://localhost:3000',
+        'http://localhost:3000/contact',
+        'http://localhost:3000/my-page',
+        'http://localhost:3000/auth/sign-in'
+      ],
+      startServerCommand: 'npm run build && npm run prod', //프로덕션 성능 측정.
       startServerReadyPattern: 'Ready on',
       numberOfRuns: 1,
       settings: {
