@@ -20,12 +20,8 @@ export default function CategorySectionClient() {
   );
 
   useEffect(() => {
-    // 초기 컨텐츠가 렌더링된 후 지연 컨텐츠 로딩
-    const timer = setTimeout(() => {
-      setShowLazyContent(true);
-    }, 100);
-
-    return () => clearTimeout(timer);
+    // 컴포넌트 마운트 후 즉시 지연 콘텐츠 로딩
+    setShowLazyContent(true);
   }, []);
 
   return (
@@ -45,7 +41,7 @@ export default function CategorySectionClient() {
             <CategoryRandomArea />
             <DividerLine />
             {showLazyContent && (
-              <Suspense fallback={<div className="h-20 animate-pulse bg-gray-100 rounded" />}>
+              <Suspense fallback={null}>
                 <LazyCategoryDiscountArea />
               </Suspense>
             )}
