@@ -3,21 +3,27 @@ import SmartImage from "@/components/ui/SmartImage";
 import { PostPreviewEntity } from "@/features/posts/domain/entities/post-preview.entity";
 import Link from "next/link";
 
-export default function PostCardSmall({ post }: { post: PostPreviewEntity }) {
+export default function PostCardSmall({ 
+  post, 
+  priority = false 
+}: { 
+  post: PostPreviewEntity;
+  priority?: boolean;
+}) {
   return (
     <>
       {/* 모바일 전용 */}
       <div className="block md:hidden">
-        <MobileCard post={post} />
+        <MobileCard post={post} priority={priority} />
       </div>
       {/* 데스크탑 전용 */}
       <div className="hidden md:block">
-        <DesktopCard post={post} />
+        <DesktopCard post={post} priority={priority} />
       </div>
     </>
   );
 }
-function MobileCard({ post }: { post: PostPreviewEntity }) {
+function MobileCard({ post, priority }: { post: PostPreviewEntity; priority?: boolean }) {
   return (
     <Link href={`/posts/${post.id}`}>
       <div className="flex w-full cursor-pointer flex-row">
@@ -29,6 +35,7 @@ function MobileCard({ post }: { post: PostPreviewEntity }) {
             alt={post.title}
             width={96}
             height={80}
+            priority={priority}
           />
         </div>
         {/* 내용 */}
@@ -57,7 +64,7 @@ function MobileCard({ post }: { post: PostPreviewEntity }) {
   );
 }
 
-function DesktopCard({ post }: { post: PostPreviewEntity }) {
+function DesktopCard({ post, priority }: { post: PostPreviewEntity; priority?: boolean }) {
   return (
     <div className="group w-full cursor-pointer">
       <Link href={`/posts/${post.id}`}>
@@ -70,6 +77,7 @@ function DesktopCard({ post }: { post: PostPreviewEntity }) {
               alt={post.title}
               width={180}
               height={120}
+              priority={priority}
             />
             {/* 오버레이: 뱃지 + 타이틀 */}
             <div className="absolute top-0 left-0 flex h-full w-full flex-col justify-between bg-black/40 p-3">

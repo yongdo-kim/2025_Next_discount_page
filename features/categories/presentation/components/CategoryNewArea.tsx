@@ -14,11 +14,11 @@ export default function NewCategoryDiscountArea() {
   const PostCardSmallList = () => {
     return (
       <ul className="grid grid-cols-1 gap-4 gap-y-4 px-4 whitespace-nowrap md:grid-cols-3 lg:grid-cols-4">
-        {categories?.map((post) => {
+        {categories?.map((post, index) => {
           if (!post) return null;
           return (
             <li key={post.id}>
-              <PostCardSmall post={post} />
+              <PostCardSmall post={post} priority={index < 4} />
             </li>
           );
         })}

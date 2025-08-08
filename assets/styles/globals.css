@@ -119,4 +119,20 @@
   body {
     @apply bg-background text-foreground;
   }
+  
+  /* CLS 방지를 위한 최적화 */
+  footer {
+    contain: layout style paint;
+  }
+  
+  /* 이미지 레이아웃 시프트 방지 */
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  /* 폰트 로딩 시 레이아웃 시프트 방지 */
+  .font-inter {
+    font-display: swap;
+  }
 }

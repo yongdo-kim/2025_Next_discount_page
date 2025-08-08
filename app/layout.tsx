@@ -13,7 +13,8 @@ const inter = Inter({
   subsets: ["latin"],
   display: "swap",
   preload: true,
-  fallback: ["system-ui", "arial"]
+  fallback: ["system-ui", "arial"],
+  adjustFontFallback: true, // 폰트 크기 조정으로 레이아웃 시프트 방지
 });
 export const metadata = createBaseMetadata();
 export const viewport = {
