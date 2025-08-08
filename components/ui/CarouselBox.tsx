@@ -43,6 +43,7 @@ export default function CarouselBox({ data }: { data: CarouselProps }) {
                 width={600}
                 height={400}
                 priority={index === 0}
+                loading={index === 0 ? "eager" : "lazy"}
               />
               <div className="absolute inset-0" />
               <div className="absolute right-0 bottom-0.5 p-6 text-white">

@@ -24,5 +24,17 @@ const getCachedCategoryPosts = unstable_cache(
 export default async function CategoryCarouselServer() {
   const posts = await getCachedCategoryPosts();
 
-  return <CategoryCarousel posts={posts} />;
+  return (
+    <>
+      {posts.length > 0 && posts[0]?.thumbnailUrl && (
+        <link 
+          rel="preload" 
+          as="image" 
+          href={posts[0].thumbnailUrl}
+          fetchPriority="high"
+        />
+      )}
+      <CategoryCarousel posts={posts} />
+    </>
+  );
 }
