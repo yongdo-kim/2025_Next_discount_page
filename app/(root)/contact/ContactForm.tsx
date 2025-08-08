@@ -87,7 +87,8 @@ export default function ContactForm() {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="w-full rounded bg-emerald-500 py-2 font-bold text-white hover:bg-emerald-600 disabled:opacity-60"
+          aria-label={isSubmitting ? "문의 전송 중..." : "문의 보내기"}
+          className="w-full rounded bg-emerald-500 py-2 font-bold text-white hover:bg-emerald-600 disabled:opacity-60 focus:outline-none focus:ring-2 focus:ring-emerald-400"
         >
           {isSubmitting ? "전송 중..." : "문의 보내기"}
         </button>

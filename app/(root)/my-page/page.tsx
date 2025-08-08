@@ -4,6 +4,11 @@ import { container } from "@/lib/di/dependencies";
 import { queryClient } from "@/lib/react-query";
 import { HydrationBoundary, dehydrate } from "@tanstack/react-query";
 
+export const metadata = {
+  title: "마이페이지 - 할인탐정",
+  description: "개인정보 수정 및 계정 설정을 관리하세요.",
+};
+
 export default async function MyPage() {
   await queryClient.prefetchQuery({
     queryKey: [usersKeys.me],
