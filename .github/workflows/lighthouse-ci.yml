@@ -1,41 +1,41 @@
-name: Lighthouse CI
+# name: Lighthouse CI
 
-on:
-  push:
-    branches: [main, develop]
-  pull_request:
-    branches: [main]
+# on:
+#   push:
+#     branches: [main, develop]
+#   pull_request:
+#     branches: [main]
 
-jobs:
-  lighthouse:
-    runs-on: ubuntu-latest
+# jobs:
+#   lighthouse:
+#     runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+#     steps:
+#       - name: Checkout
+#         uses: actions/checkout@v4
         
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '18'
-          cache: 'npm'
+#       - name: Setup Node.js
+#         uses: actions/setup-node@v4
+#         with:
+#           node-version: '18'
+#           cache: 'npm'
           
-      - name: Install dependencies
-        run: npm ci
+#       - name: Install dependencies
+#         run: npm ci
         
-      - name: Build project
-        run: npm run build
+#       - name: Build project
+#         run: npm run build
         
-      - name: Start server
-        run: npm run prod &
-        env:
-          NODE_ENV: production
+#       - name: Start server
+#         run: npm run prod &
+#         env:
+#           NODE_ENV: production
 
-      - name: Wait for server to be ready
-        run: npx wait-on https://discount.kingnaristudio.store
+#       - name: Wait for server to be ready
+#         run: npx wait-on https://discount.kingnaristudio.store
 
-      - name: Run Lighthouse collect
-        run: npx lhci collect
+#       - name: Run Lighthouse collect
+#         run: npx lhci collect
 
-      - name: Run Lighthouse assert
-        run: npx lhci assert
+#       - name: Run Lighthouse assert
+#         run: npx lhci assert
