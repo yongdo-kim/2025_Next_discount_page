@@ -35,6 +35,7 @@ function MobileCard({ post, priority }: { post: PostPreviewEntity; priority?: bo
             alt={post.title}
             width={96}
             height={80}
+            sizes="96px"
             priority={priority}
           />
         </div>
@@ -77,6 +78,7 @@ function DesktopCard({ post, priority }: { post: PostPreviewEntity; priority?: b
               alt={post.title}
               width={180}
               height={120}
+              sizes="(max-width: 640px) 200px, (max-width: 1024px) 300px, 250px"
               priority={priority}
             />
             {/* 오버레이: 뱃지 + 타이틀 */}

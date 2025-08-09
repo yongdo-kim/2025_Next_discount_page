@@ -19,6 +19,7 @@ export default function NavBar({ className = "", ssrUser }: NavBarProps) {
             alt="로고"
             width={32}
             height={32}
+            sizes="32px"
             className="rounded-full border border-amber-200 bg-amber-100 p-1"
           />
           <div className="ml-3 font-bold">할인탐정</div>

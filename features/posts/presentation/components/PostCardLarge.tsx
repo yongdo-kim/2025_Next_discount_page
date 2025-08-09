@@ -65,6 +65,7 @@ export default function PostCardLarge({
           alt={post.title}
           width={400}
           height={200}
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 400px"
         />
         <CardHeader className="px-2">
           {/* 상단 */}
@@ -90,6 +91,7 @@ export default function PostCardLarge({
                       className="aspect-square rounded-full"
                       width={20}
                       height={20}
+                      sizes="20px"
                     />
                   </CardDescription>
                   <div className="text-sm text-neutral-800 dark:text-neutral-50">

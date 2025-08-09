@@ -115,6 +115,7 @@ export const PostDetail = ({
           alt={user.nickname}
           width={13}
           height={20}
+          sizes="13px"
         />
 
         <div>
@@ -159,6 +160,7 @@ export const PostDetail = ({
               alt={post.title}
               width={600}
               height={400}
+              sizes="(max-width: 768px) 100vw, 600px"
               className="w-full rounded-xl object-cover transition-transform duration-300 group-hover:scale-105"
               style={{ maxWidth: "100%", maxHeight: "350px" }}
             />
@@ -206,6 +208,7 @@ export const PostDetail = ({
             alt={post.title}
             width={600}
             height={400}
+            sizes="(max-width: 768px) 100vw, 600px"
             className="mb-2 w-full rounded-xl object-cover"
             style={{ maxWidth: "100%", maxHeight: "350px" }}
           />

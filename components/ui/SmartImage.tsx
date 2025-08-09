@@ -12,6 +12,7 @@ interface SmartImageProps
   alt: string; // alt는 필수로 강제
   priority?: boolean;
   loading?: "eager" | "lazy";
+  sizes?: string;
   imageProps?: Omit<ImageProps, "src" | "width" | "height" | "alt">;
 }
 
@@ -22,6 +23,7 @@ const SmartImage: React.FC<SmartImageProps> = ({
   alt,
   priority = false,
   loading,
+  sizes = "100vw",
   imageProps,
   ...rest
 }) => {
@@ -34,6 +36,7 @@ const SmartImage: React.FC<SmartImageProps> = ({
       alt={alt}
       priority={priority}
       loading={loading}
+      sizes={sizes}
       {...imageProps}
       {...rest}
     />

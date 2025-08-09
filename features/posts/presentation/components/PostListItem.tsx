@@ -58,6 +58,7 @@ export default function PostListItem({ post }: { post: PostPreviewEntity }) {
                         className="aspect-square rounded-full"
                         width={20}
                         height={20}
+                        sizes="20px"
                       />
                     </CardDescription>
                     <div className="text-sm text-neutral-800 dark:text-neutral-50">
@@ -77,6 +78,7 @@ export default function PostListItem({ post }: { post: PostPreviewEntity }) {
               alt={post.title}
               width={150}
               height={100}
+              sizes="120px"
             />
           </div>
         </CardHeader>

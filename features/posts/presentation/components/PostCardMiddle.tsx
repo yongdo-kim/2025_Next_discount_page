@@ -36,6 +36,7 @@ function MobileCard({ post }: { post: PostPreviewEntity }) {
               alt={post.title}
               width={320}
               height={160}
+              sizes="(max-width: 640px) 100vw, 320px"
             />
             <div className="absolute inset-0 rounded-2xl bg-gradient-to-t from-black/60 to-transparent" />
             <div className="absolute right-0 bottom-0 left-0 p-4 text-white">
@@ -74,6 +75,7 @@ function DesktopCard({ post }: { post: PostPreviewEntity }) {
               alt={post.title}
               width={700}
               height={300}
+              sizes="(max-width: 1024px) 50vw, 700px"
             />
             <div className="absolute inset-0 rounded-2xl bg-gradient-to-t from-black/70 to-transparent" />
             <div className="absolute right-0 bottom-0 left-0 p-2 text-white">
