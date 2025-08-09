@@ -7,9 +7,11 @@ import "swiper/css/pagination";
 
 type CategoryCarouselClientProps = {
   posts: PostPreviewEntity[];
-}
+};
 
-export default function CategoryCarouselClient({ posts }: CategoryCarouselClientProps) {
+export default function CategoryCarouselClient({
+  posts,
+}: CategoryCarouselClientProps) {
   if (!posts || posts.length === 0) return null;
 
   return (
