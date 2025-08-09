@@ -43,6 +43,7 @@ export default function CarouselBox({ data }: { data: CarouselProps }) {
                 width={600}
                 height={180}
                 priority={index === 0}
+                sizes="(max-width: 768px) 100vw, 600px"
                 loading={index === 0 ? "eager" : "lazy"}
                 fetchPriority={index === 0 ? "high" : "low"}
               />
