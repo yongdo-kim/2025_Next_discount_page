@@ -19,6 +19,14 @@ jobs:
         with:
           node-version: '18'
           cache: 'npm'
+      
+      - name: Cache Lighthouse CI database
+        uses: actions/cache@v3
+        with:
+          path: lhci.db
+          key: lighthouse-db-${{ runner.os }}-${{ github.ref_name }}
+          restore-keys: |
+            lighthouse-db-${{ runner.os }}-
           
       - name: Install dependencies
         run: npm ci

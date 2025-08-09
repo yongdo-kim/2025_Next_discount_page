@@ -15,11 +15,13 @@ module.exports = {
       }
     },
     assert: {
+      preset: 'lighthouse:no-pwa',
       assertions: {
-        'categories:performance': ['warn', { minScore: 0.5 }],
-        'categories:accessibility': ['warn', { minScore: 0.5 }],
-        'categories:best-practices': ['warn', { minScore: 0.5 }],
-        'categories:seo': ['warn', { minScore: 0.8 }],
+        // 이전 빌드 대비 성능 회귀 감지 (5% 이내 허용)
+        'categories:performance': ['error', { aggregationMethod: 'optimistic', minScore: 0.95 }],
+        'categories:accessibility': ['error', { aggregationMethod: 'optimistic', minScore: 0.95 }],
+        'categories:best-practices': ['error', { aggregationMethod: 'optimistic', minScore: 0.95 }],
+        'categories:seo': ['error', { aggregationMethod: 'optimistic', minScore: 0.95 }],
       },
     },
     upload: {
