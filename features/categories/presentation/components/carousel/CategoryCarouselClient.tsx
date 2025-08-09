@@ -2,8 +2,6 @@
 
 import CarouselBox from "@/components/ui/CarouselBox";
 import { PostPreviewEntity } from "@/features/posts/domain/entities/post-preview.entity";
-import "swiper/css";
-import "swiper/css/pagination";
 
 type CategoryCarouselClientProps = {
   posts: PostPreviewEntity[];

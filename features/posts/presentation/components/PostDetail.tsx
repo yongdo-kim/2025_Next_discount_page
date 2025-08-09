@@ -8,7 +8,11 @@ import { UserEntity } from "@/features/users/domain/entities/user.entity";
 import { sendGAEvent } from "@/lib/ga";
 import { format } from "date-fns";
 import { ko } from "date-fns/locale/ko";
-import parse from "html-react-parser";
+import dynamic from "next/dynamic";
+
+const DynamicHtmlParser = dynamic(() => import("@/components/ui/DynamicHtmlParser"), {
+  ssr: true,
+});
 import Image from "next/image";
 import { useEffect } from "react";
 import { toast } from "sonner";
@@ -239,7 +243,7 @@ export default function PostContent({ html }: { html: string }) {
     <div className="mt-16 max-w-none whitespace-pre-line">
       <MainTitle title={"정리"} coloredTitle="" showIcon={false} />
       <div className="my-4 py-8 [&_*]:border [&_a]:text-blue-400 [&_a]:underline [&_img]:mx-auto [&_img]:h-auto [&_img]:max-w-full [&_table]:border-collapse [&_td]:p-2 [&_th]:p-2">
-        {parse(newHTMl)}
+        <DynamicHtmlParser html={newHTMl} />
       </div>
     </div>
   );

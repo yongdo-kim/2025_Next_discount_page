@@ -1,5 +1,9 @@
 import { usersKeys } from "@/features/users/infrastructure/contstant/query-keys";
-import UserProfileForm from "@/features/users/presentation/components/UserProfileForm";
+import dynamic from "next/dynamic";
+
+const DynamicUserProfileForm = dynamic(() => import("@/features/users/presentation/components/UserProfileForm"), {
+  loading: () => <div className="h-64 animate-pulse bg-gray-200 dark:bg-gray-700" />,
+});
 import { container } from "@/lib/di/dependencies";
 import { queryClient } from "@/lib/react-query";
 import { HydrationBoundary, dehydrate } from "@tanstack/react-query";
@@ -22,7 +26,7 @@ export default async function MyPage() {
 
   return (
     <HydrationBoundary state={dehydratedState}>
-      <UserProfileForm />
+      <DynamicUserProfileForm />
     </HydrationBoundary>
   );
 }

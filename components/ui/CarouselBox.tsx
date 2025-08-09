@@ -1,13 +1,14 @@
 "use client";
 
-import { Badge } from "@/components/shadcn/badge";
-import Link from "next/link";
-import "swiper/css";
-import "swiper/css/pagination";
+import dynamic from "next/dynamic";
+import { Suspense } from "react";
 
-import Image from "next/image";
-import { Autoplay, Pagination } from "swiper/modules";
-import { Swiper, SwiperSlide } from "swiper/react";
+const DynamicSwiper = dynamic(() => import("./DynamicSwiper"), {
+  ssr: false,
+  loading: () => (
+    <div className="h-[120px] w-full animate-pulse rounded-md bg-gray-200 dark:bg-gray-700 sm:h-[180px] md:h-[200px] lg:h-[200px]" />
+  ),
+});
 
 type CarouselProps = {
   title: string;
@@ -17,49 +18,10 @@ type CarouselProps = {
 
 export default function CarouselBox({ data }: { data: CarouselProps }) {
   return (
-    <Swiper
-      modules={[Autoplay, Pagination]}
-      pagination={{
-        clickable: true,
-      }}
-      autoplay={{
-        delay: 5000,
-      }}
-      spaceBetween={30}
-      slidesPerView={1}
-      loop={true}
-    >
-      {data.map((item, index) => (
-        <SwiperSlide
-          className="cursor-pointer overflow-hidden"
-          key={item.title}
-        >
-          <Link href={`/posts/${item.id}`}>
-            <div className="relative">
-              <Image
-                src={item.thumbnailUrl || ""}
-                className="h-[120px] w-full rounded-md object-cover sm:h-[180px] md:h-[200px] lg:h-[200px]"
-                alt={item.title}
-                width={600}
-                height={180}
-                priority={index === 0}
-                sizes="(max-width: 768px) 100vw, 600px"
-                loading={index === 0 ? "eager" : "lazy"}
-                fetchPriority={index === 0 ? "high" : "low"}
-              />
-              <div className="absolute inset-0" />
-              <div className="absolute right-0 bottom-0.5 p-6 text-white">
-                <Badge
-                  variant="secondary"
-                  className="text-md px-4 py-2 font-bold md:text-2xl lg:text-3xl"
-                >
-                  {item.title}
-                </Badge>
-              </div>
-            </div>
-          </Link>
-        </SwiperSlide>
-      ))}
-    </Swiper>
+    <Suspense fallback={
+      <div className="h-[120px] w-full animate-pulse rounded-md bg-gray-200 dark:bg-gray-700 sm:h-[180px] md:h-[200px] lg:h-[200px]" />
+    }>
+      <DynamicSwiper data={data} />
+    </Suspense>
   );
 }
