@@ -1,6 +1,6 @@
 {
-  "https://discount.kingnaristudio.store/": "https://storage.googleapis.com/lighthouse-infrastructure.appspot.com/reports/1754580648683-65345.report.html",
-  "https://discount.kingnaristudio.store/contact": "https://storage.googleapis.com/lighthouse-infrastructure.appspot.com/reports/1754580649886-20226.report.html",
-  "https://discount.kingnaristudio.store/my-page": "https://storage.googleapis.com/lighthouse-infrastructure.appspot.com/reports/1754580650956-91466.report.html",
-  "https://discount.kingnaristudio.store/auth/sign-in": "https://storage.googleapis.com/lighthouse-infrastructure.appspot.com/reports/1754580652023-96546.report.html"
+  "http://localhost:3000/": "https://storage.googleapis.com/lighthouse-infrastructure.appspot.com/reports/1754739997409-96513.report.html",
+  "http://localhost:3000/contact": "https://storage.googleapis.com/lighthouse-infrastructure.appspot.com/reports/1754739998673-42796.report.html",
+  "http://localhost:3000/my-page": "https://storage.googleapis.com/lighthouse-infrastructure.appspot.com/reports/1754740000106-94157.report.html",
+  "http://localhost:3000/auth/sign-in": "https://storage.googleapis.com/lighthouse-infrastructure.appspot.com/reports/1754740001273-35748.report.html"
 }

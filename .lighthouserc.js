@@ -2,10 +2,10 @@ module.exports = {
   ci: {
     collect: {
       url: [
-        'https://discount.kingnaristudio.store',
-        'https://discount.kingnaristudio.store/contact',
-        'https://discount.kingnaristudio.store/my-page',
-        'https://discount.kingnaristudio.store/auth/sign-in'
+        'http://localhost:3000',
+        'http://localhost:3000/contact',
+        'http://localhost:3000/my-page',
+        'http://localhost:3000/auth/sign-in'
       ],
       startServerCommand: 'npm run build && npm run prod', //프로덕션 성능 측정.
       startServerReadyPattern: 'Ready on',
@@ -26,7 +26,7 @@ module.exports = {
       target: 'temporary-public-storage',
     },
     server: {
-      port: 9001,
+      port: 3000,
       storage: {
         storageMethod: 'sql',
         sqlDialect: 'sqlite',
