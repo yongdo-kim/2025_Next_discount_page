@@ -32,7 +32,7 @@ jobs:
           NODE_ENV: production
 
       - name: Wait for server to be ready
-        run: npx wait-on http://localhost:3000
+        run: npx wait-on http://localhost:3000 --timeout 60000
 
       - name: Run Lighthouse collect
         run: npx lhci collect

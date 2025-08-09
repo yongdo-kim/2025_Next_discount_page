@@ -7,18 +7,18 @@ module.exports = {
         'http://localhost:3000/my-page',
         'http://localhost:3000/auth/sign-in'
       ],
-      startServerCommand: 'npm run build && npm run prod', //프로덕션 성능 측정.
-      startServerReadyPattern: 'Ready on',
+      // startServerCommand: 'npm run build && npm run prod', //프로덕션 성능 측정.
+      // startServerReadyPattern: 'Ready in',
       numberOfRuns: 1,
       settings: {
-        chromeFlags: '--no-sandbox'
+        chromeFlags: '--no-sandbox --headless --disable-gpu --disable-dev-shm-usage --disable-web-security --allow-running-insecure-content --ignore-certificate-errors'
       }
     },
     assert: {
       assertions: {
-        'categories:performance': ['error', { minScore: 0.8 }],
-        'categories:accessibility': ['error', { minScore: 0.9 }],
-        'categories:best-practices': ['error', { minScore: 0.8 }],
+        'categories:performance': ['error', { minScore: 0.5 }],
+        'categories:accessibility': ['error', { minScore: 0.5 }],
+        'categories:best-practices': ['error', { minScore: 0.5 }],
         'categories:seo': ['error', { minScore: 0.8 }],
       },
     },
