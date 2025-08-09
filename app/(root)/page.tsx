@@ -1,7 +1,7 @@
 import MenuTabServer from "@/components/navbar/menuTab/MenuTabServer";
-import CategoryCarouselServer from "@/features/categories/presentation/components/carousel/CategoryCarouselServer";
 import CategorySectionServer from "@/features/categories/presentation/components/section/CategorySectionServer";
 import { Suspense } from "react";
+import CategoryCarouselServer from "@/features/categories/presentation/components/carousel/CategoryCarouselServer";
 
 export const revalidate = 3600; // 1시간마다 ISR
 

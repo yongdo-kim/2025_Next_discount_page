@@ -2,37 +2,20 @@
 
 import { Badge } from "@/components/shadcn/badge";
 import Link from "next/link";
-import React, { useEffect } from "react";
 import "swiper/css";
 import "swiper/css/pagination";
 
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Pagination } from "swiper/modules";
 import Image from "next/image";
+import { Autoplay, Pagination } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
 
-type CarouselProps = {  
+type CarouselProps = {
   title: string;
   thumbnailUrl: string;
   id: number;
 }[];
 
 export default function CarouselBox({ data }: { data: CarouselProps }) {
-  //
-  useEffect(() => {
-    if (data.length > 0 && data[0].thumbnailUrl) {
-      const link = document.createElement('link');
-      link.rel = 'preload';
-      link.as = 'image';
-      link.href = data[0].thumbnailUrl;
-      link.fetchPriority = 'high';
-      document.head.appendChild(link);
-      
-      return () => {
-        document.head.removeChild(link);
-      };
-    }
-  }, [data]);
-
   return (
     <Swiper
       modules={[Autoplay, Pagination]}
@@ -55,7 +38,7 @@ export default function CarouselBox({ data }: { data: CarouselProps }) {
             <div className="relative">
               <Image
                 src={item.thumbnailUrl || ""}
-                className="h-[180px] w-full rounded-md object-cover"
+                className="h-[120px] w-full rounded-md object-cover sm:h-[180px] md:h-[200px] lg:h-[200px]"
                 alt={item.title}
                 width={600}
                 height={180}
