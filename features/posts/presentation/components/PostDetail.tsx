@@ -9,14 +9,17 @@ import { sendGAEvent } from "@/lib/ga";
 import { format } from "date-fns";
 import { ko } from "date-fns/locale/ko";
 import dynamic from "next/dynamic";
-
-const DynamicHtmlParser = dynamic(() => import("@/components/ui/DynamicHtmlParser"), {
-  ssr: true,
-});
 import Image from "next/image";
 import { useEffect } from "react";
 import { toast } from "sonner";
 import { usePostDetail } from "../hooks/use-posts";
+
+const DynamicHtmlParser = dynamic(
+  () => import("@/components/ui/DynamicHtmlParser"),
+  {
+    ssr: true,
+  },
+);
 
 export const PostDetail = ({
   postId,
@@ -38,8 +41,7 @@ export const PostDetail = ({
       author_id: post?.author?.id,
       author_nickname: post?.author?.nickname,
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [postId]);
+  }, [post, postId]);
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error</div>;
@@ -48,7 +50,7 @@ export const PostDetail = ({
   function TagList({ tags }: { tags: TagEntity[] }) {
     if (!tags?.length) return null;
     return (
-      <div className="mt-12 flex flex-wrap gap-2">
+      <div className="flex flex-wrap gap-2">
         {tags.map((tag) => (
           <Badge
             variant="outline"
@@ -135,7 +137,7 @@ export const PostDetail = ({
   }
 
   return (
-    <article className="mx-auto mt-16 max-w-screen-xl px-4 py-6 md:px-32">
+    <article className="container mx-auto py-6 px-8">
       {/* 태그 */}
       <TagList tags={post.tags} />
 

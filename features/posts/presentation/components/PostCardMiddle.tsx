@@ -68,10 +68,10 @@ function DesktopCard({ post }: { post: PostPreviewEntity }) {
             });
           }}
         >
-          <div className="relative h-[280px] transition-transform duration-300 group-hover:scale-105 lg:h-[380px]">
+          <div className="relative h-[250px] transition-transform duration-300 group-hover:scale-105 lg:h-[300px]">
             <SmartImage
               src={post.thumbnailUrl || ""}
-              className="h-[280px] rounded-2xl object-cover lg:h-[380px]"
+              className="h-[250px] rounded-2xl object-cover lg:h-[300px]"
               alt={post.title}
               width={700}
               height={300}
@@ -82,7 +82,7 @@ function DesktopCard({ post }: { post: PostPreviewEntity }) {
               <div className="line-clamp-1 text-lg font-bold lg:text-xl">
                 {post.title}
               </div>
-              <div className="line-clamp-1 w-[200px] text-base font-medium text-neutral-300 lg:text-lg">
+              <div className="line-clamp-1 w-[200px] text-base font-medium text-neutral-300 lg:text-lg overflow-hidden">
                 {content}
               </div>
             </div>
