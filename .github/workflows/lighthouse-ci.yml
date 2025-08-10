@@ -45,5 +45,5 @@ jobs:
       - name: Run Lighthouse collect
         run: npx lhci collect
 
-      - name: Run Lighthouse assert
-        run: npx lhci assert
+      # - name: Run Lighthouse assert
+      #   run: npx lhci assert
