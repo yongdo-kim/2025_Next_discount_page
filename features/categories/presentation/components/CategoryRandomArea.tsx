@@ -9,11 +9,11 @@ export default function CategoryRandomArea() {
 
   const PostCardMiddleList = () => (
     <ul className="grid grid-cols-1 gap-4 gap-y-4 px-4 pb-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-      {posts?.slice(0, 4).map((post) => {
+      {posts?.slice(0, 4).map((post, index) => {
         if (!post) return null;
         return (
           <li key={post.id}>
-            <PostCardMiddle post={post} />
+            <PostCardMiddle post={post} priority={index < 4} />
           </li>
         );
       })}
