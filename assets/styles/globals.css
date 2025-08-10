@@ -136,3 +136,7 @@
     font-display: swap;
   }
 }
+
+/* Swiper CSS - Critical styles for LCP optimization */
+@import "swiper/css";
+@import "swiper/css/pagination";
