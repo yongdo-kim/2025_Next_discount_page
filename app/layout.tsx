@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 import { Inter } from "next/font/google";
 import { Toaster } from "sonner";
 import { Providers } from "./provider";
-import FooterBox from "@/components/footer/FooterBox";
+import LazyFooterBox from "@/components/footer/LazyFooterBox";
 
 const inter = Inter({ 
   subsets: ["latin"],
@@ -45,7 +45,7 @@ export default async function RootLayout({
         <Providers>
           <NavBar ssrUser={user} />
           <main className="flex flex-1 flex-col">{children}</main>
-          <FooterBox />
+          <LazyFooterBox />
         </Providers>
         <Toaster />
       </body>
