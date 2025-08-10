@@ -75,7 +75,7 @@ function DesktopCard({ post, priority }: { post: PostPreviewEntity; priority?: b
             <SmartImage
               src={post.thumbnailUrl || ""}
               className="h-[160px] w-[200px] rounded-2xl object-cover transition-transform duration-300 group-hover:scale-105 sm:h-[160px] sm:w-[300px] lg:h-[200px] lg:w-[250px]"
-              alt={post.title}
+              alt={post.category.name}
               width={180}
               height={120}
               sizes="(max-width: 640px) 200px, (max-width: 1024px) 300px, 250px"

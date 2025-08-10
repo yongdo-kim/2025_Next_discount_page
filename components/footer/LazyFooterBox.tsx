@@ -40,7 +40,7 @@ export default function LazyFooterBox() {
       ) : (
         // 스켈레톤 또는 빈 공간
         <div 
-          className="mx-auto w-full max-w-screen-lg"
+          className="mx-auto container"
           style={{ height: '180px' }}
           aria-label="Footer loading..."
         />
