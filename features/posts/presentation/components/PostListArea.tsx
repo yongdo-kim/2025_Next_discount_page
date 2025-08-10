@@ -42,19 +42,7 @@ export default function PostListArea({
   const displayName = categoryName || (allPosts[0]?.category.name ?? "");
 
   if (isLoading) {
-    return (
-      <>
-        <MainTitle title={displayName} coloredTitle="" className="p-4" />
-        <div className="mx-6 mt-4 flex flex-col space-y-4">
-          {Array.from({ length: 8 }).map((_, i) => (
-            <div
-              key={i}
-              className="h-32 animate-pulse rounded-lg bg-slate-700"
-            />
-          ))}
-        </div>
-      </>
-    );
+    return <MainTitle title={displayName} coloredTitle="" className="p-4" />;
   }
 
   if (error) {

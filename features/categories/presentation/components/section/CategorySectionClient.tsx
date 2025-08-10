@@ -7,7 +7,12 @@ import PostListArea from "@/features/posts/presentation/components/PostListArea"
 import { useSearchParams } from "next/navigation";
 import { Suspense, lazy, useEffect, useState } from "react";
 
-const LazyCategoryDiscountArea = lazy(() => import("@/features/categories/presentation/components/CategoryDiscountArea"));
+const LazyCategoryDiscountArea = lazy(
+  () =>
+    import(
+      "@/features/categories/presentation/components/CategoryDiscountArea"
+    ),
+);
 
 export default function CategorySectionClient() {
   const searchParams = useSearchParams();
@@ -25,7 +30,7 @@ export default function CategorySectionClient() {
   }, []);
 
   return (
-    <section className="mx-auto max-w-screen-lg flex-1">
+    <section className="flex-1">
       <>
         {selectedId ? (
           // 선택된 카테고리만 보여주는 UI
@@ -46,7 +51,7 @@ export default function CategorySectionClient() {
               </Suspense>
             )}
           </>
-        )} 
+        )}
       </>
     </section>
   );

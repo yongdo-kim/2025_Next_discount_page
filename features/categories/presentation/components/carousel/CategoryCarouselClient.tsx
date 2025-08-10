@@ -13,7 +13,7 @@ export default function CategoryCarouselClient({
   if (!posts || posts.length === 0) return null;
 
   return (
-    <div className="container mx-auto pb-8">
+    <div className="container mx-auto pb-6 px-6">
       <CarouselBox data={posts.filter((result) => result !== null)} />
     </div>
   );
