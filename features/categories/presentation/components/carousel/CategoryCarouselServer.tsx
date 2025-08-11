@@ -8,8 +8,7 @@ const getCachedCategoryPosts = unstable_cache(
     try {
       const posts = await container.postService.getCategoryPostPreviews();
       return JSON.parse(JSON.stringify(posts));
-    } catch (error) {
-      console.error("Failed to fetch category posts:", error);
+    } catch {
       return [];
     }
   },

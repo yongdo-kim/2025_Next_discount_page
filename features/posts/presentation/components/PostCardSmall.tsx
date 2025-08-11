@@ -3,10 +3,10 @@ import SmartImage from "@/components/ui/SmartImage";
 import { PostPreviewEntity } from "@/features/posts/domain/entities/post-preview.entity";
 import Link from "next/link";
 
-export default function PostCardSmall({ 
-  post, 
-  priority = false 
-}: { 
+export default function PostCardSmall({
+  post,
+  priority = false,
+}: {
   post: PostPreviewEntity;
   priority?: boolean;
 }) {
@@ -23,7 +23,13 @@ export default function PostCardSmall({
     </>
   );
 }
-function MobileCard({ post, priority }: { post: PostPreviewEntity; priority?: boolean }) {
+function MobileCard({
+  post,
+  priority,
+}: {
+  post: PostPreviewEntity;
+  priority?: boolean;
+}) {
   return (
     <Link href={`/posts/${post.id}`}>
       <div className="flex w-full cursor-pointer flex-row">
@@ -65,7 +71,13 @@ function MobileCard({ post, priority }: { post: PostPreviewEntity; priority?: bo
   );
 }
 
-function DesktopCard({ post, priority }: { post: PostPreviewEntity; priority?: boolean }) {
+function DesktopCard({
+  post,
+  priority,
+}: {
+  post: PostPreviewEntity;
+  priority?: boolean;
+}) {
   return (
     <div className="group w-full cursor-pointer">
       <Link href={`/posts/${post.id}`}>
@@ -74,11 +86,11 @@ function DesktopCard({ post, priority }: { post: PostPreviewEntity; priority?: b
           <div className="relative overflow-hidden rounded-2xl">
             <SmartImage
               src={post.thumbnailUrl || ""}
-              className="h-[160px] w-[200px] rounded-2xl object-cover transition-transform duration-300 group-hover:scale-105 sm:h-[160px] sm:w-[300px] lg:h-[200px] lg:w-[250px]"
+              className="h-[160px] w-full rounded-2xl object-cover transition-transform duration-300 group-hover:scale-105"
               alt="썸네일"
               width={180}
               height={120}
-              sizes="(max-width: 640px) 200px, (max-width: 1024px) 300px, 250px"
+              sizes="(max-width: 640px) 200px, w-full"
               priority={priority}
             />
             {/* 오버레이: 뱃지 + 타이틀 */}

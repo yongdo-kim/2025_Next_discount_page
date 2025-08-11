@@ -9,8 +9,7 @@ const getCachedCategories = unstable_cache(
     try {
       const categories = await container.categoryService.getCategories();
       return JSON.parse(JSON.stringify(categories));
-    } catch (error) {
-      console.error('Failed to fetch categories:', error);
+    } catch {
       return [];
     }
   },
