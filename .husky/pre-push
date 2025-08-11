@@ -1,0 +1,9 @@
+#!/usr/bin/env sh
+
+# Run build test
+echo "Building project..."
+npm run build
+
+# Run Jest tests
+echo "Running tests..."
+npm run test:jest
