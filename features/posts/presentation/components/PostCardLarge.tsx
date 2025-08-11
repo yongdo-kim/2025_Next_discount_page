@@ -62,7 +62,7 @@ export default function PostCardLarge({
         <SmartImage
           src={post.thumbnailUrl || ""}
           className="aspect-video w-full rounded-xl object-cover"
-          alt={post.title}
+          alt="썸네일"
           width={400}
           height={200}
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 400px"

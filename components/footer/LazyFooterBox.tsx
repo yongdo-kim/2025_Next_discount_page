@@ -42,6 +42,7 @@ export default function LazyFooterBox() {
         <div 
           className="mx-auto container"
           style={{ height: '180px' }}
+          role="status"
           aria-label="Footer loading..."
         />
       )}

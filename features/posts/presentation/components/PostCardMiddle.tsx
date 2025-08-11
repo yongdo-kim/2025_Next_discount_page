@@ -44,7 +44,7 @@ function MobileCard({
             <SmartImage
               src={post.thumbnailUrl || ""}
               className="h-[180px] w-full rounded-2xl object-cover"
-              alt={post.title}
+              alt="썸네일"
               width={320}
               height={160}
               sizes="(max-width: 640px) 100vw, 320px"
@@ -84,7 +84,7 @@ function DesktopCard({ post }: { post: PostPreviewEntity }) {
             <SmartImage
               src={post.thumbnailUrl || ""}
               className="h-[250px] rounded-2xl object-cover lg:h-[300px]"
-              alt={post.title}
+              alt="썸네일"
               width={700}
               height={300}
               sizes="(max-width: 1024px) 50vw, 700px"

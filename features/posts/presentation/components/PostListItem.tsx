@@ -75,7 +75,7 @@ export default function PostListItem({ post }: { post: PostPreviewEntity }) {
             <SmartImage
               src={post.thumbnailUrl || ""}
               className="ml-2 h-[100px] w-[120px] rounded-xl object-cover"
-              alt={post.title}
+              alt="썸네일"
               width={150}
               height={100}
               sizes="120px"
