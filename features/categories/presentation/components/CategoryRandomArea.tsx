@@ -20,6 +20,8 @@ export default function CategoryRandomArea() {
     </ul>
   );
 
+  if (!posts || posts.length === 0) return null;
+
   return (
     <section className="pt-4 pb-2 md:pt-8 md:pb-8">
       <div className="flex justify-between px-4 pt-4 pb-4">
