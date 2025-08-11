@@ -52,14 +52,20 @@ export default function PostListItem({ post }: { post: PostPreviewEntity }) {
                 <div className="flex items-center">
                   <div className="flex items-center justify-center gap-2">
                     <CardDescription>
-                      <SmartImage
-                        src={post.author.picture}
-                        alt={post.author.nickname}
-                        className="aspect-square rounded-full"
-                        width={20}
-                        height={20}
-                        sizes="20px"
-                      />
+                      {post.author.picture ? (
+                        <SmartImage
+                          src={post.author.picture}
+                          alt={post.author.nickname}
+                          className="aspect-square rounded-full"
+                          width={20}
+                          height={20}
+                          sizes="20px"
+                        />
+                      ) : (
+                        <div className="aspect-square w-5 h-5 rounded-full bg-gray-300 dark:bg-gray-600 flex items-center justify-center">
+                          <span className="text-xs text-gray-500">👤</span>
+                        </div>
+                      )}
                     </CardDescription>
                     <div className="text-sm text-neutral-800 dark:text-neutral-50">
                       {post.author.nickname}
@@ -72,14 +78,20 @@ export default function PostListItem({ post }: { post: PostPreviewEntity }) {
               </CardDescription>
             </div>
             {/* 이미지 */}
-            <SmartImage
-              src={post.thumbnailUrl || ""}
-              className="ml-2 h-[100px] w-[120px] rounded-xl object-cover"
-              alt="썸네일"
-              width={150}
-              height={100}
-              sizes="120px"
-            />
+            {post.thumbnailUrl ? (
+              <SmartImage
+                src={post.thumbnailUrl}
+                className="ml-2 h-[100px] w-[120px] rounded-xl object-cover"
+                alt="썸네일"
+                width={120}
+                height={100}
+                sizes="120px"
+              />
+            ) : (
+              <div className="ml-2 h-[100px] w-[120px] rounded-xl bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
+                <span className="text-gray-400 text-xs">이미지 없음</span>
+              </div>
+            )}
           </div>
         </CardHeader>
       </Card>
