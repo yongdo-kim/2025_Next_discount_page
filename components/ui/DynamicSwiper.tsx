@@ -32,7 +32,7 @@ export default function DynamicSwiper({ data }: { data: CarouselProps }) {
             <Image
               src={firstItem.thumbnailUrl || ""}
               className="h-[120px] w-full rounded-md object-cover sm:h-[180px] md:h-[200px] lg:h-[200px]"
-              alt={firstItem.title}
+              alt="썸네일"
               width={600}
               height={180}
               priority
@@ -78,7 +78,7 @@ export default function DynamicSwiper({ data }: { data: CarouselProps }) {
               <Image
                 src={item.thumbnailUrl || ""}
                 className="h-[120px] w-full rounded-md object-cover sm:h-[180px] md:h-[200px] lg:h-[200px]"
-                alt={item.title}
+                alt="썸네일"
                 width={600}
                 height={180}
                 priority={index === 0}

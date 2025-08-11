@@ -1,7 +1,26 @@
-import MenuTabServer from "@/components/navbar/menuTab/MenuTabServer";
-import CategorySectionServer from "@/features/categories/presentation/components/section/CategorySectionServer";
 import { Suspense } from "react";
-import CategoryCarouselServer from "@/features/categories/presentation/components/carousel/CategoryCarouselServer";
+import dynamic from "next/dynamic";
+
+const CategoryCarouselServer = dynamic(
+  () => import("@/features/categories/presentation/components/carousel/CategoryCarouselServer"),
+  { 
+    loading: () => null
+  }
+);
+
+const MenuTabServer = dynamic(
+  () => import("@/components/navbar/menuTab/MenuTabServer"),
+  { 
+    loading: () => null
+  }
+);
+
+const CategorySectionServer = dynamic(
+  () => import("@/features/categories/presentation/components/section/CategorySectionServer"),
+  { 
+    loading: () => null
+  }
+);
 
 export const revalidate = 3600; // 1시간마다 ISR
 
