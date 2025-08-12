@@ -44,6 +44,9 @@ discount_next/
 ├── lib/             # 유틸 함수, 라이브러리 초기화, 상수 등
 ├── public/          # 정적 파일 (favicon, og:image 등)
 ```
+<img width="917" height="722" alt="스크린샷 2025-08-11 오후 4 14 00" src="https://github.com/user-attachments/assets/8d4caf6e-9106-4284-8d19-e6a1c8b35b1c" />
+
+
 
 ## 🎯 프로젝트 목표
 
