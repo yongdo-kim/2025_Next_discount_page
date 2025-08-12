@@ -46,7 +46,7 @@ export const queryClient = new QueryClient({
         return false;
       },
       retryDelay: (attemptIndex) => Math.min(1000 * 2 ** attemptIndex, 30000), // 지수 백오프
-      throwOnError: shouldThrowError, // 서버 에러는 Error Boundary로, 클라이언트 에러는 로컬 처리
+      throwOnError: shouldThrowError, // true면, 에러바운더리, false면 isError 상태로 변환.
     },
   },
 });
