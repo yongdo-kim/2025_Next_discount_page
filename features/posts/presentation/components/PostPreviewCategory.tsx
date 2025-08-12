@@ -4,6 +4,8 @@ import MainTitle from "@/components/MainTitle";
 import DividerLine from "@/components/ui/DividerLine";
 import PostCardLarge from "@/features/posts/presentation/components/PostCardLarge";
 import { usePostPreviews } from "@/features/posts/presentation/hooks/use-posts";
+import { ErrorState } from "@/components/error/ErrorState";
+import { isClientError } from "@/lib/error-handler";
 
 export default function PostPreviewCategoryArea({
   categoryId,
@@ -12,12 +14,30 @@ export default function PostPreviewCategoryArea({
   categoryId: number;
   title: string;
 }) {
-  const { data: posts } = usePostPreviews({
+  const {
+    data: posts,
+    error,
+    isError,
+    refetch,
+  } = usePostPreviews({
     req: {
       categoryId,
       limit: 9,
     },
   });
+
+  // 클라이언트 에러는 로컬에서 처리
+  if (isError && isClientError(error)) {
+    return (
+      <>
+        <div className="flex justify-between px-4 pb-4">
+          <MainTitle title={title} coloredTitle="" showIcon={true} />
+        </div>
+        <ErrorState error={error} onRetry={refetch} size="sm" />
+        <DividerLine className="mt-8 mb-8" />
+      </>
+    );
+  }
 
   if (!posts || posts.length === 0) return null;
 
