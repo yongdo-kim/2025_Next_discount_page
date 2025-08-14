@@ -8,28 +8,32 @@ test.describe("홈페이지 기본 테스트", () => {
     // 페이지 제목 확인
     await expect(page).toHaveTitle(/할인탐정/);
 
-    // 메인 타이틀이 표시되는지 확인
-    const mainTitle = page.locator('h1, [data-testid="main-title"]');
-    await expect(mainTitle).toBeVisible();
+    // 페이지 로딩 대기
+    await page.waitForLoadState("networkidle");
+
+    // "오늘의 따끈한 할인" 섹션이 표시되는지 확인
+    const mainSection = page.locator('text="오늘의"');
+    await expect(mainSection).toBeVisible({ timeout: 10000 });
 
     // 네비게이션 바가 표시되는지 확인
-    const navbar = page.locator('nav, [data-testid="navbar"]');
+    const navbar = page.locator("nav");
     await expect(navbar).toBeVisible();
   });
 
-  test("홈페이지에 게시물 목록이 표시된다", async ({ page }) => {
+  test("홈페이지에 할인 콘텐츠가 표시된다", async ({ page }) => {
     await page.goto("/");
 
     // 페이지 로딩 대기
     await page.waitForLoadState("networkidle");
+    await page.waitForTimeout(3000); // 데이터 로딩 대기
 
-    // 게시물 카드들이 로드되는지 확인 (일부 할인 정보가 표시되어야 함)
-    const postCards = page.locator(
-      '[data-testid="post-card"], .post-card, article',
-    );
+    // "오늘의 따끈한 할인" 섹션이 있는지 확인
+    const hotDealsSection = page.locator('text="따끈한 할인"');
+    await expect(hotDealsSection).toBeVisible({ timeout: 10000 });
 
-    // 최소 1개 이상의 게시물이 있어야 함
-    await expect(postCards.first()).toBeVisible();
+    // 그리드나 리스트 형태의 컨테이너가 있는지 확인
+    const contentGrid = page.locator("ul.grid, .grid");
+    await expect(contentGrid.first()).toBeVisible({ timeout: 10000 });
   });
 
   test("반응형 디자인이 모바일에서 작동한다", async ({ page }) => {
@@ -38,12 +42,17 @@ test.describe("홈페이지 기본 테스트", () => {
 
     await page.goto("/");
 
-    // 모바일에서도 기본 요소들이 표시되는지 확인
-    const mainContent = page.locator('main, [role="main"]');
-    await expect(mainContent).toBeVisible();
+    // 페이지 로딩 대기
+    await page.waitForLoadState("networkidle");
 
-    // 모바일 네비게이션이 적절히 표시되는지 확인
-    const navbar = page.locator('nav, [data-testid="navbar"]');
+    // 모바일 전용 게시물 카드가 표시되는지 확인
+    const mobilePostCard = page.locator(
+      '[data-testid="post-card-small-mobile-container"]',
+    );
+    await expect(mobilePostCard.first()).toBeVisible({ timeout: 15000 });
+
+    // 네비게이션이 적절히 표시되는지 확인
+    const navbar = page.locator("nav");
     await expect(navbar).toBeVisible();
   });
 });

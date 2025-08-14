@@ -23,9 +23,9 @@ export default defineConfig({
 
   // 리포터 설정
   reporter: [
-    ["html"], // HTML 리포트 생성
+    ["html", { outputFolder: "e2e-output/report" }], // HTML 리포트 생성
     ["list"], // 콘솔에 리스트 형태로 출력
-    ["json", { outputFile: "test-results.json" }], // JSON 리포트
+    ["json", { outputFile: "e2e-output/test-results.json" }], // JSON 리포트
   ],
 
   // 모든 프로젝트에 공통으로 적용될 설정
@@ -93,5 +93,5 @@ export default defineConfig({
   },
 
   // 테스트 결과 저장 위치
-  outputDir: "test-results/",
+  outputDir: "e2e-output/test-results/",
 });

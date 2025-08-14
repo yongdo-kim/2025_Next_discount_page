@@ -34,7 +34,10 @@ test.describe("디버그 테스트", () => {
     console.log("article 태그 개수:", articles);
 
     // 스크린샷 저장
-    await page.screenshot({ path: "debug-screenshot.png", fullPage: true });
+    await page.screenshot({
+      path: "e2e-output/debug-screenshot.png",
+      fullPage: true,
+    });
 
     // 테스트는 항상 통과 (디버깅 목적)
     expect(true).toBe(true);
