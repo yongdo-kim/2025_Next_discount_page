@@ -87,7 +87,7 @@ export default defineConfig({
   // 개발 서버 설정 (테스트 실행 전 자동으로 서버 시작)
   webServer: {
     command: "npm run dev",
-    port: 3002,
+    port: 3000,
     reuseExistingServer: !process.env.CI, // 로컬에서는 기존 서버 재사용
     timeout: 120 * 1000, // 서버 시작 대기 시간 (2분)
   },

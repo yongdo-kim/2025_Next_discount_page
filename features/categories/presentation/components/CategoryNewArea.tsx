@@ -49,7 +49,19 @@ export default function NewCategoryDiscountArea() {
     );
   }
 
-  if (!categories || categories.length === 0) return null;
+  if (!categories || categories.length === 0) {
+    return (
+      <section className="pt-4 pb-2 md:pb-8">
+        <div className="flex justify-between px-4 pb-4 md:pb-8">
+          <MainTitle
+            title="오늘의"
+            coloredTitle=" 따끈한 할인"
+            color="text-red-400"
+          />
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className="pt-4 pb-2 md:pb-8">

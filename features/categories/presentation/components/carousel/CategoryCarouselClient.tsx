@@ -1,19 +1,14 @@
 "use client";
 
 import CarouselBox from "@/components/ui/CarouselBox";
-import { PostPreviewEntity } from "@/features/posts/domain/entities/post-preview.entity";
+import { useCategoryPostPreviews } from "@/features/posts/presentation/hooks/use-posts";
 
-type CategoryCarouselClientProps = {
-  posts: PostPreviewEntity[];
-};
-
-export default function CategoryCarouselClient({
-  posts,
-}: CategoryCarouselClientProps) {
+export default function CategoryCarouselClient() {
+  const { data: posts = [] } = useCategoryPostPreviews();
   if (!posts || posts.length === 0) return null;
 
   return (
-    <div className="container mx-auto pb-6 px-6">
+    <div className="container mx-auto px-6 pb-6">
       <CarouselBox data={posts.filter((result) => result !== null)} />
     </div>
   );
