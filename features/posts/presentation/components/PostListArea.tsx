@@ -37,10 +37,10 @@ export default function PostListArea({
     return (
       <>
         <MainTitle title={displayName} coloredTitle="" className="p-4" />
-        <div className="mt-4">
+        <div className="mt-4" data-testid="post-list-loading">
           {/* 로딩 스켈레톤 UI */}
           {Array.from({ length: 6 }, (_, index) => (
-            <div key={index} className="mx-6 my-2">
+            <div key={index} className="mx-6 my-2" data-testid="post-skeleton">
               <div className="h-32 rounded-lg bg-gray-200 dark:bg-gray-700" />
             </div>
           ))}
@@ -53,7 +53,10 @@ export default function PostListArea({
     return (
       <>
         <MainTitle title={displayName} coloredTitle="" className="p-4" />
-        <div className="mx-6 mt-4 text-center text-red-500">
+        <div
+          className="mx-6 mt-4 text-center text-red-500"
+          data-testid="post-list-error"
+        >
           데이터를 불러오는데 실패했습니다.
         </div>
       </>
@@ -65,7 +68,10 @@ export default function PostListArea({
     return (
       <>
         <MainTitle title={displayName} coloredTitle="" className="p-4" />
-        <div className="mx-6 mt-4 text-center text-gray-500 dark:text-gray-400">
+        <div
+          className="mx-6 mt-4 text-center text-gray-500 dark:text-gray-400"
+          data-testid="post-list-empty"
+        >
           표시할 포스트가 없습니다.
         </div>
       </>
@@ -75,7 +81,7 @@ export default function PostListArea({
   return (
     <>
       <MainTitle title={displayName} coloredTitle="" className="p-4" />
-      <div className="mt-4">
+      <div className="mt-4" data-testid="post-list-container">
         <Virtuoso
           data={allPosts}
           useWindowScroll
@@ -85,7 +91,7 @@ export default function PostListArea({
             }
           }}
           itemContent={(_, post) => (
-            <div className="mx-6 my-2">
+            <div className="mx-6 my-2" data-testid="post-list-item-wrapper">
               <PostListItem post={post} />
             </div>
           )}
@@ -93,7 +99,10 @@ export default function PostListArea({
             Footer: () => {
               if (isFetchingNextPage) {
                 return (
-                  <div className="mx-6 my-2">
+                  <div
+                    className="mx-6 my-2"
+                    data-testid="post-list-loading-more"
+                  >
                     <div className="h-32 animate-pulse rounded-lg bg-gray-200 dark:bg-gray-700" />
                   </div>
                 );

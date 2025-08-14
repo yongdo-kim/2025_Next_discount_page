@@ -15,6 +15,7 @@ export default function MobileBackButton() {
       onClick={() => window.history.back()}
       className="mr-2 flex items-center md:hidden"
       aria-label="뒤로가기"
+      data-testid="navbar-mobile-back-button"
     >
       <MdArrowBack size={28} />
     </button>

@@ -1,0 +1,684 @@
+{
+  "config": {
+    "configFile": "/Users/yongdokim/Desktop/production/discount/discount_next/playwright.config.ts",
+    "rootDir": "/Users/yongdokim/Desktop/production/discount/discount_next/e2e",
+    "forbidOnly": false,
+    "fullyParallel": true,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 3,
+    "metadata": {
+      "actualWorkers": 5
+    },
+    "preserveOutput": "always",
+    "reporter": [
+      ["html", null],
+      ["list", null],
+      [
+        "json",
+        {
+          "outputFile": "test-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "quiet": false,
+    "projects": [
+      {
+        "outputDir": "/Users/yongdokim/Desktop/production/discount/discount_next/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 5
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "/Users/yongdokim/Desktop/production/discount/discount_next/e2e",
+        "testIgnore": [],
+        "testMatch": ["**/*.@(spec|test).?(c|m)[jt]s?(x)"],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "/Users/yongdokim/Desktop/production/discount/discount_next/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 5
+        },
+        "id": "firefox",
+        "name": "firefox",
+        "testDir": "/Users/yongdokim/Desktop/production/discount/discount_next/e2e",
+        "testIgnore": [],
+        "testMatch": ["**/*.@(spec|test).?(c|m)[jt]s?(x)"],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "/Users/yongdokim/Desktop/production/discount/discount_next/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 5
+        },
+        "id": "webkit",
+        "name": "webkit",
+        "testDir": "/Users/yongdokim/Desktop/production/discount/discount_next/e2e",
+        "testIgnore": [],
+        "testMatch": ["**/*.@(spec|test).?(c|m)[jt]s?(x)"],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "/Users/yongdokim/Desktop/production/discount/discount_next/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 5
+        },
+        "id": "Mobile Chrome",
+        "name": "Mobile Chrome",
+        "testDir": "/Users/yongdokim/Desktop/production/discount/discount_next/e2e",
+        "testIgnore": [],
+        "testMatch": ["**/*.@(spec|test).?(c|m)[jt]s?(x)"],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "/Users/yongdokim/Desktop/production/discount/discount_next/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 5
+        },
+        "id": "Mobile Safari",
+        "name": "Mobile Safari",
+        "testDir": "/Users/yongdokim/Desktop/production/discount/discount_next/e2e",
+        "testIgnore": [],
+        "testMatch": ["**/*.@(spec|test).?(c|m)[jt]s?(x)"],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "/Users/yongdokim/Desktop/production/discount/discount_next/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 5
+        },
+        "id": "iPad",
+        "name": "iPad",
+        "testDir": "/Users/yongdokim/Desktop/production/discount/discount_next/e2e",
+        "testIgnore": [],
+        "testMatch": ["**/*.@(spec|test).?(c|m)[jt]s?(x)"],
+        "timeout": 30000
+      }
+    ],
+    "shard": null,
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.54.2",
+    "workers": 5,
+    "webServer": {
+      "command": "npm run dev",
+      "port": 3002,
+      "reuseExistingServer": true,
+      "timeout": 120000
+    }
+  },
+  "suites": [
+    {
+      "title": "tests/auth.spec.ts",
+      "file": "tests/auth.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "인증 플로우 테스트",
+          "file": "tests/auth.spec.ts",
+          "line": 6,
+          "column": 6,
+          "specs": [
+            {
+              "title": "로그인 페이지가 정상적으로 로드되어야 한다",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "timedOut",
+                      "duration": 31324,
+                      "error": {
+                        "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+                        "stack": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                      },
+                      "errors": [
+                        {
+                          "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                        },
+                        {
+                          "location": {
+                            "file": "/Users/yongdokim/Desktop/production/discount/discount_next/e2e/page-objects/AuthPage.ts",
+                            "column": 44,
+                            "line": 83
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m()\u001b[22m\n\nLocator: locator('[data-testid=\"signin-page\"]')\nExpected: visible\nReceived: <element(s) not found>\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 15000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-testid=\"signin-page\"]')\u001b[22m\n\n\n   at page-objects/AuthPage.ts:83\n\n  81 |     \n  82 |     // 더 긴 타임아웃으로 요소 대기\n> 83 |     await expect(this.elements.signinPage).toBeVisible({ timeout: 15000 });\n     |                                            ^\n  84 |     await expect(this.elements.appTitle).toBeVisible({ timeout: 10000 });\n  85 |     await expect(this.elements.googleLoginButton).toBeVisible({ timeout: 10000 });\n  86 |   }\n    at AuthPage.waitForSignInPageReady (/Users/yongdokim/Desktop/production/discount/discount_next/e2e/page-objects/AuthPage.ts:83:44)\n    at /Users/yongdokim/Desktop/production/discount/discount_next/e2e/tests/auth.spec.ts:23:5"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-08-14T02:32:44.537Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/yongdokim/Desktop/production/discount/discount_next/test-results/tests-auth-인증-플로우-테스트-로그인-페이지가-정상적으로-로드되어야-한다-chromium/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/Users/yongdokim/Desktop/production/discount/discount_next/test-results/tests-auth-인증-플로우-테스트-로그인-페이지가-정상적으로-로드되어야-한다-chromium/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/yongdokim/Desktop/production/discount/discount_next/test-results/tests-auth-인증-플로우-테스트-로그인-페이지가-정상적으로-로드되어야-한다-chromium/error-context.md"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "d2e30edf93c6681ee681-5c824d7bb37e87d9860d",
+              "file": "tests/auth.spec.ts",
+              "line": 15,
+              "column": 7
+            },
+            {
+              "title": "Google 로그인 버튼이 올바르게 작동해야 한다",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "timedOut",
+                      "duration": 31271,
+                      "error": {
+                        "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+                        "stack": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                      },
+                      "errors": [
+                        {
+                          "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                        },
+                        {
+                          "location": {
+                            "file": "/Users/yongdokim/Desktop/production/discount/discount_next/e2e/page-objects/AuthPage.ts",
+                            "column": 44,
+                            "line": 83
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m()\u001b[22m\n\nLocator: locator('[data-testid=\"signin-page\"]')\nExpected: visible\nReceived: <element(s) not found>\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 15000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-testid=\"signin-page\"]')\u001b[22m\n\n\n   at page-objects/AuthPage.ts:83\n\n  81 |     \n  82 |     // 더 긴 타임아웃으로 요소 대기\n> 83 |     await expect(this.elements.signinPage).toBeVisible({ timeout: 15000 });\n     |                                            ^\n  84 |     await expect(this.elements.appTitle).toBeVisible({ timeout: 10000 });\n  85 |     await expect(this.elements.googleLoginButton).toBeVisible({ timeout: 10000 });\n  86 |   }\n    at AuthPage.waitForSignInPageReady (/Users/yongdokim/Desktop/production/discount/discount_next/e2e/page-objects/AuthPage.ts:83:44)\n    at /Users/yongdokim/Desktop/production/discount/discount_next/e2e/tests/auth.spec.ts:32:5"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-08-14T02:32:44.539Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/yongdokim/Desktop/production/discount/discount_next/test-results/tests-auth-인증-플로우-테스트-Google-로그인-버튼이-올바르게-작동해야-한다-chromium/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/Users/yongdokim/Desktop/production/discount/discount_next/test-results/tests-auth-인증-플로우-테스트-Google-로그인-버튼이-올바르게-작동해야-한다-chromium/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/yongdokim/Desktop/production/discount/discount_next/test-results/tests-auth-인증-플로우-테스트-Google-로그인-버튼이-올바르게-작동해야-한다-chromium/error-context.md"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "d2e30edf93c6681ee681-828d78a8ce44c29b7f71",
+              "file": "tests/auth.spec.ts",
+              "line": 30,
+              "column": 7
+            },
+            {
+              "title": "비로그인 상태에서 네비게이션이 올바르게 표시되어야 한다",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 2,
+                      "status": "passed",
+                      "duration": 24453,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-08-14T02:32:44.546Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "d2e30edf93c6681ee681-df45f02329bace57c602",
+              "file": "tests/auth.spec.ts",
+              "line": 46,
+              "column": 7
+            },
+            {
+              "title": "인증이 필요한 페이지 접근 시 로그인 페이지로 리다이렉트되어야 한다",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 3,
+                      "status": "passed",
+                      "duration": 26983,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Profile page not rendered due to authentication failure\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-08-14T02:32:44.531Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "d2e30edf93c6681ee681-f1cde85264a3a10ba9cf",
+              "file": "tests/auth.spec.ts",
+              "line": 62,
+              "column": 7
+            },
+            {
+              "title": "로그인 페이지에서 홈으로 돌아갈 수 있어야 한다",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 4,
+                      "status": "timedOut",
+                      "duration": 30710,
+                      "error": {
+                        "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+                        "stack": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                      },
+                      "errors": [
+                        {
+                          "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                        },
+                        {
+                          "location": {
+                            "file": "/Users/yongdokim/Desktop/production/discount/discount_next/e2e/tests/auth.spec.ts",
+                            "column": 48,
+                            "line": 95
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m()\u001b[22m\n\nLocator: locator('[data-testid=\"post-grid\"], [data-testid*=\"post-card\"]').first()\nExpected: visible\nReceived: <element(s) not found>\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-testid=\"post-grid\"], [data-testid*=\"post-card\"]').first()\u001b[22m\n\n\n  93 |       // 홈페이지로 이동했는지 확인\n  94 |       await page.waitForURL(/^(?!.*\\/auth).*$/);\n> 95 |       await expect(homePage.elements.postGrid).toBeVisible();\n     |                                                ^\n  96 |     }\n  97 |   });\n  98 |\n    at /Users/yongdokim/Desktop/production/discount/discount_next/e2e/tests/auth.spec.ts:95:48"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-08-14T02:32:44.571Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/yongdokim/Desktop/production/discount/discount_next/test-results/tests-auth-인증-플로우-테스트-로그인-페이지에서-홈으로-돌아갈-수-있어야-한다-chromium/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/Users/yongdokim/Desktop/production/discount/discount_next/test-results/tests-auth-인증-플로우-테스트-로그인-페이지에서-홈으로-돌아갈-수-있어야-한다-chromium/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/yongdokim/Desktop/production/discount/discount_next/test-results/tests-auth-인증-플로우-테스트-로그인-페이지에서-홈으로-돌아갈-수-있어야-한다-chromium/error-context.md"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "d2e30edf93c6681ee681-9bf168759835b0d79e31",
+              "file": "tests/auth.spec.ts",
+              "line": 85,
+              "column": 7
+            },
+            {
+              "title": "로그인 페이지 레이아웃이 반응형이어야 한다",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 2,
+                      "status": "interrupted",
+                      "duration": 7168,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-08-14T02:33:09.491Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/yongdokim/Desktop/production/discount/discount_next/test-results/tests-auth-인증-플로우-테스트-로그인-페이지-레이아웃이-반응형이어야-한다-chromium/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/Users/yongdokim/Desktop/production/discount/discount_next/test-results/tests-auth-인증-플로우-테스트-로그인-페이지-레이아웃이-반응형이어야-한다-chromium/video.webm"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "d2e30edf93c6681ee681-b9b35e60ea8677906a68",
+              "file": "tests/auth.spec.ts",
+              "line": 99,
+              "column": 7
+            },
+            {
+              "title": "로그인 에러 상황을 올바르게 처리해야 한다",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 3,
+                      "status": "interrupted",
+                      "duration": 4503,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-08-14T02:33:12.027Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/yongdokim/Desktop/production/discount/discount_next/test-results/tests-auth-인증-플로우-테스트-로그인-에러-상황을-올바르게-처리해야-한다-chromium/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/Users/yongdokim/Desktop/production/discount/discount_next/test-results/tests-auth-인증-플로우-테스트-로그인-에러-상황을-올바르게-처리해야-한다-chromium/video.webm"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "d2e30edf93c6681ee681-8f78362ee4dad2814dd9",
+              "file": "tests/auth.spec.ts",
+              "line": 120,
+              "column": 7
+            },
+            {
+              "title": "URL 직접 접근으로 인증 우회를 방지해야 한다",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 5,
+                      "parallelIndex": 4,
+                      "status": "interrupted",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-08-14T02:33:16.589Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "d2e30edf93c6681ee681-f1132fc9d1bb0db4c979",
+              "file": "tests/auth.spec.ts",
+              "line": 140,
+              "column": 7
+            },
+            {
+              "title": "OAuth 콜백 페이지가 올바르게 처리되어야 한다",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "d2e30edf93c6681ee681-376523d7b55f9aa7bae7",
+              "file": "tests/auth.spec.ts",
+              "line": 159,
+              "column": 7
+            },
+            {
+              "title": "다중 탭에서 로그인 상태가 동기화되어야 한다",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "d2e30edf93c6681ee681-830133217bffcdf56487",
+              "file": "tests/auth.spec.ts",
+              "line": 177,
+              "column": 7
+            },
+            {
+              "title": "세션 타임아웃을 올바르게 처리해야 한다",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "d2e30edf93c6681ee681-de4b45b0033aa9837809",
+              "file": "tests/auth.spec.ts",
+              "line": 198,
+              "column": 7
+            }
+          ]
+        },
+        {
+          "title": "보안 테스트",
+          "file": "tests/auth.spec.ts",
+          "line": 221,
+          "column": 6,
+          "specs": [
+            {
+              "title": "XSS 공격을 방지해야 한다",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "d2e30edf93c6681ee681-9f148274a179d8db1da1",
+              "file": "tests/auth.spec.ts",
+              "line": 228,
+              "column": 7
+            },
+            {
+              "title": "CSRF 토큰이 올바르게 처리되어야 한다",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "d2e30edf93c6681ee681-4016806232639a3b3efa",
+              "file": "tests/auth.spec.ts",
+              "line": 249,
+              "column": 7
+            },
+            {
+              "title": "안전하지 않은 리다이렉트를 방지해야 한다",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "d2e30edf93c6681ee681-ddbc6444d84925d1e606",
+              "file": "tests/auth.spec.ts",
+              "line": 267,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [
+    {
+      "message": "\u001b[31mTesting stopped early after 3 maximum allowed failures.\u001b[39m"
+    }
+  ],
+  "stats": {
+    "startTime": "2025-08-14T02:32:44.091Z",
+    "duration": 32600.233000000004,
+    "expected": 2,
+    "skipped": 9,
+    "unexpected": 3,
+    "flaky": 0
+  }
+}

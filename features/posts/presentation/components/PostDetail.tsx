@@ -43,19 +43,20 @@ export const PostDetail = ({
     });
   }, [post, postId]);
 
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Error</div>;
-  if (!post) return <div>no data</div>;
+  if (isLoading) return <div data-testid="post-detail-loading">Loading...</div>;
+  if (error) return <div data-testid="post-detail-error">Error</div>;
+  if (!post) return <div data-testid="post-detail-no-data">no data</div>;
 
   function TagList({ tags }: { tags: TagEntity[] }) {
     if (!tags?.length) return null;
     return (
-      <div className="flex flex-wrap gap-2">
+      <div className="flex flex-wrap gap-2" data-testid="post-detail-tags">
         {tags.map((tag) => (
           <Badge
             variant="outline"
             key={tag.id}
             className="md:text-md lg:text-lg"
+            data-testid="post-detail-tag"
           >
             {tag.name}
           </Badge>
@@ -80,10 +81,16 @@ export const PostDetail = ({
     };
 
     return (
-      <div className="flex items-center rounded-lg bg-neutral-50 py-3 shadow-sm dark:bg-neutral-900">
+      <div
+        className="flex items-center rounded-lg bg-neutral-50 py-3 shadow-sm dark:bg-neutral-900"
+        data-testid="post-detail-source-link"
+      >
         {/* 아이콘 */}
 
-        <span className="mr-2 text-sm font-semibold text-neutral-600 dark:text-neutral-300">
+        <span
+          className="mr-2 text-sm font-semibold text-neutral-600 dark:text-neutral-300"
+          data-testid="post-detail-source-label"
+        >
           자료출처
         </span>
         <a
@@ -92,6 +99,7 @@ export const PostDetail = ({
           rel="noopener noreferrer"
           className="truncate text-sm font-medium text-emerald-500 underline hover:text-emerald-600"
           title={url}
+          data-testid="post-detail-source-url"
         >
           {displayUrl}
         </a>
@@ -100,6 +108,7 @@ export const PostDetail = ({
           className="ml-2 rounded bg-neutral-200 px-2 py-1 text-xs font-semibold text-neutral-600 hover:bg-blue-100 hover:text-blue-600 dark:bg-neutral-800 dark:text-neutral-300 dark:hover:bg-blue-900"
           title="복사"
           type="button"
+          data-testid="post-detail-source-copy-button"
         >
           복사
         </button>
@@ -115,20 +124,30 @@ export const PostDetail = ({
     createdAt: string;
   }) {
     return (
-      <div className="mt-4 mb-4 flex items-center gap-3">
+      <div
+        className="mt-4 mb-4 flex items-center gap-3"
+        data-testid="post-detail-author-info"
+      >
         <Image
           src="/discount-character.webp"
           alt={user.nickname}
           width={13}
           height={20}
           sizes="13px"
+          data-testid="post-detail-author-avatar"
         />
 
-        <div>
-          <div className="font-semibold text-neutral-800 dark:text-neutral-50">
+        <div data-testid="post-detail-author-details">
+          <div
+            className="font-semibold text-neutral-800 dark:text-neutral-50"
+            data-testid="post-detail-author-nickname"
+          >
             {user.nickname}
           </div>
-          <div className="text-xs text-neutral-500 dark:text-neutral-400">
+          <div
+            className="text-xs text-neutral-500 dark:text-neutral-400"
+            data-testid="post-detail-created-at"
+          >
             {format(new Date(createdAt), "yyyy년 M월 d일", { locale: ko })}
           </div>
         </div>
@@ -137,18 +156,26 @@ export const PostDetail = ({
   }
 
   return (
-    <article className="container mx-auto py-6 px-8">
+    <article
+      className="container mx-auto px-8 py-6"
+      data-testid="post-detail-article"
+    >
       {/* 태그 */}
       <TagList tags={post.tags} />
 
       {/* 제목 */}
-      <h1 className="mb-2 pt-2 text-3xl font-bold">{post.title}</h1>
+      <h1
+        className="mb-2 pt-2 text-3xl font-bold"
+        data-testid="post-detail-title"
+      >
+        {post.title}
+      </h1>
 
       {/* 작성자, 작성일 */}
       <AuthorInfo user={post.author} createdAt={post.createdAt} />
 
       {/* 대표 이미지 */}
-      <div className="mt-8 mb-8">
+      <div className="mt-8 mb-8" data-testid="post-detail-image-section">
         {post.source?.originSourceUrl ? (
           <div
             className="group relative mb-2 w-full cursor-pointer overflow-hidden"
@@ -160,6 +187,7 @@ export const PostDetail = ({
                 "noopener,noreferrer",
               )
             }
+            data-testid="post-detail-clickable-image"
           >
             <SmartImage
               src={post.imageUrl}
@@ -169,9 +197,13 @@ export const PostDetail = ({
               sizes="(max-width: 768px) 100vw, 600px"
               className="w-full rounded-xl object-cover transition-transform duration-300 group-hover:scale-105"
               style={{ maxWidth: "100%", maxHeight: "350px" }}
+              data-testid="post-detail-main-image"
             />
             {/* 검정 오버레이 */}
-            <div className="absolute top-0 left-0 h-full w-full rounded-xl bg-black opacity-40" />
+            <div
+              className="absolute top-0 left-0 h-full w-full rounded-xl bg-black opacity-40"
+              data-testid="post-detail-image-overlay"
+            />
             {/* 바로가기 아이콘 */}
             <button
               type="button"
@@ -185,6 +217,7 @@ export const PostDetail = ({
               }}
               className="absolute right-3 bottom-3 flex items-center justify-center rounded-full bg-black/70 px-4 py-2 transition hover:bg-black/90"
               aria-label="원본 사이트로 이동"
+              data-testid="post-detail-external-link-button"
             >
               {/* 외부링크(새창) 아이콘 SVG */}
               <svg
@@ -198,12 +231,16 @@ export const PostDetail = ({
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 className="mr-1"
+                data-testid="post-detail-external-link-icon"
               >
                 <path d="M18 13v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
                 <polyline points="15 3 21 3 21 9" />
                 <line x1="10" y1="14" x2="21" y2="3" />
               </svg>
-              <span className="ml-1 text-xl font-semibold text-white">
+              <span
+                className="ml-1 text-xl font-semibold text-white"
+                data-testid="post-detail-external-link-text"
+              >
                 바로가기
               </span>
             </button>
@@ -217,6 +254,7 @@ export const PostDetail = ({
             sizes="(max-width: 768px) 100vw, 600px"
             className="mb-2 w-full rounded-xl object-cover"
             style={{ maxWidth: "100%", maxHeight: "350px" }}
+            data-testid="post-detail-static-image"
           />
         )}
         {/* 대표이미지-링크 */}
@@ -224,12 +262,15 @@ export const PostDetail = ({
       </div>
 
       {/* 본문 */}
-      <div className="w-full pb-8 text-lg whitespace-pre-line text-neutral-900 dark:text-neutral-100">
+      <div
+        className="w-full pb-8 text-lg whitespace-pre-line text-neutral-900 dark:text-neutral-100"
+        data-testid="post-detail-content"
+      >
         <PostContent html={post.content} />
       </div>
 
       {/* 자료출처 */}
-      <div className="border-t pt-4 pb-32">
+      <div className="border-t pt-4 pb-32" data-testid="post-detail-footer">
         <SourceLink url={post.source?.scrapingSourceUrl} />
       </div>
     </article>
@@ -242,9 +283,15 @@ export default function PostContent({ html }: { html: string }) {
     .replace(/^[`']{3}\s*$/gm, "") // 맨 뒤 ``` 또는 ''' 제거
     .trim();
   return (
-    <div className="mt-16 max-w-none whitespace-pre-line">
+    <div
+      className="mt-16 max-w-none whitespace-pre-line"
+      data-testid="post-content-section"
+    >
       <MainTitle title={"정리"} coloredTitle="" showIcon={false} />
-      <div className="my-4 py-8 [&_*]:border [&_a]:text-blue-400 [&_a]:underline [&_img]:mx-auto [&_img]:h-auto [&_img]:max-w-full [&_table]:border-collapse [&_td]:p-2 [&_th]:p-2">
+      <div
+        className="my-4 py-8 [&_*]:border [&_a]:text-blue-400 [&_a]:underline [&_img]:mx-auto [&_img]:h-auto [&_img]:max-w-full [&_table]:border-collapse [&_td]:p-2 [&_th]:p-2"
+        data-testid="post-content-html"
+      >
         <DynamicHtmlParser html={newHTMl} />
       </div>
     </div>

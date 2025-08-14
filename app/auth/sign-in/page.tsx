@@ -9,24 +9,47 @@ export const metadata = {
 
 export default function SignInPage() {
   return (
-    <div className="my-auto flex h-full flex-col justify-between">
-      <div className="flex flex-1 items-center justify-center">
-        <div className="mx-auto flex w-full max-w-screen-lg flex-col items-center rounded-lg p-8 shadow-md">
+    <div
+      className="my-auto flex h-full flex-col justify-between"
+      data-testid="signin-page"
+    >
+      <div
+        className="flex flex-1 items-center justify-center"
+        data-testid="signin-content"
+      >
+        <div
+          className="mx-auto flex w-full max-w-screen-lg flex-col items-center rounded-lg p-8 shadow-md"
+          data-testid="signin-container"
+        >
           <Image
             src="/discount-character-1024.webp"
             alt="할인탐정 캐릭터"
             width={160}
             height={160}
             priority
+            data-testid="signin-character-image"
           />
-          <h1 className="mb-2 text-2xl font-bold text-amber-600">할인탐정</h1>
-          <div className="mb-6 text-center text-lg text-neutral-100">
+          <h1
+            className="mb-2 text-2xl font-bold text-amber-600"
+            data-testid="signin-title"
+          >
+            할인탐정
+          </h1>
+          <div
+            className="mb-6 text-center text-lg text-neutral-100"
+            data-testid="signin-description"
+          >
             할인은 우리가 수사합니다. <br />
             진짜 혜택만을 추적해 보여주는 스마트 쇼핑 도우미입니다
           </div>
-          <Suspense fallback={
-            <div className="mb-2 w-60 h-14 bg-gray-200 rounded animate-pulse"></div>
-          }>
+          <Suspense
+            fallback={
+              <div
+                className="mb-2 h-14 w-60 animate-pulse rounded bg-gray-200"
+                data-testid="signin-loading"
+              ></div>
+            }
+          >
             <GoogleLoginButton />
           </Suspense>
         </div>

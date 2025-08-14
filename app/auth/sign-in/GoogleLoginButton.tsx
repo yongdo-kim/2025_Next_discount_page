@@ -12,8 +12,9 @@ export default function GoogleLoginButton() {
       className="mb-2 w-60 cursor-pointer p-6 text-xl font-semibold"
       variant="outline"
       type="button"
+      data-testid="google-login-button"
     >
-      <FcGoogle size={24} />
+      <FcGoogle size={24} data-testid="google-icon" />
       구글 계정으로 로그인
     </Button>
   );

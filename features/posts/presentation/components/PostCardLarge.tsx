@@ -37,7 +37,7 @@ export default function PostCardLarge({
   });
 
   return (
-    <Link href={`/posts/${post.id}`}>
+    <Link href={`/posts/${post.id}`} data-testid="post-card-large-link">
       <Card
         className="hover:bg-accent h-full cursor-pointer p-4"
         onMouseEnter={() => {
@@ -46,15 +46,28 @@ export default function PostCardLarge({
             queryFn: () => container.postService.getPostDetail(post.id),
           });
         }}
+        data-testid="post-card-large"
       >
-        <div className="flex items-center gap-2">
+        <div
+          className="flex items-center gap-2"
+          data-testid="post-card-large-tags"
+        >
           {post.tags?.slice(0, 3).map((tag) => (
-            <Badge variant="outline" className="text-md" key={tag.id}>
+            <Badge
+              variant="outline"
+              className="text-md"
+              key={tag.id}
+              data-testid="post-card-large-tag"
+            >
               {tag.name}
             </Badge>
           ))}
           {post.tags?.length === 0 && (
-            <Badge variant="outline" className="text-md">
+            <Badge
+              variant="outline"
+              className="text-md"
+              data-testid="post-card-large-tag-default"
+            >
               {"#"}
             </Badge>
           )}
@@ -66,25 +79,41 @@ export default function PostCardLarge({
           width={400}
           height={200}
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 400px"
+          data-testid="post-card-large-image"
         />
-        <CardHeader className="px-2">
+        <CardHeader className="px-2" data-testid="post-card-large-header">
           {/* 상단 */}
-          <CardTitle className="line-clamp-2 text-lg font-bold whitespace-normal">
+          <CardTitle
+            className="line-clamp-2 text-lg font-bold whitespace-normal"
+            data-testid="post-card-large-title"
+          >
             {post.title}
           </CardTitle>
           {/* 중단 */}
           {isDescVisible && (
-            <CardDescription className="line-clamp-2">
+            <CardDescription
+              className="line-clamp-2"
+              data-testid="post-card-large-description"
+            >
               {content}
             </CardDescription>
           )}
           {/* 하단 */}
 
           {isAuthorVisible && (
-            <CardDescription className="mt-2">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center justify-center gap-2">
-                  <CardDescription>
+            <CardDescription
+              className="mt-2"
+              data-testid="post-card-large-meta"
+            >
+              <div
+                className="flex items-center justify-between"
+                data-testid="post-card-large-author-info"
+              >
+                <div
+                  className="flex items-center justify-center gap-2"
+                  data-testid="post-card-large-author-details"
+                >
+                  <CardDescription data-testid="post-card-large-author-avatar">
                     <Image
                       src="/discount-character.webp"
                       alt={post.author.nickname}
@@ -94,11 +123,17 @@ export default function PostCardLarge({
                       sizes="20px"
                     />
                   </CardDescription>
-                  <div className="text-sm text-neutral-800 dark:text-neutral-50">
+                  <div
+                    className="text-sm text-neutral-800 dark:text-neutral-50"
+                    data-testid="post-card-large-author-nickname"
+                  >
                     {post.author.nickname}
                   </div>
                 </div>
-                <div className="text-sm text-neutral-500 dark:text-neutral-400">
+                <div
+                  className="text-sm text-neutral-500 dark:text-neutral-400"
+                  data-testid="post-card-large-created-at"
+                >
                   {timeAgo}
                 </div>
               </div>

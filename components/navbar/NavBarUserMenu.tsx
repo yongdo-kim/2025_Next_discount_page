@@ -16,14 +16,22 @@ export default function NavBarUserMenu({
   const currentUser = user ?? ssrUser;
 
   return (
-    <div className="flex items-center space-x-2">
+    <div className="flex items-center space-x-2" data-testid="navbar-user-menu">
       {currentUser ? (
-        <div className="flex items-center space-x-2">
-          <Link href={ROUTES.MY_PAGE}>
-            <span className="text-sm font-bold">
+        <div
+          className="flex items-center space-x-2"
+          data-testid="navbar-user-info"
+        >
+          <Link href={ROUTES.MY_PAGE} data-testid="navbar-user-profile-link">
+            <span
+              className="text-sm font-bold"
+              data-testid="navbar-user-nickname"
+            >
               {currentUser?.nickname || currentUser?.name}
             </span>
-            <span className="text-sm">님</span>
+            <span className="text-sm" data-testid="navbar-user-suffix">
+              님
+            </span>
           </Link>
           <LogoutButton />
         </div>
@@ -32,6 +40,7 @@ export default function NavBarUserMenu({
           variant="outline"
           className="cursor-pointer text-xs sm:text-base"
           asChild
+          data-testid="navbar-login-button"
         >
           <Link href={ROUTES.SIGN_IN}>로그인</Link>
         </Button>

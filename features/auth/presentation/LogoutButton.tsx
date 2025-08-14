@@ -12,6 +12,7 @@ export default function LogoutButton() {
       className="flex cursor-pointer items-center"
       onClick={() => logout()}
       disabled={isPending}
+      data-testid="navbar-logout-button"
     >
       {isPending ? "로그아웃 중..." : "로그아웃"}
     </Button>

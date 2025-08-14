@@ -30,10 +30,18 @@ export default function PostPreviewCategoryArea({
   if (isError && isClientError(error)) {
     return (
       <>
-        <div className="flex justify-between px-4 pb-4">
+        <div
+          className="flex justify-between px-4 pb-4"
+          data-testid="post-preview-category-header"
+        >
           <MainTitle title={title} coloredTitle="" showIcon={true} />
         </div>
-        <ErrorState error={error} onRetry={refetch} size="sm" />
+        <ErrorState
+          error={error}
+          onRetry={refetch}
+          size="sm"
+          data-testid="post-preview-category-error"
+        />
         <DividerLine className="mt-8 mb-8" />
       </>
     );
@@ -43,12 +51,18 @@ export default function PostPreviewCategoryArea({
 
   return (
     <>
-      <div className="flex justify-between px-4 pb-4">
+      <div
+        className="flex justify-between px-4 pb-4"
+        data-testid="post-preview-category-header"
+      >
         <MainTitle title={title} coloredTitle="" showIcon={true} />
       </div>
-      <ul className="grid grid-cols-1 gap-4 px-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3">
+      <ul
+        className="grid grid-cols-1 gap-4 px-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3"
+        data-testid="post-preview-category-grid"
+      >
         {posts.map((post) => (
-          <li key={post.id}>
+          <li key={post.id} data-testid="post-preview-category-item">
             <PostCardLarge post={post} />
           </li>
         ))}
