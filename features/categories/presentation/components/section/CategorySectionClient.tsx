@@ -2,12 +2,13 @@
 import DividerLine from "@/components/ui/DividerLine";
 import NewCategoryDiscountArea from "@/features/categories/presentation/components/CategoryNewArea";
 import CategoryRandomArea from "@/features/categories/presentation/components/CategoryRandomArea";
+import CategoryDiscountArea from "@/features/categories/presentation/components/CategoryDiscountArea";
 import { useFetchCategories } from "@/features/categories/presentation/hooks/use-fetch-categories";
 import PostListArea from "@/features/posts/presentation/components/PostListArea";
 import { useSearchParams } from "next/navigation";
 import { Suspense, lazy, useEffect, useState } from "react";
 
-const LazyCategoryDiscountArea = lazy(
+const LazyCategoryDiscountAreaRest = lazy(
   () =>
     import(
       "@/features/categories/presentation/components/CategoryDiscountArea"
@@ -45,9 +46,12 @@ export default function CategorySectionClient() {
             <DividerLine />
             <CategoryRandomArea />
             <DividerLine />
+            {/* 첫 번째 카테고리는 즉시 렌더링 */}
+            <CategoryDiscountArea firstCategoryOnly={true} />
+            {/* 나머지 카테고리는 지연 로딩 */}
             {showLazyContent && (
               <Suspense fallback={null}>
-                <LazyCategoryDiscountArea />
+                <LazyCategoryDiscountAreaRest />
               </Suspense>
             )}
           </>

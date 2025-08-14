@@ -4,10 +4,20 @@ import MainTitle from "@/components/MainTitle";
 import { useFetchCategories } from "@/features/categories/presentation/hooks/use-fetch-categories";
 import PostPreviewCategoryArea from "@/features/posts/presentation/components/PostPreviewCategory";
 
-export default function CategoryDiscountArea() {
+type CategoryDiscountAreaProps = {
+  firstCategoryOnly?: boolean;
+};
+
+export default function CategoryDiscountArea({
+  firstCategoryOnly = false,
+}: CategoryDiscountAreaProps) {
   const { data: categories } = useFetchCategories();
 
   if (!categories || categories.length === 0) return null;
+
+  const categoriesToShow = firstCategoryOnly
+    ? categories.slice(0, 1)
+    : categories.slice(1);
 
   return (
     <section className="pt-8 pb-2 md:pt-8 md:pb-8">
@@ -19,7 +29,7 @@ export default function CategoryDiscountArea() {
         />
       </div>
 
-      {categories.map((category) => (
+      {categoriesToShow.map((category) => (
         <div key={category.id}>
           <PostPreviewCategoryArea
             categoryId={category.id}

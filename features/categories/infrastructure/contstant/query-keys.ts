@@ -4,4 +4,5 @@ export const categoryKeys = {
     ["categories", id, limit] as const,
   banners: ["categories", "banners"] as const,
   infinite: ["categories", "infinite"] as const,
+  carousel: ["categories", "carousel"] as const,
 };
