@@ -16,7 +16,7 @@ test.describe("홈페이지 기본 테스트", () => {
     await expect(mainSection).toBeVisible({ timeout: 10000 });
 
     // 네비게이션 바가 표시되는지 확인
-    const navbar = page.locator("nav");
+    const navbar = page.locator("nav"); //tag 잡기.
     await expect(navbar).toBeVisible();
   });
 
