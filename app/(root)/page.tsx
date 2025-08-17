@@ -1,15 +1,5 @@
-import { Suspense } from "react";
 import dynamic from "next/dynamic";
-
-const DynamicCategoryCarouselServer = dynamic(
-  () =>
-    import(
-      "@/features/categories/presentation/components/carousel/CategoryCarouselServer"
-    ),
-  {
-    loading: () => null,
-  },
-);
+import { Suspense } from "react";
 
 const DynamicMenuTabServer = dynamic(
   () => import("@/components/navbar/menuTab/MenuTabServer"),
@@ -35,7 +25,6 @@ export default async function Page() {
     <>
       {/* 카테고리 캐러셀과 메뉴탭을 함께 로딩 */}
       <Suspense fallback={null}>
-        <DynamicCategoryCarouselServer />
         {/* 메뉴탭 : 데스크탑인 경우 양옆, 모바일이라면 세로.  */}
         <div className="container mx-auto lg:flex">
           <DynamicMenuTabServer />

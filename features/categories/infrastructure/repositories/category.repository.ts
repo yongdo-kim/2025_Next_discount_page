@@ -4,7 +4,7 @@ import { categoryApi } from "@/features/categories/infrastructure/api/category.a
 
 export class HttpCategoryRepository implements CategoryRepository {
   async getCategories(query?: string): Promise<CategoryEntity[]> {
-    const categories = await categoryApi.getCategories(query);
+    const categories = await categoryApi.getCategories({ query });
     return categories.map(
       (category) =>
         new CategoryEntity({

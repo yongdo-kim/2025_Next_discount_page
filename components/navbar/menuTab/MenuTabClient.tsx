@@ -43,13 +43,9 @@ export default function MenuTabClient() {
 
     const etcCategory = categories.find((c) => c.name === "기타");
     const rest = categories.filter((c) => c.name !== "기타");
-    const sortedRest = [...rest].sort((a, b) =>
-      a.name.localeCompare(b.name, "ko"),
-    );
-
     return etcCategory
-      ? [SHOW_ALL_CATEGORY, ...sortedRest, etcCategory]
-      : [SHOW_ALL_CATEGORY, ...sortedRest];
+      ? [SHOW_ALL_CATEGORY, ...rest, etcCategory]
+      : [SHOW_ALL_CATEGORY, ...rest];
   }, [categories]); // categories가 변경될 때만 재계산
 
   const selectedCategoryId = Number(selectedId) || 0;

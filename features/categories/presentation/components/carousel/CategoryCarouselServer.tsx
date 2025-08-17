@@ -8,7 +8,7 @@ import { categoryKeys } from "@/features/categories/infrastructure/contstant/que
 export default async function CategoryCarouselServer() {
   try {
     await queryClient.prefetchQuery({
-      queryKey: [categoryKeys.carousel],
+      queryKey: [categoryKeys.all],
       queryFn: async () => {
         const posts = await container.postService.getCategoryPostPreviews();
         return JSON.parse(JSON.stringify(posts));
