@@ -50,16 +50,20 @@ function MobileCard({
             className="relative"
             data-testid="post-card-middle-mobile-image-wrapper"
           >
-            <SmartImage
-              src={post.thumbnailUrl || ""}
-              className="h-[180px] w-full rounded-2xl object-cover"
-              alt="썸네일"
-              width={320}
-              height={160}
-              sizes="(max-width: 640px) 100vw, 320px"
-              priority={priority}
-              data-testid="post-card-middle-mobile-image"
-            />
+            {post.thumbnailUrl ? (
+              <SmartImage
+                src={post.thumbnailUrl}
+                className="h-[180px] w-full rounded-2xl object-cover"
+                alt="썸네일"
+                width={320}
+                height={160}
+                sizes="(max-width: 640px) 100vw, 320px"
+                priority={priority}
+                data-testid="post-card-middle-mobile-image"
+              />
+            ) : (
+              <div className="h-[180px] w-full rounded-2xl bg-gray-200" />
+            )}
             <div
               className="absolute inset-0 rounded-2xl bg-gradient-to-t from-black/60 to-transparent"
               data-testid="post-card-middle-mobile-overlay"
@@ -113,15 +117,19 @@ function DesktopCard({ post }: { post: PostPreviewEntity }) {
             className="relative h-[250px] transition-transform duration-300 group-hover:scale-105 lg:h-[300px]"
             data-testid="post-card-middle-desktop-image-wrapper"
           >
-            <SmartImage
-              src={post.thumbnailUrl || ""}
-              className="h-[250px] rounded-2xl object-cover lg:h-[300px]"
-              alt="썸네일"
-              width={700}
-              height={300}
-              sizes="(max-width: 1024px) 50vw, 700px"
-              data-testid="post-card-middle-desktop-image"
-            />
+            {post.thumbnailUrl ? (
+              <SmartImage
+                src={post.thumbnailUrl}
+                className="h-[250px] rounded-2xl object-cover lg:h-[300px]"
+                alt="썸네일"
+                width={700}
+                height={300}
+                sizes="(max-width: 1024px) 50vw, 700px"
+                data-testid="post-card-middle-desktop-image"
+              />
+            ) : (
+              <div className="h-[250px] rounded-2xl bg-gray-200 lg:h-[300px]" />
+            )}
             <div
               className="absolute inset-0 rounded-2xl bg-gradient-to-t from-black/70 to-transparent"
               data-testid="post-card-middle-desktop-overlay"

@@ -24,22 +24,26 @@ export default function DynamicSwiper({ data }: { data: CarouselProps }) {
     // SSR에서는 첫 번째 이미지만 렌더링하여 LCP 최적화
     const firstItem = data[0];
     if (!firstItem) return null;
-    
+
     return (
       <div className="cursor-pointer overflow-hidden">
         <Link href={`/posts/${firstItem.id}`}>
           <div className="relative">
-            <Image
-              src={firstItem.thumbnailUrl || ""}
-              className="h-[120px] w-full rounded-md object-cover sm:h-[180px] md:h-[200px] lg:h-[200px]"
-              alt="썸네일"
-              width={600}
-              height={180}
-              priority
-              sizes="(max-width: 768px) 100vw, 600px"
-              loading="eager"
-              fetchPriority="high"
-            />
+            {firstItem.thumbnailUrl ? (
+              <Image
+                src={firstItem.thumbnailUrl}
+                className="h-[120px] w-full rounded-md object-cover sm:h-[180px] md:h-[200px] lg:h-[200px]"
+                alt="썸네일"
+                width={600}
+                height={180}
+                priority
+                sizes="(max-width: 768px) 100vw, 600px"
+                loading="eager"
+                fetchPriority="high"
+              />
+            ) : (
+              <div className="h-[120px] w-full rounded-md bg-gray-200 sm:h-[180px] md:h-[200px] lg:h-[200px]" />
+            )}
             <div className="absolute inset-0" />
             <div className="absolute right-0 bottom-0.5 p-6 text-white">
               <Badge
@@ -75,17 +79,21 @@ export default function DynamicSwiper({ data }: { data: CarouselProps }) {
         >
           <Link href={`/posts/${item.id}`}>
             <div className="relative">
-              <Image
-                src={item.thumbnailUrl || ""}
-                className="h-[120px] w-full rounded-md object-cover sm:h-[180px] md:h-[200px] lg:h-[200px]"
-                alt="썸네일"
-                width={600}
-                height={180}
-                priority={index === 0}
-                sizes="(max-width: 768px) 100vw, 600px"
-                loading={index === 0 ? "eager" : "lazy"}
-                fetchPriority={index === 0 ? "high" : "low"}
-              />
+              {item.thumbnailUrl ? (
+                <Image
+                  src={item.thumbnailUrl}
+                  className="h-[120px] w-full rounded-md object-cover sm:h-[180px] md:h-[200px] lg:h-[200px]"
+                  alt="썸네일"
+                  width={600}
+                  height={180}
+                  priority={index === 0}
+                  sizes="(max-width: 768px) 100vw, 600px"
+                  loading={index === 0 ? "eager" : "lazy"}
+                  fetchPriority={index === 0 ? "high" : "low"}
+                />
+              ) : (
+                <div className="h-[120px] w-full rounded-md bg-gray-200 sm:h-[180px] md:h-[200px] lg:h-[200px]" />
+              )}
               <div className="absolute inset-0" />
               <div className="absolute right-0 bottom-0.5 p-6 text-white">
                 <Badge

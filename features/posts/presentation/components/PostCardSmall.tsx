@@ -38,15 +38,19 @@ function MobileCard({
       >
         {/* 이미지 */}
         <div className="h-20 w-24 flex-shrink-0 rounded-2xl">
-          <SmartImage
-            src={post.thumbnailUrl || ""}
-            className="h-full w-full rounded-2xl object-cover"
-            alt="썸네일"
-            width={96}
-            height={80}
-            sizes="96px"
-            priority={priority}
-          />
+          {post.thumbnailUrl ? (
+            <SmartImage
+              src={post.thumbnailUrl}
+              className="h-full w-full rounded-2xl object-cover"
+              alt="썸네일"
+              width={96}
+              height={80}
+              sizes="96px"
+              priority={priority}
+            />
+          ) : (
+            <div className="h-full w-full rounded-2xl bg-gray-200" />
+          )}
         </div>
         {/* 내용 */}
         <div className="px-6">
@@ -114,16 +118,20 @@ function DesktopCard({
             className="relative overflow-hidden rounded-2xl"
             data-testid="post-card-small-desktop-image-wrapper"
           >
-            <SmartImage
-              src={post.thumbnailUrl || ""}
-              className="h-[160px] w-full rounded-2xl object-cover transition-transform duration-300 group-hover:scale-105"
-              alt="썸네일"
-              width={180}
-              height={120}
-              sizes="(max-width: 640px) 200px, w-full"
-              priority={priority}
-              data-testid="post-card-small-desktop-image"
-            />
+            {post.thumbnailUrl ? (
+              <SmartImage
+                src={post.thumbnailUrl}
+                className="h-[160px] w-full rounded-2xl object-cover transition-transform duration-300 group-hover:scale-105"
+                alt="썸네일"
+                width={180}
+                height={120}
+                sizes="(max-width: 640px) 200px, w-full"
+                priority={priority}
+                data-testid="post-card-small-desktop-image"
+              />
+            ) : (
+              <div className="h-[160px] w-full rounded-2xl bg-gray-200" />
+            )}
             {/* 오버레이: 뱃지 + 타이틀 */}
             <div
               className="absolute top-0 left-0 flex h-full w-full flex-col justify-between bg-black/40 p-3"

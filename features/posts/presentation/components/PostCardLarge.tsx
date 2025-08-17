@@ -72,15 +72,19 @@ export default function PostCardLarge({
             </Badge>
           )}
         </div>
-        <SmartImage
-          src={post.thumbnailUrl || ""}
-          className="aspect-video w-full rounded-xl object-cover"
-          alt="썸네일"
-          width={400}
-          height={200}
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 400px"
-          data-testid="post-card-large-image"
-        />
+        {post.thumbnailUrl ? (
+          <SmartImage
+            src={post.thumbnailUrl}
+            className="aspect-video w-full rounded-xl object-cover"
+            alt="썸네일"
+            width={400}
+            height={200}
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 400px"
+            data-testid="post-card-large-image"
+          />
+        ) : (
+          <div className="aspect-video w-full rounded-xl bg-gray-200" />
+        )}
         <CardHeader className="px-2" data-testid="post-card-large-header">
           {/* 상단 */}
           <CardTitle
