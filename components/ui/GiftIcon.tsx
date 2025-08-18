@@ -1,4 +1,4 @@
-import { Gift } from "lucide-react";
+import { ClockAlert } from "lucide-react";
 
 interface GiftIconProps {
   className?: string;
@@ -16,17 +16,17 @@ export function GiftIcon({ className = "h-6 w-6" }: GiftIconProps) {
             x2="100%"
             y2="100%"
           >
-            <stop offset="0%" stopColor="#eab308" />
-            <stop offset="100%" stopColor="#f97316" />
+            <stop offset="0%" stopColor="#10b981" />
+            <stop offset="100%" stopColor="#059669" />
           </linearGradient>
         </defs>
       </svg>
-      <Gift
+      <ClockAlert
         className={className}
         style={{
           stroke: "url(#gift-gradient)",
-          strokeWidth: 1.5,
-          fill: "url(#gift-gradient)",
+          strokeWidth: 2,
+          fill: "none",
         }}
       />
     </>
