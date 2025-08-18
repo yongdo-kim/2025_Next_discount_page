@@ -9,4 +9,11 @@ export const discountApi = {
     });
     return response.posts;
   },
+
+  async getDiscountDetail(id: number) {
+    const response = await apiClient.get<DiscountDto>({
+      url: `/discounts/${id}`,
+    });
+    return response;
+  },
 };

@@ -1,5 +1,11 @@
+"use client";
+
 import { PlatformTag } from "@/components/ui/PlatformTag";
 import { DiscountEntity } from "@/features/discounts/domain/entities/discount.entity";
+import { discountKeys } from "@/features/discounts/infrastructure/constant/query-keys";
+import { container } from "@/lib/di/dependencies";
+import { queryClient } from "@/lib/react-query";
+import Link from "next/link";
 
 function splitTitleByPlatform(title: string): {
   platform: string | null;
@@ -14,15 +20,24 @@ function splitTitleByPlatform(title: string): {
   return { platform: null, content: title };
 }
 
-//프레페칭 기능 추가하기.
-
 export const DiscountPreview = ({ discount }: { discount: DiscountEntity }) => {
   const { platform, content } = splitTitleByPlatform(discount.title);
 
+  const handlePrefetch = () => {
+    queryClient.prefetchQuery({
+      queryKey: discountKeys.detail(discount.id),
+      queryFn: () => container.discountService.getDiscountDetail(discount.id),
+    });
+  };
+
   return (
-    <div className="flex items-center gap-2 pb-2">
+    <Link
+      href={`/discounts/${discount.id}`}
+      onMouseEnter={handlePrefetch}
+      className="flex items-center gap-2 pb-2 hover:cursor-pointer hover:underline"
+    >
       {platform && <PlatformTag platform={platform} />}
-      <div className="hover:cursor-pointer hover:underline">{content}</div>
-    </div>
+      <span>{content}</span>
+    </Link>
   );
 };

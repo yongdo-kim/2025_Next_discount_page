@@ -7,4 +7,8 @@ export class DiscountService {
   async getNewestDiscountPreview(limit?: number): Promise<DiscountEntity[]> {
     return await this.discountRepository.getNewestDiscountPreview(limit);
   }
+
+  async getDiscountDetail(id: number): Promise<DiscountEntity> {
+    return await this.discountRepository.getDiscountDetail(id);
+  }
 }
