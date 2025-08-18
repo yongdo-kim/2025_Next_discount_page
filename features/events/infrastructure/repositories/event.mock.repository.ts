@@ -11,6 +11,7 @@ export class MockEventRepository implements EventRepository {
       winners: "30명",
       endDate: new Date("2025-08-19T00:00:00.000Z"),
       link: "https://www.eventhouse.kr/site/",
+      eventMethod: "댓글응모",
       originSourceUrl:
         "https://www.youtube.com/post/Ugkxg2cWuFbX7PeWMPG5WV8yLHzSXCOEiJHf?app=desktop&utm_src=ehi",
     }),
@@ -23,6 +24,7 @@ export class MockEventRepository implements EventRepository {
       endDate: new Date("2025-01-07T00:00:00.000Z"),
       link: "https://www.example.com/event",
       originSourceUrl: "https://www.example.com/original",
+      eventMethod: "댓글응모",
     }),
     new EventEntity({
       postId: 524,
@@ -32,6 +34,7 @@ export class MockEventRepository implements EventRepository {
       winners: "50명",
       endDate: new Date("2025-02-15T00:00:00.000Z"),
       link: "https://www.valentine.com/sale",
+      eventMethod: "댓글응모",
       originSourceUrl: "https://www.valentine.com/source",
     }),
   ];

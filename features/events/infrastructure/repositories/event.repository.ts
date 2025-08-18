@@ -16,6 +16,7 @@ export class HttpEventRepository implements EventRepository {
           endDate: event.endDate,
           link: event.link,
           originSourceUrl: event.originSourceUrl,
+          eventMethod: event.eventMethod,
         }),
     );
   }
@@ -33,6 +34,7 @@ export class HttpEventRepository implements EventRepository {
           endDate: event.endDate,
           link: event.link,
           originSourceUrl: event.originSourceUrl,
+          eventMethod: event.eventMethod,
         }),
     );
   }
@@ -50,6 +52,7 @@ export class HttpEventRepository implements EventRepository {
           endDate: event.endDate,
           link: event.link,
           originSourceUrl: event.originSourceUrl,
+          eventMethod: event.eventMethod,
         }),
     );
   }
@@ -66,6 +69,7 @@ export class HttpEventRepository implements EventRepository {
         endDate: event.endDate,
         link: event.link,
         originSourceUrl: event.originSourceUrl,
+        eventMethod: event.eventMethod,
       });
     } catch {
       return null;

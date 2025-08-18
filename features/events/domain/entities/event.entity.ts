@@ -6,6 +6,7 @@ export interface EventProps {
   winners: string;
   endDate: Date;
   link: string;
+  eventMethod: string;
   originSourceUrl: string;
 }
 
@@ -18,6 +19,7 @@ export class EventEntity {
   public readonly endDate: Date;
   public readonly link: string;
   public readonly originSourceUrl: string;
+  public readonly eventMethod: string;
 
   constructor(props: EventProps) {
     this.postId = props.postId;
@@ -27,6 +29,7 @@ export class EventEntity {
     this.winners = props.winners;
     this.endDate = props.endDate;
     this.link = props.link;
+    this.eventMethod = props.eventMethod;
     this.originSourceUrl = props.originSourceUrl;
   }
 }

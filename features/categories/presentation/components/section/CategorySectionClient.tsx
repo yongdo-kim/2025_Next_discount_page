@@ -43,7 +43,7 @@ export default function CategorySectionClient() {
         ) : (
           // 전체 UI
           <>
-            <section className="flex">
+            <section className="grid grid-cols-2">
               <NewestDiscountArea />
               <EventsUpComingArea />
             </section>

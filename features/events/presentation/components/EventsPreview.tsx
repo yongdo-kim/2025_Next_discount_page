@@ -1,5 +1,11 @@
+import { EventTypeTag } from "@/components/ui/EventTypeTag";
 import { EventEntity } from "@/features/events/domain/entities/event.entity";
 
 export const EventsPreview = ({ event }: { event: EventEntity }) => {
-  return <div>{event.title}</div>;
+  return (
+    <div className="flex items-center gap-2 pb-2 hover:cursor-pointer hover:underline">
+      <div>{EventTypeTag({ eventType: event.eventMethod })}</div>
+      <div>{event.title + " 이벤트"}</div>
+    </div>
+  );
 };

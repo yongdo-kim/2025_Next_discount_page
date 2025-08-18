@@ -9,6 +9,7 @@ export const eventResponseSchema = z.object({
   winners: z.string(),
   endDate: z.string().transform((str) => new Date(str)),
   link: z.string(),
+  eventMethod: z.string(),
   originSourceUrl: z.string(),
 });
 
@@ -23,6 +24,7 @@ export function toEntity(dto: EventDto): EventEntity {
     winners: dto.winners,
     endDate: dto.endDate,
     link: dto.link,
+    eventMethod: dto.eventMethod,
     originSourceUrl: dto.originSourceUrl,
   });
 }
