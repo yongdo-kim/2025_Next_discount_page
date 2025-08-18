@@ -1,18 +1,10 @@
+import NewestDiscountServer from "@/features/discounts/presentation/components/NewestDiscountServer";
+import EventsUpComingServer from "@/features/events/presentation/components/EventsUpComingServer";
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
 
 const DynamicMenuTabServer = dynamic(
   () => import("@/components/navbar/menuTab/MenuTabServer"),
-  {
-    loading: () => null,
-  },
-);
-
-const DynamicCategorySectionServer = dynamic(
-  () =>
-    import(
-      "@/features/categories/presentation/components/section/CategorySectionServer"
-    ),
   {
     loading: () => null,
   },
@@ -28,7 +20,10 @@ export default async function Page() {
         {/* 메뉴탭 : 데스크탑인 경우 양옆, 모바일이라면 세로.  */}
         <div className="container mx-auto lg:flex">
           <DynamicMenuTabServer />
-          <DynamicCategorySectionServer />
+          <section className="grid grid-cols-2">
+            <NewestDiscountServer />
+            <EventsUpComingServer />
+          </section>
         </div>
       </Suspense>
     </>

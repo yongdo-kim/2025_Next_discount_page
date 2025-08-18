@@ -20,9 +20,9 @@ export const DiscountPreview = ({ discount }: { discount: DiscountEntity }) => {
   const { platform, content } = splitTitleByPlatform(discount.title);
 
   return (
-    <div className="flex items-center gap-2 pb-2 hover:cursor-pointer hover:underline">
+    <div className="flex items-center gap-2 pb-2">
       {platform && <PlatformTag platform={platform} />}
-      <div className="pl-2">{content}</div>
+      <div className="hover:cursor-pointer hover:underline">{content}</div>
     </div>
   );
 };

@@ -1,10 +1,11 @@
 "use client";
+
 import { MainListSection } from "@/components/common/MainListSection";
-import { FlameIcon } from "@/components/ui/FlameIcon";
+import { GiftIcon } from "@/components/ui/GiftIcon";
 import { DiscountPreview } from "@/features/discounts/presentation/components/DiscountPreview";
 import { useNewestDiscountPreviews } from "@/features/discounts/presentation/hooks/use-fetch-discounts";
 
-export function NewestDiscountArea() {
+export default function NewestDiscountClient() {
   const {
     data: discounts,
     error,
@@ -15,7 +16,7 @@ export function NewestDiscountArea() {
   return (
     <MainListSection
       title="오늘의 할인"
-      icon={<FlameIcon />}
+      icon={<GiftIcon />}
       data={discounts}
       error={error}
       isError={isError}

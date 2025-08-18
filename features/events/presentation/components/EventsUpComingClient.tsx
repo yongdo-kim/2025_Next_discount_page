@@ -1,11 +1,12 @@
 "use client";
+
 import { MainListSection } from "@/components/common/MainListSection";
 import { GiftIcon } from "@/components/ui/GiftIcon";
 import { EventsPreview } from "@/features/events/presentation/components/EventsPreview";
 import { useFetchEventsUpcoming } from "@/features/events/presentation/hooks/use-event-upcoming";
 import { formatToMMDD } from "@/lib/utils";
 
-export function EventsUpComingArea() {
+export default function EventsUpComingClient() {
   const { data: events, error, isError, refetch } = useFetchEventsUpcoming(8);
 
   return (
