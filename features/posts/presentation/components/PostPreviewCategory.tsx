@@ -34,7 +34,7 @@ export default function PostPreviewCategoryArea({
           className="flex justify-between px-4 pb-4"
           data-testid="post-preview-category-header"
         >
-          <MainTitle title={title} coloredTitle="" showIcon={true} />
+          <MainTitle title={title} />
         </div>
         <ErrorState
           error={error}
@@ -55,7 +55,7 @@ export default function PostPreviewCategoryArea({
         className="flex justify-between px-4 pb-4"
         data-testid="post-preview-category-header"
       >
-        <MainTitle title={title} coloredTitle="" showIcon={true} />
+        <MainTitle title={title} />
       </div>
       <ul
         className="grid grid-cols-1 gap-4 px-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3"

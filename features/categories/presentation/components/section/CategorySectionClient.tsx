@@ -1,8 +1,8 @@
 "use client";
 import DividerLine from "@/components/ui/DividerLine";
-import NewCategoryDiscountArea from "@/features/categories/presentation/components/CategoryNewArea";
-import CategoryRandomArea from "@/features/categories/presentation/components/CategoryRandomArea";
 import CategoryDiscountArea from "@/features/categories/presentation/components/CategoryDiscountArea";
+import NewCategoryDiscountArea from "@/features/categories/presentation/components/TodayDiscount";
+import CategoryRandomArea from "@/features/categories/presentation/components/CategoryRandomArea";
 import { useFetchCategories } from "@/features/categories/presentation/hooks/use-fetch-categories";
 import PostListArea from "@/features/posts/presentation/components/PostListArea";
 import { useSearchParams } from "next/navigation";
@@ -42,7 +42,10 @@ export default function CategorySectionClient() {
         ) : (
           // 전체 UI
           <>
-            <NewCategoryDiscountArea />
+            <section>
+              <NewCategoryDiscountArea />
+            </section>
+
             <DividerLine />
             <CategoryRandomArea />
             <DividerLine />

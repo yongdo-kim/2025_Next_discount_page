@@ -18,11 +18,11 @@ export default async function CategorySectionServer() {
         },
       })
       .catch(() => [] as CategoryEntity[]),
-    
+
     // NewCategoryDiscountArea용 데이터 (오늘의 따끈한 할인)
     queryClient
       .fetchQuery({
-        queryKey: [categoryKeys.postPreviews(null, 8)],
+        queryKey: [categoryKeys.hotDeals],
         queryFn: async () => {
           const posts = await container.postService.getPostPreviews({
             req: { limit: 8, categoryId: null },
@@ -31,7 +31,7 @@ export default async function CategorySectionServer() {
         },
       })
       .catch(() => []),
-      
+
     // CategoryRandomArea용 데이터 (테마별 특가 추천)
     queryClient
       .fetchQuery({

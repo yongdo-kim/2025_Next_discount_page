@@ -36,7 +36,7 @@ export default function PostListArea({
   if (isLoading) {
     return (
       <>
-        <MainTitle title={displayName} coloredTitle="" className="p-4" />
+        <MainTitle title={displayName} className="p-4" />
         <div className="mt-4" data-testid="post-list-loading">
           {/* 로딩 스켈레톤 UI */}
           {Array.from({ length: 6 }, (_, index) => (
@@ -52,7 +52,7 @@ export default function PostListArea({
   if (error) {
     return (
       <>
-        <MainTitle title={displayName} coloredTitle="" className="p-4" />
+        <MainTitle title={displayName} className="p-4" />
         <div
           className="mx-6 mt-4 text-center text-red-500"
           data-testid="post-list-error"
@@ -67,7 +67,7 @@ export default function PostListArea({
   if (!isLoading && allPosts.length === 0) {
     return (
       <>
-        <MainTitle title={displayName} coloredTitle="" className="p-4" />
+        <MainTitle title={displayName} className="p-4" />
         <div
           className="mx-6 mt-4 text-center text-gray-500 dark:text-gray-400"
           data-testid="post-list-empty"
@@ -80,7 +80,7 @@ export default function PostListArea({
 
   return (
     <>
-      <MainTitle title={displayName} coloredTitle="" className="p-4" />
+      <MainTitle title={displayName} className="p-4" />
       <div className="mt-4" data-testid="post-list-container">
         <Virtuoso
           data={allPosts}

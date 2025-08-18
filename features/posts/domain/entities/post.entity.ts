@@ -2,7 +2,6 @@ import { PostSourceEntity } from "@/features/posts/domain/entities/post-source.e
 import { TagEntity } from "@/features/tags/domain/entities/tag.entity";
 import { UserEntity } from "@/features/users/domain/entities/user.entity";
 
-
 export interface PostProps {
   id: number;
   title: string;
@@ -43,7 +42,6 @@ export class PostEntity {
   public readonly isBlockedByMe: boolean;
   public readonly tags: TagEntity[];
   public readonly source: PostSourceEntity;
-
   constructor(props: PostProps) {
     this.id = props.id;
     this.title = props.title;

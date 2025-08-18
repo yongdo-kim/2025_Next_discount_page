@@ -3,6 +3,7 @@
 import MainTitle from "@/components/MainTitle";
 import { useFetchCategories } from "@/features/categories/presentation/hooks/use-fetch-categories";
 import PostPreviewCategoryArea from "@/features/posts/presentation/components/PostPreviewCategory";
+import { Flame } from "lucide-react";
 
 type CategoryDiscountAreaProps = {
   firstCategoryOnly?: boolean;
@@ -22,11 +23,7 @@ export default function CategoryDiscountArea({
   return (
     <section className="pt-8 pb-2 md:pt-8 md:pb-8">
       <div className="flex justify-between px-4 pt-4 pb-4">
-        <MainTitle
-          title="테마별"
-          coloredTitle=" 할인"
-          color="text-emerald-500"
-        />
+        <MainTitle title="테마별 할인" icon={<Flame />} />
       </div>
 
       {categoriesToShow.map((category) => (

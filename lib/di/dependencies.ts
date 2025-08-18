@@ -5,6 +5,9 @@ import { HttpAuthRepository } from "@/features/auth/infrastructure/repositories/
 import { CategoryService } from "@/features/categories/application/services/category.service";
 import { MockCategoryRepository } from "@/features/categories/infrastructure/repositories/category.mock.repository";
 import { HttpCategoryRepository } from "@/features/categories/infrastructure/repositories/category.repository";
+import { EventService } from "@/features/events/application/services/event.service";
+import { MockEventRepository } from "@/features/events/infrastructure/repositories/event.mock.repository";
+import { HttpEventRepository } from "@/features/events/infrastructure/repositories/event.repository";
 import { PostService } from "@/features/posts/application/services/post.service";
 import { MockPostRepository } from "@/features/posts/infrastructure/repositories/post.mock.repository";
 import { HttpPostRepository } from "@/features/posts/infrastructure/repositories/post.repository";
@@ -20,6 +23,7 @@ type Services = {
   postService: PostService;
   tagService: TagService;
   categoryService: CategoryService;
+  eventService: EventService;
   userService: UsersService;
   authService: AuthService;
   // 향후 추가될 서비스들...
@@ -42,6 +46,10 @@ const createServices = (): Services => {
     MockCategoryRepository,
     HttpCategoryRepository,
   );
+  const eventRepository = createRepository(
+    MockEventRepository,
+    HttpEventRepository,
+  );
   const userRepository = createRepository(
     MockUsersRepository,
     HttpUsersRepository,
@@ -52,6 +60,7 @@ const createServices = (): Services => {
     postService: new PostService(postRepository),
     tagService: new TagService(tagRepository),
     categoryService: new CategoryService(categoryRepository),
+    eventService: new EventService(eventRepository),
     userService: new UsersService(userRepository),
     authService: new AuthService(authService),
   };

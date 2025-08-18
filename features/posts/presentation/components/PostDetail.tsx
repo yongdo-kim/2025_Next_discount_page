@@ -287,7 +287,7 @@ export default function PostContent({ html }: { html: string }) {
       className="mt-16 max-w-none whitespace-pre-line"
       data-testid="post-content-section"
     >
-      <MainTitle title={"정리"} coloredTitle="" showIcon={false} />
+      <MainTitle title={"정리"} />
       <div
         className="my-4 py-8 [&_*]:border [&_a]:text-blue-400 [&_a]:underline [&_img]:mx-auto [&_img]:h-auto [&_img]:max-w-full [&_table]:border-collapse [&_td]:p-2 [&_th]:p-2"
         data-testid="post-content-html"
