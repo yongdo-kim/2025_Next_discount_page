@@ -4,7 +4,7 @@ export interface EventProps {
   title: string;
   prize: string;
   winners: string;
-  endDate: Date;
+  endDate: string;
   link: string;
   eventMethod: string;
   originSourceUrl: string;
@@ -16,7 +16,7 @@ export class EventEntity {
   public readonly title: string;
   public readonly prize: string;
   public readonly winners: string;
-  public readonly endDate: Date;
+  public readonly endDate: string;
   public readonly link: string;
   public readonly originSourceUrl: string;
   public readonly eventMethod: string;

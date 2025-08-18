@@ -9,7 +9,7 @@ export class MockEventRepository implements EventRepository {
       title: "제주특별자치도 댓글응모",
       prize: "상품권",
       winners: "30명",
-      endDate: new Date("2025-08-19T00:00:00.000Z"),
+      endDate: "2025-08-19T00:00:00.000Z",
       link: "https://www.eventhouse.kr/site/",
       eventMethod: "댓글응모",
       originSourceUrl:
@@ -21,7 +21,7 @@ export class MockEventRepository implements EventRepository {
       title: "신년 특가 이벤트",
       prize: "현금",
       winners: "10명",
-      endDate: new Date("2025-01-07T00:00:00.000Z"),
+      endDate: "2025-01-07T00:00:00.000Z",
       link: "https://www.example.com/event",
       originSourceUrl: "https://www.example.com/original",
       eventMethod: "댓글응모",
@@ -32,7 +32,7 @@ export class MockEventRepository implements EventRepository {
       title: "발렌타인데이 특별 할인",
       prize: "기프트카드",
       winners: "50명",
-      endDate: new Date("2025-02-15T00:00:00.000Z"),
+      endDate: "2025-02-15T00:00:00.000Z",
       link: "https://www.valentine.com/sale",
       eventMethod: "댓글응모",
       originSourceUrl: "https://www.valentine.com/source",
@@ -49,15 +49,6 @@ export class MockEventRepository implements EventRepository {
       );
     }
     return this.mockEvents;
-  }
-
-  async getActiveEvents(): Promise<EventEntity[]> {
-    const now = new Date();
-    return this.mockEvents.filter((event) => event.endDate > now);
-  }
-
-  async getEventById(id: number): Promise<EventEntity | null> {
-    return this.mockEvents.find((event) => event.eventId === id) || null;
   }
 
   async getEventsUpcoming(limit?: number): Promise<EventEntity[]> {

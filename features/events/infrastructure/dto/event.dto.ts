@@ -7,7 +7,7 @@ export const eventResponseSchema = z.object({
   title: z.string(),
   prize: z.string(),
   winners: z.string(),
-  endDate: z.string().transform((str) => new Date(str)),
+  endDate: z.string(),
   link: z.string(),
   eventMethod: z.string(),
   originSourceUrl: z.string(),
