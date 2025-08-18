@@ -12,7 +12,7 @@ export const discountApi = {
 
   async getDiscountDetail(id: number) {
     const response = await apiClient.get<DiscountDto>({
-      url: `/discounts/${id}`,
+      url: `/${id}/detail`,
     });
     return response;
   },

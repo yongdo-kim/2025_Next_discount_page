@@ -6,7 +6,6 @@ import { toEntity } from "@/features/discounts/infrastructure/dto/discount.dto";
 export class HttpDiscountRepository implements DiscountRepository {
   async getNewestDiscountPreview(limit?: number): Promise<DiscountEntity[]> {
     const discounts = await discountApi.getNewestDiscountPreview(limit);
-    console.log(discounts);
     return discounts.map(toEntity);
   }
 
