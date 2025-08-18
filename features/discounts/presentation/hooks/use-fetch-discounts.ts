@@ -7,6 +7,6 @@ import { useQuery } from "@tanstack/react-query";
 export const useNewestDiscountPreviews = () => {
   return useQuery({
     queryKey: discountKeys.newest(),
-    queryFn: () => container.discountService.getNewestDiscountPreview(3),
+    queryFn: () => container.discountService.getNewestDiscountPreview(8),
   });
 };

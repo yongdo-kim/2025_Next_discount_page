@@ -4,7 +4,7 @@ import CategoryDiscountArea from "@/features/categories/presentation/components/
 import CategoryRandomArea from "@/features/categories/presentation/components/CategoryRandomArea";
 import { useFetchCategories } from "@/features/categories/presentation/hooks/use-fetch-categories";
 import { NewestDiscountArea } from "@/features/discounts/presentation/components/NewestDiscount";
-import { EventsUpComingList } from "@/features/events/presentation/components/EventsUpComingList";
+import { EventsUpComingArea } from "@/features/events/presentation/components/EventsUpComingArea";
 import PostListArea from "@/features/posts/presentation/components/PostListArea";
 import { useSearchParams } from "next/navigation";
 import { Suspense, lazy, useEffect, useState } from "react";
@@ -43,9 +43,9 @@ export default function CategorySectionClient() {
         ) : (
           // 전체 UI
           <>
-            <section>
+            <section className="flex">
               <NewestDiscountArea />
-              <EventsUpComingList />
+              <EventsUpComingArea />
             </section>
 
             <DividerLine />
