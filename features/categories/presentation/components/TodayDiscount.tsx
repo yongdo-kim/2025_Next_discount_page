@@ -6,7 +6,7 @@ import { usePostPreviews } from "@/features/posts/presentation/hooks/use-posts";
 import { isClientError } from "@/lib/error-handler";
 import { Flame } from "lucide-react";
 
-export default function TodayDiscountArea() {
+export function TodayDiscountArea() {
   const {
     data: categories,
     error,

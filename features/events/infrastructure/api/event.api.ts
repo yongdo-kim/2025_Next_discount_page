@@ -10,6 +10,14 @@ export const eventApi = {
     return response;
   },
 
+  async getEventsUpcoming({ limit }: { limit?: number }) {
+    const response = await apiClient.get<EventDto[]>({
+      url: "/events/upcoming",
+      ...(limit && { query: `limit=${limit}` }),
+    });
+    return response;
+  },
+
   async getActiveEvents() {
     const response = await apiClient.get<EventDto[]>({
       url: "/events/active",

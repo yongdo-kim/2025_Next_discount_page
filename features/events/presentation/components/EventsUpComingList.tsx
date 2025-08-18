@@ -1,14 +1,14 @@
 "use client";
 
 import { Badge } from "@/components/shadcn/badge";
-import { useFetchEvents } from "@/features/events/presentation/hooks/use-fetch-events";
+import { useFetchEventsUpcoming } from "@/features/events/presentation/hooks/use-event-upcoming";
 
 type EventListProps = {
-  query?: string;
+  limit?: number;
 };
 
-export default function EventList({ query }: EventListProps) {
-  const { data: events, isLoading, error } = useFetchEvents(query);
+export function EventsUpComingList({ limit }: EventListProps) {
+  const { data: events, isLoading, error } = useFetchEventsUpcoming(limit);
 
   if (isLoading) {
     return <div className="p-4">이벤트를 불러오는 중...</div>;
@@ -50,9 +50,9 @@ export default function EventList({ query }: EventListProps) {
           <div className="mb-4 grid grid-cols-1 gap-4 text-sm">
             <div>
               <span className="text-gray-500">종료일:</span>
-              <div className="font-medium">
-                {event.endDate.toLocaleDateString()}
-              </div>
+              {/* <div className="font-medium">
+                {event.endDate.toISOString().split("T")[0]}
+              </div> */}
             </div>
           </div>
 

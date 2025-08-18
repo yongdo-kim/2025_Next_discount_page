@@ -20,6 +20,23 @@ export class HttpEventRepository implements EventRepository {
     );
   }
 
+  async getEventsUpcoming(limit?: number): Promise<EventEntity[]> {
+    const events = await eventApi.getEventsUpcoming({ limit });
+    return events.map(
+      (event) =>
+        new EventEntity({
+          postId: event.postId,
+          eventId: event.eventId,
+          title: event.title,
+          prize: event.prize,
+          winners: event.winners,
+          endDate: event.endDate,
+          link: event.link,
+          originSourceUrl: event.originSourceUrl,
+        }),
+    );
+  }
+
   async getActiveEvents(): Promise<EventEntity[]> {
     const events = await eventApi.getActiveEvents();
     return events.map(

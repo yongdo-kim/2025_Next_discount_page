@@ -3,4 +3,5 @@ export const eventKeys = {
   active: ["events", "active"] as const,
   detail: (id: number) => ["events", id] as const,
   list: (query?: string) => ["events", "list", query] as const,
+  upcoming: (limit?: number) => ["events", "upcoming", limit] as const,
 } as const;

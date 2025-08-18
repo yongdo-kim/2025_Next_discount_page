@@ -14,6 +14,11 @@ export class EventService {
     return events;
   }
 
+  async getEventsUpcoming(limit?: number): Promise<EventEntity[]> {
+    const events = await this.eventRepository.getEventsUpcoming(limit);
+    return events;
+  }
+
   async getEventById(id: number): Promise<EventEntity | null> {
     const event = await this.eventRepository.getEventById(id);
     return event;
