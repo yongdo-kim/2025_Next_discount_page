@@ -2,11 +2,9 @@ import { PostCategory } from "@/features/posts/domain/types";
 import { TagEntity } from "@/features/tags/domain/entities/tag.entity";
 import { UserEntity } from "@/features/users/domain/entities/user.entity";
 
-
 export interface PostPreviewProps {
   id: number;
   title: string;
-  content: string;
   author: UserEntity;
   commentsCount: number;
   createdAt: string;
@@ -27,7 +25,6 @@ export interface PostPreviewProps {
 export class PostPreviewEntity {
   public readonly id: number;
   public title: string;
-  public content: string;
   public readonly author: UserEntity;
   public readonly commentsCount: number;
   public readonly createdAt: string;
@@ -47,10 +44,6 @@ export class PostPreviewEntity {
   constructor(props: PostPreviewProps) {
     this.id = props.id;
     this.title = props.title;
-    this.content = props.content
-      .replace(/^[`']{3}html\s*/im, "")
-      .replace(/^[`']{3}\s*$/gm, "")
-      .trim();
     this.author = props.author;
     this.commentsCount = props.commentsCount;
     this.createdAt = props.createdAt;

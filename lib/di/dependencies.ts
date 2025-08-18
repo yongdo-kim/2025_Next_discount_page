@@ -5,6 +5,9 @@ import { HttpAuthRepository } from "@/features/auth/infrastructure/repositories/
 import { CategoryService } from "@/features/categories/application/services/category.service";
 import { MockCategoryRepository } from "@/features/categories/infrastructure/repositories/category.mock.repository";
 import { HttpCategoryRepository } from "@/features/categories/infrastructure/repositories/category.repository";
+import { DiscountService } from "@/features/discounts/application/services/discount.service";
+import { MockDiscountRepository } from "@/features/discounts/infrastructure/repositories/discount.mock.repository";
+import { HttpDiscountRepository } from "@/features/discounts/infrastructure/repositories/discount.repository";
 import { EventService } from "@/features/events/application/services/event.service";
 import { MockEventRepository } from "@/features/events/infrastructure/repositories/event.mock.repository";
 import { HttpEventRepository } from "@/features/events/infrastructure/repositories/event.repository";
@@ -23,6 +26,7 @@ type Services = {
   postService: PostService;
   tagService: TagService;
   categoryService: CategoryService;
+  discountService: DiscountService;
   eventService: EventService;
   userService: UsersService;
   authService: AuthService;
@@ -46,6 +50,10 @@ const createServices = (): Services => {
     MockCategoryRepository,
     HttpCategoryRepository,
   );
+  const discountRepository = createRepository(
+    MockDiscountRepository,
+    HttpDiscountRepository,
+  );
   const eventRepository = createRepository(
     MockEventRepository,
     HttpEventRepository,
@@ -60,6 +68,7 @@ const createServices = (): Services => {
     postService: new PostService(postRepository),
     tagService: new TagService(tagRepository),
     categoryService: new CategoryService(categoryRepository),
+    discountService: new DiscountService(discountRepository),
     eventService: new EventService(eventRepository),
     userService: new UsersService(userRepository),
     authService: new AuthService(authService),

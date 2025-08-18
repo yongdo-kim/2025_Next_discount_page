@@ -2,8 +2,8 @@
 import DividerLine from "@/components/ui/DividerLine";
 import CategoryDiscountArea from "@/features/categories/presentation/components/CategoryDiscountArea";
 import CategoryRandomArea from "@/features/categories/presentation/components/CategoryRandomArea";
-import { TodayDiscountArea } from "@/features/categories/presentation/components/TodayDiscount";
 import { useFetchCategories } from "@/features/categories/presentation/hooks/use-fetch-categories";
+import { NewestDiscountArea } from "@/features/discounts/presentation/components/NewestDiscount";
 import { EventsUpComingList } from "@/features/events/presentation/components/EventsUpComingList";
 import PostListArea from "@/features/posts/presentation/components/PostListArea";
 import { useSearchParams } from "next/navigation";
@@ -44,7 +44,7 @@ export default function CategorySectionClient() {
           // 전체 UI
           <>
             <section>
-              <TodayDiscountArea />
+              <NewestDiscountArea />
               <EventsUpComingList />
             </section>
 

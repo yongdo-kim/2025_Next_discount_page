@@ -12,7 +12,6 @@ import { container } from "@/lib/di/dependencies";
 import { queryClient } from "@/lib/react-query";
 import { formatDistanceToNow } from "date-fns";
 import { ko } from "date-fns/locale/ko";
-import { htmlToText } from "html-to-text";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -25,7 +24,7 @@ export default function PostCardLarge({
   isAuthorVisible?: boolean;
   isDescVisible?: boolean;
 }) {
-  const content = htmlToText(post.content);
+  // const content = htmlToText(post.content);
 
   // createdAt이 string인 경우 Date 객체로 변환
   const createdAt = post.createdAt ? post.createdAt : new Date();
@@ -99,7 +98,7 @@ export default function PostCardLarge({
               className="line-clamp-2"
               data-testid="post-card-large-description"
             >
-              {content}
+              {/* {content} */}
             </CardDescription>
           )}
           {/* 하단 */}

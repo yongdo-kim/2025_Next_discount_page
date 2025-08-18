@@ -3,7 +3,6 @@ import { PostPreviewEntity } from "@/features/posts/domain/entities/post-preview
 import { postKeys } from "@/features/posts/infrastructure/contstant/query-keys";
 import { container } from "@/lib/di/dependencies";
 import { queryClient } from "@/lib/react-query";
-import { htmlToText } from "html-to-text";
 import Link from "next/link";
 
 export default function PostCardMiddle({
@@ -34,7 +33,7 @@ function MobileCard({
   post: PostPreviewEntity;
   priority?: boolean;
 }) {
-  const content = htmlToText(post.content);
+  // const content = htmlToText(post.content);
 
   return (
     <div
@@ -82,7 +81,7 @@ function MobileCard({
                 className="line-clamp-1 text-xs font-medium text-neutral-300"
                 data-testid="post-card-middle-mobile-description"
               >
-                {content}
+                {/* {content} */}
               </div>
             </div>
           </div>
@@ -93,7 +92,7 @@ function MobileCard({
 }
 
 function DesktopCard({ post }: { post: PostPreviewEntity }) {
-  const content = htmlToText(post.content);
+  // const content = htmlToText(post.content);
 
   return (
     <div
@@ -148,7 +147,7 @@ function DesktopCard({ post }: { post: PostPreviewEntity }) {
                 className="line-clamp-1 w-[200px] overflow-hidden text-base font-medium text-neutral-300 lg:text-lg"
                 data-testid="post-card-middle-desktop-description"
               >
-                {content}
+                {/* {content} */}
               </div>
             </div>
           </div>

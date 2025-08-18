@@ -12,11 +12,11 @@ import { container } from "@/lib/di/dependencies";
 import { queryClient } from "@/lib/react-query";
 import { formatDistanceToNow } from "date-fns";
 import { ko } from "date-fns/locale/ko";
-import { htmlToText } from "html-to-text";
+
 import Link from "next/link";
 
 export default function PostListItem({ post }: { post: PostPreviewEntity }) {
-  const content = htmlToText(post.content).replace(/\n/g, " ");
+  // const content = htmlToText(post.content).replace(/\n/g, " ");
   // createdAt이 string인 경우 Date 객체로 변환
   const createdAt = post.createdAt ? post.createdAt : new Date();
 
@@ -57,7 +57,7 @@ export default function PostListItem({ post }: { post: PostPreviewEntity }) {
                 className="line-clamp-2"
                 data-testid="post-description"
               >
-                {content}
+                {/* {content} */}
               </CardDescription>
               {/* 작성자 */}
               <CardDescription className="mt-2" data-testid="post-meta">

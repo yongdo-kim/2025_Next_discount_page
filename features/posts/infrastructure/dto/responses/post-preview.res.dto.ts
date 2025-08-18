@@ -9,7 +9,6 @@ import { z } from "zod";
 export const postPreviewResSchema = z.object({
   id: z.number(),
   title: z.string(),
-  content: z.string(),
   author: userDtoSchema,
   createdAt: z.string(),
   viewsCount: z.number(),
@@ -22,14 +21,15 @@ export const postPreviewResSchema = z.object({
   category: categoryResponseSchema,
 });
 
-export type PostPreviewsResponse = { posts: z.infer<typeof postPreviewResSchema>[] }; //json 반환타입을 위해 키를 추가
+export type PostPreviewsResponse = {
+  posts: z.infer<typeof postPreviewResSchema>[];
+}; //json 반환타입을 위해 키를 추가
 export type PostPreviewDto = z.infer<typeof postPreviewResSchema>;
 
 export function toPostPreviewEntity(dto: PostPreviewDto): PostPreviewEntity {
   return new PostPreviewEntity({
     id: dto.id,
     title: dto.title,
-    content: dto.content,
     author: new UserEntity({
       id: dto.author.id,
       email: "",
