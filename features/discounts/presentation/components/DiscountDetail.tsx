@@ -38,7 +38,12 @@ export function DiscountDetail({ discountId }: DiscountDetailProps) {
       author_id: discount?.author?.id,
       author_nickname: discount?.author?.nickname,
     });
-  }, [discountId]);
+  }, [
+    discount?.id,
+    discount?.title,
+    discount?.author?.id,
+    discount?.author?.nickname,
+  ]);
 
   if (isLoading) return <div>Loading...</div>;
   if (error || !discount) return <div>할인 정보를 찾을 수 없습니다.</div>;
