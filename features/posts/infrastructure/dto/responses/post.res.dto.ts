@@ -26,7 +26,7 @@ export const postResponseSchema = z.object({
   imageUrl: z.string(),
   tags: tagResponseSchema.array(),
   source: postSourceResSchema,
-  event: postEventResSchema,
+  event: postEventResSchema.optional(),
 });
 
 //dto
@@ -63,6 +63,6 @@ export function toPostEntity(dto: PostDto): PostEntity {
     imageUrl: dto.imageUrl,
     tags: dto.tags.map((tag) => new TagEntity({ id: tag.id, name: tag.name })),
     source: dto.source,
-    event: dto.event,
+    event: dto.event ? dto.event : null,
   });
 }

@@ -12,7 +12,7 @@ export const EventsPreview = ({ event }: { event: EventEntity }) => {
   const handlePrefetch = () => {
     queryClient.prefetchQuery({
       queryKey: postKeys.detail(event.postId),
-      queryFn: () => container.eventService.getEventDetail(event.postId),
+      queryFn: () => container.postService.getPostDetail(event.postId),
     });
   };
 

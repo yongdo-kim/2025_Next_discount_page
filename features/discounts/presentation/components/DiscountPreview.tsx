@@ -14,7 +14,7 @@ export const DiscountPreview = ({ discount }: { discount: DiscountEntity }) => {
   const handlePrefetch = () => {
     queryClient.prefetchQuery({
       queryKey: postKeys.detail(discount.id),
-      queryFn: () => container.discountService.getDiscountDetail(discount.id),
+      queryFn: () => container.postService.getPostDetail(discount.id),
     });
   };
 
