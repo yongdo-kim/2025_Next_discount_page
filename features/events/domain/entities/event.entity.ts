@@ -8,6 +8,7 @@ export interface EventProps {
   link: string;
   eventMethod: string;
   originSourceUrl: string;
+  ogImage: string;
 }
 
 export class EventEntity {
@@ -20,6 +21,7 @@ export class EventEntity {
   public readonly link: string;
   public readonly originSourceUrl: string;
   public readonly eventMethod: string;
+  public readonly ogImage: string;
 
   constructor(props: EventProps) {
     this.postId = props.postId;
@@ -31,5 +33,6 @@ export class EventEntity {
     this.link = props.link;
     this.eventMethod = props.eventMethod;
     this.originSourceUrl = props.originSourceUrl;
+    this.ogImage = props.ogImage;
   }
 }

@@ -11,6 +11,7 @@ export const eventResponseSchema = z.object({
   link: z.string(),
   eventMethod: z.string(),
   originSourceUrl: z.string(),
+  ogImage: z.string(),
 });
 
 export type EventDto = z.infer<typeof eventResponseSchema>;
@@ -26,5 +27,6 @@ export function toEntity(dto: EventDto): EventEntity {
     link: dto.link,
     eventMethod: dto.eventMethod,
     originSourceUrl: dto.originSourceUrl,
+    ogImage: dto.ogImage,
   });
 }

@@ -71,14 +71,14 @@ export default function MenuTabClient() {
     <>
       {/* 데스크탑 */}
       <div className="hidden lg:flex">
-        <aside className="mx-auto flex w-[200px] flex-col items-center space-y-6 px-4 py-4">
+        <aside className="container mx-auto flex flex-wrap px-4 py-4">
           {sorted.map((category) => (
             <MenuItem
               key={category.id}
               category={category}
               selected={selectedCategoryId === category.id}
               onClick={createHandleCategoryClick(category.id)}
-              className="text-md hover:bg-accent w-[150px] cursor-pointer items-start rounded-sm border-0 p-3 font-bold"
+              className="text-md hover:bg-accent cursor-pointer items-start rounded-sm border-0 p-3 font-bold"
             />
           ))}
         </aside>

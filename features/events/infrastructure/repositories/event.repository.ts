@@ -17,6 +17,7 @@ export class HttpEventRepository implements EventRepository {
           link: event.link,
           originSourceUrl: event.originSourceUrl,
           eventMethod: event.eventMethod,
+          ogImage: event.ogImage,
         }),
     );
   }
