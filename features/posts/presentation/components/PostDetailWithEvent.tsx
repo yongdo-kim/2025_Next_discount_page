@@ -49,6 +49,19 @@ export const PostDetailWithEvent = ({ post }: { post: PostEntity }) => {
             <TicketIcon />
             <h2 className="pl-2 text-2xl font-bold">이벤트 정보</h2>
           </div>
+          {post.event && post.source.originSourceUrl && (
+            <div className="mb-4 w-[300px]">
+              <a
+                href={post.source.originSourceUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-emerald-500 to-emerald-600 px-6 py-3 font-semibold text-white shadow-md transition-all duration-200 hover:scale-105 hover:from-emerald-600 hover:to-emerald-700 hover:shadow-lg focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 focus:outline-none"
+              >
+                <TicketIcon className="h-5 w-5" />
+                <div className="font-bold text-white">이벤트 참여하기</div>
+              </a>
+            </div>
+          )}
           <div className="space-y-4 rounded-lg bg-gradient-to-r from-emerald-50 to-blue-50 p-6 dark:from-emerald-900/20 dark:to-blue-900/20">
             {post.event.organizer && (
               <div className="flex items-center gap-2">
@@ -60,6 +73,7 @@ export const PostDetailWithEvent = ({ post }: { post: PostEntity }) => {
                 </span>
               </div>
             )}
+
             {post.event.entryMethod && (
               <div className="flex items-center gap-2">
                 <span className="font-semibold text-emerald-700 dark:text-emerald-300">
@@ -96,7 +110,7 @@ export const PostDetailWithEvent = ({ post }: { post: PostEntity }) => {
                   기간:
                 </span>
                 <span className="text-neutral-800 dark:text-neutral-200">
-                  {post.event.period}
+                  {formatToMMDD(post.event.period) + "까지"}
                 </span>
               </div>
             )}
