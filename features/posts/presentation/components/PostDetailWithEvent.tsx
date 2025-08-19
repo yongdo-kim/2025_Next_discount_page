@@ -1,12 +1,12 @@
 "use client";
 import DividerLine from "@/components/ui/DividerLine";
 import { EventTypeTag } from "@/components/ui/EventTypeTag";
+import { TicketIcon } from "@/components/ui/TicketIcon";
 import { PostEntity } from "@/features/posts/domain/entities/post.entity";
 import { PostDetailFooter } from "@/features/posts/presentation/components/PostDetailFooter";
 import { PostDetailHeader } from "@/features/posts/presentation/components/PostDetailHeader";
 import { sendGAEvent } from "@/lib/ga";
 import { formatToMMDD } from "@/lib/utils";
-import { Ticket } from "lucide-react";
 import { useEffect } from "react";
 
 export const PostDetailWithEvent = ({ post }: { post: PostEntity }) => {
@@ -46,7 +46,7 @@ export const PostDetailWithEvent = ({ post }: { post: PostEntity }) => {
       {post.event && (
         <section className="mt-8" data-testid="post-detail-event-section">
           <div className="mb-8 flex items-center">
-            <Ticket />
+            <TicketIcon />
             <h2 className="pl-2 text-2xl font-bold">이벤트 정보</h2>
           </div>
           <div className="space-y-4 rounded-lg bg-gradient-to-r from-emerald-50 to-blue-50 p-6 dark:from-emerald-900/20 dark:to-blue-900/20">
