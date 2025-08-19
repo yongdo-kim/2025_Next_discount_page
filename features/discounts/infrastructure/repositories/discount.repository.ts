@@ -2,6 +2,8 @@ import { DiscountEntity } from "@/features/discounts/domain/entities/discount.en
 import { DiscountRepository } from "@/features/discounts/domain/repositories/discount.repository";
 import { discountApi } from "@/features/discounts/infrastructure/api/discount.api";
 import { toEntity } from "@/features/discounts/infrastructure/dto/discount.dto";
+import { PostEntity } from "@/features/posts/domain/entities/post.entity";
+import { toPostEntity } from "@/features/posts/infrastructure/dto/responses/post.res.dto";
 
 export class HttpDiscountRepository implements DiscountRepository {
   async getNewestDiscountPreview(limit?: number): Promise<DiscountEntity[]> {
@@ -9,8 +11,8 @@ export class HttpDiscountRepository implements DiscountRepository {
     return discounts.map(toEntity);
   }
 
-  async getDiscountDetail(id: number): Promise<DiscountEntity> {
+  async getDiscountDetail(id: number): Promise<PostEntity> {
     const discount = await discountApi.getDiscountDetail(id);
-    return toEntity(discount);
+    return toPostEntity(discount);
   }
 }

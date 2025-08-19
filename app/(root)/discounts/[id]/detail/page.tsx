@@ -1,4 +1,3 @@
-import { DiscountEntity } from "@/features/discounts/domain/entities/discount.entity";
 import { discountKeys } from "@/features/discounts/infrastructure/constant/query-keys";
 import { DiscountDetail } from "@/features/discounts/presentation/components/DiscountDetail";
 import { container } from "@/lib/di/dependencies";
@@ -18,16 +17,16 @@ export async function generateMetadata({
     const discount = await container.discountService.getDiscountDetail(numId);
     return {
       title: discount.title ? `${discount.title} | 할인탐정` : "할인탐정",
-      description: discount.description || "할인 정보 상세",
+      description: discount.title || "할인 정보 상세",
       openGraph: {
         title: discount.title,
-        description: discount.description,
+        description: discount.title,
         images: discount.imageUrl ? [{ url: discount.imageUrl }] : [],
       },
       twitter: {
         card: "summary_large_image",
         title: discount.title,
-        description: discount.description,
+        description: discount.title,
         images: discount.imageUrl ? [{ url: discount.imageUrl }] : [],
       },
     };
@@ -61,19 +60,11 @@ export default async function DiscountDetailPage({
     }
   }
 
-  const discount = queryClient.getQueryData<DiscountEntity>(
-    discountKeys.detail(numId),
-  );
   const dehydratedState = dehydrate(queryClient);
-
-  // 클래스 인스턴스를 plain object로 변환
-  const serializedDiscount = discount
-    ? JSON.parse(JSON.stringify(discount))
-    : null;
 
   return (
     <HydrationBoundary state={dehydratedState}>
-      <DiscountDetail discountId={numId} initialDiscount={serializedDiscount} />
+      <DiscountDetail discountId={numId} />
     </HydrationBoundary>
   );
 }

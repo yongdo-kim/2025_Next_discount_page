@@ -44,7 +44,7 @@ export function MainListSection<T>({
           {data.map((item) => {
             if (!item) return null;
             return (
-              <li className="list-none" key={getItemKey(item)}>
+              <li className="list-none pl-4" key={getItemKey(item)}>
                 {renderItem(item)}
               </li>
             );

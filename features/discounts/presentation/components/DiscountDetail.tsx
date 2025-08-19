@@ -1,14 +1,12 @@
 "use client";
 
-import { DiscountEntity } from "@/features/discounts/domain/entities/discount.entity";
-import { discountKeys } from "@/features/discounts/infrastructure/constant/query-keys";
-import { container } from "@/lib/di/dependencies";
-import { useQuery } from "@tanstack/react-query";
 import { PlatformTag } from "@/components/ui/PlatformTag";
+import { useDiscountDetail } from "@/features/discounts/presentation/hooks/use-fetch-discounts";
+import { sendGAEvent } from "@/lib/ga";
+import { useEffect } from "react";
 
 interface DiscountDetailProps {
   discountId: number;
-  initialDiscount?: DiscountEntity;
 }
 
 function splitTitleByPlatform(title: string): {
@@ -24,19 +22,23 @@ function splitTitleByPlatform(title: string): {
   return { platform: null, content: title };
 }
 
-export function DiscountDetail({
-  discountId,
-  initialDiscount,
-}: DiscountDetailProps) {
+export function DiscountDetail({ discountId }: DiscountDetailProps) {
   const {
     data: discount,
     isLoading,
     error,
-  } = useQuery({
-    queryKey: discountKeys.detail(discountId),
-    queryFn: () => container.discountService.getDiscountDetail(discountId),
-    initialData: initialDiscount,
+  } = useDiscountDetail({
+    discountId,
   });
+
+  useEffect(() => {
+    sendGAEvent("post_detail_view_init", {
+      post_id: discountId,
+      post_title: discount?.title,
+      author_id: discount?.author?.id,
+      author_nickname: discount?.author?.nickname,
+    });
+  }, [discountId]);
 
   if (isLoading) return <div>Loading...</div>;
   if (error || !discount) return <div>할인 정보를 찾을 수 없습니다.</div>;

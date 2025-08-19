@@ -10,3 +10,10 @@ export const useNewestDiscountPreviews = () => {
     queryFn: () => container.discountService.getNewestDiscountPreview(8),
   });
 };
+
+export const useDiscountDetail = ({ discountId }: { discountId: number }) => {
+  return useQuery({
+    queryKey: discountKeys.detail(discountId),
+    queryFn: () => container.discountService.getDiscountDetail(discountId),
+  });
+};

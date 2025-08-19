@@ -1,5 +1,7 @@
 import { DiscountEntity } from "@/features/discounts/domain/entities/discount.entity";
 import { DiscountRepository } from "@/features/discounts/domain/repositories/discount.repository";
+import { PostEntity } from "@/features/posts/domain/entities/post.entity";
+import { UserEntity } from "@/features/users/domain/entities/user.entity";
 
 export class MockDiscountRepository implements DiscountRepository {
   //더미데이터
@@ -40,11 +42,37 @@ export class MockDiscountRepository implements DiscountRepository {
     return this.mockDiscounts.slice(0, limit);
   }
 
-  async getDiscountDetail(id: number): Promise<DiscountEntity> {
-    const discount = this.mockDiscounts.find((d) => d.id === id);
-    if (!discount) {
-      throw new Error("404");
-    }
-    return discount;
+  async getDiscountDetail(id: number): Promise<PostEntity> {
+    return new PostEntity({
+      id: id + 3,
+      title: "할인 정보",
+      content: "할인 정보",
+      imageUrl: "https://example.com/laptop.jpg",
+      author: new UserEntity({
+        id: 1,
+        nickname: "test",
+        picture: "https://example.com/laptop.jpg",
+        name: "test",
+        provider: "local",
+        role: "user",
+        email: "",
+      }),
+      commentsCount: 0,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+      deletedAt: null,
+      viewsCount: 0,
+      likesCount: 0,
+      isLikedByMe: false,
+      isReportedByMe: false,
+      isBlurredByAI: false,
+      isBlockedByMe: false,
+      isMine: false,
+      tags: [],
+      source: {
+        scrapingSourceUrl: "https://naver.com",
+        originSourceUrl: "https://naver.com",
+      },
+    });
   }
 }
