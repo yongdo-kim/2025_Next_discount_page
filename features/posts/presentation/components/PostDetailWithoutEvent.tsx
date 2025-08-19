@@ -38,7 +38,7 @@ export const PostDetailWithoutEvent = ({ post }: { post: PostEntity }) => {
 
   return (
     <article
-      className="container mx-auto px-8 py-6"
+      className="container mx-auto px-16 py-6"
       data-testid="post-detail-article"
     >
       {/* 태그 */}
@@ -271,16 +271,6 @@ function AiSummaryHeader() {
           </svg>
         </div>
         <span className="text-lg font-semibold">
-          <linearGradient
-            id="robotGradient"
-            x1="0%"
-            y1="0%"
-            x2="100%"
-            y2="100%"
-          >
-            <stop offset="0%" stopColor="#d1d5db" />
-            <stop offset="100%" stopColor="#4b5563" />
-          </linearGradient>
           AI가 할인 내용을 요약해드릴게요!
         </span>
       </div>
