@@ -17,3 +17,16 @@ export function formatToMMDD(dateString: string): string {
     return dateString;
   }
 }
+
+export function splitTitleByPlatform(title: string): {
+  platform: string | null;
+  content: string;
+} {
+  const platformMatch = title.match(/\[.*?\]/);
+  if (platformMatch) {
+    const platform = platformMatch[0];
+    const content = title.replace(/\[.*?\]\s*/, "").trim();
+    return { platform, content };
+  }
+  return { platform: null, content: title };
+}

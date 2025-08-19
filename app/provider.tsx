@@ -1,12 +1,12 @@
 "use client";
 
+import { ErrorBoundary } from "@/components/error/ErrorBoundary";
 import { Toaster } from "@/components/shadcn/sonner";
 import { RefreshTokenEffect } from "@/features/auth/presentation/hooks/useRefreshToken";
 import { queryClient } from "@/lib/react-query";
+import { captureException } from "@sentry/nextjs";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { ThemeProvider } from "next-themes";
-import { ErrorBoundary } from "@/components/error/ErrorBoundary";
-import { captureException } from "@sentry/nextjs";
 import dynamic from "next/dynamic";
 const DynamicClarityScript = dynamic(
   () => import("@/components/analytics/ClarityScript"),

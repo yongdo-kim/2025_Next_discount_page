@@ -5,20 +5,8 @@ import { DiscountEntity } from "@/features/discounts/domain/entities/discount.en
 import { discountKeys } from "@/features/discounts/infrastructure/constant/query-keys";
 import { container } from "@/lib/di/dependencies";
 import { queryClient } from "@/lib/react-query";
+import { splitTitleByPlatform } from "@/lib/utils";
 import Link from "next/link";
-
-function splitTitleByPlatform(title: string): {
-  platform: string | null;
-  content: string;
-} {
-  const platformMatch = title.match(/\[.*?\]/);
-  if (platformMatch) {
-    const platform = platformMatch[0];
-    const content = title.replace(/\[.*?\]\s*/, "").trim();
-    return { platform, content };
-  }
-  return { platform: null, content: title };
-}
 
 export const DiscountPreview = ({ discount }: { discount: DiscountEntity }) => {
   const { platform, content } = splitTitleByPlatform(discount.title);
@@ -32,7 +20,7 @@ export const DiscountPreview = ({ discount }: { discount: DiscountEntity }) => {
 
   return (
     <Link
-      href={`/discounts/${discount.id}/detail`}
+      href={`/posts/${discount.id}`}
       onMouseEnter={handlePrefetch}
       className="flex items-center gap-2 pb-2 hover:cursor-pointer hover:underline"
     >

@@ -6,6 +6,7 @@ import { PostEntity } from "@/features/posts/domain/entities/post.entity";
 import { TagEntity } from "@/features/tags/domain/entities/tag.entity";
 import { UserEntity } from "@/features/users/domain/entities/user.entity";
 import { sendGAEvent } from "@/lib/ga";
+import { splitTitleByPlatform } from "@/lib/utils";
 import { format } from "date-fns";
 import { ko } from "date-fns/locale/ko";
 import dynamic from "next/dynamic";
@@ -13,6 +14,7 @@ import Image from "next/image";
 import { useEffect } from "react";
 import { toast } from "sonner";
 import { usePostDetail } from "../hooks/use-posts";
+import { PlatformTag } from "@/components/ui/PlatformTag";
 
 const DynamicHtmlParser = dynamic(
   () => import("@/components/ui/DynamicHtmlParser"),
@@ -154,7 +156,7 @@ export const PostDetail = ({
       </div>
     );
   }
-
+  const { platform, content } = splitTitleByPlatform(post.title);
   return (
     <article
       className="container mx-auto px-8 py-6"
@@ -165,10 +167,11 @@ export const PostDetail = ({
 
       {/* 제목 */}
       <h1
-        className="mb-2 pt-2 text-3xl font-bold"
+        className="mb-2 flex items-center gap-2 pt-2 text-3xl font-bold"
         data-testid="post-detail-title"
       >
-        {post.title}
+        {platform && <PlatformTag platform={platform} />}
+        <span>{content}</span>
       </h1>
 
       {/* 작성자, 작성일 */}
