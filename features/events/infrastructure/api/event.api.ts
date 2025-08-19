@@ -1,15 +1,8 @@
 import { EventDto } from "@/features/events/infrastructure/dto/event.dto";
+import { PostDto } from "@/features/posts/infrastructure/dto/responses/post.res.dto";
 import { apiClient } from "@/lib/api/client";
 
 export const eventApi = {
-  async getEvents({ query }: { query?: string }) {
-    const response = await apiClient.get<EventDto[]>({
-      url: "/events",
-      query,
-    });
-    return response;
-  },
-
   async getEventsUpcoming({ limit }: { limit?: number }) {
     const response = await apiClient.get<EventDto[]>({
       url: "/events/upcoming",
@@ -18,16 +11,9 @@ export const eventApi = {
     return response;
   },
 
-  async getActiveEvents() {
-    const response = await apiClient.get<EventDto[]>({
-      url: "/events/active",
-    });
-    return response;
-  },
-
-  async getEventById(id: number) {
-    const response = await apiClient.get<EventDto>({
-      url: `/events/${id}`,
+  async getEventDetail(id: number) {
+    const response = await apiClient.get<PostDto>({
+      url: `/events/${id}/detail`,
     });
     return response;
   },

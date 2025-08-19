@@ -1,6 +1,8 @@
 import { EventEntity } from "@/features/events/domain/entities/event.entity";
 import { EventRepository } from "@/features/events/domain/repositories/event.repository";
 import { eventApi } from "@/features/events/infrastructure/api/event.api";
+import { PostEntity } from "@/features/posts/domain/entities/post.entity";
+import { toPostEntity } from "@/features/posts/infrastructure/dto/responses/post.res.dto";
 
 export class HttpEventRepository implements EventRepository {
   async getEventsUpcoming(limit?: number): Promise<EventEntity[]> {
@@ -19,5 +21,10 @@ export class HttpEventRepository implements EventRepository {
           eventMethod: event.eventMethod,
         }),
     );
+  }
+
+  async getEventDetail(id: number): Promise<PostEntity> {
+    const event = await eventApi.getEventDetail(id);
+    return toPostEntity(event);
   }
 }

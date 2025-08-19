@@ -1,5 +1,4 @@
 "use client";
-import MainTitle from "@/components/MainTitle";
 import { Badge } from "@/components/shadcn/badge";
 import DividerLine from "@/components/ui/DividerLine";
 import { PlatformTag } from "@/components/ui/PlatformTag";
@@ -145,6 +144,12 @@ export default function PostContent({ html }: { html: string }) {
       /위 코드를 HTML 파일에 삽입하면 테이블 형태로 주요 내용을 볼 수 있습니다\./g,
       "",
     ) // 특정 텍스트 제거
+    .replace(/.*HTML 내용.*/g, "") // HTML 내용이 포함된 라인 전체 제거
+    .replace(/.*요약하여 포함.*/g, "") // 요약하여 포함이 포함된 라인 전체 제거
+    .replace(/.*정리.*/g, "") // 정리가 포함된 라인 전체 제거
+    .replace(/.*HTML 정보.*/g, "") // HTML 정보가 포함된 라인 전체 제거
+    .replace(/.*HTML.*/g, "") // HTML이 포함된 라인 전체 제거
+    .replace(/.*표.*/g, "") // 표가 포함된 라인 전체 제거
     .replace(/src="\/\//g, 'src="https://') // //로 시작하는 이미지 URL을 https://로 변환
     .trim();
 
@@ -182,9 +187,8 @@ export default function PostContent({ html }: { html: string }) {
       className="mt-16 max-w-none whitespace-pre-line"
       data-testid="post-content-section"
     >
-      <MainTitle title={"정리"} />
       <div
-        className="my-4 py-8 [&_*]:border [&_a]:text-blue-400 [&_a]:underline [&_img]:mx-auto [&_img]:h-auto [&_img]:max-w-full [&_table]:border-collapse [&_td]:p-2 [&_th]:p-2"
+        className="[&_*]:border [&_a]:text-blue-400 [&_a]:underline [&_img]:mx-auto [&_img]:h-auto [&_img]:max-w-full [&_table]:border-collapse [&_td]:p-2 [&_th]:bg-emerald-500 [&_th]:p-2 dark:[&_th]:bg-emerald-500"
         data-testid="post-content-html"
       >
         <DynamicHtmlParser html={processedHtml} />
@@ -243,7 +247,7 @@ function SourceLink({ url }: { url?: string | null }) {
         href={url}
         target="_blank"
         rel="noopener noreferrer"
-        className="truncate text-sm font-medium text-emerald-500 underline hover:text-emerald-600"
+        className="truncate text-sm font-medium text-gray-400 underline hover:text-emerald-600"
         title={url}
         data-testid="post-detail-source-url"
       >
@@ -251,7 +255,7 @@ function SourceLink({ url }: { url?: string | null }) {
       </a>
       <button
         onClick={handleCopy}
-        className="ml-2 rounded bg-neutral-200 px-2 py-1 text-xs font-semibold text-neutral-600 hover:bg-blue-100 hover:text-blue-600 dark:bg-neutral-800 dark:text-neutral-300 dark:hover:bg-blue-900"
+        className="ml-2 rounded bg-gray-400 px-2 py-1 text-xs font-semibold text-neutral-600 hover:bg-blue-100 hover:text-blue-600 dark:bg-neutral-800 dark:text-neutral-300 dark:hover:bg-blue-900"
         title="복사"
         type="button"
         data-testid="post-detail-source-copy-button"
