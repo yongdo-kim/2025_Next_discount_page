@@ -72,7 +72,7 @@ export const PostDetail = ({
       {/* 작성자, 작성일 */}
       <AuthorInfo user={post.author} createdAt={post.createdAt} />
 
-      <DividerLine />
+      <DividerLine className="mt-4" />
 
       {/* 대표 이미지 */}
       <div className="flex w-full justify-center">
@@ -110,13 +110,14 @@ export const PostDetail = ({
         </div>
       </div>
 
-      <AiSummaryHeader />
+      <DividerLine className="mt-10" />
 
       {/* 본문 */}
       <div
-        className="flex w-full justify-center pb-8 text-lg whitespace-pre-line text-neutral-900 dark:text-neutral-100"
+        className="flex w-full flex-col items-center justify-center pb-8 text-lg whitespace-pre-line text-neutral-900 dark:text-neutral-100"
         data-testid="post-detail-content"
       >
+        <AiSummaryHeader />
         <PostContent html={post.content} />
       </div>
 
@@ -264,7 +265,7 @@ function SourceLink({ url }: { url?: string | null }) {
 function AiSummaryHeader() {
   return (
     <>
-      <div className="mb-4 flex items-center justify-center gap-2">
+      <div className="mt-10 mb-2 flex items-center justify-center gap-2">
         <div className="relative">
           <svg className="h-10 w-10" viewBox="0 0 24 24" fill="none">
             <defs>
@@ -283,10 +284,19 @@ function AiSummaryHeader() {
           </svg>
         </div>
         <span className="text-lg font-semibold">
-          AI 정리가 내용을 정리해드려요!
+          <linearGradient
+            id="robotGradient"
+            x1="0%"
+            y1="0%"
+            x2="100%"
+            y2="100%"
+          >
+            <stop offset="0%" stopColor="#d1d5db" />
+            <stop offset="100%" stopColor="#4b5563" />
+          </linearGradient>
+          AI가 할인 내용을 요약해드릴게요!
         </span>
       </div>
-      <DividerLine />
     </>
   );
 }
