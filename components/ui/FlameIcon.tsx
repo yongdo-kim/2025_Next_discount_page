@@ -1,17 +1,67 @@
+"use client";
+
+import { useEffect, useRef } from "react";
 import { Flame } from "lucide-react";
+import { gsap } from "gsap";
 
 interface FlameIconProps {
   className?: string;
 }
 
 export function FlameIcon({ className = "h-6 w-6" }: FlameIconProps) {
+  const gradientRef = useRef<SVGLinearGradientElement>(null);
+
+  useEffect(() => {
+    if (!gradientRef.current) return;
+
+    const gradient = gradientRef.current;
+    const stops = gradient.querySelectorAll("stop");
+
+    // 초기 위치 설정
+    stops.forEach((stop, i) => {
+      gsap.set(stop, {
+        attr: { offset: `${-50 + i * 50}%` },
+      });
+    });
+
+    const tl = gsap.timeline({ repeat: -1, yoyo: true });
+
+    // 연속적인 파도 효과: 모든 stop들이 함께 위로 이동
+    stops.forEach((stop, i) => {
+      tl.to(
+        stop,
+        {
+          attr: { offset: `${100 + i * 50}%` },
+          duration: 2,
+          ease: "power2.inOut",
+        },
+        0,
+      );
+    });
+
+    return () => {
+      tl.kill();
+    };
+  }, []);
+
   return (
     <>
       <svg width="0" height="0">
         <defs>
-          <linearGradient id="flame-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stopColor="#fbbf24" />
+          <linearGradient
+            ref={gradientRef}
+            id="flame-gradient"
+            x1="0%"
+            y1="100%"
+            x2="0%"
+            y2="0%"
+            gradientUnits="objectBoundingBox"
+          >
+            <stop offset="-50%" stopColor="#fbbf24" />
+            <stop offset="0%" stopColor="#ef4444" />
+            <stop offset="50%" stopColor="#fbbf24" />
             <stop offset="100%" stopColor="#ef4444" />
+            <stop offset="150%" stopColor="#fbbf24" />
           </linearGradient>
         </defs>
       </svg>
