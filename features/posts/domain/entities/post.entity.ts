@@ -1,3 +1,4 @@
+import { PostEventEntity } from "@/features/posts/domain/entities/post-event.entity";
 import { PostSourceEntity } from "@/features/posts/domain/entities/post-source.entity";
 import { TagEntity } from "@/features/tags/domain/entities/tag.entity";
 import { UserEntity } from "@/features/users/domain/entities/user.entity";
@@ -21,6 +22,7 @@ export interface PostProps {
   isBlockedByMe: boolean;
   tags: TagEntity[];
   source: PostSourceEntity;
+  event: PostEventEntity | null;
 }
 
 export class PostEntity {
@@ -42,6 +44,7 @@ export class PostEntity {
   public readonly isBlockedByMe: boolean;
   public readonly tags: TagEntity[];
   public readonly source: PostSourceEntity;
+  public readonly event: PostEventEntity | null;
   constructor(props: PostProps) {
     this.id = props.id;
     this.title = props.title;
@@ -61,5 +64,6 @@ export class PostEntity {
     this.isBlockedByMe = props.isBlockedByMe;
     this.tags = props.tags;
     this.source = props.source;
+    this.event = props.event;
   }
 }

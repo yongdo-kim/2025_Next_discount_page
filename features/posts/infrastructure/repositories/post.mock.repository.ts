@@ -220,6 +220,13 @@ export class MockPostRepository implements PostRepository {
             scrapingSourceUrl: "https://naver.com",
             originSourceUrl: "https://naver.com",
           },
+          event: {
+            organizer: "서울특별시",
+            entryMethod: "단순응모",
+            winners: "30명",
+            prize: "기프티콘",
+            period: "2025-09-07T00:00:00.000Z",
+          },
         }),
       );
     }

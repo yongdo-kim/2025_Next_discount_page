@@ -2,7 +2,7 @@
 
 import { EventTypeTag } from "@/components/ui/EventTypeTag";
 import { EventEntity } from "@/features/events/domain/entities/event.entity";
-import { eventKeys } from "@/features/events/infrastructure/constant/query-keys";
+import { postKeys } from "@/features/posts/infrastructure/contstant/query-keys";
 import { container } from "@/lib/di/dependencies";
 import { queryClient } from "@/lib/react-query";
 import { formatToMMDD } from "@/lib/utils";
@@ -11,14 +11,14 @@ import Link from "next/link";
 export const EventsPreview = ({ event }: { event: EventEntity }) => {
   const handlePrefetch = () => {
     queryClient.prefetchQuery({
-      queryKey: eventKeys.detail(event.eventId),
-      queryFn: () => container.eventService.getEventDetail(event.eventId),
+      queryKey: postKeys.detail(event.postId),
+      queryFn: () => container.eventService.getEventDetail(event.postId),
     });
   };
 
   return (
     <Link
-      href={`/posts/${event.eventId}`}
+      href={`/posts/${event.postId}`}
       onMouseEnter={handlePrefetch}
       className="flex items-center gap-2 pb-2 hover:cursor-pointer hover:underline"
     >

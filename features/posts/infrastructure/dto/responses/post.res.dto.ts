@@ -1,10 +1,10 @@
 import { PostEntity } from "@/features/posts/domain/entities/post.entity";
+import { postEventResSchema } from "@/features/posts/infrastructure/dto/responses/post-event.res.dto";
 import { postSourceResSchema } from "@/features/posts/infrastructure/dto/responses/post-source.res.dto";
 import { TagEntity } from "@/features/tags/domain/entities/tag.entity";
 import { tagResponseSchema } from "@/features/tags/infrastructure/dto/tag.dto";
 import { UserEntity } from "@/features/users/domain/entities/user.entity";
 import { z } from "zod";
-
 
 export const userDtoSchema = z.object({
   id: z.number(),
@@ -26,6 +26,7 @@ export const postResponseSchema = z.object({
   imageUrl: z.string(),
   tags: tagResponseSchema.array(),
   source: postSourceResSchema,
+  event: postEventResSchema,
 });
 
 //dto
@@ -62,5 +63,6 @@ export function toPostEntity(dto: PostDto): PostEntity {
     imageUrl: dto.imageUrl,
     tags: dto.tags.map((tag) => new TagEntity({ id: tag.id, name: tag.name })),
     source: dto.source,
+    event: dto.event,
   });
 }

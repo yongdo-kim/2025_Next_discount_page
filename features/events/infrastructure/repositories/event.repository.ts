@@ -25,6 +25,7 @@ export class HttpEventRepository implements EventRepository {
 
   async getEventDetail(id: number): Promise<PostEntity> {
     const event = await eventApi.getEventDetail(id);
+    console.log(event);
     return toPostEntity(event);
   }
 }

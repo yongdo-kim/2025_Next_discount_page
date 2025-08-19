@@ -107,6 +107,7 @@ export class MockEventRepository implements EventRepository {
       scrapingSourceUrl: "https://www.coupang.com/vp/products/7123456789",
       originSourceUrl: "https://www.samsung.com/sec/audio/galaxy-buds3/",
     }),
+    event: null,
   });
 
   async getEventDetail(id: number): Promise<PostEntity> {

@@ -2,7 +2,7 @@
 
 import { PlatformTag } from "@/components/ui/PlatformTag";
 import { DiscountEntity } from "@/features/discounts/domain/entities/discount.entity";
-import { discountKeys } from "@/features/discounts/infrastructure/constant/query-keys";
+import { postKeys } from "@/features/posts/infrastructure/contstant/query-keys";
 import { container } from "@/lib/di/dependencies";
 import { queryClient } from "@/lib/react-query";
 import { splitTitleByPlatform } from "@/lib/utils";
@@ -13,7 +13,7 @@ export const DiscountPreview = ({ discount }: { discount: DiscountEntity }) => {
 
   const handlePrefetch = () => {
     queryClient.prefetchQuery({
-      queryKey: discountKeys.detail(discount.id),
+      queryKey: postKeys.detail(discount.id),
       queryFn: () => container.discountService.getDiscountDetail(discount.id),
     });
   };
