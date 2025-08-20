@@ -8,4 +8,9 @@ export class EventService {
     const events = await this.eventRepository.getEventsUpcoming(limit);
     return events;
   }
+
+  async getEventsLatest(limit?: number): Promise<EventEntity[]> {
+    const events = await this.eventRepository.getEventsLatest(limit);
+    return events;
+  }
 }

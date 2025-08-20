@@ -20,9 +20,9 @@ export default async function MainAdAreaServer() {
 
     queryClient
       .fetchQuery({
-        queryKey: eventKeys.upcoming(8),
+        queryKey: eventKeys.latest(12),
         queryFn: async () => {
-          const events = await container.eventService.getEventsUpcoming(8);
+          const events = await container.eventService.getEventsLatest(12);
           return JSON.parse(JSON.stringify(events));
         },
       })

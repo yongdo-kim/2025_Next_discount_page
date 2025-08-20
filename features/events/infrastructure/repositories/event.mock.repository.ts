@@ -126,4 +126,8 @@ export class MockEventRepository implements EventRepository {
   async getEventsUpcoming(limit?: number): Promise<EventEntity[]> {
     return this.mockEvents.slice(0, limit);
   }
+
+  async getEventsLatest(limit?: number): Promise<EventEntity[]> {
+    return this.mockEvents.slice(0, limit);
+  }
 }

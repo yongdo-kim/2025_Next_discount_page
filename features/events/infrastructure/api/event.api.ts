@@ -9,4 +9,11 @@ export const eventApi = {
     });
     return response;
   },
+  async getEventsLatest({ limit }: { limit?: number }) {
+    const response = await apiClient.get<EventDto[]>({
+      url: "/events/latest",
+      ...(limit && { query: `limit=${limit}` }),
+    });
+    return response;
+  },
 };
