@@ -8,4 +8,9 @@ export class HttpDiscountRepository implements DiscountRepository {
     const discounts = await discountApi.getNewestDiscountPreview(limit);
     return discounts.map(toEntity);
   }
+
+  async getDiscountsByHotCategory(): Promise<DiscountEntity[]> {
+    const discounts = await discountApi.getDiscountsByHotCategory();
+    return discounts.map(toEntity);
+  }
 }

@@ -9,4 +9,11 @@ export const discountApi = {
     });
     return response.posts;
   },
+
+  async getDiscountsByHotCategory() {
+    const response = await apiClient.get<{ posts: DiscountDto[] }>({
+      url: `/discounts/hot-category`,
+    });
+    return response.posts;
+  },
 };

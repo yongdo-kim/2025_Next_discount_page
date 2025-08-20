@@ -35,6 +35,7 @@ export default async function Page() {
           <MainAdBanners />
           {/* 추천 포스트 */}
           <EventsLatestServer />
+          <DividerLine />
         </div>
       </Suspense>
     </>

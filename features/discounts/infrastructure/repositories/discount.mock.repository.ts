@@ -42,6 +42,10 @@ export class MockDiscountRepository implements DiscountRepository {
     return this.mockDiscounts.slice(0, limit);
   }
 
+  async getDiscountsByHotCategory(): Promise<DiscountEntity[]> {
+    return this.mockDiscounts;
+  }
+
   async getDiscountDetail(id: number): Promise<PostEntity> {
     return new PostEntity({
       id: id + 3,
