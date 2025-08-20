@@ -1,4 +1,5 @@
 import DividerLine from "@/components/ui/DividerLine";
+import MainAdAreaServer from "@/features/discounts/presentation/components/MainAdAreaServer";
 import NewestDiscountServer from "@/features/discounts/presentation/components/NewestDiscountServer";
 import EventsUpComingServer from "@/features/events/presentation/components/EventsUpComingServer";
 import dynamic from "next/dynamic";
@@ -22,6 +23,7 @@ export default async function Page() {
         <div className="container mx-auto">
           <DynamicMenuTabServer />
           <DividerLine className="my-4" />
+          <MainAdAreaServer />
           <section className="grid grid-cols-2">
             <NewestDiscountServer />
             <EventsUpComingServer />
