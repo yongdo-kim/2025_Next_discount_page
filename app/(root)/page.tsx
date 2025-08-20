@@ -2,6 +2,7 @@ import DividerLine from "@/components/ui/DividerLine";
 import { MainAdBanners } from "@/features/banners/presentation/components/MainAdBanners";
 import MainAdAreaServer from "@/features/discounts/presentation/components/MainAdAreaServer";
 import NewestDiscountServer from "@/features/discounts/presentation/components/NewestDiscountServer";
+import EventsLatestServer from "@/features/events/presentation/components/EventsLatestServer";
 import EventsUpComingServer from "@/features/events/presentation/components/EventsUpComingServer";
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
@@ -30,7 +31,10 @@ export default async function Page() {
             <EventsUpComingServer />
           </section>
           <DividerLine />
+          {/* 메인 배너 */}
           <MainAdBanners />
+          {/* 추천 포스트 */}
+          <EventsLatestServer />
         </div>
       </Suspense>
     </>
