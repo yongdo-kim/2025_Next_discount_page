@@ -5,13 +5,13 @@ import { queryClient } from "@/lib/react-query";
 import { HydrationBoundary, dehydrate } from "@tanstack/react-query";
 
 export default async function CategoryDiscountServer() {
-  // 핫 카테고리 할인 데이터를 prefetch
+  // 플랫폼별 할인 데이터를 prefetch
   await queryClient
     .fetchQuery({
-      queryKey: discountKeys.hotCategory(),
+      queryKey: discountKeys.platforms(),
       queryFn: async () => {
         const discounts =
-          await container.discountService.getDiscountsByHotCategory();
+          await container.discountService.getDiscountsByPlatforms();
         return JSON.parse(JSON.stringify(discounts));
       },
     })

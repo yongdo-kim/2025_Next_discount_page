@@ -8,7 +8,7 @@ export class DiscountService {
     return await this.discountRepository.getNewestDiscountPreview(limit);
   }
 
-  async getDiscountsByHotCategory(): Promise<DiscountEntity[]> {
-    return await this.discountRepository.getDiscountsByHotCategory();
+  async getDiscountsByPlatforms(): Promise<DiscountEntity[]> {
+    return await this.discountRepository.getDiscountsByPlatforms();
   }
 }

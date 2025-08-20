@@ -10,9 +10,9 @@ export const discountApi = {
     return response.posts;
   },
 
-  async getDiscountsByHotCategory() {
+  async getDiscountsByPlatforms() {
     const response = await apiClient.get<{ posts: DiscountDto[] }>({
-      url: `/discounts/hot-category`,
+      url: `/discounts/platforms`,
     });
     return response.posts;
   },

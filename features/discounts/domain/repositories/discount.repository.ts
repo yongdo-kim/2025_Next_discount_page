@@ -2,5 +2,5 @@ import { DiscountEntity } from "@/features/discounts/domain/entities/discount.en
 
 export interface DiscountRepository {
   getNewestDiscountPreview(limit?: number): Promise<DiscountEntity[]>;
-  getDiscountsByHotCategory(): Promise<DiscountEntity[]>;
+  getDiscountsByPlatforms(): Promise<DiscountEntity[]>;
 }

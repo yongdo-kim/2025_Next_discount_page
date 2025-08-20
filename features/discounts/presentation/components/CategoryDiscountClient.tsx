@@ -4,21 +4,21 @@ import { MainListSection } from "@/components/common/MainListSection";
 import { FlameIcon } from "@/components/ui/FlameIcon";
 import { DiscountEntity } from "@/features/discounts/domain/entities/discount.entity";
 import { DiscountPreview } from "@/features/discounts/presentation/components/DiscountPreview";
-import { useFetchHotCategoryDiscounts } from "@/features/discounts/presentation/hooks/use-fetch-category-discounts";
+import { useFetchPlatformsDiscounts } from "@/features/discounts/presentation/hooks/use-fetch-category-discounts";
 
 interface CategoryDiscountClientProps {
   title?: string;
 }
 
 export default function CategoryDiscountClient({
-  title = "핫 카테고리 할인",
+  title = "플랫폼별 할인",
 }: CategoryDiscountClientProps) {
   const {
     data: discounts,
     error,
     isError,
     refetch,
-  } = useFetchHotCategoryDiscounts();
+  } = useFetchPlatformsDiscounts();
 
   return (
     <MainListSection<DiscountEntity>

@@ -4,12 +4,12 @@ import { discountKeys } from "@/features/discounts/infrastructure/constant/query
 import { container } from "@/lib/di/dependencies";
 import { useQuery } from "@tanstack/react-query";
 
-export const useFetchHotCategoryDiscounts = () => {
+export const useFetchPlatformsDiscounts = () => {
   return useQuery({
-    queryKey: discountKeys.hotCategory(),
+    queryKey: discountKeys.platforms(),
     queryFn: async () => {
       const discounts =
-        await container.discountService.getDiscountsByHotCategory();
+        await container.discountService.getDiscountsByPlatforms();
       return JSON.parse(JSON.stringify(discounts));
     },
   });
