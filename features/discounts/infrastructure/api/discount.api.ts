@@ -12,11 +12,9 @@ export const discountApi = {
   },
 
   async getDiscountPlatforms() {
-    const response = await apiClient.get<{
-      platforms: DiscountPlatformGroupDto;
-    }>({
-      url: `/discounts/platforms`,
+    const response = await apiClient.get<DiscountPlatformGroupDto>({
+      url: `/platforms`,
     });
-    return response.platforms;
+    return response;
   },
 };

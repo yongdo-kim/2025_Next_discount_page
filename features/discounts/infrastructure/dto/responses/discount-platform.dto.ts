@@ -4,23 +4,23 @@ import {
 } from "@/features/discounts/domain/entities/discount-platform.entity";
 import { z } from "zod";
 
-export const discountPostSchema = z.object({
+export const discountPlatformSchema = z.object({
   id: z.number(),
   title: z.string(),
-  created_at: z.string(),
+  createdAt: z.string(),
   views: z.number(),
-  post_images: z.array(z.string()),
+  postImages: z.array(z.string()),
 });
 
 export const discountByPlatformResponseSchema = z.object({
-  kakao: z.array(discountPostSchema),
-  coupang: z.array(discountPostSchema),
-  naver: z.array(discountPostSchema),
-  ohouse: z.array(discountPostSchema),
-  gmarket: z.array(discountPostSchema),
+  kakao: z.array(discountPlatformSchema),
+  coupang: z.array(discountPlatformSchema),
+  naver: z.array(discountPlatformSchema),
+  ohouse: z.array(discountPlatformSchema),
+  gmarket: z.array(discountPlatformSchema),
 });
 
-export type DiscountPlatformPreviewDto = z.infer<typeof discountPostSchema>;
+export type DiscountPlatformPreviewDto = z.infer<typeof discountPlatformSchema>;
 export type DiscountPlatformGroupDto = z.infer<
   typeof discountByPlatformResponseSchema
 >;
@@ -31,9 +31,9 @@ export function toDiscountPlatformPreviewEntity(
   return new DiscountPlatformPreviewEntity({
     id: dto.id,
     title: dto.title,
-    createdAt: new Date(dto.created_at),
+    createdAt: new Date(dto.createdAt),
     views: dto.views,
-    postImages: dto.post_images,
+    postImages: dto.postImages,
   });
 }
 
