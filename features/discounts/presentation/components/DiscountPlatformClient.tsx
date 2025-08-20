@@ -12,10 +12,14 @@ import {
 import { ShoppingBagIcon } from "@/components/ui/ShoppingBagIcon";
 import SmartImage from "@/components/ui/SmartImage";
 import { useFetchDiscountPlatforms } from "@/features/discounts/presentation/hooks/use-fetch-discount-platforms";
+import { postKeys } from "@/features/posts/infrastructure/contstant/query-keys";
+import { container } from "@/lib/di/dependencies";
 import { isClientError } from "@/lib/error-handler";
+import { queryClient } from "@/lib/react-query";
 import { formatDistanceToNow } from "date-fns";
 import { ko } from "date-fns/locale/ko";
 import { useState } from "react";
+import Link from "next/link";
 
 type PlatformKey = "kakao" | "coupang" | "naver" | "ohouse" | "gmarket";
 
@@ -96,6 +100,13 @@ export default function DiscountPlatformClient() {
     return platforms?.[selectedTab]?.slice(0, 8) || [];
   };
 
+  const handlePrefetch = (postId: string) => {
+    queryClient.prefetchQuery({
+      queryKey: postKeys.detail(postId),
+      queryFn: () => container.postService.getPostDetail(Number(postId)),
+    });
+  };
+
   if (isLoading) return <div>Loading...</div>;
   if (isError && isClientError(error))
     return <ErrorState error={error} onRetry={refetch} size="sm" />;
@@ -138,48 +149,54 @@ export default function DiscountPlatformClient() {
           });
 
           return (
-            <Card key={post.id} className="hover:bg-accent cursor-pointer p-4">
-              <div className="flex items-center">
-                <Badge variant="outline" className="text-md">
-                  {selectedTab === "kakao"
-                    ? "카카오"
-                    : selectedTab === "coupang"
-                      ? "쿠팡"
-                      : selectedTab === "naver"
-                        ? "네이버"
-                        : selectedTab === "ohouse"
-                          ? "오늘의집"
-                          : "G마켓"}
-                </Badge>
-              </div>
-              {post.postImages.length > 0 ? (
-                <SmartImage
-                  src={post.postImages[0]}
-                  className="aspect-video w-full rounded-xl object-cover"
-                  alt={post.title}
-                  width={300}
-                  height={200}
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 300px"
-                />
-              ) : (
-                <div className="aspect-video w-full rounded-xl bg-gray-200" />
-              )}
-              <CardHeader className="px-2">
-                <CardTitle className="line-clamp-2 text-lg font-bold whitespace-normal">
-                  {post.title}
-                </CardTitle>
-                <CardDescription className="mt-2">
-                  <div className="flex items-center justify-between">
-                    <div className="text-sm text-neutral-500 dark:text-neutral-400">
-                      {/* 조회수: {post.views.toLocaleString()} */}
+            <Link
+              key={post.id}
+              href={`/posts/${post.id}`}
+              onMouseEnter={() => handlePrefetch(post.id.toString())}
+            >
+              <Card className="hover:bg-accent cursor-pointer p-4">
+                <div className="flex items-center">
+                  <Badge variant="outline" className="text-md">
+                    {selectedTab === "kakao"
+                      ? "카카오"
+                      : selectedTab === "coupang"
+                        ? "쿠팡"
+                        : selectedTab === "naver"
+                          ? "네이버"
+                          : selectedTab === "ohouse"
+                            ? "오늘의집"
+                            : "G마켓"}
+                  </Badge>
+                </div>
+                {post.postImages.length > 0 ? (
+                  <SmartImage
+                    src={post.postImages[0]}
+                    className="aspect-video w-full rounded-xl object-cover"
+                    alt={post.title}
+                    width={300}
+                    height={200}
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 300px"
+                  />
+                ) : (
+                  <div className="aspect-video w-full rounded-xl bg-gray-200" />
+                )}
+                <CardHeader className="px-2">
+                  <CardTitle className="line-clamp-2 text-lg font-bold whitespace-normal">
+                    {post.title}
+                  </CardTitle>
+                  <CardDescription className="mt-2">
+                    <div className="flex items-center justify-between">
+                      <div className="text-sm text-neutral-500 dark:text-neutral-400">
+                        {/* 조회수: {post.views.toLocaleString()} */}
+                      </div>
+                      <div className="text-sm text-neutral-500 dark:text-neutral-400">
+                        {timeAgo}
+                      </div>
                     </div>
-                    <div className="text-sm text-neutral-500 dark:text-neutral-400">
-                      {timeAgo}
-                    </div>
-                  </div>
-                </CardDescription>
-              </CardHeader>
-            </Card>
+                  </CardDescription>
+                </CardHeader>
+              </Card>
+            </Link>
           );
         })}
       </div>
