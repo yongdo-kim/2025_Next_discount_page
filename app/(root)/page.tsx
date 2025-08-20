@@ -1,4 +1,5 @@
 import DividerLine from "@/components/ui/DividerLine";
+import { MainAdBanners } from "@/features/banners/presentation/components/MainAdBanners";
 import MainAdAreaServer from "@/features/discounts/presentation/components/MainAdAreaServer";
 import NewestDiscountServer from "@/features/discounts/presentation/components/NewestDiscountServer";
 import EventsUpComingServer from "@/features/events/presentation/components/EventsUpComingServer";
@@ -29,6 +30,7 @@ export default async function Page() {
             <EventsUpComingServer />
           </section>
           <DividerLine />
+          <MainAdBanners />
         </div>
       </Suspense>
     </>

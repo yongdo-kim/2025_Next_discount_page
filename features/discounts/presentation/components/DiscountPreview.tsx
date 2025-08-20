@@ -25,7 +25,7 @@ export const DiscountPreview = ({ discount }: { discount: DiscountEntity }) => {
       className="flex items-center gap-2 pb-2 hover:cursor-pointer hover:underline"
     >
       {platform && <PlatformTag platform={platform} />}
-      <span>{content}</span>
+      <span className="truncate">{content}</span>
     </Link>
   );
 };
