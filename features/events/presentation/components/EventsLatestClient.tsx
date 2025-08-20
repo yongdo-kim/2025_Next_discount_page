@@ -2,7 +2,7 @@
 
 import { ErrorState } from "@/components/error/ErrorState";
 import MainTitle from "@/components/MainTitle";
-import { GiftIcon } from "@/components/ui/GiftIcon";
+import { TicketIcon } from "@/components/ui/TicketIcon";
 import { EventsPreview } from "@/features/events/presentation/components/EventsPreview";
 import { useFetchEventsLatest } from "@/features/events/presentation/hooks/use-event-latest";
 import { isClientError } from "@/lib/error-handler";
@@ -18,7 +18,7 @@ export default function EventsLatestClient() {
       >
         <MainTitle
           title={`최신 이벤트 목록을 가져왔어요!`}
-          icon={<GiftIcon />}
+          icon={<TicketIcon className="h-5 w-5" />}
         />
       </div>
 
