@@ -1,8 +1,8 @@
-import { z } from "zod";
 import {
-  DiscountPostEntity,
-  DiscountByPlatformEntity,
+  DiscountPlatformGroup,
+  DiscountPlatformPreviewEntity,
 } from "@/features/discounts/domain/entities/discount-platform.entity";
+import { z } from "zod";
 
 export const discountPostSchema = z.object({
   id: z.number(),
@@ -20,13 +20,15 @@ export const discountByPlatformResponseSchema = z.object({
   gmarket: z.array(discountPostSchema),
 });
 
-export type DiscountPostDto = z.infer<typeof discountPostSchema>;
-export type DiscountByPlatformDto = z.infer<
+export type DiscountPlatformPreviewDto = z.infer<typeof discountPostSchema>;
+export type DiscountPlatformGroupDto = z.infer<
   typeof discountByPlatformResponseSchema
 >;
 
-export function toDiscountPostEntity(dto: DiscountPostDto): DiscountPostEntity {
-  return new DiscountPostEntity({
+export function toDiscountPlatformPreviewEntity(
+  dto: DiscountPlatformPreviewDto,
+): DiscountPlatformPreviewEntity {
+  return new DiscountPlatformPreviewEntity({
     id: dto.id,
     title: dto.title,
     createdAt: new Date(dto.created_at),
@@ -35,14 +37,14 @@ export function toDiscountPostEntity(dto: DiscountPostDto): DiscountPostEntity {
   });
 }
 
-export function toDiscountByPlatformEntity(
-  dto: DiscountByPlatformDto,
-): DiscountByPlatformEntity {
-  return new DiscountByPlatformEntity({
-    kakao: dto.kakao.map(toDiscountPostEntity),
-    coupang: dto.coupang.map(toDiscountPostEntity),
-    naver: dto.naver.map(toDiscountPostEntity),
-    ohouse: dto.ohouse.map(toDiscountPostEntity),
-    gmarket: dto.gmarket.map(toDiscountPostEntity),
+export function toDiscountPlatformGroupEntity(
+  dto: DiscountPlatformGroupDto,
+): DiscountPlatformGroup {
+  return new DiscountPlatformGroup({
+    kakao: dto.kakao.map(toDiscountPlatformPreviewEntity),
+    coupang: dto.coupang.map(toDiscountPlatformPreviewEntity),
+    naver: dto.naver.map(toDiscountPlatformPreviewEntity),
+    ohouse: dto.ohouse.map(toDiscountPlatformPreviewEntity),
+    gmarket: dto.gmarket.map(toDiscountPlatformPreviewEntity),
   });
 }

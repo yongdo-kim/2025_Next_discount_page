@@ -1,5 +1,6 @@
 import DividerLine from "@/components/ui/DividerLine";
 import { MainAdBanners } from "@/features/banners/presentation/components/MainAdBanners";
+import DiscountPlatformServer from "@/features/discounts/presentation/components/DiscountPlatformServer";
 import MainAdAreaServer from "@/features/discounts/presentation/components/MainAdAreaServer";
 import NewestDiscountServer from "@/features/discounts/presentation/components/NewestDiscountServer";
 import EventsLatestServer from "@/features/events/presentation/components/EventsLatestServer";
@@ -36,6 +37,8 @@ export default async function Page() {
           {/* 추천 포스트 */}
           <EventsLatestServer />
           <DividerLine />
+          {/* 플랫폼별 할인 */}
+          <DiscountPlatformServer />
         </div>
       </Suspense>
     </>

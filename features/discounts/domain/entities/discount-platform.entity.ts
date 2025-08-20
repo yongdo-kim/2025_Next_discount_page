@@ -1,4 +1,4 @@
-interface DiscountPostProps {
+interface DiscountPlatformPreviewProps {
   id: number;
   title: string;
   createdAt: Date;
@@ -6,14 +6,20 @@ interface DiscountPostProps {
   postImages: string[];
 }
 
-export class DiscountPostEntity {
+export class DiscountPlatformPreviewEntity {
   public readonly id: number;
   public readonly title: string;
   public readonly createdAt: Date;
   public readonly views: number;
   public readonly postImages: string[];
 
-  constructor({ id, title, createdAt, views, postImages }: DiscountPostProps) {
+  constructor({
+    id,
+    title,
+    createdAt,
+    views,
+    postImages,
+  }: DiscountPlatformPreviewProps) {
     this.id = id;
     this.title = title;
     this.createdAt = createdAt;
@@ -30,20 +36,20 @@ export class DiscountPostEntity {
   }
 }
 
-export interface DiscountByPlatformProps {
-  kakao: DiscountPostEntity[];
-  coupang: DiscountPostEntity[];
-  naver: DiscountPostEntity[];
-  ohouse: DiscountPostEntity[];
-  gmarket: DiscountPostEntity[];
+export interface DiscountPlatformGroupProps {
+  kakao: DiscountPlatformPreviewEntity[];
+  coupang: DiscountPlatformPreviewEntity[];
+  naver: DiscountPlatformPreviewEntity[];
+  ohouse: DiscountPlatformPreviewEntity[];
+  gmarket: DiscountPlatformPreviewEntity[];
 }
 
-export class DiscountByPlatformEntity {
-  public readonly kakao: DiscountPostEntity[];
-  public readonly coupang: DiscountPostEntity[];
-  public readonly naver: DiscountPostEntity[];
-  public readonly ohouse: DiscountPostEntity[];
-  public readonly gmarket: DiscountPostEntity[];
+export class DiscountPlatformGroup {
+  public readonly kakao: DiscountPlatformPreviewEntity[];
+  public readonly coupang: DiscountPlatformPreviewEntity[];
+  public readonly naver: DiscountPlatformPreviewEntity[];
+  public readonly ohouse: DiscountPlatformPreviewEntity[];
+  public readonly gmarket: DiscountPlatformPreviewEntity[];
 
   constructor({
     kakao,
@@ -51,7 +57,7 @@ export class DiscountByPlatformEntity {
     naver,
     ohouse,
     gmarket,
-  }: DiscountByPlatformProps) {
+  }: DiscountPlatformGroupProps) {
     this.kakao = kakao;
     this.coupang = coupang;
     this.naver = naver;
@@ -59,7 +65,7 @@ export class DiscountByPlatformEntity {
     this.gmarket = gmarket;
   }
 
-  get allPosts(): DiscountPostEntity[] {
+  get allPosts(): DiscountPlatformPreviewEntity[] {
     return [
       ...this.kakao,
       ...this.coupang,
@@ -74,8 +80,8 @@ export class DiscountByPlatformEntity {
   }
 
   getPostsByPlatform(
-    platform: keyof DiscountByPlatformProps,
-  ): DiscountPostEntity[] {
+    platform: keyof DiscountPlatformGroupProps,
+  ): DiscountPlatformPreviewEntity[] {
     return this[platform];
   }
 }

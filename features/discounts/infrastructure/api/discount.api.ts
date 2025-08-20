@@ -1,4 +1,5 @@
 import { DiscountDto } from "@/features/discounts/infrastructure/dto/discount.dto";
+import { DiscountPlatformGroupDto } from "@/features/discounts/infrastructure/dto/responses/discount-platform.dto";
 import { apiClient } from "@/lib/api/client";
 
 export const discountApi = {
@@ -10,10 +11,12 @@ export const discountApi = {
     return response.posts;
   },
 
-  async getDiscountsByPlatforms() {
-    const response = await apiClient.get<{ posts: DiscountDto[] }>({
+  async getDiscountPlatforms() {
+    const response = await apiClient.get<{
+      platforms: DiscountPlatformGroupDto;
+    }>({
       url: `/discounts/platforms`,
     });
-    return response.posts;
+    return response.platforms;
   },
 };
