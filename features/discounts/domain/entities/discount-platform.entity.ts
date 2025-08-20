@@ -26,14 +26,6 @@ export class DiscountPlatformPreviewEntity {
     this.views = views;
     this.postImages = postImages;
   }
-
-  get mainImage(): string | null {
-    return this.postImages.length > 0 ? this.postImages[0] : null;
-  }
-
-  get hasMultipleImages(): boolean {
-    return this.postImages.length > 1;
-  }
 }
 
 export interface DiscountPlatformGroupProps {
@@ -63,25 +55,5 @@ export class DiscountPlatformGroup {
     this.naver = naver;
     this.ohouse = ohouse;
     this.gmarket = gmarket;
-  }
-
-  get allPosts(): DiscountPlatformPreviewEntity[] {
-    return [
-      ...this.kakao,
-      ...this.coupang,
-      ...this.naver,
-      ...this.ohouse,
-      ...this.gmarket,
-    ];
-  }
-
-  get totalPostsCount(): number {
-    return this.allPosts.length;
-  }
-
-  getPostsByPlatform(
-    platform: keyof DiscountPlatformGroupProps,
-  ): DiscountPlatformPreviewEntity[] {
-    return this[platform];
   }
 }
