@@ -2,10 +2,19 @@
 
 import { ErrorState } from "@/components/error/ErrorState";
 import MainTitle from "@/components/MainTitle";
+import { Badge } from "@/components/shadcn/badge";
+import {
+  Card,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/shadcn/card";
 import { ShoppingBagIcon } from "@/components/ui/ShoppingBagIcon";
+import SmartImage from "@/components/ui/SmartImage";
 import { useFetchDiscountPlatforms } from "@/features/discounts/presentation/hooks/use-fetch-discount-platforms";
 import { isClientError } from "@/lib/error-handler";
-import Image from "next/image";
+import { formatDistanceToNow } from "date-fns";
+import { ko } from "date-fns/locale/ko";
 import { useState } from "react";
 
 type PlatformKey = "kakao" | "coupang" | "naver" | "ohouse" | "gmarket";
@@ -84,10 +93,12 @@ export default function DiscountPlatformClient() {
   ];
 
   const getFilteredPlatforms = () => {
-    return platforms?.[selectedTab] ? [platforms[selectedTab]] : [];
+    return platforms?.[selectedTab]?.slice(0, 8) || [];
   };
 
   if (isLoading) return <div>Loading...</div>;
+  if (isError && isClientError(error))
+    return <ErrorState error={error} onRetry={refetch} size="sm" />;
 
   return (
     <section className="pt-4 pb-2 md:pb-8">
@@ -104,7 +115,7 @@ export default function DiscountPlatformClient() {
             <button
               key={tab.key}
               onClick={() => setSelectedTab(tab.key)}
-              className={`rounded-full border px-2 py-1 text-sm font-medium whitespace-nowrap transition-colors ${
+              className={`rounded-full border-1 px-2 py-1 text-sm font-medium whitespace-nowrap transition-colors ${
                 selectedTab === tab.key
                   ? tab.colors.selected
                   : `border-gray-300 bg-transparent text-gray-300 ${tab.colors.hover}`
@@ -116,42 +127,62 @@ export default function DiscountPlatformClient() {
         </div>
       </div>
       {/* 리스트 아이템 */}
-      <div className="mt-4 flex px-4">
-        {getFilteredPlatforms().map((posts, index) => (
-          <div key={index} className="space-y-4">
-            {posts?.map((post) => (
-              <div
-                key={post.id}
-                className="rounded-lg border bg-white p-4 shadow-sm"
-              >
-                <h3 className="mb-2 text-lg font-semibold">{post.title}</h3>
-                <div className="flex items-center justify-between text-sm text-gray-500">
-                  <span>조회수: {post.views.toLocaleString()}</span>
-                  <span>
-                    {new Date(post.createdAt).toLocaleDateString("ko-KR")}
-                  </span>
-                </div>
-                {post.postImages.length > 0 && (
-                  <div className="mt-3 grid grid-cols-2 gap-2">
-                    <Image
-                      key={post.postImages[0]}
-                      src={post.postImages[0]}
-                      alt={post.title}
-                      width={200}
-                      height={200}
-                      className="h-32 w-full rounded object-cover"
-                    />
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-        ))}
-      </div>
+      <div className="mt-4 grid w-full grid-cols-4 gap-4 px-4">
+        {getFilteredPlatforms().map((post) => {
+          const createdAt = post.createdAt
+            ? new Date(post.createdAt)
+            : new Date();
+          const timeAgo = formatDistanceToNow(createdAt, {
+            addSuffix: true,
+            locale: ko,
+          });
 
-      {isError && isClientError(error) && (
-        <ErrorState error={error} onRetry={refetch} size="sm" />
-      )}
+          return (
+            <Card key={post.id} className="hover:bg-accent cursor-pointer p-4">
+              <div className="flex items-center">
+                <Badge variant="outline" className="text-md">
+                  {selectedTab === "kakao"
+                    ? "카카오"
+                    : selectedTab === "coupang"
+                      ? "쿠팡"
+                      : selectedTab === "naver"
+                        ? "네이버"
+                        : selectedTab === "ohouse"
+                          ? "오늘의집"
+                          : "G마켓"}
+                </Badge>
+              </div>
+              {post.postImages.length > 0 ? (
+                <SmartImage
+                  src={post.postImages[0]}
+                  className="aspect-video w-full rounded-xl object-cover"
+                  alt={post.title}
+                  width={300}
+                  height={200}
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 300px"
+                />
+              ) : (
+                <div className="aspect-video w-full rounded-xl bg-gray-200" />
+              )}
+              <CardHeader className="px-2">
+                <CardTitle className="line-clamp-2 text-lg font-bold whitespace-normal">
+                  {post.title}
+                </CardTitle>
+                <CardDescription className="mt-2">
+                  <div className="flex items-center justify-between">
+                    <div className="text-sm text-neutral-500 dark:text-neutral-400">
+                      조회수: {post.views.toLocaleString()}
+                    </div>
+                    <div className="text-sm text-neutral-500 dark:text-neutral-400">
+                      {timeAgo}
+                    </div>
+                  </div>
+                </CardDescription>
+              </CardHeader>
+            </Card>
+          );
+        })}
+      </div>
     </section>
   );
 }
