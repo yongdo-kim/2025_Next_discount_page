@@ -171,7 +171,7 @@ export default function DiscountPlatformClient() {
                 <CardDescription className="mt-2">
                   <div className="flex items-center justify-between">
                     <div className="text-sm text-neutral-500 dark:text-neutral-400">
-                      조회수: {post.views.toLocaleString()}
+                      {/* 조회수: {post.views.toLocaleString()} */}
                     </div>
                     <div className="text-sm text-neutral-500 dark:text-neutral-400">
                       {timeAgo}
