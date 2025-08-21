@@ -143,7 +143,7 @@ export default function DiscountPlatformClient() {
         </div>
       </div>
       {/* 리스트 아이템 */}
-      <div className="mt-8 grid w-full grid-cols-4 gap-4 px-4">
+      <div className="mt-8 grid w-full grid-cols-1 gap-4 px-4 lg:grid-cols-4">
         {getFilteredPlatforms().map((post) => {
           const createdAt = post.createdAt
             ? new Date(post.createdAt)
