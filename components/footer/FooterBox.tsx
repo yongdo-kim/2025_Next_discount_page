@@ -9,17 +9,20 @@ export default function FooterBox() {
   return (
     <footer className="container mx-auto min-h-[200px] border-neutral-600 pt-4">
       <DividerLine />
-      <div className="flex h-full flex-col items-end px-8 py-8">
+      <div className="flex w-full flex-col items-end px-8 py-8">
         <div className="flex-1">
-          <h4 className="mb-4 font-semibold">고객 지원</h4>
-          <ul className="space-y-2 text-gray-400">
-            <li>
+          <h4 className="mb-4 flex justify-end font-semibold">고객 지원</h4>
+          <ul className="space-y-2">
+            <li className="flex justify-end">
               <Link
                 href={ROUTES.CONTACT}
-                className="transition-colors hover:text-white"
+                className="text-right transition-colors hover:text-white"
               >
                 문의하기
               </Link>
+            </li>
+            <li className="flex justify-end">
+              이메일문의 : naristudio2023@gmail.com
             </li>
           </ul>
         </div>
