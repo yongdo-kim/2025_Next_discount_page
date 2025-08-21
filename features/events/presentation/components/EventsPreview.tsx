@@ -20,7 +20,7 @@ export const EventsPreview = ({ event }: { event: EventEntity }) => {
     <Link
       href={`/posts/${event.postId}`}
       onMouseEnter={handlePrefetch}
-      className="flex items-center gap-2 pb-2 hover:cursor-pointer hover:underline"
+      className="flex items-center gap-2 truncate pb-2 hover:cursor-pointer hover:underline"
     >
       <div>{EventTypeTag({ eventType: event.eventMethod })}</div>
       <div>{event.title + " 이벤트"}</div>

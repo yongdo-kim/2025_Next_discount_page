@@ -27,7 +27,7 @@ export default async function Page() {
           <DynamicMenuTabServer />
           <DividerLine className="my-4" />
           <MainAdAreaServer />
-          <section className="grid grid-cols-2">
+          <section className="grid grid-cols-1 lg:grid-cols-2">
             <NewestDiscountServer />
             <EventsUpComingServer />
           </section>

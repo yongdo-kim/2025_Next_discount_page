@@ -28,7 +28,7 @@ export function MainListSection<T>({
   const hasData = data && data.length > 0;
 
   return (
-    <section className="py-8">
+    <section className="py-6 lg:py-8">
       <div
         className={`flex justify-between px-4 ${hasData ? "pb-3" : "pb-4 md:pb-8"}`}
       >
@@ -40,7 +40,7 @@ export function MainListSection<T>({
       )}
 
       {hasData && (
-        <ul className="px-4">
+        <ul className="lg:px-4">
           {data.map((item) => {
             if (!item) return null;
             return (
