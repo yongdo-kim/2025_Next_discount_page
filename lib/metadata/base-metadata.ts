@@ -23,11 +23,20 @@ export function createBaseMetadata(): Metadata {
       title: APP_NAME,
       description: APP_DESCRIPTION,
       siteName: APP_NAME,
+      images: [
+        {
+          url: "/discount-character.webp",
+          width: 1200,
+          height: 630,
+          alt: APP_NAME,
+        },
+      ],
     },
     twitter: {
       card: "summary_large_image",
       title: APP_NAME,
       description: APP_DESCRIPTION,
+      images: ["/discount-character.webp"],
     },
   };
 }
@@ -35,7 +44,7 @@ export function createBaseMetadata(): Metadata {
 export function createPageMetadata(
   title: string,
   description?: string,
-  imageUrl?: string
+  imageUrl?: string,
 ): Metadata {
   return {
     title,
