@@ -21,15 +21,35 @@ export default function EventsLatestClient() {
       if (showMore) {
         gsap.fromTo(
           secondColumnRef.current,
-          { height: 0, opacity: 0 },
-          { height: "auto", opacity: 1, duration: 0.5, ease: "power2.out" },
+          { height: 0, opacity: 0, willChange: "height, opacity" },
+          {
+            height: "auto",
+            opacity: 1,
+            duration: 0.5,
+            ease: "power2.out",
+            onComplete: () => {
+              if (secondColumnRef.current) {
+                gsap.set(secondColumnRef.current, { willChange: "auto" });
+              }
+            },
+          },
         );
       } else {
         const currentHeight = secondColumnRef.current.scrollHeight;
         gsap.fromTo(
           secondColumnRef.current,
-          { height: currentHeight, opacity: 1 },
-          { height: 0, opacity: 0, duration: 0.5, ease: "power2.out" },
+          { height: currentHeight, opacity: 1, willChange: "height, opacity" },
+          {
+            height: 0,
+            opacity: 0,
+            duration: 0.5,
+            ease: "power2.out",
+            onComplete: () => {
+              if (secondColumnRef.current) {
+                gsap.set(secondColumnRef.current, { willChange: "auto" });
+              }
+            },
+          },
         );
       }
     }
