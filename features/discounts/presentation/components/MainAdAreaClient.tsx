@@ -31,19 +31,21 @@ export const MainAdAreaClient = () => {
       image: d.imageUrl,
       title: d.title,
       type: "discount" as const,
+      postId: d.id,
       storeName: d.storeName,
     })) || []),
     ...(events?.slice(1, 3).map((e) => ({
       image: e.ogImage,
       title: e.title,
       type: "event" as const,
+      postId: e.postId,
     })) || []),
   ];
 
-  const handlePrefetch = () => {
+  const handlePrefetch = (postId: number) => {
     queryClient.prefetchQuery({
-      queryKey: postKeys.detail(leftEvent?.eventId),
-      queryFn: () => container.postService.getPostDetail(leftEvent?.eventId),
+      queryKey: postKeys.detail(postId),
+      queryFn: () => container.postService.getPostDetail(postId),
     });
   };
 
@@ -54,8 +56,8 @@ export const MainAdAreaClient = () => {
         <div className="group relative cursor-pointer overflow-hidden rounded-lg bg-gray-200">
           {leftImage ? (
             <Link
-              href={`/posts/${leftEvent?.eventId}`}
-              onMouseEnter={handlePrefetch}
+              href={`/posts/${leftEvent?.postId}`}
+              onMouseEnter={() => handlePrefetch(leftEvent?.postId)}
             >
               <Image
                 src={leftImage}
@@ -73,8 +75,8 @@ export const MainAdAreaClient = () => {
             <>
               {/* Event icon for missing image */}
               <Link
-                href={`/posts/${leftEvent?.eventId}`}
-                onMouseEnter={handlePrefetch}
+                href={`/posts/${leftEvent?.postId}`}
+                onMouseEnter={() => handlePrefetch(leftEvent?.postId)}
               >
                 <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-purple-100 to-purple-200">
                   <Calendar size={64} className="text-purple-600" />
@@ -100,8 +102,8 @@ export const MainAdAreaClient = () => {
               >
                 {item && item.image ? (
                   <Link
-                    href={`/posts/${leftEvent?.eventId}`}
-                    onMouseEnter={handlePrefetch}
+                    href={`/posts/${item.postId}`}
+                    onMouseEnter={() => handlePrefetch(item.postId)}
                   >
                     <Image
                       src={item.image}
@@ -120,8 +122,8 @@ export const MainAdAreaClient = () => {
                   </Link>
                 ) : item ? (
                   <Link
-                    href={`/posts/${leftEvent?.eventId}`}
-                    onMouseEnter={handlePrefetch}
+                    href={`/posts/${item.postId}`}
+                    onMouseEnter={() => handlePrefetch(item.postId)}
                   >
                     <Image
                       src="/discount-character-1024.webp"
