@@ -18,8 +18,8 @@ import { isClientError } from "@/lib/error-handler";
 import { queryClient } from "@/lib/react-query";
 import { formatDistanceToNow } from "date-fns";
 import { ko } from "date-fns/locale/ko";
-import { useState } from "react";
 import Link from "next/link";
+import { useState } from "react";
 
 type PlatformKey = "kakao" | "coupang" | "naver" | "ohouse" | "gmarket";
 
@@ -112,7 +112,7 @@ export default function DiscountPlatformClient() {
     return <ErrorState error={error} onRetry={refetch} size="sm" />;
 
   return (
-    <section className="pt-4 pb-2 md:pb-8">
+    <section className="py-8">
       <div className={`flex justify-between px-4`}>
         <MainTitle
           title="테마별 할인"
@@ -126,7 +126,7 @@ export default function DiscountPlatformClient() {
             <button
               key={tab.key}
               onClick={() => setSelectedTab(tab.key)}
-              className={`rounded-full border-1 px-2 py-1 text-sm font-medium whitespace-nowrap transition-colors ${
+              className={`rounded-full border px-2 py-1 text-sm font-medium whitespace-nowrap transition-colors ${
                 selectedTab === tab.key
                   ? tab.colors.selected
                   : `border-gray-300 bg-transparent text-gray-300 ${tab.colors.hover}`
@@ -138,7 +138,7 @@ export default function DiscountPlatformClient() {
         </div>
       </div>
       {/* 리스트 아이템 */}
-      <div className="mt-4 grid w-full grid-cols-4 gap-4 px-4">
+      <div className="mt-8 grid w-full grid-cols-4 gap-4 px-4">
         {getFilteredPlatforms().map((post) => {
           const createdAt = post.createdAt
             ? new Date(post.createdAt)

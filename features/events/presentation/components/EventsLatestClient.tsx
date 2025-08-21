@@ -12,7 +12,7 @@ export default function EventsLatestClient() {
   const hasData = events && events.length > 0;
 
   return (
-    <section className="pt-4 pb-2 md:pb-8">
+    <section className="py-8">
       <div
         className={`flex justify-between px-4 ${hasData ? "pb-3" : "pb-4 md:pb-8"}`}
       >

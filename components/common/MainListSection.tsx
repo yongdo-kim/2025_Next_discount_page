@@ -1,8 +1,8 @@
 "use client";
-import { ReactNode } from "react";
 import { ErrorState } from "@/components/error/ErrorState";
 import MainTitle from "@/components/MainTitle";
 import { isClientError } from "@/lib/error-handler";
+import { ReactNode } from "react";
 
 interface ListSectionProps<T> {
   title: string;
@@ -28,7 +28,7 @@ export function MainListSection<T>({
   const hasData = data && data.length > 0;
 
   return (
-    <section className="pt-4 pb-2 md:pb-8">
+    <section className="py-8">
       <div
         className={`flex justify-between px-4 ${hasData ? "pb-3" : "pb-4 md:pb-8"}`}
       >
