@@ -18,7 +18,7 @@ export default function LazyFooterBox() {
       {
         rootMargin: "100px", // 100px 전에 미리 로딩
         threshold: 0.1,
-      }
+      },
     );
 
     if (footerRef.current) {
@@ -32,16 +32,15 @@ export default function LazyFooterBox() {
     <div
       ref={footerRef}
       style={{
-        minHeight: '180px', // CLS 방지를 위한 예약 공간
+        minHeight: "200px", // CLS 방지를 위한 예약 공간
       }}
     >
       {isVisible ? (
         <FooterBox />
       ) : (
         // 스켈레톤 또는 빈 공간
-        <div 
-          className="mx-auto container"
-          style={{ height: '180px' }}
+        <div
+          className="container mx-auto min-h-[200px]"
           role="status"
           aria-label="Footer loading..."
         />
