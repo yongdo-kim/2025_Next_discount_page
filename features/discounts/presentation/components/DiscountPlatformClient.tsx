@@ -97,7 +97,12 @@ export default function DiscountPlatformClient() {
   ];
 
   const getFilteredPlatforms = () => {
-    return platforms?.[selectedTab]?.slice(0, 8) || [];
+    const platformPosts = platforms?.[selectedTab] || [];
+    const uniquePosts = platformPosts.filter(
+      (post, index, self) =>
+        index === self.findIndex((p) => p.title === post.title),
+    );
+    return uniquePosts.slice(0, 8);
   };
 
   const handlePrefetch = (postId: string) => {

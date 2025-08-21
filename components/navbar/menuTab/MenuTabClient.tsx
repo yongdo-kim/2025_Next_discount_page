@@ -32,6 +32,22 @@ function MenuItem({ category, selected, onClick, className }: MenuItemProps) {
 
 const SHOW_ALL_CATEGORY = new CategoryEntity({ id: 0, name: "전체보기" });
 
+const ALLOWED_TITLES = [
+  "이벤트",
+  "게임",
+  "쿠팡",
+  "카카오",
+  "지마켓",
+  "옥션",
+  "오늘의집",
+  "롯데온",
+  "네이버",
+  "G마켓",
+  "11번가",
+  "토스",
+  "톡딜",
+];
+
 export default function MenuTabClient() {
   const { data: categories = [] } = useFetchCategories();
   const router = useRouter();
@@ -41,11 +57,21 @@ export default function MenuTabClient() {
   const sorted = useMemo(() => {
     if (!categories || categories.length === 0) return [];
 
-    const etcCategory = categories.find((c) => c.name === "기타");
-    const rest = categories.filter((c) => c.name !== "기타");
+    const matchingCategories = categories.filter((c) =>
+      ALLOWED_TITLES.includes(c.name),
+    );
+
+    const hasOtherCategories = categories.some(
+      (c) => !ALLOWED_TITLES.includes(c.name) && c.name !== "기타",
+    );
+
+    const etcCategory = hasOtherCategories
+      ? new CategoryEntity({ id: -1, name: "기타" })
+      : null;
+
     return etcCategory
-      ? [SHOW_ALL_CATEGORY, ...rest, etcCategory]
-      : [SHOW_ALL_CATEGORY, ...rest];
+      ? [SHOW_ALL_CATEGORY, ...matchingCategories, etcCategory]
+      : [SHOW_ALL_CATEGORY, ...matchingCategories];
   }, [categories]); // categories가 변경될 때만 재계산
 
   const selectedCategoryId = Number(selectedId) || 0;
@@ -78,7 +104,7 @@ export default function MenuTabClient() {
               category={category}
               selected={selectedCategoryId === category.id}
               onClick={createHandleCategoryClick(category.id)}
-              className="text-md hover:bg-accent cursor-pointer items-start rounded-sm border-0 p-3 font-bold"
+              className="text-md hover:bg-accent cursor-pointer items-start rounded-sm border-0 p-3 font-bold hover:text-emerald-400"
             />
           ))}
         </aside>
