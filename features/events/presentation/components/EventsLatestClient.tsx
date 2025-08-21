@@ -9,15 +9,17 @@ import { isClientError } from "@/lib/error-handler";
 import { gsap } from "gsap";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import { useMediaQuery } from "react-responsive";
 
 export default function EventsLatestClient() {
   const { data: events, error, isError, refetch } = useFetchEventsLatest(12);
   const hasData = events && events.length > 0;
   const [showMore, setShowMore] = useState(false);
+  const isMobile = useMediaQuery({ maxWidth: 640 });
   const secondColumnRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (secondColumnRef.current) {
+    if (secondColumnRef.current && isMobile) {
       if (showMore) {
         gsap.fromTo(
           secondColumnRef.current,
@@ -53,7 +55,7 @@ export default function EventsLatestClient() {
         );
       }
     }
-  }, [showMore]);
+  }, [showMore, isMobile]);
 
   const handleToggleMore = () => {
     setShowMore(!showMore);
@@ -76,7 +78,7 @@ export default function EventsLatestClient() {
 
       {hasData && (
         <div className="px-4">
-          <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
             <div className="space-y-2">
               {events.slice(0, 6).map((event) => (
                 <EventsPreview key={event.eventId} event={event} />
@@ -84,8 +86,8 @@ export default function EventsLatestClient() {
             </div>
             <div
               ref={secondColumnRef}
-              className={`space-y-2 overflow-hidden lg:block`}
-              style={{ height: showMore ? "auto" : "0" }}
+              className={`space-y-2 overflow-hidden md:block`}
+              style={{ height: isMobile ? (showMore ? "auto" : "0") : "auto" }}
             >
               {events.slice(6, 12).map((event) => (
                 <EventsPreview key={event.eventId} event={event} />
@@ -94,7 +96,7 @@ export default function EventsLatestClient() {
           </div>
 
           {events.length > 6 && (
-            <div className="mt-4 flex justify-center lg:hidden">
+            <div className="mt-4 flex justify-center md:hidden">
               <div
                 role="button"
                 onClick={handleToggleMore}

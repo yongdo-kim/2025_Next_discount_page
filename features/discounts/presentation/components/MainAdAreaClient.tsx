@@ -51,7 +51,7 @@ export const MainAdAreaClient = () => {
 
   return (
     <div className="container mx-auto p-4">
-      <div className="grid h-96 grid-cols-1 gap-4 lg:grid-cols-2">
+      <div className="grid h-64 grid-cols-1 gap-4 md:h-84 md:grid-cols-2 lg:h-96">
         {/* Left side - Event image */}
         <div className="group relative cursor-pointer overflow-hidden rounded-lg bg-gray-200">
           {leftImage ? (
@@ -92,7 +92,7 @@ export const MainAdAreaClient = () => {
         </div>
 
         {/* Right side - 2x2 grid for discounts and other events */}
-        <div className="grid grid-cols-2 gap-2 lg:grid-cols-2 lg:grid-rows-2">
+        <div className="grid grid-cols-2 grid-rows-1 gap-2 md:grid-cols-2 md:grid-rows-2">
           {[0, 1, 2, 3].map((index) => {
             const item = rightItems[index];
             return (
