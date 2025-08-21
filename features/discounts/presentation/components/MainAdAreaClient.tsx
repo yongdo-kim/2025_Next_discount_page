@@ -2,8 +2,12 @@
 
 import { useNewestDiscountPreviews } from "@/features/discounts/presentation/hooks/use-fetch-discounts";
 import { useFetchEventsUpcoming } from "@/features/events/presentation/hooks/use-event-upcoming";
+import { postKeys } from "@/features/posts/infrastructure/contstant/query-keys";
+import { container } from "@/lib/di/dependencies";
+import { queryClient } from "@/lib/react-query";
 import { Calendar } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { ImageOverlay } from "./ImageOverlay";
 
 export const MainAdAreaClient = () => {
@@ -36,13 +40,23 @@ export const MainAdAreaClient = () => {
     })) || []),
   ];
 
+  const handlePrefetch = () => {
+    queryClient.prefetchQuery({
+      queryKey: postKeys.detail(leftEvent?.eventId),
+      queryFn: () => container.postService.getPostDetail(leftEvent?.eventId),
+    });
+  };
+
   return (
     <div className="container mx-auto p-4">
       <div className="grid h-96 grid-cols-2 gap-4">
         {/* Left side - Event image */}
         <div className="group relative cursor-pointer overflow-hidden rounded-lg bg-gray-200">
           {leftImage ? (
-            <>
+            <Link
+              href={`/posts/${leftEvent?.eventId}`}
+              onMouseEnter={handlePrefetch}
+            >
               <Image
                 src={leftImage}
                 alt=""
@@ -54,18 +68,23 @@ export const MainAdAreaClient = () => {
                 subtitle="이벤트"
                 isLarge={true}
               />
-            </>
+            </Link>
           ) : (
             <>
               {/* Event icon for missing image */}
-              <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-purple-100 to-purple-200">
-                <Calendar size={64} className="text-purple-600" />
-              </div>
-              <ImageOverlay
-                title={leftEvent?.title || "이벤트"}
-                subtitle="이벤트"
-                isLarge={true}
-              />
+              <Link
+                href={`/posts/${leftEvent?.eventId}`}
+                onMouseEnter={handlePrefetch}
+              >
+                <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-purple-100 to-purple-200">
+                  <Calendar size={64} className="text-purple-600" />
+                </div>
+                <ImageOverlay
+                  title={leftEvent?.title || "이벤트"}
+                  subtitle="이벤트"
+                  isLarge={true}
+                />
+              </Link>
             </>
           )}
         </div>
@@ -80,7 +99,10 @@ export const MainAdAreaClient = () => {
                 className="group relative cursor-pointer overflow-hidden rounded-lg bg-gray-200"
               >
                 {item && item.image ? (
-                  <>
+                  <Link
+                    href={`/posts/${leftEvent?.eventId}`}
+                    onMouseEnter={handlePrefetch}
+                  >
                     <Image
                       src={item.image}
                       alt=""
@@ -95,9 +117,12 @@ export const MainAdAreaClient = () => {
                           : "이벤트"
                       }
                     />
-                  </>
+                  </Link>
                 ) : item ? (
-                  <>
+                  <Link
+                    href={`/posts/${leftEvent?.eventId}`}
+                    onMouseEnter={handlePrefetch}
+                  >
                     <Image
                       src="/discount-character-1024.webp"
                       alt=""
@@ -112,7 +137,7 @@ export const MainAdAreaClient = () => {
                           : "이벤트"
                       }
                     />
-                  </>
+                  </Link>
                 ) : (
                   <div className="flex h-full w-full items-center justify-center text-sm text-gray-500">
                     <span>정보 없음</span>

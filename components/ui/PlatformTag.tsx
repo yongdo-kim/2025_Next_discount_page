@@ -28,7 +28,7 @@ export const PlatformTag = ({ platform }: PlatformTagProps) => {
 
   return (
     <span
-      className={`inline-block rounded-md px-2 py-1 text-xs font-medium ${getPlatformStyle(platform)}`}
+      className={`inline-block flex-shrink-0 rounded-md px-2 py-1 text-xs font-medium ${getPlatformStyle(platform)}`}
     >
       {platform}
     </span>
