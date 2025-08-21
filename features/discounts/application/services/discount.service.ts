@@ -6,7 +6,16 @@ export class DiscountService {
   constructor(private discountRepository: DiscountRepository) {}
 
   async getNewestDiscountPreview(limit?: number): Promise<DiscountEntity[]> {
-    return await this.discountRepository.getNewestDiscountPreview(limit);
+    const discounts =
+      await this.discountRepository.getNewestDiscountPreview(limit);
+
+    // Filter out duplicates based on title
+    const uniqueDiscounts = discounts.filter(
+      (discount, index, array) =>
+        array.findIndex((d) => d.title === discount.title) === index,
+    );
+
+    return uniqueDiscounts;
   }
 
   async getDiscountPlatforms(): Promise<DiscountPlatformGroup> {
