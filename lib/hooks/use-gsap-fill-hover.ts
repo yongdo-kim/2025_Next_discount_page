@@ -8,7 +8,7 @@ interface UseGsapHoverOptions {
   ease?: string;
 }
 
-export function useGsapHover<T extends HTMLElement>(
+export function useGsapFillHover<T extends HTMLElement>(
   options: UseGsapHoverOptions = {},
 ) {
   const {
