@@ -11,7 +11,7 @@ export const MainAdBanners = () => {
         <div className="absolute right-32 bottom-2 h-11 w-11 rounded-full bg-gradient-to-br from-green-400 to-emerald-500 opacity-50 sm:h-15 sm:w-15 md:h-16 md:w-16 lg:h-20 lg:w-20"></div>
       </div>
 
-      <div className="relative z-10 flex items-center justify-center space-x-4">
+      <div className="relative z-1 flex items-center justify-center space-x-4">
         <h1 className="text-sm font-bold text-white lg:text-xl">
           할인탐정에 어서오세요
         </h1>

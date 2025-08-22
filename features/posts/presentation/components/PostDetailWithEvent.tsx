@@ -22,7 +22,7 @@ export const PostDetailWithEvent = ({ post }: { post: PostEntity }) => {
 
   return (
     <article
-      className="container mx-auto px-16 py-6"
+      className="container mx-auto px-4 py-6"
       data-testid="post-detail-article"
     >
       {/* 태그 */}

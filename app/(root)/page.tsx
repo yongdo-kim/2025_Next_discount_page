@@ -47,7 +47,9 @@ export default async function Page({
               </section>
               <DividerLine />
               {/* 메인 배너 */}
-              <MainAdBanners />
+              <div className="px-4">
+                <MainAdBanners />
+              </div>
               {/* 추천 포스트 */}
               <EventsLatestServer />
               <DividerLine />
