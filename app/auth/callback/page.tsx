@@ -3,12 +3,14 @@ import { API_BASE_URL } from "@/lib/constants";
 import { container } from "@/lib/di/dependencies";
 import { ROUTES } from "@/lib/routes";
 import * as Sentry from "@sentry/nextjs";
+import { gsap } from "gsap";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 export default function AuthCallbackPage() {
   const router = useRouter();
+  const imageRef = useRef<HTMLImageElement>(null);
 
   useEffect(() => {
     const authenticate = async () => {
@@ -53,11 +55,29 @@ export default function AuthCallbackPage() {
     authenticate();
   }, [router]);
 
+  useEffect(() => {
+    if (imageRef.current) {
+      gsap.to(imageRef.current, {
+        rotation: 360,
+        duration: 1,
+        repeat: -1,
+        ease: "none",
+      });
+    }
+  }, []);
+
   return (
-    <div className="container mx-auto flex h-full flex-col justify-between">
+    <div className="container mx-auto flex h-full flex-col justify-between pt-64">
       <div className="flex flex-1 items-center justify-center">
         <div className="flex w-full max-w-screen-lg flex-col items-center rounded-lg p-8 shadow-md">
+          <h1 className="mb-2 text-2xl font-bold text-emerald-400">
+            로그인 중이에요!
+          </h1>
+          <h1 className="mb-2 text-2xl font-bold text-emerald-400">
+            잠시만 기다려주세요
+          </h1>
           <Image
+            ref={imageRef}
             src="/discount-character-1024.webp"
             alt="할인탐정 캐릭터"
             width={160}
@@ -65,16 +85,10 @@ export default function AuthCallbackPage() {
             sizes="160px"
             priority
           />
-          <h1 className="mb-2 text-2xl font-bold text-emerald-600">할인탐정</h1>
+          <h1 className="mb-2 text-2xl font-bold text-emerald-400">할인탐정</h1>
           <div className="mb-6 text-center text-lg text-neutral-100">
             할인은 우리가 수사합니다. <br />
             진짜 혜택만을 추적해 보여주는 스마트 쇼핑 도우미입니다
-          </div>
-          <div className="mb-2 text-center text-lg text-neutral-100">
-            로그인 중이에요
-          </div>
-          <div className="text-center text-lg text-neutral-100">
-            잠시만 기다려주세요
           </div>
         </div>
       </div>
