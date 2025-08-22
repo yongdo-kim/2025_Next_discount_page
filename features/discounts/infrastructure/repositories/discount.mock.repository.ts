@@ -4,6 +4,7 @@ import {
 } from "@/features/discounts/domain/entities/discount-platform.entity";
 import { DiscountEntity } from "@/features/discounts/domain/entities/discount.entity";
 import { DiscountRepository } from "@/features/discounts/domain/repositories/discount.repository";
+import { PostPreviewEntity } from "@/features/posts/domain/entities/post-preview.entity";
 import { PostEntity } from "@/features/posts/domain/entities/post.entity";
 import { UserEntity } from "@/features/users/domain/entities/user.entity";
 
@@ -234,8 +235,174 @@ export class MockDiscountRepository implements DiscountRepository {
     }),
   ];
 
-  async getNewestDiscountPreview(limit?: number): Promise<DiscountEntity[]> {
-    return this.mockDiscounts.slice(0, limit);
+  private mockDiscountPreviews = [
+    new PostPreviewEntity({
+      id: 68,
+      title: "[네이버페이] 일일적립, 클릭 53원",
+      author: new UserEntity({
+        id: 1,
+        nickname: "할인탐정",
+        picture:
+          "https://nari-s3.s3.us-east-1.amazonaws.com/discount/discount-character.png",
+        name: "할인탐정",
+        email: "discount@detective.com",
+        provider: "local",
+        role: "admin",
+      }),
+      createdAt: "2025-08-22T04:21:31.037Z",
+      viewsCount: 0,
+      likesCount: 0,
+      isLikedByMe: false,
+      isReportedByMe: false,
+      commentsCount: 0,
+      thumbnailUrl: "https://img.ruliweb.com/img/2016/ruli_400x210.png",
+      tags: [
+        {
+          id: 31,
+          name: "#네이버페이",
+        },
+      ],
+      category: {
+        name: "상품권",
+        id: 5,
+      },
+      updatedAt: "2025-08-22T04:21:31.037Z",
+      deletedAt: null,
+      isMine: false,
+      isBlurredByAI: false,
+      isBlockedByMe: false,
+    }),
+    new PostPreviewEntity({
+      id: 67,
+      title: "[mobapad] 모바패드 스위치2 조이콘 어댑터 $20/무료배송",
+      author: new UserEntity({
+        id: 1,
+        nickname: "할인탐정",
+        picture:
+          "https://nari-s3.s3.us-east-1.amazonaws.com/discount/discount-character.png",
+        name: "할인탐정",
+        email: "discount@detective.com",
+        provider: "local",
+        role: "admin",
+      }),
+      createdAt: "2025-08-22T04:21:31.033Z",
+      viewsCount: 1,
+      likesCount: 0,
+      isLikedByMe: false,
+      isReportedByMe: false,
+      commentsCount: 0,
+      thumbnailUrl:
+        "http://www.mobapad.com/cdn/shop/files/MobapadC70JoyConadapterwithMobapadM6HDblack2.webp?v=1755573909",
+      tags: [
+        {
+          id: 298,
+          name: "#mobapad",
+        },
+        {
+          id: 299,
+          name: "#스위치2",
+        },
+        {
+          id: 300,
+          name: "#조이콘",
+        },
+        {
+          id: 301,
+          name: "#어댑터",
+        },
+        {
+          id: 302,
+          name: "#모바패드",
+        },
+      ],
+      category: {
+        name: "게임H/W",
+        id: 7,
+      },
+      updatedAt: "2025-08-22T04:21:31.033Z",
+      deletedAt: null,
+      isMine: false,
+      isBlurredByAI: false,
+      isBlockedByMe: false,
+    }),
+    new PostPreviewEntity({
+      id: 66,
+      title: "[롯데온] 찰떡 일품 팥빙수 아이스크림 240ml 12개",
+      author: new UserEntity({
+        id: 1,
+        nickname: "할인탐정",
+        picture:
+          "https://nari-s3.s3.us-east-1.amazonaws.com/discount/discount-character.png",
+        name: "할인탐정",
+        email: "discount@detective.com",
+        provider: "local",
+        role: "admin",
+      }),
+      createdAt: "2025-08-22T04:21:31.030Z",
+      viewsCount: 0,
+      likesCount: 0,
+      isLikedByMe: false,
+      isReportedByMe: false,
+      commentsCount: 0,
+      thumbnailUrl:
+        "https://contents.lotteon.com/itemimage/20250811151937/LO/21/49/17/81/98/_2/14/91/78/19/9/LO2149178198_2149178199_1.jpg",
+      tags: [
+        {
+          id: 89,
+          name: "#롯데온",
+        },
+      ],
+      category: {
+        name: "음식",
+        id: 6,
+      },
+      updatedAt: "2025-08-22T04:21:31.030Z",
+      deletedAt: null,
+      isMine: false,
+      isBlurredByAI: false,
+      isBlockedByMe: false,
+    }),
+    new PostPreviewEntity({
+      id: 65,
+      title: "[롯데리아] 리아데이, 치킨버거+쥐포튀김 5500원 (8/21)",
+      author: new UserEntity({
+        id: 1,
+        nickname: "할인탐정",
+        picture:
+          "https://nari-s3.s3.us-east-1.amazonaws.com/discount/discount-character.png",
+        name: "할인탐정",
+        email: "discount@detective.com",
+        provider: "local",
+        role: "admin",
+      }),
+      createdAt: "2025-08-22T04:21:31.026Z",
+      viewsCount: 0,
+      likesCount: 0,
+      isLikedByMe: false,
+      isReportedByMe: false,
+      commentsCount: 0,
+      thumbnailUrl:
+        "https://img.lotteeatz.com/upload/event/CONTENT_IMG/2025/08/19/20250819093213664_5.jpg",
+      tags: [
+        {
+          id: 115,
+          name: "#롯데리아",
+        },
+      ],
+      category: {
+        name: "음식",
+        id: 6,
+      },
+      updatedAt: "2025-08-22T04:21:31.030Z",
+      deletedAt: null,
+      isMine: false,
+      isBlurredByAI: false,
+      isBlockedByMe: false,
+    }),
+  ];
+
+  async getNewestDiscountPreview(limit?: number): Promise<PostPreviewEntity[]> {
+    return this.mockDiscountPreviews.slice(0, limit);
   }
 
   async getDiscountPlatforms(): Promise<DiscountPlatformGroup> {

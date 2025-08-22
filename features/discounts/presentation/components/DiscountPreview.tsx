@@ -1,14 +1,18 @@
 "use client";
 
 import { PlatformTag } from "@/components/ui/PlatformTag";
-import { DiscountEntity } from "@/features/discounts/domain/entities/discount.entity";
+import { PostPreviewEntity } from "@/features/posts/domain/entities/post-preview.entity";
 import { postKeys } from "@/features/posts/infrastructure/contstant/query-keys";
 import { container } from "@/lib/di/dependencies";
 import { queryClient } from "@/lib/react-query";
 import { splitTitleByPlatform } from "@/lib/utils";
 import Link from "next/link";
 
-export const DiscountPreview = ({ discount }: { discount: DiscountEntity }) => {
+export const DiscountPreview = ({
+  discount,
+}: {
+  discount: PostPreviewEntity;
+}) => {
   const { platform, content } = splitTitleByPlatform(discount.title);
 
   const handlePrefetch = () => {

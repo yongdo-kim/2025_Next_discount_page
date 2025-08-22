@@ -28,6 +28,13 @@ export class EventService {
 
   async getEventsLatest(limit?: number): Promise<EventEntity[]> {
     const events = await this.eventRepository.getEventsLatest(limit);
-    return events;
+
+    // Filter out duplicates based on title
+    const uniqueEvents = events.filter(
+      (event, index, array) =>
+        array.findIndex((e) => e.title === event.title) === index,
+    );
+
+    return uniqueEvents;
   }
 }

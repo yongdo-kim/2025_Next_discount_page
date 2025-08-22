@@ -5,7 +5,7 @@ import { UserDto } from "@/features/users/infrastructure/dto/user-res.dto";
 import { useMe } from "@/features/users/presentation/hooks/useMe";
 import { ROUTES } from "@/lib/routes";
 import { gsap } from "gsap";
-import { LogIn } from "lucide-react";
+import { LogIn, User } from "lucide-react";
 import Link from "next/link";
 import { useRef, useEffect } from "react";
 
@@ -54,7 +54,12 @@ export default function NavBarUserMenu({
           className="flex items-center space-x-2"
           data-testid="navbar-user-info"
         >
-          <Link href={ROUTES.MY_PAGE} data-testid="navbar-user-profile-link">
+          <Link
+            href={ROUTES.MY_PAGE}
+            data-testid="navbar-user-profile-link"
+            className="flex items-center gap-2"
+          >
+            <User size={16} />
             <span
               className="text-sm font-bold"
               data-testid="navbar-user-nickname"

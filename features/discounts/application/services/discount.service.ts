@@ -1,11 +1,11 @@
 import { DiscountPlatformGroup } from "@/features/discounts/domain/entities/discount-platform.entity";
-import { DiscountEntity } from "@/features/discounts/domain/entities/discount.entity";
 import { DiscountRepository } from "@/features/discounts/domain/repositories/discount.repository";
+import { PostPreviewEntity } from "@/features/posts/domain/entities/post-preview.entity";
 
 export class DiscountService {
   constructor(private discountRepository: DiscountRepository) {}
 
-  async getNewestDiscountPreview(limit?: number): Promise<DiscountEntity[]> {
+  async getNewestDiscountPreview(limit?: number): Promise<PostPreviewEntity[]> {
     const discounts =
       await this.discountRepository.getNewestDiscountPreview(limit);
 

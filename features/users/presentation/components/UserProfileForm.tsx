@@ -4,7 +4,6 @@ import {
   AvatarFallback,
   AvatarImage,
 } from "@/components/shadcn/avatar";
-import { Button } from "@/components/shadcn/button";
 import {
   Card,
   CardContent,
@@ -26,6 +25,7 @@ export default function UserProfileForm() {
   const { mutateAsync: updateMe, isPending } = useUpdateMe();
 
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
 
   const [previewUrl, setPreviewUrl] = useState<string | null>(null); // 미리보기용
 
@@ -70,7 +70,7 @@ export default function UserProfileForm() {
   if (!user) return null;
 
   return (
-    <div className="flex justify-center py-12" data-testid="profile-page">
+    <div className="flex justify-center py-32" data-testid="profile-page">
       <Card className="w-full max-w-md" data-testid="profile-card">
         <CardHeader data-testid="profile-header">
           <CardTitle data-testid="profile-title">회원정보 수정</CardTitle>
@@ -83,12 +83,12 @@ export default function UserProfileForm() {
               data-testid="profile-avatar-section"
             >
               <div
-                className="group relative"
+                className="group relative cursor-pointer"
                 data-testid="profile-avatar-container"
               >
                 <button
                   type="button"
-                  className="focus:outline-none"
+                  className="cursor-pointer focus:outline-none"
                   onClick={() => {
                     const isMobile = /iPhone|iPad|iPod|Android/i.test(
                       navigator.userAgent,
@@ -119,7 +119,7 @@ export default function UserProfileForm() {
                     </AvatarFallback>
                   </Avatar>
                   <span
-                    className="absolute right-0 bottom-0 flex h-8 w-8 items-center justify-center rounded-full border border-neutral-200 bg-white shadow-md transition-colors group-hover:bg-emerald-100"
+                    className="absolute right-0 bottom-0 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full border border-neutral-200 bg-white shadow-md transition-colors group-hover:bg-emerald-100"
                     data-testid="profile-camera-icon"
                   >
                     <MdCameraAlt className="h-5 w-5 text-emerald-600" />
@@ -180,17 +180,18 @@ export default function UserProfileForm() {
           </CardContent>
           <CardFooter data-testid="profile-footer">
             <div
-              className="mt-8 flex w-full justify-end"
+              className="mt-8 flex w-full justify-end bg-transparent"
               data-testid="profile-footer-content"
             >
-              <Button
+              <button
+                ref={buttonRef}
                 type="submit"
                 disabled={isPending}
-                className="w-full cursor-pointer hover:text-emerald-800"
+                className="w-full cursor-pointer rounded-xl border border-gray-600 px-4 py-2 text-lg font-semibold hover:text-emerald-400"
                 data-testid="profile-save-button"
               >
                 {isPending ? "저장 중..." : "저장하기"}
-              </Button>
+              </button>
             </div>
           </CardFooter>
         </form>

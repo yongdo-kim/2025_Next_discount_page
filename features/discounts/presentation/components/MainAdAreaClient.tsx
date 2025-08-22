@@ -1,7 +1,7 @@
 "use client";
 
 import { useNewestDiscountPreviews } from "@/features/discounts/presentation/hooks/use-fetch-discounts";
-import { useFetchEventsUpcoming } from "@/features/events/presentation/hooks/use-event-upcoming";
+import { useFetchEventsLatest } from "@/features/events/presentation/hooks/use-event-latest";
 import { postKeys } from "@/features/posts/infrastructure/contstant/query-keys";
 import { container } from "@/lib/di/dependencies";
 import { queryClient } from "@/lib/react-query";
@@ -14,11 +14,12 @@ export const MainAdAreaClient = () => {
   const { data: discounts, isError: isDiscountError } =
     useNewestDiscountPreviews();
 
-  const { data: events, isError: isEventError } = useFetchEventsUpcoming(8);
+  const { data: events, isError: isEventError } = useFetchEventsLatest(4);
 
   if (isDiscountError || isEventError) {
     return null;
   }
+
   if (!discounts || !events) {
     return null;
   }
@@ -28,11 +29,10 @@ export const MainAdAreaClient = () => {
 
   const rightItems = [
     ...(discounts?.slice(0, 2).map((d) => ({
-      image: d.imageUrl,
+      image: d.thumbnailUrl,
       title: d.title,
       type: "discount" as const,
       postId: d.id,
-      storeName: d.storeName,
     })) || []),
     ...(events?.slice(1, 3).map((e) => ({
       image: e.ogImage,
@@ -113,11 +113,7 @@ export const MainAdAreaClient = () => {
                     />
                     <ImageOverlay
                       title={item.title}
-                      subtitle={
-                        item.type === "discount"
-                          ? item.storeName || "할인"
-                          : "이벤트"
-                      }
+                      subtitle={item.type === "discount" ? "할인" : "이벤트"}
                     />
                   </Link>
                 ) : item ? (
@@ -133,11 +129,7 @@ export const MainAdAreaClient = () => {
                     />
                     <ImageOverlay
                       title={item.title}
-                      subtitle={
-                        item.type === "discount"
-                          ? item.storeName || "할인"
-                          : "이벤트"
-                      }
+                      subtitle={item.type === "discount" ? "할인" : "이벤트"}
                     />
                   </Link>
                 ) : (
