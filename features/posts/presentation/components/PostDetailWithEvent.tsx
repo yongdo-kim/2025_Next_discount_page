@@ -57,10 +57,12 @@ export const PostDetailWithEvent = ({ post }: { post: PostEntity }) => {
                 href={post.source.originSourceUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 rounded-lg bg-gradient-to-r from-emerald-500 to-emerald-600 px-6 py-3 font-semibold text-white shadow-md transition-all duration-200 hover:scale-105 hover:from-emerald-600 hover:to-emerald-700 hover:shadow-lg focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 focus:outline-none"
+                className="flex items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-emerald-500 to-emerald-600 px-6 py-3 font-semibold text-white shadow-md transition-all duration-200 hover:scale-105 hover:from-emerald-600 hover:to-emerald-700 hover:shadow-lg focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 focus:outline-none"
               >
                 <TicketIcon className="h-5 w-5" />
-                <div className="font-bold text-white">이벤트 참여하기</div>
+                <div className="text-center font-bold text-white">
+                  이벤트 참여하기
+                </div>
               </a>
             </div>
           )}
