@@ -10,7 +10,7 @@ export const metadata = {
 export default function SignInPage() {
   return (
     <div
-      className="my-auto flex h-full flex-col justify-between"
+      className="container mx-auto flex flex-col justify-between pt-64"
       data-testid="signin-page"
     >
       <div
@@ -30,7 +30,7 @@ export default function SignInPage() {
             data-testid="signin-character-image"
           />
           <h1
-            className="mb-2 text-2xl font-bold text-amber-600"
+            className="mb-2 text-2xl font-bold text-emerald-400"
             data-testid="signin-title"
           >
             할인탐정
