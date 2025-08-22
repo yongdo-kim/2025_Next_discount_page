@@ -5,6 +5,7 @@ import { UserDto } from "@/features/users/infrastructure/dto/user-res.dto";
 import { useMe } from "@/features/users/presentation/hooks/useMe";
 import { ROUTES } from "@/lib/routes";
 import { gsap } from "gsap";
+import { LogIn } from "lucide-react";
 import Link from "next/link";
 import { useRef, useEffect } from "react";
 
@@ -71,7 +72,10 @@ export default function NavBarUserMenu({
           ref={buttonRef}
           className="cursor-pointer rounded-full border-1 px-4 py-2"
         >
-          <Link href={ROUTES.SIGN_IN}>로그인</Link>
+          <Link href={ROUTES.SIGN_IN} className="flex items-center gap-2">
+            <LogIn size={16} />
+            로그인
+          </Link>
         </button>
       )}
     </div>

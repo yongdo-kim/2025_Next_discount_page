@@ -19,7 +19,7 @@ function MenuItem({ category, selected, onClick, className }: MenuItemProps) {
     <Badge
       variant={selected ? "default" : "outline"}
       className={cn(
-        "rounded-full font-medium",
+        "rounded-full text-sm font-medium",
         selected && "border border-emerald-400 bg-transparent text-emerald-400",
         className,
       )}
@@ -96,7 +96,7 @@ export default function MenuTabClient() {
   return (
     <>
       {/* 데스크탑 */}
-      <div className="hidden lg:flex">
+      <div className="hidden md:flex">
         <aside className="container mx-auto flex flex-wrap px-4 py-4">
           {sorted.map((category) => (
             <MenuItem
@@ -110,7 +110,7 @@ export default function MenuTabClient() {
         </aside>
       </div>
       {/* 모바일 */}
-      <div className="block lg:hidden">
+      <div className="block md:hidden">
         <div className="flex flex-wrap gap-3 px-4 pt-4 pb-4">
           {sorted.map((category) => (
             <MenuItem
