@@ -16,11 +16,8 @@ import { ko } from "date-fns/locale/ko";
 import Link from "next/link";
 
 export default function PostListItem({ post }: { post: PostPreviewEntity }) {
-  // const content = htmlToText(post.content).replace(/\n/g, " ");
-  // createdAt이 string인 경우 Date 객체로 변환
   const createdAt = post.createdAt ? post.createdAt : new Date();
 
-  // 현재 시간과의 차이를 계산 (예: "2시간 전")
   const timeAgo = formatDistanceToNow(createdAt, {
     addSuffix: true,
     locale: ko, // 한국어 설정

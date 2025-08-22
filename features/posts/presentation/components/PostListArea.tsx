@@ -1,10 +1,13 @@
 "use client";
 
 import MainTitle from "@/components/MainTitle";
+import LoadingIndicator from "@/components/ui/LoadingIndicator";
 import PostListItem from "@/features/posts/presentation/components/PostListItem";
+import PostCardLarge from "@/features/posts/presentation/components/PostCardLarge";
 import { useInfinitePostPreviews } from "@/features/posts/presentation/hooks/use-posts";
 import { getCategoryColors } from "@/lib/category-colors";
-import { useMemo } from "react";
+import { useMemo, useEffect, useRef } from "react";
+import { useMediaQuery } from "react-responsive";
 import { Virtuoso } from "react-virtuoso";
 
 type PostListAreaProps = {
@@ -34,21 +37,35 @@ export default function PostListArea({
   );
   const displayName = categoryName || (allPosts[0]?.category.name ?? "");
 
+  const isLargeScreen = useMediaQuery({ minWidth: 768 });
+  const loadMoreRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (
+      !isLargeScreen ||
+      !loadMoreRef.current ||
+      !hasNextPage ||
+      isFetchingNextPage
+    )
+      return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          fetchNextPage();
+        }
+      },
+      { threshold: 0.1 },
+    );
+
+    observer.observe(loadMoreRef.current);
+
+    return () => observer.disconnect();
+  }, [isLargeScreen, hasNextPage, isFetchingNextPage, fetchNextPage]);
+
   //이거 마음에 안드는데..
   if (isLoading) {
-    return (
-      <>
-        <MainTitle title={displayName} className="p-4" />
-        <div className="mt-4" data-testid="post-list-loading">
-          {/* 로딩 스켈레톤 UI */}
-          {Array.from({ length: 6 }, (_, index) => (
-            <div key={index} className="mx-6 my-2" data-testid="post-skeleton">
-              <div className="h-32 rounded-lg bg-gray-200 dark:bg-gray-700" />
-            </div>
-          ))}
-        </div>
-      </>
-    );
+    return <LoadingIndicator />;
   }
 
   if (error) {
@@ -87,36 +104,59 @@ export default function PostListArea({
     <>
       <MainTitle title={displayName} className="p-4" />
       <div className="mt-4" data-testid="post-list-container">
-        <Virtuoso
-          data={allPosts}
-          useWindowScroll
-          endReached={() => {
-            if (hasNextPage && !isFetchingNextPage) {
-              fetchNextPage();
-            }
-          }}
-          itemContent={(_, post) => (
-            <div className="mx-6 my-2" data-testid="post-list-item-wrapper">
-              <PostListItem post={post} />
+        {isLargeScreen ? (
+          <div className="mx-6">
+            <div className="grid grid-cols-3 gap-4">
+              {allPosts.map((post) => (
+                <div key={post.id} data-testid="post-grid-item-wrapper">
+                  <PostCardLarge post={post} />
+                </div>
+              ))}
             </div>
-          )}
-          components={{
-            Footer: () => {
-              if (isFetchingNextPage) {
-                return (
+            {isFetchingNextPage && (
+              <div className="mt-4 grid grid-cols-3 gap-4">
+                {[...Array(3)].map((_, index) => (
                   <div
-                    className="mx-6 my-2"
-                    data-testid="post-list-loading-more"
-                  >
-                    <div className="h-32 animate-pulse rounded-lg bg-gray-200 dark:bg-gray-700" />
-                  </div>
-                );
+                    key={index}
+                    className="h-64 animate-pulse rounded-lg bg-gray-200 dark:bg-gray-700"
+                  />
+                ))}
+              </div>
+            )}
+            {hasNextPage && <div ref={loadMoreRef} className="mt-4 h-10" />}
+          </div>
+        ) : (
+          <Virtuoso
+            data={allPosts}
+            useWindowScroll
+            endReached={() => {
+              if (hasNextPage && !isFetchingNextPage) {
+                fetchNextPage();
               }
+            }}
+            itemContent={(_, post) => (
+              <div className="mx-6 my-2" data-testid="post-list-item-wrapper">
+                <PostListItem post={post} />
+              </div>
+            )}
+            components={{
+              Footer: () => {
+                if (isFetchingNextPage) {
+                  return (
+                    <div
+                      className="mx-6 my-2"
+                      data-testid="post-list-loading-more"
+                    >
+                      <div className="h-32 animate-pulse rounded-lg bg-gray-200 dark:bg-gray-700" />
+                    </div>
+                  );
+                }
 
-              return null;
-            },
-          }}
-        />
+                return null;
+              },
+            }}
+          />
+        )}
       </div>
     </>
   );
