@@ -1,6 +1,6 @@
-import Image from "next/image";
 import { Suspense } from "react";
 import GoogleLoginButton from "./GoogleLoginButton";
+import AnimatedCharacterImage from "./AnimatedCharacterImage";
 
 export const metadata = {
   title: "로그인 - 할인탐정",
@@ -21,14 +21,7 @@ export default function SignInPage() {
           className="mx-auto flex w-full max-w-screen-lg flex-col items-center rounded-lg p-8 shadow-md"
           data-testid="signin-container"
         >
-          <Image
-            src="/discount-character-1024.webp"
-            alt="할인탐정 캐릭터"
-            width={160}
-            height={160}
-            priority
-            data-testid="signin-character-image"
-          />
+          <AnimatedCharacterImage />
           <h1
             className="mb-2 text-2xl font-bold text-emerald-400"
             data-testid="signin-title"
