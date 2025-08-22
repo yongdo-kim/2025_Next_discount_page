@@ -15,11 +15,16 @@ export default function EventsLatestClient() {
   const { data: events, error, isError, refetch } = useFetchEventsLatest(12);
   const hasData = events && events.length > 0;
   const [showMore, setShowMore] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
   const isMobile = useMediaQuery({ maxWidth: 640 });
   const secondColumnRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (secondColumnRef.current && isMobile) {
+    setIsMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (secondColumnRef.current && isMobile && isMounted) {
       if (showMore) {
         gsap.fromTo(
           secondColumnRef.current,
@@ -55,7 +60,7 @@ export default function EventsLatestClient() {
         );
       }
     }
-  }, [showMore, isMobile]);
+  }, [showMore, isMobile, isMounted]);
 
   const handleToggleMore = () => {
     setShowMore(!showMore);
@@ -87,7 +92,15 @@ export default function EventsLatestClient() {
             <div
               ref={secondColumnRef}
               className={`space-y-2 overflow-hidden md:block`}
-              style={{ height: isMobile ? (showMore ? "auto" : "0") : "auto" }}
+              style={{
+                height: !isMounted
+                  ? "auto"
+                  : isMobile
+                    ? showMore
+                      ? "auto"
+                      : "0"
+                    : "auto",
+              }}
             >
               {events.slice(6, 12).map((event) => (
                 <EventsPreview key={event.eventId} event={event} />
@@ -95,7 +108,7 @@ export default function EventsLatestClient() {
             </div>
           </div>
 
-          {events.length > 6 && (
+          {events.length > 6 && isMounted && (
             <div className="mt-4 flex justify-center md:hidden">
               <div
                 role="button"
