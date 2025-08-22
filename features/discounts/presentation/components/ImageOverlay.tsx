@@ -1,8 +1,8 @@
-interface ImageOverlayProps {
+type ImageOverlayProps = {
   title: string;
   subtitle: string;
   isLarge?: boolean;
-}
+};
 
 export const ImageOverlay = ({
   title,

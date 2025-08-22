@@ -108,36 +108,4 @@ describe("PostService", () => {
       );
     });
   });
-
-  describe("getCategoryPostPreviews", () => {
-    it("카테고리별 특별 게시글 목록을 반환해야 한다", async () => {
-      const result = await postService.getCategoryPostPreviews();
-
-      expect(result).toBeDefined();
-      expect(Array.isArray(result)).toBe(true);
-      expect(result.length).toBeGreaterThan(0);
-
-      result.forEach((post) => {
-        expect(post).toHaveProperty("id");
-        expect(post).toHaveProperty("title");
-        expect(post).toHaveProperty("category");
-        expect(post.id).toBeGreaterThanOrEqual(10000); // 카테고리 포스트는 10000번대 ID
-      });
-    });
-
-    it("반환되는 게시글들이 올바른 구조를 가져야 한다", async () => {
-      const result = await postService.getCategoryPostPreviews();
-
-      expect(result.length).toBeGreaterThan(0);
-
-      const firstPost = result[0];
-      expect(firstPost.author).toBeDefined();
-      expect(firstPost.author.nickname).toBe("할인탐정");
-      expect(firstPost.category).toBeDefined();
-      expect(firstPost.category.name).toBeDefined();
-      expect(firstPost.commentsCount).toBeGreaterThanOrEqual(0);
-      expect(firstPost.viewsCount).toBeGreaterThanOrEqual(0);
-      expect(firstPost.likesCount).toBeGreaterThanOrEqual(0);
-    });
-  });
 });

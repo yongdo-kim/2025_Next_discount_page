@@ -4,9 +4,9 @@ import { useEffect, useRef } from "react";
 import { Flame } from "lucide-react";
 import { gsap } from "gsap";
 
-interface FlameIconProps {
+type FlameIconProps = {
   className?: string;
-}
+};
 
 export function FlameIcon({ className = "h-6 w-6" }: FlameIconProps) {
   const gradientRef = useRef<SVGLinearGradientElement>(null);

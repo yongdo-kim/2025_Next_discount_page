@@ -43,13 +43,6 @@ export const usePostDetail = ({
   });
 };
 
-export const useCategoryPostPreviews = () => {
-  return useQuery<PostPreviewEntity[]>({
-    queryKey: [categoryKeys.banners],
-    queryFn: () => container.postService.getCategoryPostPreviews(),
-  });
-};
-
 export const useInfinitePostPreviews = ({
   categoryId,
   limit = 10,

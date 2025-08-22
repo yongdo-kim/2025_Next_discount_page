@@ -5,6 +5,7 @@ import MainAdAreaServer from "@/features/discounts/presentation/components/MainA
 import NewestDiscountServer from "@/features/discounts/presentation/components/NewestDiscountServer";
 import EventsLatestServer from "@/features/events/presentation/components/EventsLatestServer";
 import EventsUpComingServer from "@/features/events/presentation/components/EventsUpComingServer";
+import PostsByCategoryServer from "@/features/posts/presentation/components/PostsByCategoryServer";
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
 
@@ -35,10 +36,7 @@ export default async function Page({
 
           {category ? (
             /* 카테고리가 있는 경우의 UI */
-            <div>
-              {/* 여기에 카테고리별 UI를 구현하세요 */}
-              <p>카테고리 {category}에 대한 컨텐츠</p>
-            </div>
+            <PostsByCategoryServer categoryId={category} limit={20} />
           ) : (
             /* 기본 홈페이지 UI */
             <>

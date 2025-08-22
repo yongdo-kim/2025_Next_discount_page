@@ -4,9 +4,9 @@ import { gsap } from "gsap";
 import { ShoppingBag } from "lucide-react";
 import { useEffect, useRef } from "react";
 
-interface ShoppingBagIconProps {
+type ShoppingBagIconProps = {
   className?: string;
-}
+};
 
 export function ShoppingBagIcon({
   className = "h-5 w-5",

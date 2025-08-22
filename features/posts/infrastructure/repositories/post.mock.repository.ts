@@ -8,92 +8,9 @@ import { UserEntity } from "@/features/users/domain/entities/user.entity";
 export class MockPostRepository implements PostRepository {
   private mockPosts: PostEntity[] = [];
   private mockPostPreviews: PostPreviewEntity[] = [];
-  private mockCategoryPostPreviews: PostPreviewEntity[] = [];
-
   constructor() {
     this.mockPosts.push(...this.generateMockPosts(10));
     this.mockPostPreviews.push(...this.generateMockPostPreviews(500));
-    this.mockCategoryPostPreviews.push(
-      ...this.generateMockCategoryPostPreviews(100),
-    );
-  }
-  getCategoryPostPreviews(): Promise<PostPreviewEntity[]> {
-    // 카테고리별 특별 프로모션 포스트들 (배너용)
-    const bannerPosts = this.mockCategoryPostPreviews;
-    return Promise.resolve(bannerPosts);
-  }
-  private generateMockCategoryPostPreviews(count: number): PostPreviewEntity[] {
-    const categories = [
-      { id: 1, name: "전자제품" },
-      { id: 2, name: "의류" },
-      { id: 3, name: "음식" },
-      { id: 4, name: "도서" },
-      { id: 5, name: "생활용품" },
-    ];
-
-    const bannerTitles = [
-      "🔥 한정 특가! 삼성 갤럭시 최대 할인",
-      "⚡ 오늘만! 나이키 운동화 반값 세일",
-      "⭐ 스타벅스 원두 할인 + 무료배송",
-      "💎 다이슨 청소기 역대급 특가",
-      "🎯 애플 아이폰 최저가 보장",
-      "🛍️ 유니클로 전 상품 30% 할인",
-      "📚 교보문고 베스트셀러 50% 세일",
-      "🏠 생활용품 대전 최대 70% 할인",
-      "⌚ 갤럭시 워치 런칭 기념 특가",
-      "👟 아디다스 신발 컬렉션 할인",
-    ];
-
-    const result: PostPreviewEntity[] = [];
-
-    for (let i = 0; i < count; i++) {
-      const category =
-        categories[Math.floor(Math.random() * categories.length)];
-      const title =
-        bannerTitles[Math.floor(Math.random() * bannerTitles.length)] +
-        ` #${i + 1}`;
-
-      const now = new Date();
-      const randomPast = new Date(
-        now.getTime() - Math.random() * 24 * 60 * 60 * 1000, // 최근 24시간
-      );
-
-      result.push(
-        new PostPreviewEntity({
-          id: 10000 + i,
-          title,
-          author: new UserEntity({
-            id: 1,
-            nickname: "할인탐정",
-            name: "할인탐정",
-            picture: "https://randomuser.me/api/portraits/men/1.jpg",
-            provider: "local",
-            role: "user",
-            email: "",
-          }),
-          commentsCount: Math.floor(Math.random() * 200) + 50, // 50-250 댓글
-          createdAt: randomPast.toISOString(),
-          updatedAt: randomPast.toISOString(),
-          deletedAt: null,
-          viewsCount: Math.floor(Math.random() * 5000) + 1000, // 1000-6000 조회수
-          thumbnailUrl:
-            "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=400",
-          likesCount: Math.floor(Math.random() * 300) + 100, // 100-400 좋아요
-          isLikedByMe: false,
-          isMine: false,
-          isReportedByMe: false,
-          isBlurredByAI: false,
-          isBlockedByMe: false,
-          tags: [],
-          category: {
-            id: category.id,
-            name: category.name,
-          },
-        }),
-      );
-    }
-
-    return result;
   }
 
   private generateMockPosts(count: number): PostEntity[] {

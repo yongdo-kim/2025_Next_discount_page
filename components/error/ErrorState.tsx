@@ -4,12 +4,12 @@ import { Button } from "@/components/shadcn/button";
 import { AlertTriangle, RefreshCw } from "lucide-react";
 import { getErrorMessage, isRetryableError } from "@/lib/error-handler";
 
-interface ErrorStateProps {
+type ErrorStateProps = {
   error: unknown;
   onRetry?: () => void;
   size?: "sm" | "md" | "lg";
   showIcon?: boolean;
-}
+};
 
 export function ErrorState({
   error,

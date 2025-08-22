@@ -1,9 +1,11 @@
-interface PostCardSkeletonProps {
-  variant?: 'mobile' | 'desktop';
-}
+type PostCardSkeletonProps = {
+  variant?: "mobile" | "desktop";
+};
 
-export default function PostCardSkeleton({ variant = 'desktop' }: PostCardSkeletonProps) {
-  if (variant === 'mobile') {
+export default function PostCardSkeleton({
+  variant = "desktop",
+}: PostCardSkeletonProps) {
+  if (variant === "mobile") {
     return (
       <div className="w-full cursor-pointer rounded-2xl">
         <div className="animate-pulse">

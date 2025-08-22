@@ -4,7 +4,7 @@ import MainTitle from "@/components/MainTitle";
 import { isClientError } from "@/lib/error-handler";
 import { ReactNode } from "react";
 
-interface ListSectionProps<T> {
+type ListSectionProps<T> = {
   title: string;
   icon: ReactNode;
   data: T[] | undefined;
@@ -13,7 +13,7 @@ interface ListSectionProps<T> {
   refetch: () => void;
   renderItem: (item: T) => ReactNode;
   getItemKey: (item: T) => string | number;
-}
+};
 
 export function MainListSection<T>({
   title,

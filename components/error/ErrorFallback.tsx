@@ -3,10 +3,10 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/shadcn/alert";
 import { Button } from "@/components/shadcn/button";
 import { AlertCircle, RefreshCw } from "lucide-react";
 
-interface ErrorFallbackProps {
+type ErrorFallbackProps = {
   error: Error | null;
   resetErrorBoundary: () => void;
-}
+};
 
 export function ErrorFallback({
   error,

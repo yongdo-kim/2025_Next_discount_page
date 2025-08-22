@@ -1,8 +1,8 @@
 import { ClockAlert } from "lucide-react";
 
-interface GiftIconProps {
+type GiftIconProps = {
   className?: string;
-}
+};
 
 export function GiftIcon({ className = "h-6 w-6" }: GiftIconProps) {
   return (

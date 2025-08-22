@@ -23,12 +23,4 @@ export const postApi = {
     });
     return response;
   },
-
-  //카테고리별 포스트 가져오기
-  async getCategoryPostPreviews() {
-    const response = await apiClient.get<PostPreviewsResponse>({
-      url: "/posts/previews/by-category",
-    });
-    return response.posts;
-  },
 };

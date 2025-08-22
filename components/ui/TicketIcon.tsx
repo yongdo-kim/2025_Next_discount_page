@@ -2,9 +2,9 @@ import { Ticket } from "lucide-react";
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 
-interface TicketIconProps {
+type TicketIconProps = {
   className?: string;
-}
+};
 
 export function TicketIcon({ className = "h-6 w-6" }: TicketIconProps) {
   const gradientRef = useRef<SVGLinearGradientElement>(null);
