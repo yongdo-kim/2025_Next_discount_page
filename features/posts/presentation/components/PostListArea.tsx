@@ -3,6 +3,7 @@
 import MainTitle from "@/components/MainTitle";
 import PostListItem from "@/features/posts/presentation/components/PostListItem";
 import { useInfinitePostPreviews } from "@/features/posts/presentation/hooks/use-posts";
+import { getCategoryColors } from "@/lib/category-colors";
 import { useMemo } from "react";
 import { Virtuoso } from "react-virtuoso";
 
@@ -33,6 +34,7 @@ export default function PostListArea({
   );
   const displayName = categoryName || (allPosts[0]?.category.name ?? "");
 
+  //이거 마음에 안드는데..
   if (isLoading) {
     return (
       <>
@@ -52,7 +54,10 @@ export default function PostListArea({
   if (error) {
     return (
       <>
-        <MainTitle title={displayName} className="p-4" />
+        <MainTitle
+          title={displayName}
+          className={`${getCategoryColors(displayName)?.bg} p-4`}
+        />
         <div
           className="mx-6 mt-4 text-center text-red-500"
           data-testid="post-list-error"
