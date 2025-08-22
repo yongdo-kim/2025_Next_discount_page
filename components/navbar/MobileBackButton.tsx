@@ -13,7 +13,7 @@ export default function MobileBackButton() {
     <button
       type="button"
       onClick={() => window.history.back()}
-      className="mr-2 flex items-center md:hidden"
+      className="mr-2 flex cursor-pointer items-center hover:bg-emerald-400 hover:text-emerald-400 md:hidden"
       aria-label="뒤로가기"
       data-testid="navbar-mobile-back-button"
     >
