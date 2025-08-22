@@ -8,8 +8,8 @@ import Image from "next/image";
 
 export const PostDetailHeader = ({ post }: { post: PostEntity }) => {
   return (
-    <div className="flex justify-between">
-      <div>
+    <div className="flex flex-col justify-between">
+      <div className="w-full">
         <TagList tags={post.tags} />
       </div>
       <AuthorInfo user={post.author} createdAt={post.createdAt} />
@@ -25,7 +25,7 @@ function TagList({ tags }: { tags: TagEntity[] }) {
         <Badge
           variant="outline"
           key={tag.id}
-          className="md:text-md lg:text-lg"
+          className="md:text-md text-sm lg:text-lg"
           data-testid="post-detail-tag"
         >
           {tag.name}
@@ -67,7 +67,7 @@ function AuthorInfo({
           {user.nickname}
         </div>
         <div
-          className="pl-2 text-neutral-800 dark:text-gray-400"
+          className="pl-2 text-neutral-800 dark:text-gray-200"
           data-testid="post-detail-created-at"
         >
           {format(new Date(createdAt), "yyyy년 M월 d일", { locale: ko })}

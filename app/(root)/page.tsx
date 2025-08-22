@@ -36,7 +36,7 @@ export default async function Page({
 
           {category ? (
             /* 카테고리가 있는 경우의 UI */
-            <PostsByCategoryServer categoryId={category} limit={20} />
+            <PostsByCategoryServer categoryId={category} />
           ) : (
             /* 기본 홈페이지 UI */
             <>

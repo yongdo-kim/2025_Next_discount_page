@@ -30,7 +30,7 @@ export const PostDetailWithEvent = ({ post }: { post: PostEntity }) => {
 
       {/* 제목 */}
       <h1
-        className="mb-2 flex items-center gap-2 pt-2 text-3xl font-bold"
+        className="text-md mb-2 flex items-center gap-2 pt-2 font-bold md:text-2xl lg:text-3xl"
         data-testid="post-detail-title"
       >
         <div className="flex items-center">
@@ -47,15 +47,17 @@ export const PostDetailWithEvent = ({ post }: { post: PostEntity }) => {
         <section className="mt-8" data-testid="post-detail-event-section">
           <div className="mb-8 flex items-center">
             <TicketIcon />
-            <h2 className="pl-2 text-2xl font-bold">이벤트 정보</h2>
+            <h2 className="text-md pl-2 font-bold md:text-lg lg:text-2xl">
+              이벤트 정보
+            </h2>
           </div>
           {post.event && post.source.originSourceUrl && (
-            <div className="mb-4 w-[300px]">
+            <div className="mb-4 md:w-[300px]">
               <a
                 href={post.source.originSourceUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-emerald-500 to-emerald-600 px-6 py-3 font-semibold text-white shadow-md transition-all duration-200 hover:scale-105 hover:from-emerald-600 hover:to-emerald-700 hover:shadow-lg focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 focus:outline-none"
+                className="flex items-center gap-2 rounded-lg bg-gradient-to-r from-emerald-500 to-emerald-600 px-6 py-3 font-semibold text-white shadow-md transition-all duration-200 hover:scale-105 hover:from-emerald-600 hover:to-emerald-700 hover:shadow-lg focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 focus:outline-none"
               >
                 <TicketIcon className="h-5 w-5" />
                 <div className="font-bold text-white">이벤트 참여하기</div>
