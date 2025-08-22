@@ -17,7 +17,13 @@ const DynamicMenuTabServer = dynamic(
 
 export const revalidate = 3600; // 1시간마다 ISR
 
-export default async function Page() {
+export default async function Page({
+  searchParams,
+}: {
+  searchParams: { category?: string };
+}) {
+  const category = searchParams.category;
+
   return (
     <>
       {/* 카테고리 캐러셀과 메뉴탭을 함께 로딩 */}
@@ -26,19 +32,31 @@ export default async function Page() {
         <div className="container mx-auto">
           <DynamicMenuTabServer />
           <DividerLine className="my-4" />
-          <MainAdAreaServer />
-          <section className="grid grid-cols-1 md:grid-cols-2">
-            <NewestDiscountServer />
-            <EventsUpComingServer />
-          </section>
-          <DividerLine />
-          {/* 메인 배너 */}
-          <MainAdBanners />
-          {/* 추천 포스트 */}
-          <EventsLatestServer />
-          <DividerLine />
-          {/* 플랫폼별 할인 */}
-          <DiscountPlatformServer />
+
+          {category ? (
+            /* 카테고리가 있는 경우의 UI */
+            <div>
+              {/* 여기에 카테고리별 UI를 구현하세요 */}
+              <p>카테고리 {category}에 대한 컨텐츠</p>
+            </div>
+          ) : (
+            /* 기본 홈페이지 UI */
+            <>
+              <MainAdAreaServer />
+              <section className="grid grid-cols-1 md:grid-cols-2">
+                <NewestDiscountServer />
+                <EventsUpComingServer />
+              </section>
+              <DividerLine />
+              {/* 메인 배너 */}
+              <MainAdBanners />
+              {/* 추천 포스트 */}
+              <EventsLatestServer />
+              <DividerLine />
+              {/* 플랫폼별 할인 */}
+              <DiscountPlatformServer />
+            </>
+          )}
         </div>
       </Suspense>
     </>
