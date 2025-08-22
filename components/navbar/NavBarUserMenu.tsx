@@ -1,11 +1,12 @@
 "use client";
 
-import { Button } from "@/components/shadcn/button";
 import LogoutButton from "@/features/auth/presentation/LogoutButton";
 import { UserDto } from "@/features/users/infrastructure/dto/user-res.dto";
 import { useMe } from "@/features/users/presentation/hooks/useMe";
 import { ROUTES } from "@/lib/routes";
+import { gsap } from "gsap";
 import Link from "next/link";
+import { useRef, useEffect } from "react";
 
 export default function NavBarUserMenu({
   ssrUser,
@@ -14,6 +15,36 @@ export default function NavBarUserMenu({
 }) {
   const { data: user } = useMe(!!ssrUser);
   const currentUser = user ?? ssrUser;
+  const buttonRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    const button = buttonRef.current;
+    if (!button) return;
+
+    const handleMouseEnter = () => {
+      gsap.to(button, {
+        backgroundColor: "#34d399",
+        duration: 0.3,
+        ease: "power2.out",
+      });
+    };
+
+    const handleMouseLeave = () => {
+      gsap.to(button, {
+        backgroundColor: "transparent",
+        duration: 0.3,
+        ease: "power2.out",
+      });
+    };
+
+    button.addEventListener("mouseenter", handleMouseEnter);
+    button.addEventListener("mouseleave", handleMouseLeave);
+
+    return () => {
+      button.removeEventListener("mouseenter", handleMouseEnter);
+      button.removeEventListener("mouseleave", handleMouseLeave);
+    };
+  }, []);
 
   return (
     <div className="flex items-center space-x-2" data-testid="navbar-user-menu">
@@ -36,14 +67,12 @@ export default function NavBarUserMenu({
           <LogoutButton />
         </div>
       ) : (
-        <Button
-          variant="outline"
-          className="cursor-pointer text-xs sm:text-base"
-          asChild
-          data-testid="navbar-login-button"
+        <button
+          ref={buttonRef}
+          className="cursor-pointer rounded-full border-1 px-4 py-2"
         >
           <Link href={ROUTES.SIGN_IN}>로그인</Link>
-        </Button>
+        </button>
       )}
     </div>
   );

@@ -24,7 +24,7 @@ export default function NavBar({ className = "", ssrUser }: NavBarProps) {
             className="ml-3 font-bold hover:text-emerald-400"
             data-testid="navbar-brand"
           >
-            할인탐정
+            Bargain Hunter
           </div>
         </Link>
         <NavBarUserMenu ssrUser={ssrUser} />
