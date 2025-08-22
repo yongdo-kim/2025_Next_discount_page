@@ -10,7 +10,6 @@ export function useLogout() {
     mutationFn: () => container.authService.logout(),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: usersKeys.me });
-      toast.success("로그아웃 되었습니다.");
       window.location.replace("/");
     },
     onError: (e) => {
