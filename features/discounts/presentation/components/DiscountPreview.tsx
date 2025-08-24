@@ -27,6 +27,7 @@ export const DiscountPreview = ({
       href={`/posts/${discount.id}`}
       onMouseEnter={handlePrefetch}
       className="flex items-center gap-2 pb-2 hover:cursor-pointer hover:underline"
+      data-testid="discount-preview-link"
     >
       {platform && <PlatformTag platform={platform} />}
       <span className="truncate">{content}</span>

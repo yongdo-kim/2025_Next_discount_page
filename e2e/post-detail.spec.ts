@@ -1,4 +1,4 @@
-import { test, expect } from "@playwright/test";
+import { expect, test } from "@playwright/test";
 
 test.describe("게시물 상세 페이지 테스트", () => {
   // 실제 게시물 ID (테스트용)
@@ -34,8 +34,8 @@ test.describe("게시물 상세 페이지 테스트", () => {
     // 404 페이지, 에러 상태, 또는 "no data" 상태 중 하나는 표시되어야 함
     const errorIndicators = page.locator(
       [
-        'text="404"',
-        'text="찾을 수 없습니다"',
+        'text="404 Not Found"',
+        'text="요청하신 페이지를 찾을 수 없어요.',
         'text="존재하지 않는"',
         'text="Not Found"',
         '[data-testid="post-detail-error"]',

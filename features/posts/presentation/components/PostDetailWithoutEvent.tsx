@@ -24,6 +24,11 @@ const DynamicHtmlParser = dynamic(
 );
 
 export const PostDetailWithoutEvent = ({ post }: { post: PostEntity }) => {
+  // post가 없는 경우 error 상태를 throw하여 error.tsx가 처리하도록 함
+  if (!post) {
+    throw new Error("게시글을 찾을 수 없습니다.");
+  }
+
   const { platform, content } = splitTitleByPlatform(post.title);
 
   // 상세 페이지 진입 시 GA 이벤트 전송
