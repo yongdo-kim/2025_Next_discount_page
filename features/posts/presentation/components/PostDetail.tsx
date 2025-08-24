@@ -29,8 +29,7 @@ export const PostDetail = ({
   }, [post, postId]);
 
   if (isLoading) return <div data-testid="post-detail-loading">Loading...</div>;
-  if (error) return <div data-testid="post-detail-error">Error</div>;
-  if (!post) throw new Error("게시글을 찾을 수 없습니다.");
+  if (!post || error) throw new Error("게시글을 찾을 수 없습니다.");
 
   if (post.event != null) {
     return <PostDetailWithEvent post={post} />;

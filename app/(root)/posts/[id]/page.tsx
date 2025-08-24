@@ -61,6 +61,7 @@ export default async function PostDetailPage({
     if (error instanceof Error && error.message === "404") {
       return notFound();
     }
+    throw error;
   }
 
   const post = queryClient.getQueryData<PostEntity>(postKeys.detail(numId));

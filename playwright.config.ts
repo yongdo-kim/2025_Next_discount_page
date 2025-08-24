@@ -80,7 +80,7 @@ export default defineConfig({
     // 태블릿 테스트
     {
       name: "iPad",
-      use: { ...devices["iPad Pro"] },
+      use: { ...devices["iPad Pro 11"] },
     },
   ],
 

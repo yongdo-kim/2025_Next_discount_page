@@ -51,9 +51,9 @@ export const MainAdAreaClient = () => {
 
   return (
     <div className="container mx-auto p-4">
-      <div className="grid h-64 grid-cols-1 gap-4 md:h-84 md:grid-cols-2 lg:h-96">
+      <div className="isolate grid h-64 grid-cols-1 gap-4 md:h-84 md:grid-cols-2 lg:h-96">
         {/* Left side - Event image */}
-        <div className="group relative cursor-pointer overflow-hidden rounded-lg bg-gray-200">
+        <div className="group relative isolate cursor-pointer overflow-hidden rounded-lg bg-gray-200">
           {leftImage ? (
             <Link
               href={`/posts/${leftEvent?.postId}`}
@@ -98,7 +98,7 @@ export const MainAdAreaClient = () => {
             return (
               <div
                 key={index}
-                className="group relative cursor-pointer overflow-hidden rounded-lg bg-gray-200"
+                className="group relative isolate cursor-pointer overflow-hidden rounded-lg bg-gray-200"
               >
                 {item && item.image ? (
                   <Link
