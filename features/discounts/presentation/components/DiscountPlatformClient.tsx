@@ -117,7 +117,7 @@ export default function DiscountPlatformClient() {
     return <ErrorState error={error} onRetry={refetch} size="sm" />;
 
   return (
-    <section className="py-8">
+    <section className="py-8" data-testid="discount-platform-section">
       <div className={`flex justify-between px-4`}>
         <MainTitle
           title="테마별 할인"
@@ -131,6 +131,7 @@ export default function DiscountPlatformClient() {
             <button
               key={tab.key}
               onClick={() => setSelectedTab(tab.key)}
+              data-testid={`platform-tab-${tab.key}`}
               className={`rounded-full border px-2 py-1 text-sm font-medium whitespace-nowrap transition-colors ${
                 selectedTab === tab.key
                   ? tab.colors.selected
@@ -143,7 +144,10 @@ export default function DiscountPlatformClient() {
         </div>
       </div>
       {/* 리스트 아이템 */}
-      <div className="mt-8 grid w-full grid-cols-1 gap-4 px-4 md:grid-cols-3 lg:grid-cols-4">
+      <div
+        className="mt-8 grid w-full grid-cols-1 gap-4 px-4 md:grid-cols-3 lg:grid-cols-4"
+        data-testid="discount-platform-grid"
+      >
         {getFilteredPlatforms().map((post) => {
           const createdAt = post.createdAt
             ? new Date(post.createdAt)
@@ -158,6 +162,7 @@ export default function DiscountPlatformClient() {
               key={post.id}
               href={`/posts/${post.id}`}
               onMouseEnter={() => handlePrefetch(post.id.toString())}
+              data-testid="discount-platform-card-link"
             >
               <Card className="hover:bg-accent cursor-pointer p-4">
                 <div className="flex items-center">
@@ -181,9 +186,13 @@ export default function DiscountPlatformClient() {
                     width={300}
                     height={200}
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 300px"
+                    data-testid="discount-platform-image"
                   />
                 ) : (
-                  <div className="aspect-video w-full rounded-xl bg-gray-200" />
+                  <div
+                    className="aspect-video w-full rounded-xl bg-gray-200"
+                    data-testid="discount-platform-placeholder"
+                  />
                 )}
                 <CardHeader className="px-2">
                   <CardTitle className="line-clamp-2 text-lg font-bold whitespace-normal">

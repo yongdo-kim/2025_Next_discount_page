@@ -50,10 +50,13 @@ export const MainAdAreaClient = () => {
   };
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="container mx-auto p-4" data-testid="main-ad-area">
       <div className="isolate grid h-64 grid-cols-1 gap-4 md:h-84 md:grid-cols-2 lg:h-96">
         {/* Left side - Event image */}
-        <div className="group relative isolate cursor-pointer overflow-hidden rounded-lg bg-gray-200">
+        <div
+          className="group relative isolate cursor-pointer overflow-hidden rounded-lg bg-gray-200"
+          data-testid="main-ad-left-event"
+        >
           {leftImage ? (
             <Link
               href={`/posts/${leftEvent?.postId}`}
@@ -78,8 +81,15 @@ export const MainAdAreaClient = () => {
                 href={`/posts/${leftEvent?.postId}`}
                 onMouseEnter={() => handlePrefetch(leftEvent?.postId)}
               >
-                <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-purple-100 to-purple-200">
-                  <Calendar size={64} className="text-purple-600" />
+                <div
+                  className="flex h-full w-full items-center justify-center bg-gradient-to-br from-purple-100 to-purple-200"
+                  data-testid="event-fallback-container"
+                >
+                  <Calendar
+                    size={64}
+                    className="text-purple-600"
+                    data-testid="event-fallback-icon"
+                  />
                 </div>
                 <ImageOverlay
                   title={leftEvent?.title || "이벤트"}
@@ -92,13 +102,17 @@ export const MainAdAreaClient = () => {
         </div>
 
         {/* Right side - 2x2 grid for discounts and other events */}
-        <div className="grid grid-cols-2 grid-rows-1 gap-2 md:grid-cols-2 md:grid-rows-2">
+        <div
+          className="grid grid-cols-2 grid-rows-1 gap-2 md:grid-cols-2 md:grid-rows-2"
+          data-testid="main-ad-right-grid"
+        >
           {[0, 1, 2, 3].map((index) => {
             const item = rightItems[index];
             return (
               <div
                 key={index}
                 className="group relative isolate cursor-pointer overflow-hidden rounded-lg bg-gray-200"
+                data-testid={`main-ad-grid-item-${index}`}
               >
                 {item && item.image ? (
                   <Link
@@ -126,6 +140,7 @@ export const MainAdAreaClient = () => {
                       alt=""
                       fill
                       className="object-cover transition-transform duration-300 group-hover:scale-110"
+                      data-testid="fallback-image"
                     />
                     <ImageOverlay
                       title={item.title}
@@ -133,8 +148,11 @@ export const MainAdAreaClient = () => {
                     />
                   </Link>
                 ) : (
-                  <div className="flex h-full w-full items-center justify-center text-sm text-gray-500">
-                    <span>정보 없음</span>
+                  <div
+                    className="flex h-full w-full items-center justify-center text-sm text-gray-500"
+                    data-testid="no-data-container"
+                  >
+                    <span data-testid="no-data-text">정보 없음</span>
                   </div>
                 )}
               </div>
