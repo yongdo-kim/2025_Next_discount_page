@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import GoogleLoginButton from "./GoogleLoginButton";
 import AnimatedCharacterImage from "./AnimatedCharacterImage";
+import DevLoginButton from "@/app/auth/sign-in/DevLoginButton";
 
 export const metadata = {
   title: "로그인 - 할인탐정",
@@ -44,6 +45,7 @@ export default function SignInPage() {
             }
           >
             <GoogleLoginButton />
+            {process.env.NODE_ENV === "development" && <DevLoginButton />}
           </Suspense>
         </div>
       </div>

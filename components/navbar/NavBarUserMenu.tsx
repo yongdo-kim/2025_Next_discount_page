@@ -76,6 +76,7 @@ export default function NavBarUserMenu({
         <button
           ref={buttonRef}
           className="cursor-pointer rounded-full border-1 px-4 py-2"
+          data-testid="navbar-login-button"
         >
           <Link href={ROUTES.SIGN_IN} className="flex items-center gap-2">
             <LogIn size={16} />

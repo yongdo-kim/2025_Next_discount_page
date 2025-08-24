@@ -3,6 +3,9 @@ import { defineConfig, devices } from "@playwright/test";
 /**
  * @see https://playwright.dev/docs/test-configuration
  */
+
+// npx playwright show-report e2e-output/report
+// npx playwright test e2e/google-login.spec.ts --headed
 export default defineConfig({
   // E2E 테스트 파일 위치
   testDir: "./e2e",

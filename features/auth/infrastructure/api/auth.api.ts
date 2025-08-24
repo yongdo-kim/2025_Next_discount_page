@@ -10,6 +10,12 @@ export const authApi = {
     });
     return response;
   },
+  async generateDevTokens() {
+    const response = await apiClient.post({
+      url: "/auth/dev/generate-tokens",
+    });
+    return response;
+  },
   async refreshToken(refreshToken?: string): Promise<string | null> {
     //백엔드 to 백엔드의 경우 쿠키를 Next 서버에서 접근해서 보낼 수 있다.
     //cookies가 아닌 cookie 문자열로 보내야 받아진다.

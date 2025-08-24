@@ -18,7 +18,6 @@ export default function LogoutButton() {
       {isPending ? (
         <div className="flex items-center space-x-2">
           <div className="h-4 w-4 animate-spin rounded-full border-2 border-transparent border-t-current"></div>
-          <span>로그아웃 중...</span>
         </div>
       ) : (
         "로그아웃"
