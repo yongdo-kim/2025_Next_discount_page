@@ -20,4 +20,9 @@ export class HttpPostRepository implements PostRepository {
     const post = await postApi.getPostDetail(id);
     return toPostEntity(post);
   }
+  async togglePostLike(
+    id: number,
+  ): Promise<{ isLiked: boolean; likesCount: number }> {
+    return await postApi.togglePostLike(id);
+  }
 }

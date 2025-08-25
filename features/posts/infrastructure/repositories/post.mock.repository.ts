@@ -8,6 +8,7 @@ import { UserEntity } from "@/features/users/domain/entities/user.entity";
 export class MockPostRepository implements PostRepository {
   private mockPosts: PostEntity[] = [];
   private mockPostPreviews: PostPreviewEntity[] = [];
+  private postLikeStates: Map<number, boolean> = new Map();
   constructor() {
     this.mockPosts.push(...this.generateMockPosts(10));
     this.mockPostPreviews.push(...this.generateMockPostPreviews(500));
@@ -257,5 +258,23 @@ export class MockPostRepository implements PostRepository {
       throw new Error("Post not found");
     }
     return post;
+  }
+
+  async togglePostLike(
+    id: number,
+  ): Promise<{ isLiked: boolean; likesCount: number }> {
+    const currentLikeState = this.postLikeStates.get(id) || false;
+    const newLikeState = !currentLikeState;
+
+    this.postLikeStates.set(id, newLikeState);
+
+    const post = this.mockPosts.find((post) => post.id === id);
+    if (post) {
+      const baseCount = 5;
+      const likesCount = newLikeState ? baseCount + 1 : baseCount;
+      return { isLiked: newLikeState, likesCount };
+    }
+
+    return { isLiked: newLikeState, likesCount: 0 };
   }
 }

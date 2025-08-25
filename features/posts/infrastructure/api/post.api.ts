@@ -23,4 +23,14 @@ export const postApi = {
     });
     return response;
   },
+
+  async togglePostLike(id: number) {
+    const response = await apiClient.post<{
+      isLiked: boolean;
+      likesCount: number;
+    }>({
+      url: `/posts/${id}/like`,
+    });
+    return response;
+  },
 };

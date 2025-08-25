@@ -1,18 +1,44 @@
+"use client";
+
 import { Badge } from "@/components/shadcn/badge";
 import { PostEntity } from "@/features/posts/domain/entities/post.entity";
 import { TagEntity } from "@/features/tags/domain/entities/tag.entity";
 import { UserEntity } from "@/features/users/domain/entities/user.entity";
+import { usePostLike } from "@/features/posts/presentation/hooks/use-post-like";
 import { format } from "date-fns";
 import { ko } from "date-fns/locale/ko";
+import { Heart } from "lucide-react";
 import Image from "next/image";
 
 export const PostDetailHeader = ({ post }: { post: PostEntity }) => {
+  const { isLiked, isPending, toggleLike } = usePostLike(
+    post.id,
+    post.isLikedByMe,
+  );
+
   return (
     <div className="flex flex-col justify-between">
       <div className="w-full">
         <TagList tags={post.tags} />
       </div>
-      <AuthorInfo user={post.author} createdAt={post.createdAt} />
+      <div className="flex items-center justify-between">
+        <AuthorInfo user={post.author} createdAt={post.createdAt} />
+        <button
+          onClick={toggleLike}
+          disabled={isPending}
+          className="flex cursor-pointer items-center gap-1 rounded-lg p-2 transition-colors hover:bg-gray-100 dark:hover:bg-gray-800"
+          data-testid="post-detail-like-button"
+        >
+          <Heart
+            size={20}
+            className={`transition-colors ${
+              isLiked
+                ? "fill-red-500 text-red-500"
+                : "text-gray-500 hover:text-red-500"
+            } ${isPending ? "opacity-50" : ""}`}
+          />
+        </button>
+      </div>
     </div>
   );
 };

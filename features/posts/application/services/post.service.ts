@@ -21,4 +21,9 @@ export class PostService {
     const post = await this.postRepository.getPostDetail(id);
     return post;
   }
+  async togglePostLike(
+    id: number,
+  ): Promise<{ isLiked: boolean; likesCount: number }> {
+    return await this.postRepository.togglePostLike(id);
+  }
 }

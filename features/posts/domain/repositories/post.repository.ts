@@ -9,4 +9,5 @@ export interface PostRepository {
     req: PostPreviewsReqDto;
   }): Promise<PostPreviewEntity[]>;
   getPostDetail(id: number): Promise<PostEntity>;
+  togglePostLike(id: number): Promise<{ isLiked: boolean; likesCount: number }>;
 }
