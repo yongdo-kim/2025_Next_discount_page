@@ -5,6 +5,7 @@ import { PostEntity } from "@/features/posts/domain/entities/post.entity";
 import { TagEntity } from "@/features/tags/domain/entities/tag.entity";
 import { UserEntity } from "@/features/users/domain/entities/user.entity";
 import { usePostLike } from "@/features/posts/presentation/hooks/use-post-like";
+import { useMe } from "@/features/users/presentation/hooks/useMe";
 import { format } from "date-fns";
 import { ko } from "date-fns/locale/ko";
 import { Heart } from "lucide-react";
@@ -16,6 +17,8 @@ export const PostDetailHeader = ({ post }: { post: PostEntity }) => {
     post.isLikedByMe,
   );
 
+  const { data: user } = useMe(false); //데이터만 확인.
+
   return (
     <div className="flex flex-col justify-between">
       <div className="w-full">
@@ -24,7 +27,7 @@ export const PostDetailHeader = ({ post }: { post: PostEntity }) => {
       <div className="flex items-center justify-between">
         <AuthorInfo user={post.author} createdAt={post.createdAt} />
         <button
-          onClick={toggleLike}
+          onClick={user ? toggleLike : undefined}
           disabled={isPending}
           className="flex cursor-pointer items-center gap-1 rounded-lg p-2 transition-colors hover:bg-gray-100 dark:hover:bg-gray-800"
           data-testid="post-detail-like-button"

@@ -17,7 +17,8 @@ export function useMe(enable: boolean = true) {
   // 인증 오류 시 로그인 페이지로 리다이렉트
   useEffect(() => {
     if (query.isError && query.error) {
-      router.push("/auth/sign-in");
+      console.log("인증 오류");
+      //router.push("/auth/sign-in");
     }
   }, [query.isError, query.error, router]);
 

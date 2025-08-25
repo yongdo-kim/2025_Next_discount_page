@@ -25,10 +25,16 @@ export default function NavBar({ className = "", ssrUser }: NavBarProps) {
           className="flex cursor-pointer text-lg font-bold"
           data-testid="navbar-logo-link"
         >
+          <div
+            className="ml-3 hidden font-bold hover:text-emerald-400 md:block"
+            data-testid="navbar-brand"
+          >
+            Bargain Hunter
+          </div>
           {pathname === "/" && (
             <div
-              className="ml-3 font-bold hover:text-emerald-400"
-              data-testid="navbar-brand"
+              className="ml-3 font-bold hover:text-emerald-400 md:hidden"
+              data-testid="navbar-brand-mobile"
             >
               Bargain Hunter
             </div>
