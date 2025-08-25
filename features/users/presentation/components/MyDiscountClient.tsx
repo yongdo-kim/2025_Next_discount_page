@@ -15,9 +15,9 @@ export default function MyDiscountClient() {
 
   return (
     <section className="mt-8">
-      <MainTitle title="내가 좋아한 포스트" icon={<SparklingStarIcon />} />
+      <MainTitle title="내가 좋아하는 포스트" icon={<SparklingStarIcon />} />
       <div className="h-4"></div>
-      <div className="grid grid-cols-4 grid-rows-2 gap-4">
+      <div className="grid grid-cols-4 gap-4">
         {posts.map((post) => (
           <PostCardSmall key={post.id} post={post} />
         ))}

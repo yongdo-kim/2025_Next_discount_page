@@ -3,6 +3,25 @@ import type { ApiError } from "@/features/common/types/api-error";
 import { API_ERROR_CODES } from "@/features/common/constants/api-error-codes";
 import { API_BASE_URL } from "@/lib/constants";
 import { captureException } from "@sentry/nextjs";
+
+function isServerSide(): boolean {
+  return typeof window === "undefined";
+}
+
+async function getServerSideCookies(): Promise<{
+  accessToken?: string;
+  refreshToken?: string;
+}> {
+  if (isServerSide()) {
+    const { cookies } = await import("next/headers");
+    const cookieStore = await cookies();
+    return {
+      accessToken: cookieStore.get("accessToken")?.value,
+      refreshToken: cookieStore.get("refreshToken")?.value,
+    };
+  }
+  return {};
+}
 //헤더
 const defaultHeaders = {
   "Content-Type": "application/json",
@@ -65,10 +84,26 @@ async function request<T>(
       query.startsWith("?") || query.startsWith("&") ? query : `?${query}`;
   }
 
+  // 서버 사이드에서 자동으로 쿠키 추가
+  let serverSideHeaders: Record<string, string> = {};
+  if (isServerSide()) {
+    const { accessToken, refreshToken } = await getServerSideCookies();
+    const existingHeaders = options?.headers as Record<string, string>;
+    if ((accessToken || refreshToken) && !existingHeaders?.cookie) {
+      const cookieParts = [];
+      if (accessToken) cookieParts.push(`accessToken=${accessToken}`);
+      if (refreshToken) cookieParts.push(`refreshToken=${refreshToken}`);
+      serverSideHeaders = { cookie: cookieParts.join("; ") };
+    }
+  }
+
   const mergedOptions: RequestInit = {
     method,
     ...options,
-    headers: getMergedHeaders(options),
+    headers: {
+      ...getMergedHeaders(options),
+      ...serverSideHeaders,
+    },
     credentials: "include",
   };
 

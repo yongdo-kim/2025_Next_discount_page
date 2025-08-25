@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 
 export function useLikedPosts(limit?: number) {
   return useQuery({
-    queryKey: usersKeys.likedPosts(limit),
+    queryKey: [usersKeys.likedPosts(limit)],
     queryFn: () => container.userService.getLikedPosts(limit),
     staleTime: 1000 * 60 * 5, // 5분
   });

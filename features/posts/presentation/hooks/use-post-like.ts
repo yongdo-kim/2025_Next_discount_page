@@ -1,10 +1,11 @@
 "use client";
 
 import { postKeys } from "@/features/posts/infrastructure/contstant/query-keys";
+import { usersKeys } from "@/features/users/infrastructure/contstant/query-keys";
 import { container } from "@/lib/di/dependencies";
 import { queryClient } from "@/lib/react-query";
 import { useMutation } from "@tanstack/react-query";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export const usePostLike = (postId: number, initialLiked: boolean) => {
   const [isLiked, setIsLiked] = useState(initialLiked);
@@ -24,6 +25,9 @@ export const usePostLike = (postId: number, initialLiked: boolean) => {
       setIsLiked(result.isLiked);
       queryClient.invalidateQueries({
         queryKey: [postKeys.detail(postId)],
+      });
+      queryClient.invalidateQueries({
+        queryKey: [usersKeys.likedPosts(8)],
       });
     },
     onError: (error) => {

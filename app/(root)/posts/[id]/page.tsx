@@ -1,4 +1,3 @@
-import { PostEntity } from "@/features/posts/domain/entities/post.entity";
 import { postKeys } from "@/features/posts/infrastructure/contstant/query-keys";
 import { PostDetail } from "@/features/posts/presentation/components/PostDetail";
 import { container } from "@/lib/di/dependencies";
@@ -15,6 +14,7 @@ export async function generateMetadata({
   const numId = Number(id);
   try {
     const post = await container.postService.getPostDetail(numId);
+
     return {
       title: post.title ? `${post.title} | 할인탐정` : "할인탐정",
       description: post.content || "할인 정보 상세",
@@ -64,15 +64,11 @@ export default async function PostDetailPage({
     throw error;
   }
 
-  const post = queryClient.getQueryData<PostEntity>(postKeys.detail(numId));
   const dehydratedState = dehydrate(queryClient);
-
-  // 클래스 인스턴스를 plain object로 변환
-  const serializedPost = post ? JSON.parse(JSON.stringify(post)) : null;
 
   return (
     <HydrationBoundary state={dehydratedState}>
-      <PostDetail postId={numId} initialPost={serializedPost} />
+      <PostDetail postId={numId} />
     </HydrationBoundary>
   );
 }

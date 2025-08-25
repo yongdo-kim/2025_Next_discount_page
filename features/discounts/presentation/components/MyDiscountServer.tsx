@@ -8,7 +8,7 @@ export default async function MyDiscountServer() {
   // 내가 좋아한 할인 데이터를 prefetch
   await queryClient
     .fetchQuery({
-      queryKey: usersKeys.likedPosts(),
+      queryKey: [usersKeys.likedPosts(8)],
       queryFn: async () => {
         const discounts = await container.userService.getLikedPosts();
         return JSON.parse(JSON.stringify(discounts));
