@@ -1,6 +1,9 @@
 "use client";
 import { API_BASE_URL } from "@/lib/constants";
 import { container } from "@/lib/di/dependencies";
+import { queryClient } from "@/lib/react-query";
+import { usersKeys } from "@/features/users/infrastructure/contstant/query-keys";
+import { postKeys } from "@/features/posts/infrastructure/contstant/query-keys";
 import { ROUTES } from "@/lib/routes";
 import * as Sentry from "@sentry/nextjs";
 import { gsap } from "gsap";
@@ -33,6 +36,11 @@ export default function AuthCallbackPage() {
 
           // 로그인 성공 후 유저 정보 조회, 쿠키의 jwt를 자동으로 전송
           await container.userService.getMe();
+
+          // 로그인 후 관련 캐시 무효화
+          queryClient.invalidateQueries({ queryKey: usersKeys.me });
+          queryClient.invalidateQueries({ queryKey: postKeys.all });
+
           window.location.replace(ROUTES.HOME);
         } catch (err) {
           Sentry.captureException(err);

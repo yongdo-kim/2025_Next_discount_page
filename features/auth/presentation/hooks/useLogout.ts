@@ -1,4 +1,5 @@
 import { usersKeys } from "@/features/users/infrastructure/contstant/query-keys";
+import { postKeys } from "@/features/posts/infrastructure/contstant/query-keys";
 import { container } from "@/lib/di/dependencies";
 import { queryClient } from "@/lib/react-query";
 import { captureException } from "@sentry/nextjs";
@@ -10,6 +11,7 @@ export function useLogout() {
     mutationFn: () => container.authService.logout(),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: usersKeys.me });
+      queryClient.invalidateQueries({ queryKey: postKeys.all });
       window.location.replace("/");
     },
     onError: (e) => {

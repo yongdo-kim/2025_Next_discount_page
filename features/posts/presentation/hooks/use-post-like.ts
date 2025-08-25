@@ -3,42 +3,39 @@
 import { postKeys } from "@/features/posts/infrastructure/contstant/query-keys";
 import { container } from "@/lib/di/dependencies";
 import { queryClient } from "@/lib/react-query";
-import { useOptimistic, useTransition, useEffect } from "react";
+import { useMutation } from "@tanstack/react-query";
+import { useState, useEffect } from "react";
 
 export const usePostLike = (postId: number, initialLiked: boolean) => {
-  const [optimisticLiked, setOptimisticLiked] = useOptimistic(
-    initialLiked,
-    (_, newValue: boolean) => newValue,
-  );
-  const [isPending, startTransition] = useTransition();
+  const [isLiked, setIsLiked] = useState(initialLiked);
 
-  // props로 받은 initialLiked가 변경되면 optimistic 상태 동기화
+  // props로 받은 initialLiked가 변경되면 상태 동기화
   useEffect(() => {
-    startTransition(() => {
-      setOptimisticLiked(initialLiked);
-    });
-  }, [initialLiked, setOptimisticLiked, startTransition]);
+    setIsLiked(initialLiked);
+  }, [initialLiked]);
 
-  const toggleLike = async () => {
-    startTransition(async () => {
-      setOptimisticLiked(!optimisticLiked);
-
-      try {
-        const result = await container.postService.togglePostLike(postId);
-        queryClient.invalidateQueries({
-          queryKey: [postKeys.detail(postId)],
-        });
-        console.log(result);
-        setOptimisticLiked(result.isLiked);
-      } catch (error) {
-        console.error("Failed to toggle like:", error);
-      }
-    });
-  };
+  const mutation = useMutation({
+    mutationFn: () => container.postService.togglePostLike(postId),
+    onMutate: () => {
+      // Optimistic update
+      setIsLiked(!isLiked);
+    },
+    onSuccess: (result) => {
+      setIsLiked(result.isLiked);
+      queryClient.invalidateQueries({
+        queryKey: postKeys.detail(postId),
+      });
+    },
+    onError: (error) => {
+      // Revert optimistic update
+      setIsLiked(isLiked);
+      console.error("Failed to toggle like:", error);
+    },
+  });
 
   return {
-    isLiked: optimisticLiked,
-    isPending,
-    toggleLike,
+    isLiked,
+    isPending: mutation.isPending,
+    toggleLike: mutation.mutate,
   };
 };

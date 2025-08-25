@@ -27,7 +27,7 @@ export const PostDetailHeader = ({ post }: { post: PostEntity }) => {
       <div className="flex items-center justify-between">
         <AuthorInfo user={post.author} createdAt={post.createdAt} />
         <button
-          onClick={user ? toggleLike : undefined}
+          onClick={user ? () => toggleLike() : undefined}
           disabled={isPending}
           className="flex cursor-pointer items-center gap-1 rounded-lg p-2 transition-colors hover:bg-gray-100 dark:hover:bg-gray-800"
           data-testid="post-detail-like-button"

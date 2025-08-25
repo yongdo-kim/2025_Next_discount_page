@@ -35,7 +35,7 @@ export const usePostDetail = ({
   initialPost?: PostEntity;
 }) => {
   return useQuery<PostEntity>({
-    queryKey: [postKeys.detail(id)],
+    queryKey: postKeys.detail(id),
     queryFn: () => {
       return container.postService.getPostDetail(id);
     },
