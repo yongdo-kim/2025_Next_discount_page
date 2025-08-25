@@ -107,7 +107,7 @@ export default function DiscountPlatformClient() {
 
   const handlePrefetch = (postId: string) => {
     queryClient.prefetchQuery({
-      queryKey: postKeys.detail(postId),
+      queryKey: [postKeys.detail(postId)],
       queryFn: () => container.postService.getPostDetail(Number(postId)),
     });
   };

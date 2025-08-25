@@ -23,7 +23,7 @@ export const usePostLike = (postId: number, initialLiked: boolean) => {
     onSuccess: (result) => {
       setIsLiked(result.isLiked);
       queryClient.invalidateQueries({
-        queryKey: postKeys.detail(postId),
+        queryKey: [postKeys.detail(postId)],
       });
     },
     onError: (error) => {

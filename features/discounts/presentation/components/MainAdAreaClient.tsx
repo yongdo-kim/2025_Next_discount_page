@@ -44,7 +44,7 @@ export const MainAdAreaClient = () => {
 
   const handlePrefetch = (postId: number) => {
     queryClient.prefetchQuery({
-      queryKey: postKeys.detail(postId),
+      queryKey: [postKeys.detail(postId)],
       queryFn: () => container.postService.getPostDetail(postId),
     });
   };

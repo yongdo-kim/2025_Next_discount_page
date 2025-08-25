@@ -51,7 +51,7 @@ export default async function PostDetailPage({
   const numId = Number(id);
   try {
     await queryClient.prefetchQuery({
-      queryKey: postKeys.detail(numId),
+      queryKey: [postKeys.detail(numId)],
       queryFn: async () => {
         const post = await container.postService.getPostDetail(numId);
         return JSON.parse(JSON.stringify(post));
