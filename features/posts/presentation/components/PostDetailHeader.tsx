@@ -6,6 +6,17 @@ import { TagEntity } from "@/features/tags/domain/entities/tag.entity";
 import { UserEntity } from "@/features/users/domain/entities/user.entity";
 import { usePostLike } from "@/features/posts/presentation/hooks/use-post-like";
 import { useMe } from "@/features/users/presentation/hooks/useMe";
+import { useGoogleLogin } from "@/features/auth/presentation/hooks/useGoogleLogin";
+import { useModal } from "@/hooks/useModal";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/shadcn/dialog";
+import { Button } from "@/components/shadcn/button";
 import { format } from "date-fns";
 import { ko } from "date-fns/locale/ko";
 import { Heart } from "lucide-react";
@@ -18,6 +29,22 @@ export const PostDetailHeader = ({ post }: { post: PostEntity }) => {
   );
 
   const { data: user } = useMe(false); //데이터만 확인.
+  const { googleLogin } = useGoogleLogin();
+  const { modalState, openModal, closeModal, handleConfirm } = useModal();
+
+  const handleLikeClick = () => {
+    if (user) {
+      toggleLike();
+    } else {
+      openModal({
+        title: "로그인이 필요합니다",
+        description: "좋아요 기능을 사용하려면 로그인이 필요합니다.",
+        confirmText: "구글로 로그인",
+        cancelText: "취소",
+        onConfirm: googleLogin,
+      });
+    }
+  };
 
   return (
     <div className="flex flex-col justify-between">
@@ -27,7 +54,7 @@ export const PostDetailHeader = ({ post }: { post: PostEntity }) => {
       <div className="flex items-center justify-between">
         <AuthorInfo user={post.author} createdAt={post.createdAt} />
         <button
-          onClick={user ? () => toggleLike() : undefined}
+          onClick={handleLikeClick}
           disabled={isPending}
           className="flex cursor-pointer items-center gap-1 rounded-lg p-2 transition-colors hover:bg-gray-100 dark:hover:bg-gray-800"
           data-testid="post-detail-like-button"
@@ -42,6 +69,23 @@ export const PostDetailHeader = ({ post }: { post: PostEntity }) => {
           />
         </button>
       </div>
+
+      <Dialog open={modalState.isOpen} onOpenChange={closeModal}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>{modalState.title}</DialogTitle>
+            <DialogDescription>{modalState.description}</DialogDescription>
+          </DialogHeader>
+          <DialogFooter>
+            <Button variant="outline" onClick={closeModal}>
+              {modalState.cancelText || "취소"}
+            </Button>
+            <Button onClick={handleConfirm}>
+              {modalState.confirmText || "확인"}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
