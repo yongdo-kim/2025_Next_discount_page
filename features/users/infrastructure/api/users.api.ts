@@ -1,3 +1,4 @@
+import { PostPreviewDto } from "@/features/posts/infrastructure/dto/responses/post-preview.res.dto";
 import { UserDto } from "@/features/users/infrastructure/dto/user-res.dto";
 import { UserUpdateReqDto } from "@/features/users/infrastructure/dto/user-update.req.dto";
 import { apiClient } from "@/lib/api/client";
@@ -24,6 +25,19 @@ export const UsersApi = {
     const response = await apiClient.put<UserDto>({
       url: "/users/me",
       body: formData,
+    });
+    return response;
+  },
+
+  async getLikedPosts(limit?: number): Promise<PostPreviewDto[]> {
+    const params = new URLSearchParams();
+    if (limit !== undefined) {
+      params.append("limit", limit.toString());
+    }
+
+    const url = `/users/me/liked-posts${params.toString() ? `?${params.toString()}` : ""}`;
+    const response = await apiClient.get<PostPreviewDto[]>({
+      url,
     });
     return response;
   },

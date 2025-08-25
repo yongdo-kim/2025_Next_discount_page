@@ -163,7 +163,7 @@ function DesktopCard({
                 )}
               </div>
               <div
-                className="line-clamp-2 text-2xl font-bold whitespace-normal text-white drop-shadow"
+                className="text-md line-clamp-2 font-bold whitespace-normal text-white drop-shadow"
                 data-testid="post-card-small-desktop-title"
               >
                 {post.title}

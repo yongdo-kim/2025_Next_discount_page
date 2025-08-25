@@ -7,6 +7,7 @@ import { UserUpdateReqDto } from "@/features/users/infrastructure/dto/user-updat
 const mockUsersRepository: jest.Mocked<UsersRepository> = {
   getMe: jest.fn(),
   updateMe: jest.fn(),
+  getLikedPosts: jest.fn(),
 };
 
 describe("UsersService", () => {

@@ -1,3 +1,4 @@
+import { PostPreviewEntity } from "@/features/posts/domain/entities/post-preview.entity";
 import { UsersRepository } from "@/features/users/domain/entities/repositories/user.repository";
 import { UserEntity } from "@/features/users/domain/entities/user.entity";
 import { UserUpdateReqDto } from "@/features/users/infrastructure/dto/user-update.req.dto";
@@ -10,5 +11,9 @@ export class UsersService {
   }
   async updateMe(data: UserUpdateReqDto): Promise<UserEntity> {
     return this.usersRepository.updateMe(data);
+  }
+
+  async getLikedPosts(limit?: number): Promise<PostPreviewEntity[]> {
+    return this.usersRepository.getLikedPosts(limit);
   }
 }
