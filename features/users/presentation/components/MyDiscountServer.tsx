@@ -3,13 +3,21 @@ import { usersKeys } from "@/features/users/infrastructure/contstant/query-keys"
 import { container } from "@/lib/di/dependencies";
 import { queryClient } from "@/lib/react-query";
 import { HydrationBoundary, dehydrate } from "@tanstack/react-query";
+import { cookies } from "next/headers";
 
 export default async function MyDiscountServer() {
+  const cookieStore = await cookies();
+  const accessToken = cookieStore.get("accessToken")?.value;
+
+  if (!accessToken) {
+    return null;
+  }
+
   await Promise.all([
     // 좋아요한 포스트 prefetch
     queryClient
       .fetchQuery({
-        queryKey: [usersKeys.likedPosts(8)],
+        queryKey: usersKeys.likedPosts,
         queryFn: async () => {
           const likedPosts = await container.userService.getLikedPosts();
           return JSON.parse(JSON.stringify(likedPosts));

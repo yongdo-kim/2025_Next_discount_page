@@ -27,7 +27,7 @@ export const usePostLike = (postId: number, initialLiked: boolean) => {
         queryKey: [postKeys.detail(postId)],
       });
       queryClient.invalidateQueries({
-        queryKey: [usersKeys.likedPosts(8)],
+        queryKey: [usersKeys.likedPosts],
       });
     },
     onError: (error) => {

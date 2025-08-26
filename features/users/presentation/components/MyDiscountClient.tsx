@@ -7,7 +7,7 @@ import PostCardSmall from "@/features/posts/presentation/components/PostCardSmal
 import { useLikedPosts } from "@/features/users/presentation/hooks/useLikedPosts";
 
 export default function MyDiscountClient() {
-  const { data: postsData, isLoading: postsLoading } = useLikedPosts(8, true);
+  const { data: postsData, isLoading: postsLoading } = useLikedPosts(true);
 
   if (postsLoading) return <div data-testid="my-discount-loading"></div>;
   if (!postsData || postsData.length === 0) return null;
