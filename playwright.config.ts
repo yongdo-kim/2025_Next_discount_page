@@ -19,7 +19,7 @@ export default defineConfig({
   },
 
   // 테스트 실행 설정
-  fullyParallel: true, // 병렬 실행
+  fullyParallel: false, // 순차 실행
   forbidOnly: !!process.env.CI, // CI에서는 test.only 금지
   retries: process.env.CI ? 2 : 0, // CI에서는 실패시 2번 재시도
   workers: process.env.CI ? 1 : undefined, // CI에서는 1개 워커만 사용
@@ -41,7 +41,7 @@ export default defineConfig({
   // 모든 프로젝트에 공통으로 적용될 설정
   use: {
     // 기본 URL (로컬 개발 서버)
-    baseURL: "http://localhost:3001",
+    baseURL: "http://localhost:3000",
 
     // 실패한 테스트의 스크린샷 저장
     screenshot: "only-on-failure",
@@ -112,8 +112,8 @@ export default defineConfig({
 
   // 개발 서버 설정 (테스트 실행 전 자동으로 서버 시작)
   webServer: {
-    command: "npm run dev -- --port 3001",
-    port: 3001,
+    command: "npm run dev -- --port 3000",
+    port: 3000,
     reuseExistingServer: !process.env.CI, // 로컬에서는 기존 서버 재사용
     timeout: 120 * 1000, // 서버 시작 대기 시간 (2분)
   },

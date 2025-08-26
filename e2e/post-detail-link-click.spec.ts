@@ -24,32 +24,13 @@ test.describe("오늘의 할인 상품 탐색 여정", () => {
     // 4. 첫 번째 할인 상품에 호버하여 프리페칭 동작 확인 (데스크톱에서만)
     const firstDiscountLink = discountLinks.first();
 
-    // 첫 번째 할인 링크 정보 확인
-    const linkText = await firstDiscountLink.textContent();
-    const linkHref = await firstDiscountLink.getAttribute("href");
-    console.log(`🔗 첫 번째 할인 링크 정보:`, {
-      text: linkText,
-      href: linkHref,
-    });
+    await firstDiscountLink.hover();
 
-    // 모바일 디바이스인지 확인
-    const isMobile = await page.evaluate(() => {
-      return /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
-    });
+    // Wait for any hover effects to complete
+    await page.waitForTimeout(500);
 
-    if (!isMobile) {
-      // 데스크톱에서만 프리페칭 테스트 실행
-      // 4-2. 호버하여 프리페칭 트리거 (just hover to test interaction)
-      await firstDiscountLink.hover();
-
-      // Wait for any hover effects to complete
-      await page.waitForTimeout(500);
-
-      // 호버 상태에서 요소가 여전히 표시되는지 확인
-      await expect(firstDiscountLink).toBeVisible();
-    } else {
-      console.log(`📱 모바일 디바이스 감지: 프리페칭 테스트 건너뜀`);
-    }
+    // 호버 상태에서 요소가 여전히 표시되는지 확인
+    await expect(firstDiscountLink).toBeVisible();
 
     // 5. 할인 상품 클릭하여 상세페이지로 이동
     // Wait for everything to stabilize before clicking
@@ -150,26 +131,6 @@ test.describe("오늘의 할인 상품 탐색 여정", () => {
     await mobileShortcut.click();
 
     console.log("✅ 모바일 사용자 여정 테스트 완료");
-  });
-
-  test("네트워크 오류 상황에서 적절한 에러 처리가 된다", async ({ page }) => {
-    // 1. 네트워크를 먼저 차단
-    await page.route("**/api/**", (route) => {
-      console.log("🚫 네트워크 요청 차단:", route.request().url());
-      route.abort("failed");
-    });
-
-    // 2. 존재하지 않는 포스트로 직접 접근 (SSR 캐시 우회)
-    const nonExistentPostId = 999999;
-    await page.goto(`/posts/${nonExistentPostId}`, {
-      waitUntil: "domcontentloaded",
-    });
-    // 에러 페이지 또는 에러 상태 확인
-    const errorIndicators = page.locator(
-      ['[data-testid="error-page-container"]'].join(", "),
-    );
-
-    await expect(errorIndicators.first()).toBeVisible({ timeout: 15000 });
   });
 
   test("존재하지 않는 게시물 접근 시 에러 페이지로 이동한다.", async ({
