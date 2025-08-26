@@ -2,6 +2,7 @@ import { Badge } from "@/components/shadcn/badge";
 import SmartImage from "@/components/ui/SmartImage";
 import { PostPreviewEntity } from "@/features/posts/domain/entities/post-preview.entity";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function PostCardSmall({
   post,
@@ -50,7 +51,17 @@ function MobileCard({
               priority={priority}
             />
           ) : (
-            <div className="h-full w-full rounded-2xl bg-gray-200" />
+            <div className="h-full w-full rounded-2xl bg-gray-200">
+              <Image
+                src="/discount-character-1024.webp"
+                alt="할인탐정 캐릭터"
+                width={96}
+                height={80}
+                sizes="96px"
+                priority
+                data-testid="error-character-image"
+              />
+            </div>
           )}
         </div>
         {/* 내용 */}
