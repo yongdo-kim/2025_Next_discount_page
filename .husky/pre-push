@@ -12,10 +12,20 @@ npm run test:jest
 current_branch=$(git symbolic-ref --short HEAD)
 if [ "$current_branch" = "main" ]; then
     echo "Running E2E tests on main branch..."
-    echo "Starting E2E test environment..."
-    npx playwright test
-    if [ $? -ne 0 ]; then
+    echo "Environment: NODE_ENV=$NODE_ENV, PWD=$PWD"
+    echo "Starting E2E test environment on port 3001..."
+    
+    # 환경변수 명시적 설정
+    export NODE_ENV=development
+    export PATH="$PWD/node_modules/.bin:$PATH"
+    
+    # E2E 테스트 실행
+    npx playwright test --reporter=list
+    test_result=$?
+    
+    if [ $test_result -ne 0 ]; then
         echo "❌ E2E tests failed! Push cancelled."
+        echo "Exit code: $test_result"
         exit 1
     fi
     echo "✅ E2E tests passed!"

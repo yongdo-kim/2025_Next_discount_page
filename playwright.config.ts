@@ -41,7 +41,7 @@ export default defineConfig({
   // 모든 프로젝트에 공통으로 적용될 설정
   use: {
     // 기본 URL (로컬 개발 서버)
-    baseURL: "http://localhost:3000",
+    baseURL: "http://localhost:3001",
 
     // 실패한 테스트의 스크린샷 저장
     screenshot: "only-on-failure",
@@ -112,8 +112,8 @@ export default defineConfig({
 
   // 개발 서버 설정 (테스트 실행 전 자동으로 서버 시작)
   webServer: {
-    command: "npm run dev",
-    port: 3000,
+    command: "npm run dev -- --port 3001",
+    port: 3001,
     reuseExistingServer: !process.env.CI, // 로컬에서는 기존 서버 재사용
     timeout: 120 * 1000, // 서버 시작 대기 시간 (2분)
   },
