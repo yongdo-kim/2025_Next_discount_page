@@ -110,7 +110,7 @@ export default function DiscountPlatformClient() {
     });
   };
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <div></div>;
   if (isError && isClientError(error))
     return <ErrorState error={error} onRetry={refetch} size="sm" />;
 
