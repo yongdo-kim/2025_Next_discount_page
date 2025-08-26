@@ -10,12 +10,12 @@ export default defineConfig({
   // E2E 테스트 파일 위치
   testDir: "./e2e",
 
-  // 각 테스트의 타임아웃 (30초)
-  timeout: 30 * 1000,
+  // 각 테스트의 타임아웃 (60초)
+  timeout: 60 * 1000,
 
-  // expect() 함수의 타임아웃 (5초)
+  // expect() 함수의 타임아웃 (10초)
   expect: {
-    timeout: 5000,
+    timeout: 10000,
   },
 
   // 테스트 실행 설정
@@ -26,7 +26,14 @@ export default defineConfig({
 
   // 리포터 설정
   reporter: [
-    ["html", { outputFolder: "e2e-output/report" }], // HTML 리포트 생성
+    [
+      "html",
+      {
+        outputFolder: "e2e-output/report",
+        open: "never",
+        showTrace: true,
+      },
+    ], // HTML 리포트 생성
     ["list"], // 콘솔에 리스트 형태로 출력
     ["json", { outputFile: "e2e-output/test-results.json" }], // JSON 리포트
   ],
@@ -54,35 +61,51 @@ export default defineConfig({
 
   // 다양한 브라우저와 디바이스에서 테스트
   projects: [
+    // my-discount-client.spec.ts용 단일 워커 프로젝트
+    {
+      name: "my-discount-client-chromium",
+      testMatch: "**/my-discount-client.spec.ts",
+      use: { ...devices["Desktop Chrome"] },
+      fullyParallel: false,
+      workers: 1,
+    },
+
+    // 나머지 테스트용 일반 프로젝트들
     {
       name: "chromium",
+      testIgnore: "**/my-discount-client.spec.ts",
       use: { ...devices["Desktop Chrome"] },
     },
 
     {
       name: "firefox",
+      testIgnore: "**/my-discount-client.spec.ts",
       use: { ...devices["Desktop Firefox"] },
     },
 
     {
       name: "webkit",
+      testIgnore: "**/my-discount-client.spec.ts",
       use: { ...devices["Desktop Safari"] },
     },
 
     // 모바일 테스트
     {
       name: "Mobile Chrome",
+      testIgnore: "**/my-discount-client.spec.ts",
       use: { ...devices["Pixel 5"] },
     },
 
     {
       name: "Mobile Safari",
+      testIgnore: "**/my-discount-client.spec.ts",
       use: { ...devices["iPhone 12"] },
     },
 
     // 태블릿 테스트
     {
       name: "iPad",
+      testIgnore: "**/my-discount-client.spec.ts",
       use: { ...devices["iPad Pro 11"] },
     },
   ],

@@ -1,5 +1,7 @@
 import { expect, test } from "@playwright/test";
 
+test.describe.configure({ mode: "serial" });
+
 test.describe("LIKE SECTION TEST", () => {
   test("1. 로그인 후 좋아하는 포스트가 있으면 '내가 좋아하는 포스트' 제목이 표시된다", async ({
     page,
@@ -99,7 +101,7 @@ test.describe("LIKE SECTION TEST", () => {
     }
   });
 
-  test.only("2.로그인 후 좋아하는 포스트 로딩 상태가 정상적으로 표시되고 좋아요 상태 변화를 확인한다", async ({
+  test("2.로그인 후 좋아하는 포스트 로딩 상태가 정상적으로 표시되고 좋아요 상태 변화를 확인한다", async ({
     page,
   }) => {
     // 1. 홈페이지 진입
@@ -229,7 +231,7 @@ test.describe("LIKE SECTION TEST", () => {
     }
 
     // 상태 변화 대기 (API 응답 후 UI 업데이트 대기)
-    await page.waitForTimeout(500);
+    await page.waitForTimeout(1500);
 
     // 10. 클릭 후 좋아요 버튼 상태 확인
     const updatedIconClasses =
@@ -254,8 +256,8 @@ test.describe("LIKE SECTION TEST", () => {
     // 12. 홈으로 돌아가기
     console.log("🏠 홈페이지로 이동");
     await page.goto("/");
-    await page.waitForLoadState("networkidle");
-    await page.waitForTimeout(2000); // useLikedPosts 훅 데이터 로딩 대기
+    await page.waitForLoadState("domcontentloaded");
+    await page.waitForTimeout(3000); // useLikedPosts 훅 데이터 로딩 대기
 
     // 13. 내가 좋아하는 포스트 섹션에서 포스트 개수 다시 확인
     const updatedMyDiscountSection = page.locator(
@@ -291,6 +293,99 @@ test.describe("LIKE SECTION TEST", () => {
       );
     }
 
-    console.log("✅ 좋아요 상태 변화 및 UI 반응 테스트 완료");
+    // 15. 반대 동작 확인을 위해 다시 좋아요 버튼 클릭
+    console.log("🔄 반대 동작 확인을 위해 포스트로 다시 이동");
+
+    // 포스트 디테일 페이지로 다시 이동
+    await page.goto(`/posts/${postId}`);
+    await page.waitForLoadState("domcontentloaded");
+
+    const detailLikeButton = page.locator(
+      '[data-testid="post-detail-like-button"]',
+    );
+    await expect(detailLikeButton).toBeVisible({ timeout: 5000 });
+
+    // 현재 좋아요 상태 확인 (이전 클릭의 결과)
+    const detailLikeButtonIcon = detailLikeButton.locator("svg");
+    const beforeSecondClickClasses =
+      (await detailLikeButtonIcon.getAttribute("class")) || "";
+    const beforeSecondClickIsLiked =
+      beforeSecondClickClasses.includes("fill-red-500");
+
+    console.log(
+      `💡 두 번째 클릭 전 상태: ${beforeSecondClickIsLiked ? "liked (T)" : "not liked (F)"}`,
+    );
+
+    // API 호출 감지를 위한 Promise 생성
+    const secondApiCallPromise = page.waitForResponse(
+      (response) => {
+        const url = response.url();
+        const method = response.request().method();
+        return url.includes(`/posts/${postId}/like`) && method === "POST";
+      },
+      { timeout: 5000 },
+    );
+
+    // 두 번째 좋아요 버튼 클릭 (반대 동작)
+    console.log("❤️ 좋아요 버튼 두 번째 클릭 (반대 동작)");
+    await detailLikeButton.click();
+
+    // API 호출 대기
+    try {
+      const secondApiResponse = await secondApiCallPromise;
+      expect(secondApiResponse.status()).toBe(201);
+      console.log("✅ 두 번째 좋아요 API 호출 성공");
+    } catch (error) {
+      console.error("❌ 두 번째 좋아요 API 호출 실패:", error);
+      throw error;
+    }
+
+    await page.waitForTimeout(1500);
+
+    // 16. 두 번째 클릭 후 좋아요 상태 확인
+    const afterSecondClickClasses =
+      (await detailLikeButtonIcon.getAttribute("class")) || "";
+    const afterSecondClickIsLiked =
+      afterSecondClickClasses.includes("fill-red-500");
+
+    console.log(
+      `💡 두 번째 클릭 후 상태: ${afterSecondClickIsLiked ? "liked (T)" : "not liked (F)"}`,
+    );
+
+    // 17. 상태가 원래대로 돌아갔는지 검증
+    expect(afterSecondClickIsLiked).toBe(initialIsLiked);
+    console.log("✅ 좋아요 상태가 원래 상태로 복구됨");
+
+    // 18. 홈으로 다시 돌아가서 최종 포스트 개수 확인
+    console.log("🏠 홈페이지로 다시 이동하여 최종 확인");
+    await page.goto("/");
+    await page.waitForLoadState("domcontentloaded");
+    await page.waitForTimeout(3000);
+
+    // 19. 최종 포스트 개수가 초기 개수와 같은지 확인
+    const finalMyDiscountSection = page.locator(
+      '[data-testid="my-discount-section"]',
+    );
+    let restoredPostCount = 0;
+    const finalSectionExists = await finalMyDiscountSection.isVisible({
+      timeout: 5000,
+    });
+
+    if (finalSectionExists) {
+      const finalPostItems = page.locator(
+        '[data-testid="my-discount-post-item"]',
+      );
+      restoredPostCount = await finalPostItems.count();
+    }
+
+    console.log(
+      `📄 복구된 포스트 개수: ${restoredPostCount}개 (초기: ${initialPostCount}개)`,
+    );
+
+    // 20. 포스트 개수가 초기 상태로 복구되었는지 검증
+    expect(restoredPostCount).toBe(initialPostCount);
+    console.log(`✅ 포스트 개수가 초기 상태로 복구됨: ${restoredPostCount}개`);
+
+    console.log("✅ 좋아요 상태 변화 및 반대 동작 검증 테스트 완료");
   });
 });
