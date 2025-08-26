@@ -27,19 +27,12 @@ export const usePostPreviews = ({
   });
 };
 
-export const usePostDetail = ({
-  id,
-  initialPost,
-}: {
-  id: number;
-  initialPost?: PostEntity;
-}) => {
+export const usePostDetail = ({ id }: { id: number }) => {
   return useQuery<PostEntity>({
     queryKey: [postKeys.detail(id)],
     queryFn: () => {
       return container.postService.getPostDetail(id);
     },
-    initialData: initialPost,
   });
 };
 
