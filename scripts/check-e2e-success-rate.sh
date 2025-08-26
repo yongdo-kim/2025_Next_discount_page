@@ -2,8 +2,8 @@
 
 echo "🧪 Running E2E tests..."
 
-# E2E 테스트 실행 (순차 실행, JSON 출력으로 결과 저장)
-npx playwright test --project=dev-sequential --reporter=json > e2e-results.json
+# E2E 테스트 실행 (순차 실행, 진행률과 JSON 출력 동시 저장)
+npx playwright test --project=dev-sequential --reporter=list --reporter=json:e2e-results.json
 
 # JSON 결과에서 성공/실패 통계 추출
 if [ -f "e2e-results.json" ]; then
