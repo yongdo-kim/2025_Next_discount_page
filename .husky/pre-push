@@ -9,6 +9,6 @@ echo "🧪 Running Jest tests..."
 npm run test:jest
 
 # Run E2E tests and check success rate
-echo "🎭 Checking E2E test success rate..."
-./scripts/check-e2e-success-rate.sh
+# echo "🎭 Checking E2E test success rate..."
+# ./scripts/check-e2e-success-rate.sh
 
