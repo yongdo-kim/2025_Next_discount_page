@@ -7,3 +7,16 @@ npm run build
 # Run Jest tests
 echo "Running tests..."
 npm run test:jest
+
+# Check if pushing to main branch and run E2E tests
+current_branch=$(git symbolic-ref --short HEAD)
+if [ "$current_branch" = "main" ]; then
+    echo "Running E2E tests on main branch..."
+    echo "Starting E2E test environment..."
+    npx playwright test
+    if [ $? -ne 0 ]; then
+        echo "❌ E2E tests failed! Push cancelled."
+        exit 1
+    fi
+    echo "✅ E2E tests passed!"
+fi
