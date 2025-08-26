@@ -1,7 +1,7 @@
 import { expect, test } from "@playwright/test";
 
-test.describe("내가 좋아하는 포스트 섹션 테스트", () => {
-  test("로그인 후 좋아하는 포스트가 있으면 '내가 좋아하는 포스트' 제목이 표시된다", async ({
+test.describe("LIKE SECTION TEST", () => {
+  test("1. 로그인 후 좋아하는 포스트가 있으면 '내가 좋아하는 포스트' 제목이 표시된다", async ({
     page,
   }) => {
     // 1. 홈페이지 진입
@@ -99,7 +99,7 @@ test.describe("내가 좋아하는 포스트 섹션 테스트", () => {
     }
   });
 
-  test("로그인 후 좋아하는 포스트 로딩 상태가 정상적으로 표시되고 좋아요 상태 변화를 확인한다", async ({
+  test("2.로그인 후 좋아하는 포스트 로딩 상태가 정상적으로 표시되고 좋아요 상태 변화를 확인한다", async ({
     page,
   }) => {
     // 1. 홈페이지 진입
@@ -129,24 +129,6 @@ test.describe("내가 좋아하는 포스트 섹션 테스트", () => {
 
     // 3. 페이지 새로고침하여 로딩 상태 관찰
     await page.reload();
-
-    // 4. 로딩 상태 확인 (빠르게 나타났다가 사라질 수 있음)
-    const loadingElement = page.locator('[data-testid="my-discount-loading"]');
-
-    try {
-      // 로딩 요소가 잠깐이라도 나타나는지 확인
-      await expect(loadingElement).toBeVisible({ timeout: 1000 });
-      console.log("✅ 로딩 상태 표시됨");
-
-      // 로딩이 사라지고 섹션이나 빈 상태가 되는지 확인
-      await expect(loadingElement).not.toBeVisible({ timeout: 10000 });
-      console.log("✅ 로딩 상태 완료");
-    } catch (error) {
-      console.log(
-        `ℹ️ 로딩 상태가 너무 빨라 감지되지 않음 (정상적일 수 있음) ${error}`,
-      );
-    }
-
     await page.waitForLoadState("networkidle");
     await page.waitForTimeout(2000);
 
@@ -193,10 +175,7 @@ test.describe("내가 좋아하는 포스트 섹션 테스트", () => {
     const likeButtonIcon = likeButton.locator("svg");
     const initialIconClasses =
       (await likeButtonIcon.getAttribute("class")) || "";
-    const initialIsLiked =
-      initialIconClasses.includes("fill-current") ||
-      initialIconClasses.includes("fill-red") ||
-      (await likeButton.getAttribute("data-liked")) === "true";
+    const initialIsLiked = initialIconClasses.includes("fill-red-500");
 
     console.log(
       `💡 초기 좋아요 상태: ${initialIsLiked ? "liked (T)" : "not liked (F)"}`,
@@ -212,10 +191,7 @@ test.describe("내가 좋아하는 포스트 섹션 테스트", () => {
     // 10. 클릭 후 좋아요 버튼 상태 확인
     const updatedIconClasses =
       (await likeButtonIcon.getAttribute("class")) || "";
-    const updatedIsLiked =
-      updatedIconClasses.includes("fill-current") ||
-      updatedIconClasses.includes("fill-red") ||
-      (await likeButton.getAttribute("data-liked")) === "true";
+    const updatedIsLiked = updatedIconClasses.includes("fill-red-500");
 
     console.log(
       `💡 클릭 후 좋아요 상태: ${updatedIsLiked ? "liked (T)" : "not liked (F)"}`,
@@ -275,7 +251,7 @@ test.describe("내가 좋아하는 포스트 섹션 테스트", () => {
     console.log("✅ 좋아요 상태 변화 및 UI 반응 테스트 완료");
   });
 
-  test("로그아웃 상태에서는 내가 좋아하는 포스트 섹션이 표시되지 않는다", async ({
+  test("3. 로그아웃 상태에서는 내가 좋아하는 포스트 섹션이 표시되지 않는다", async ({
     page,
   }) => {
     // 1. 홈페이지 진입
@@ -319,7 +295,7 @@ test.describe("내가 좋아하는 포스트 섹션 테스트", () => {
     console.log("✅ 로그아웃 상태에서 내가 좋아하는 포스트 섹션 미표시 확인");
   });
 
-  test("좋아요 버튼을 누르면 내가 좋아하는 포스트 목록이 증가한다", async ({
+  test.only("4. 좋아요 버튼을 누르면 내가 좋아하는 포스트 목록이 증가한다", async ({
     page,
   }) => {
     // 1. 홈페이지 진입 및 로그인

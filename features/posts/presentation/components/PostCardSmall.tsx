@@ -6,12 +6,13 @@ import Link from "next/link";
 export default function PostCardSmall({
   post,
   priority = false,
+  ...props
 }: {
   post: PostPreviewEntity;
   priority?: boolean;
-}) {
+} & React.HTMLAttributes<HTMLDivElement>) {
   return (
-    <>
+    <div {...props}>
       {/* 모바일 전용 */}
       <div className="block md:hidden">
         <MobileCard post={post} priority={priority} />
@@ -20,7 +21,7 @@ export default function PostCardSmall({
       <div className="hidden md:block">
         <DesktopCard post={post} priority={priority} />
       </div>
-    </>
+    </div>
   );
 }
 function MobileCard({
