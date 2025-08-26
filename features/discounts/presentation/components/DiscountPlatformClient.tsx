@@ -16,8 +16,6 @@ import { postKeys } from "@/features/posts/infrastructure/contstant/query-keys";
 import { container } from "@/lib/di/dependencies";
 import { isClientError } from "@/lib/error-handler";
 import { queryClient } from "@/lib/react-query";
-import { formatDistanceToNow } from "date-fns";
-import { ko } from "date-fns/locale/ko";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -32,7 +30,7 @@ export default function DiscountPlatformClient() {
     refetch,
   } = useFetchDiscountPlatforms();
 
-  const [selectedTab, setSelectedTab] = useState<PlatformKey>("kakao");
+  const [selectedTab, setSelectedTab] = useState<PlatformKey>("naver");
 
   const platformTabs: {
     key: PlatformKey;
@@ -149,13 +147,13 @@ export default function DiscountPlatformClient() {
         data-testid="discount-platform-grid"
       >
         {getFilteredPlatforms().map((post) => {
-          const createdAt = post.createdAt
-            ? new Date(post.createdAt)
-            : new Date();
-          const timeAgo = formatDistanceToNow(createdAt, {
-            addSuffix: true,
-            locale: ko,
-          });
+          // const createdAt = post.createdAt
+          //   ? new Date(post.createdAt)
+          //   : new Date();
+          // const timeAgo = formatDistanceToNow(createdAt, {
+          //   addSuffix: true,
+          //   locale: ko,
+          // });
 
           return (
             <Link
@@ -203,9 +201,9 @@ export default function DiscountPlatformClient() {
                       <div className="text-sm text-neutral-500 dark:text-neutral-400">
                         {/* 조회수: {post.views.toLocaleString()} */}
                       </div>
-                      <div className="text-sm text-neutral-500 dark:text-neutral-400">
+                      {/* <div className="text-sm text-neutral-500 dark:text-neutral-400">
                         {timeAgo}
-                      </div>
+                      </div> */}
                     </div>
                   </CardDescription>
                 </CardHeader>

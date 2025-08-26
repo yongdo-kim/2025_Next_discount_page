@@ -10,8 +10,6 @@ import { PostPreviewEntity } from "@/features/posts/domain/entities/post-preview
 import { postKeys } from "@/features/posts/infrastructure/contstant/query-keys";
 import { container } from "@/lib/di/dependencies";
 import { queryClient } from "@/lib/react-query";
-import { formatDistanceToNow } from "date-fns";
-import { ko } from "date-fns/locale/ko";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -27,13 +25,13 @@ export default function PostCardLarge({
   // const content = htmlToText(post.content);
 
   // createdAt이 string인 경우 Date 객체로 변환
-  const createdAt = post.createdAt ? post.createdAt : new Date();
+  // const createdAt = post.createdAt ? post.createdAt : new Date();
 
   // 현재 시간과의 차이를 계산 (예: "2시간 전")
-  const timeAgo = formatDistanceToNow(createdAt, {
-    addSuffix: true,
-    locale: ko, // 한국어 설정
-  });
+  // const timeAgo = formatDistanceToNow(createdAt, {
+  //   addSuffix: true,
+  //   locale: ko, // 한국어 설정
+  // });
 
   return (
     <Link href={`/posts/${post.id}`} data-testid="post-card-large-link">
@@ -133,12 +131,12 @@ export default function PostCardLarge({
                     {post.author.nickname}
                   </div>
                 </div>
-                <div
+                {/* <div
                   className="text-sm text-neutral-500 dark:text-neutral-400"
                   data-testid="post-card-large-created-at"
                 >
                   {timeAgo}
-                </div>
+                </div> */}
               </div>
             </CardDescription>
           )}
