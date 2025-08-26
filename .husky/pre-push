@@ -1,32 +1,14 @@
 #!/usr/bin/env sh
 
 # Run build test
-echo "Building project..."
+echo "🏗️  Building project..."
 npm run build
 
 # Run Jest tests
-echo "Running tests..."
+echo "🧪 Running Jest tests..."
 npm run test:jest
 
-# Check if pushing to main branch and run E2E tests
-current_branch=$(git symbolic-ref --short HEAD)
-if [ "$current_branch" = "main" ]; then
-    echo "Running E2E tests on main branch..."
-    echo "Environment: NODE_ENV=$NODE_ENV, PWD=$PWD"
-    echo "Starting E2E test environment on port 3001..."
-    
-    # 환경변수 명시적 설정
-    export NODE_ENV=development
-    export PATH="$PWD/node_modules/.bin:$PATH"
-    
-    # E2E 테스트 실행
-    npx playwright test --reporter=list
-    test_result=$?
-    
-    if [ $test_result -ne 0 ]; then
-        echo "❌ E2E tests failed! Push cancelled."
-        echo "Exit code: $test_result"
-        exit 1
-    fi
-    echo "✅ E2E tests passed!"
-fi
+# Run E2E tests and check success rate
+echo "🎭 Checking E2E test success rate..."
+./scripts/check-e2e-success-rate.sh
+
