@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import MainTitle from "@/components/MainTitle";
 import DividerLine from "@/components/ui/DividerLine";
 import SparklingStarIcon from "@/components/ui/SparklingStarIcon";
@@ -7,8 +8,14 @@ import PostCardSmall from "@/features/posts/presentation/components/PostCardSmal
 import { useLikedPosts } from "@/features/users/presentation/hooks/useLikedPosts";
 
 export default function MyDiscountClient() {
+  const [isMounted, setIsMounted] = useState(false);
   const { data: postsData, isLoading: postsLoading } = useLikedPosts();
 
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted) return null;
   if (postsLoading) return <div data-testid="my-discount-loading"></div>;
   if (!postsData || postsData.length === 0) return null;
 
