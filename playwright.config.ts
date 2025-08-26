@@ -22,7 +22,7 @@ export default defineConfig({
   fullyParallel: false, // 순차 실행
   forbidOnly: !!process.env.CI, // CI에서는 test.only 금지
   retries: process.env.CI ? 2 : 0, // CI에서는 실패시 2번 재시도
-  workers: process.env.CI ? 1 : undefined, // CI에서는 1개 워커만 사용
+  workers: 1, // 순차 실행을 위해 항상 1개 워커만 사용
 
   // 리포터 설정
   reporter: [
@@ -61,6 +61,14 @@ export default defineConfig({
 
   // 다양한 브라우저와 디바이스에서 테스트
   projects: [
+    // 개발용 순차 실행 프로젝트 (Chromium만)
+    {
+      name: "dev-sequential",
+      use: { ...devices["Desktop Chrome"] },
+      fullyParallel: false,
+      workers: 1,
+    },
+
     // my-discount-client.spec.ts용 단일 워커 프로젝트
     {
       name: "my-discount-client-chromium",
