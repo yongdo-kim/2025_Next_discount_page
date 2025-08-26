@@ -1,20 +1,15 @@
 "use client";
-import { Badge } from "@/components/shadcn/badge";
 import DividerLine from "@/components/ui/DividerLine";
 import { PlatformTag } from "@/components/ui/PlatformTag";
 import SmartImage from "@/components/ui/SmartImage";
 import { PostEntity } from "@/features/posts/domain/entities/post.entity";
-import { TagEntity } from "@/features/tags/domain/entities/tag.entity";
-import { UserEntity } from "@/features/users/domain/entities/user.entity";
+import { PostDetailHeader } from "./PostDetailHeader";
+import { PostDetailFooter } from "./PostDetailFooter";
 import { sendGAEvent } from "@/lib/ga";
 import { splitTitleByPlatform } from "@/lib/utils";
-import { format } from "date-fns";
-import { ko } from "date-fns/locale/ko";
 import { Bot, ExternalLink } from "lucide-react";
 import dynamic from "next/dynamic";
-import Image from "next/image";
 import { useEffect } from "react";
-import { toast } from "sonner";
 
 const DynamicHtmlParser = dynamic(
   () => import("@/components/ui/DynamicHtmlParser"),
@@ -46,8 +41,8 @@ export const PostDetailWithoutEvent = ({ post }: { post: PostEntity }) => {
       className="container mx-auto px-4 py-6"
       data-testid="post-detail-article"
     >
-      {/* 태그 */}
-      <TagList tags={post.tags} />
+      {/* Header with tags, author info, and like button */}
+      <PostDetailHeader post={post} />
 
       {/* 제목 */}
       <h1
@@ -57,9 +52,6 @@ export const PostDetailWithoutEvent = ({ post }: { post: PostEntity }) => {
         {platform && <PlatformTag platform={platform} />}
         <span>{content}</span>
       </h1>
-
-      {/* 작성자, 작성일 */}
-      <AuthorInfo user={post.author} createdAt={post.createdAt} />
 
       <DividerLine className="mt-4" />
 
@@ -110,13 +102,8 @@ export const PostDetailWithoutEvent = ({ post }: { post: PostEntity }) => {
         <PostContent html={post.content} />
       </div>
 
-      {/* 자료출처 */}
-      <div
-        className="flex w-full justify-end border-t pt-4 pb-32"
-        data-testid="post-detail-footer"
-      >
-        <SourceLink url={post.source?.scrapingSourceUrl} />
-      </div>
+      {/* Footer with source link */}
+      <PostDetailFooter post={post} />
     </article>
   );
 };
@@ -187,73 +174,6 @@ export default function PostContent({ html }: { html: string }) {
   );
 }
 
-function TagList({ tags }: { tags: TagEntity[] }) {
-  if (!tags?.length) return null;
-  return (
-    <div className="flex flex-wrap gap-2" data-testid="post-detail-tags">
-      {tags.map((tag) => (
-        <Badge
-          variant="outline"
-          key={tag.id}
-          className="md:text-md lg:text-lg"
-          data-testid="post-detail-tag"
-        >
-          {tag.name}
-        </Badge>
-      ))}
-    </div>
-  );
-}
-
-function SourceLink({ url }: { url?: string | null }) {
-  if (!url) return null;
-
-  const MAX_LENGTH = 40;
-  let displayUrl = url;
-  if (url.length > MAX_LENGTH) {
-    displayUrl = url.slice(0, 30) + "..." + url.slice(-8);
-  }
-
-  // 클립보드 복사
-  const handleCopy = () => {
-    navigator.clipboard.writeText(url);
-    toast("URL이 클립보드에 복사되었습니다.");
-  };
-
-  return (
-    <div
-      className="flex items-center rounded-lg bg-neutral-50 py-3 shadow-sm dark:bg-neutral-900"
-      data-testid="post-detail-source-link"
-    >
-      <span
-        className="mr-2 text-sm font-semibold text-neutral-600 dark:text-neutral-300"
-        data-testid="post-detail-source-label"
-      >
-        자료출처
-      </span>
-      <a
-        href={url}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="truncate text-sm font-medium text-gray-400 underline hover:text-emerald-600"
-        title={url}
-        data-testid="post-detail-source-url"
-      >
-        {displayUrl}
-      </a>
-      <button
-        onClick={handleCopy}
-        className="ml-2 rounded bg-gray-400 px-2 py-1 text-xs font-semibold text-neutral-600 hover:bg-blue-100 hover:text-blue-600 dark:bg-neutral-800 dark:text-neutral-300 dark:hover:bg-blue-900"
-        title="복사"
-        type="button"
-        data-testid="post-detail-source-copy-button"
-      >
-        복사
-      </button>
-    </div>
-  );
-}
-
 function AiSummaryHeader() {
   return (
     <>
@@ -280,47 +200,5 @@ function AiSummaryHeader() {
         </span>
       </div>
     </>
-  );
-}
-
-function AuthorInfo({
-  user,
-  createdAt,
-}: {
-  user: UserEntity;
-  createdAt: string;
-}) {
-  return (
-    <div
-      className="mt-4 mb-4 flex items-center gap-3 pl-2"
-      data-testid="post-detail-author-info"
-    >
-      <Image
-        src="/discount-character.webp"
-        alt={user.nickname}
-        width={20}
-        height={20}
-        sizes="20px"
-        data-testid="post-detail-author-avatar"
-      />
-
-      <div
-        className="flex items-center"
-        data-testid="post-detail-author-details"
-      >
-        <div
-          className="font-semibold text-neutral-800 dark:text-neutral-50"
-          data-testid="post-detail-author-nickname"
-        >
-          {user.nickname}
-        </div>
-        <div
-          className="pl-2 text-neutral-800 dark:text-gray-400"
-          data-testid="post-detail-created-at"
-        >
-          {format(new Date(createdAt), "yyyy년 M월 d일", { locale: ko })}
-        </div>
-      </div>
-    </div>
   );
 }
