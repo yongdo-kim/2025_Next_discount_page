@@ -6,7 +6,7 @@ import NewestDiscountServer from "@/features/discounts/presentation/components/N
 import EventsLatestServer from "@/features/events/presentation/components/EventsLatestServer";
 import EventsUpComingServer from "@/features/events/presentation/components/EventsUpComingServer";
 import PostsByCategoryServer from "@/features/posts/presentation/components/PostsByCategoryServer";
-import MyDiscountServer from "@/features/users/presentation/components/MyDiscountServer";
+import MyDiscountClient from "@/features/users/presentation/components/MyDiscountClient";
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
 
@@ -50,7 +50,7 @@ export default async function Page({
               <DividerLine />
               {/* 메인 배너 */}
               <div className="px-4">
-                <MyDiscountServer />
+                <MyDiscountClient />
                 <MainAdBanners />
               </div>
               {/* 추천 포스트 */}

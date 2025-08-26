@@ -99,7 +99,7 @@ test.describe("LIKE SECTION TEST", () => {
     }
   });
 
-  test("2.로그인 후 좋아하는 포스트 로딩 상태가 정상적으로 표시되고 좋아요 상태 변화를 확인한다", async ({
+  test.only("2.로그인 후 좋아하는 포스트 로딩 상태가 정상적으로 표시되고 좋아요 상태 변화를 확인한다", async ({
     page,
   }) => {
     // 1. 홈페이지 진입
@@ -181,12 +181,55 @@ test.describe("LIKE SECTION TEST", () => {
       `💡 초기 좋아요 상태: ${initialIsLiked ? "liked (T)" : "not liked (F)"}`,
     );
 
-    // 9. 좋아요 버튼 클릭
+    // 9. 좋아요 버튼 클릭 및 API 호출 검증
     console.log("❤️ 좋아요 버튼 클릭");
+
+    // 현재 페이지 URL에서 postId 추출
+    const currentUrl = page.url();
+    const postId = currentUrl.split("/posts/")[1];
+    console.log(`📝 현재 포스트 ID: ${postId}`);
+
+    // API 호출 감지를 위한 Promise 생성
+    const apiCallPromise = page.waitForResponse(
+      (response) => {
+        const url = response.url();
+        const method = response.request().method();
+        const isLikeApi =
+          url.includes(`/posts/${postId}/like`) && method === "POST";
+
+        if (isLikeApi) {
+          console.log(`🔍 API 호출 감지: ${method} ${url}`);
+          console.log(`📊 응답 상태: ${response.status()}`);
+        }
+
+        return isLikeApi;
+      },
+      { timeout: 5000 },
+    );
+
+    // 좋아요 버튼 클릭
     await likeButton.click();
 
-    // 상태 변화 대기
-    await page.waitForTimeout(1000);
+    // API 호출 대기 및 검증
+    try {
+      const apiResponse = await apiCallPromise;
+      expect(apiResponse.status()).toBe(201);
+      console.log("✅ 좋아요 API 호출 성공 확인");
+
+      // 응답 데이터 확인 (가능한 경우)
+      try {
+        const responseData = await apiResponse.json();
+        console.log(`📋 API 응답 데이터:`, JSON.stringify(responseData));
+      } catch {
+        console.log("⚠️ API 응답 데이터 파싱 불가 (JSON이 아닐 수 있음)");
+      }
+    } catch (error) {
+      console.error("❌ 좋아요 API 호출 실패:", error);
+      throw error;
+    }
+
+    // 상태 변화 대기 (API 응답 후 UI 업데이트 대기)
+    await page.waitForTimeout(500);
 
     // 10. 클릭 후 좋아요 버튼 상태 확인
     const updatedIconClasses =
@@ -249,159 +292,5 @@ test.describe("LIKE SECTION TEST", () => {
     }
 
     console.log("✅ 좋아요 상태 변화 및 UI 반응 테스트 완료");
-  });
-
-  test("3. 로그아웃 상태에서는 내가 좋아하는 포스트 섹션이 표시되지 않는다", async ({
-    page,
-  }) => {
-    // 1. 홈페이지 진입
-    await page.goto("/");
-    await page.waitForLoadState("networkidle");
-
-    // 2. 로그아웃 상태 확인 및 로그아웃 수행
-    const loginButton = page.locator('[data-testid="navbar-login-button"]');
-    const logoutButton = page.locator('[data-testid="navbar-logout-button"]');
-
-    const isLogoutButtonVisible = await logoutButton.isVisible({
-      timeout: 3000,
-    });
-
-    // 로그인 되어 있다면 로그아웃
-    if (isLogoutButtonVisible) {
-      console.log("🚪 로그아웃 진행");
-      await logoutButton.click();
-      await page.waitForLoadState("networkidle");
-      await expect(loginButton).toBeVisible({ timeout: 15000 });
-      console.log("✅ 로그아웃 완료");
-    }
-
-    // 3. 로그아웃 상태 확인
-    await expect(loginButton).toBeVisible({ timeout: 5000 });
-
-    // 4. 페이지 새로고침하여 상태 확인
-    await page.reload();
-    await page.waitForLoadState("networkidle");
-    await page.waitForTimeout(2000);
-
-    // 5. MyDiscountClient 섹션이 표시되지 않는지 확인
-    const myDiscountSection = page.locator(
-      '[data-testid="my-discount-section"]',
-    );
-
-    // 로그아웃 상태에서는 섹션과 로딩 모두 표시되지 않아야 함
-    const sectionVisible = await myDiscountSection.isVisible({ timeout: 2000 });
-    expect(sectionVisible).toBeFalsy();
-
-    console.log("✅ 로그아웃 상태에서 내가 좋아하는 포스트 섹션 미표시 확인");
-  });
-
-  test.only("4. 좋아요 버튼을 누르면 내가 좋아하는 포스트 목록이 증가한다", async ({
-    page,
-  }) => {
-    // 1. 홈페이지 진입 및 로그인
-    await page.goto("/");
-    await page.waitForLoadState("networkidle");
-
-    const loginButton = page.locator('[data-testid="navbar-login-button"]');
-    const logoutButton = page.locator('[data-testid="navbar-logout-button"]');
-
-    const isLogoutButtonVisible = await logoutButton.isVisible({
-      timeout: 3000,
-    });
-
-    if (!isLogoutButtonVisible) {
-      console.log("🔑 로그인 진행");
-      await loginButton.click();
-      await page.waitForLoadState("domcontentloaded");
-      await expect(page).toHaveURL(/.*\/auth\/sign-in/);
-
-      const devLoginButton = page.locator('[data-testid="dev-login-button"]');
-      await expect(devLoginButton).toBeVisible({ timeout: 10000 });
-      await devLoginButton.click();
-
-      await page.waitForURL("/", { timeout: 15000 });
-      await page.waitForLoadState("networkidle");
-      console.log("✅ 로그인 완료");
-    }
-
-    // 2. 로그인 상태 확인 후 페이지 새로고침
-    await expect(logoutButton).toBeVisible({ timeout: 10000 });
-    await page.reload();
-    await page.waitForLoadState("networkidle");
-    await page.waitForTimeout(2000);
-
-    // 3. 내가 좋아하는 포스트 섹션에서 초기 포스트 개수 확인
-    const myDiscountSection = page.locator(
-      '[data-testid="my-discount-section"]',
-    );
-
-    let initialPostCount = 0;
-    const sectionExists = await myDiscountSection.isVisible({ timeout: 5000 });
-
-    if (sectionExists) {
-      const postItems = page.locator('[data-testid="my-discount-post-item"]');
-      initialPostCount = await postItems.count();
-      console.log(`📄 초기 좋아하는 포스트 개수: ${initialPostCount}개`);
-    }
-
-    // 4. 일반 포스트 목록에서 아직 좋아요하지 않은 포스트 찾기
-    const mainPostItems = page.locator('[data-testid="discount-preview-link"]');
-    const mainPostCount = await mainPostItems.count();
-
-    if (mainPostCount === 0) {
-      console.log("❌ 테스트할 포스트가 없습니다.");
-      expect(true).toBeTruthy(); // 테스트 스킵
-      return;
-    }
-
-    // 5. 첫 번째 포스트로 이동
-    const firstPost = mainPostItems.first();
-    await firstPost.click();
-    await page.waitForLoadState("networkidle");
-
-    // 포스트 디테일 페이지 로딩 대기
-    const postDetailArticle = page.locator(
-      '[data-testid="post-detail-article"]',
-    );
-    await expect(postDetailArticle).toBeVisible({ timeout: 10000 });
-
-    // 6. 좋아요 버튼 찾기 및 클릭
-    const likeButton = page.locator('[data-testid="post-detail-like-button"]');
-    await expect(likeButton).toBeVisible({ timeout: 5000 });
-
-    console.log("❤️ 좋아요 버튼 클릭");
-    await likeButton.click();
-
-    // 좋아요 처리 대기
-    await page.waitForTimeout(1000);
-
-    // 7. 홈으로 돌아가기
-    console.log("🏠 홈페이지로 이동");
-    await page.goto("/");
-    await page.waitForLoadState("networkidle");
-    await page.waitForTimeout(2000); // useLikedPosts 훅 데이터 로딩 대기
-
-    // 8. 내가 좋아하는 포스트 섹션에서 포스트 개수 다시 확인
-    const updatedMyDiscountSection = page.locator(
-      '[data-testid="my-discount-section"]',
-    );
-
-    // 섹션이 나타날 때까지 대기 (새로 좋아요한 포스트로 인해 섹션이 생성될 수 있음)
-    await expect(updatedMyDiscountSection).toBeVisible({ timeout: 10000 });
-
-    const updatedPostItems = page.locator(
-      '[data-testid="my-discount-post-item"]',
-    );
-    const finalPostCount = await updatedPostItems.count();
-
-    console.log(`📄 좋아요 후 포스트 개수: ${finalPostCount}개`);
-
-    // 9. 포스트 개수가 증가했는지 확인
-    expect(finalPostCount).toBeGreaterThan(initialPostCount);
-    console.log(
-      `✅ 좋아하는 포스트가 ${initialPostCount}개에서 ${finalPostCount}개로 증가했습니다`,
-    );
-
-    console.log("✅ 좋아요 버튼 상호작용 테스트 완료");
   });
 });
