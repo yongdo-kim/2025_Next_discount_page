@@ -66,6 +66,7 @@ export const MainAdAreaClient = () => {
                 src={leftImage}
                 alt=""
                 fill
+                sizes="(max-width: 768px) 100vw, 50vw"
                 className="object-cover transition-transform duration-300 group-hover:scale-110"
               />
               <ImageOverlay
@@ -123,6 +124,7 @@ export const MainAdAreaClient = () => {
                       src={item.image}
                       alt=""
                       fill
+                      sizes="(max-width: 768px) 50vw, 25vw"
                       className="object-cover transition-transform duration-300 group-hover:scale-110"
                     />
                     <ImageOverlay
@@ -139,6 +141,7 @@ export const MainAdAreaClient = () => {
                       src="/discount-character-1024.webp"
                       alt=""
                       fill
+                      sizes="(max-width: 768px) 50vw, 25vw"
                       className="object-cover transition-transform duration-300 group-hover:scale-110"
                       data-testid="fallback-image"
                     />

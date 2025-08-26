@@ -16,6 +16,7 @@ export const MainAdBanners = () => {
           alt="할인탐정 캐릭터"
           width={80}
           height={80}
+          style={{ height: "auto" }}
           priority
         />
       </div>

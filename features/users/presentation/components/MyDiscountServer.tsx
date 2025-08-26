@@ -17,7 +17,7 @@ export default async function MyDiscountServer() {
     // 좋아요한 포스트 prefetch
     queryClient
       .fetchQuery({
-        queryKey: usersKeys.likedPosts,
+        queryKey: [usersKeys.likedPosts],
         queryFn: async () => {
           const likedPosts = await container.userService.getLikedPosts();
           return JSON.parse(JSON.stringify(likedPosts));
