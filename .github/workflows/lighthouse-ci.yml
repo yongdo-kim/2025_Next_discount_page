@@ -32,9 +32,28 @@ jobs:
         uses: actions/cache@v3
         with:
           path: .lighthouse-previous
-          key: lighthouse-results-${{ runner.os }}-${{ github.ref_name }}-${{ github.sha }}
+          key: lighthouse-results-${{ runner.os }}-${{ github.ref_name }}-latest
           restore-keys: |
+            lighthouse-results-${{ runner.os }}-${{ github.ref_name }}-latest
             lighthouse-results-${{ runner.os }}-${{ github.ref_name }}-
+
+      - name: Debug cache status and fallback to artifacts
+        run: |
+          echo "🔍 Checking cache restore status..."
+          echo "Cache key: lighthouse-results-${{ runner.os }}-${{ github.ref_name }}-latest"
+          echo "Previous results directory:"
+          if [ -d ".lighthouse-previous" ]; then
+            echo "✅ .lighthouse-previous directory exists (from cache)"
+            ls -la .lighthouse-previous/ || echo "Directory is empty"
+          else
+            echo "❌ .lighthouse-previous directory not found from cache"
+            echo "🔄 Attempting to restore from artifacts as fallback..."
+            
+            # Artifacts 백업에서 복원 시도 (실제로는 수동으로 다운로드해야 함)
+            # 여기서는 첫 실행임을 알리는 메시지만 표시
+            echo "ℹ️  This appears to be the first run or cache was cleared"
+            echo "   Next run will have previous results to compare with"
+          fi
           
       - name: Install dependencies
         run: npm ci
@@ -152,12 +171,46 @@ jobs:
       - name: Save current results for next comparison
         if: always()
         run: |
+          echo "💾 Saving current results for next comparison..."
+          
           # 현재 결과를 다음 실행을 위해 저장
           if [ -d ".lighthouse-current" ]; then
+            echo "📁 Current results found:"
+            ls -la .lighthouse-current/
+            
+            # 캐시용 복사
             rm -rf .lighthouse-previous
             cp -r .lighthouse-current .lighthouse-previous
-            echo "✅ Current results saved for next comparison"
+            echo "✅ Results copied to .lighthouse-previous for cache"
+            
+            # 다음 실행을 위한 캐시 업데이트 확인
+            echo "📊 Summary of saved results:"
+            for file in .lighthouse-previous/*.json; do
+              if [ -f "$file" ]; then
+                echo "- $(basename "$file")"
+                node -e "
+                  try {
+                    const data = JSON.parse(require('fs').readFileSync('$file', 'utf8'));
+                    console.log('  Performance: ' + data.performance + ', Accessibility: ' + data.accessibility);
+                  } catch (e) {
+                    console.log('  Error reading file');
+                  }
+                "
+              fi
+            done
+          else
+            echo "❌ No current results directory found"
           fi
+
+      - name: Upload results as artifacts (backup)
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: lighthouse-results-backup-${{ github.ref_name }}
+          path: |
+            .lighthouse-current/
+            .lighthouseci/
+          retention-days: 7
 
       - name: Upload Lighthouse reports
         uses: actions/upload-artifact@v4
