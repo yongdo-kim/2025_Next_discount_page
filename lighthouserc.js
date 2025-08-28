@@ -17,6 +17,7 @@ module.exports = {
           downloadThroughputKbps: 1600, // 중간 속도 인터넷
           uploadThroughputKbps: 750,
         },
+        outputMode: "json", // CI 환경에서 JSON 파일 출력 보장
       },
       numberOfRuns: 1, // CI에서는 빠른 실행을 위해 1번만
     },
@@ -46,9 +47,8 @@ module.exports = {
     server: {
       port: 3000,
       storage: {
-        storageMethod: "sql",
-        sqlDialect: "sqlite",
-        sqlDatabasePath: "./lhci.db",
+        storageMethod: "filesystem", // CI 환경에서 파일시스템 스토리지 사용
+        outputDir: "./.lighthouseci", // 출력 디렉토리 명시적 지정
       },
     },
   },

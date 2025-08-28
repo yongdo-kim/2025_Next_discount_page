@@ -210,20 +210,46 @@ jobs:
             echo "❌ No current results directory found"
           fi
 
+      - name: Debug directory status before upload
+        if: always()
+        run: |
+          echo "🔍 Debugging directory status for artifacts upload..."
+          echo "Current working directory: $(pwd)"
+          echo "\n📁 Directory structure:"
+          ls -la
+          echo "\n📁 .lighthouse-current status:"
+          if [ -d ".lighthouse-current" ]; then
+            echo "✅ .lighthouse-current exists"
+            ls -la .lighthouse-current/ || echo "Directory empty"
+            find .lighthouse-current -type f | wc -l | xargs echo "Files count:"
+          else
+            echo "❌ .lighthouse-current does not exist"
+          fi
+          echo "\n📁 .lighthouseci status:"
+          if [ -d ".lighthouseci" ]; then
+            echo "✅ .lighthouseci exists"
+            ls -la .lighthouseci/ || echo "Directory empty"
+            find .lighthouseci -type f | wc -l | xargs echo "Files count:"
+          else
+            echo "❌ .lighthouseci does not exist"
+          fi
+
       - name: Upload results as artifacts (backup)
         uses: actions/upload-artifact@v4
-        if: always() && (hashFiles('.lighthouse-current/**') != '' || hashFiles('.lighthouseci/**') != '')
+        if: always()
         with:
           name: lighthouse-results-backup-${{ github.ref_name }}
           path: |
             .lighthouse-current/
             .lighthouseci/
           retention-days: 7
+          if-no-files-found: warn
 
       - name: Upload Lighthouse reports
         uses: actions/upload-artifact@v4
-        if: always() && hashFiles('.lighthouseci/**') != ''
+        if: always()
         with:
           name: lighthouse-reports
           path: .lighthouseci/
           retention-days: 30
+          if-no-files-found: warn
