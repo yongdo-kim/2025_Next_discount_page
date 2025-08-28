@@ -20,6 +20,10 @@
     "prod": "cross-env NODE_ENV=production next start",
     "lint": "next lint",
     "lighthouse:ci": "lhci autorun",
+    "lighthouse:analyze": "node scripts/lighthouse-results.mjs",
+    "lighthouse:history": "node scripts/lighthouse-history.mjs",
+    "lighthouse:dashboard": "node scripts/lighthouse-dashboard.mjs",
+    "lighthouse:report": "node scripts/lighthouse-dashboard.mjs json",
     "prepare": "husky"
   },
   "dependencies": {

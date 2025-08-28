@@ -5,6 +5,10 @@ on:
     branches: [main, develop]
   pull_request:
     branches: [main]
+  schedule:
+    # 매일 오전 9시 (UTC 0시), 오후 6시 (UTC 9시)에 실행
+    - cron: '0 0,9 * * *'
+  workflow_dispatch: # 수동 실행 가능
 
 jobs:
   lighthouse:
@@ -36,6 +40,14 @@ jobs:
           restore-keys: |
             lighthouse-results-${{ runner.os }}-${{ github.ref_name }}-latest
             lighthouse-results-${{ runner.os }}-${{ github.ref_name }}-
+
+      - name: Cache Lighthouse history
+        uses: actions/cache@v3
+        with:
+          path: .lighthouse-history
+          key: lighthouse-history-${{ runner.os }}-${{ github.ref_name }}
+          restore-keys: |
+            lighthouse-history-${{ runner.os }}-
 
       - name: Debug cache status and fallback to artifacts
         run: |
@@ -75,101 +87,25 @@ jobs:
       # - name: Run Lighthouse assert
       #   run: npx lhci assert || echo "⚠️ Some Lighthouse assertions failed, but continuing build..."
 
-      - name: Display Lighthouse scores with comparison
+      - name: Analyze Lighthouse results and calculate averages
         run: |
-          echo "🚦 Lighthouse Performance Summary"
-          echo "================================="
+          echo "🚦 Lighthouse Performance Analysis"
+          echo "=================================="
           echo "📁 Checking for Lighthouse reports..."
           ls -la .lighthouseci/ || echo "❌ .lighthouseci directory not found"
           
-          # 현재 결과 요약을 위한 임시 파일 생성
-          mkdir -p .lighthouse-current
-          echo "📁 Created .lighthouse-current directory"
-          
-          # JSON 파일 찾기 및 처리
+          # 새로운 스크립트로 평균값 계산 및 비교 분석
           if ls .lighthouseci/lhr-*.json 1> /dev/null 2>&1; then
-            echo "✅ Found Lighthouse reports:"
+            echo "✅ Running Lighthouse results analysis..."
+            node scripts/lighthouse-results.mjs
             
-            # 전체 결과를 저장할 배열
-            declare -A current_scores
+            echo ""
+            echo "📚 Adding results to history..."
+            node scripts/lighthouse-history.mjs add
             
-            for file in .lighthouseci/lhr-*.json; do
-              echo ""
-              echo "📄 Report: $(basename "$file")"
-              
-              # Node.js로 점수 추출 및 비교
-              node -e "
-                try {
-                  const fs = require('fs');
-                  const path = require('path');
-                  const lhr = JSON.parse(fs.readFileSync('$file', 'utf8'));
-                  const scores = lhr.categories;
-                  
-                  const currentScores = {
-                    performance: Math.round(scores.performance.score * 100),
-                    accessibility: Math.round(scores.accessibility.score * 100),
-                    bestPractices: Math.round(scores['best-practices'].score * 100),
-                    seo: Math.round(scores.seo.score * 100),
-                    url: lhr.finalUrl
-                  };
-                  
-                  console.log('🎯 Performance: ' + currentScores.performance);
-                  console.log('♿ Accessibility: ' + currentScores.accessibility); 
-                  console.log('⚡ Best Practices: ' + currentScores.bestPractices);
-                  console.log('🔍 SEO: ' + currentScores.seo);
-                  console.log('🌐 URL: ' + currentScores.url);
-                  
-                  // 현재 결과를 파일에 저장 (다음 실행을 위해)
-                  const filename = path.basename('$file').replace('.json', '-summary.json');
-                  
-                  // 디렉터리 존재 확인 및 생성
-                  if (!fs.existsSync('.lighthouse-current')) {
-                    fs.mkdirSync('.lighthouse-current', { recursive: true });
-                  }
-                  
-                  fs.writeFileSync('.lighthouse-current/' + filename, JSON.stringify(currentScores, null, 2));
-                  console.log('💾 Saved summary to: .lighthouse-current/' + filename);
-                  
-                  // 이전 결과와 비교
-                  const previousFile = '.lighthouse-previous/' + filename;
-                  if (fs.existsSync(previousFile)) {
-                    const previousScores = JSON.parse(fs.readFileSync(previousFile, 'utf8'));
-                    
-                    console.log('');
-                    console.log('📊 Changes from previous build:');
-                    
-                    const performanceDiff = currentScores.performance - previousScores.performance;
-                    const accessibilityDiff = currentScores.accessibility - previousScores.accessibility;
-                    const bestPracticesDiff = currentScores.bestPractices - previousScores.bestPractices;
-                    const seoDiff = currentScores.seo - previousScores.seo;
-                    
-                    const getDiffEmoji = (diff) => diff > 0 ? '📈' : diff < 0 ? '📉' : '➡️';
-                    const getDiffColor = (diff) => diff >= 10 ? '🟢' : diff <= -10 ? '🔴' : '🟡';
-                    
-                    console.log('🎯 Performance: ' + getDiffEmoji(performanceDiff) + ' ' + (performanceDiff >= 0 ? '+' : '') + performanceDiff + ' ' + getDiffColor(performanceDiff));
-                    console.log('♿ Accessibility: ' + getDiffEmoji(accessibilityDiff) + ' ' + (accessibilityDiff >= 0 ? '+' : '') + accessibilityDiff + ' ' + getDiffColor(accessibilityDiff));
-                    console.log('⚡ Best Practices: ' + getDiffEmoji(bestPracticesDiff) + ' ' + (bestPracticesDiff >= 0 ? '+' : '') + bestPracticesDiff + ' ' + getDiffColor(bestPracticesDiff));
-                    console.log('🔍 SEO: ' + getDiffEmoji(seoDiff) + ' ' + (seoDiff >= 0 ? '+' : '') + seoDiff + ' ' + getDiffColor(seoDiff));
-                    
-                    // 심각한 성능 저하 경고
-                    if (performanceDiff <= -15) {
-                      console.log('');
-                      console.log('⚠️  WARNING: Performance decreased significantly by ' + Math.abs(performanceDiff) + ' points!');
-                    } else if (performanceDiff >= 10) {
-                      console.log('');
-                      console.log('🎉 Great! Performance improved by ' + performanceDiff + ' points!');
-                    }
-                  } else {
-                    console.log('');
-                    console.log('ℹ️  No previous results to compare with.');
-                  }
-                  
-                } catch (error) {
-                  console.log('❌ Error reading report:', error.message);
-                }
-              "
-              echo "---"
-            done
+            echo ""
+            echo "📈 Showing performance trend..."
+            node scripts/lighthouse-history.mjs summary
           else
             echo "❌ No Lighthouse report files found"
             echo "🔍 Available files in .lighthouseci/:"
@@ -241,6 +177,7 @@ jobs:
           name: lighthouse-results-backup-${{ github.ref_name }}
           path: |
             .lighthouse-current/
+            .lighthouse-history/
             .lighthouseci/
           retention-days: 7
           if-no-files-found: warn

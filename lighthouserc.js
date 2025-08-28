@@ -19,7 +19,7 @@ module.exports = {
         },
         outputMode: "json", // CI 환경에서 JSON 파일 출력 보장
       },
-      numberOfRuns: 1, // CI에서는 빠른 실행을 위해 1번만
+      numberOfRuns: 3, // 여러 번 실행해서 평균값 계산
     },
     assert: {
       assertions: {
