@@ -45,5 +45,32 @@ jobs:
       - name: Run Lighthouse collect
         run: npx lhci collect
 
-      # - name: Run Lighthouse assert
-      #   run: npx lhci assert
+      - name: Run Lighthouse assert
+        run: npx lhci assert
+
+      - name: Display Lighthouse scores
+        run: |
+          echo "🚦 Lighthouse Performance Summary"
+          echo "================================="
+          if [ -f ".lighthouseci/lhr-*.json" ]; then
+            for file in .lighthouseci/lhr-*.json; do
+              echo "📄 $(basename "$file")"
+              node -e "
+                const lhr = JSON.parse(require('fs').readFileSync('$file', 'utf8'));
+                const scores = lhr.categories;
+                console.log('🎯 Performance: ' + Math.round(scores.performance.score * 100));
+                console.log('♿ Accessibility: ' + Math.round(scores.accessibility.score * 100)); 
+                console.log('⚡ Best Practices: ' + Math.round(scores['best-practices'].score * 100));
+                console.log('🔍 SEO: ' + Math.round(scores.seo.score * 100));
+                console.log('---');
+              "
+            done
+          fi
+
+      - name: Upload Lighthouse reports
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: lighthouse-reports
+          path: .lighthouseci/
+          retention-days: 30

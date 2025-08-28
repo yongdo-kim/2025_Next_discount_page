@@ -1,6 +1,6 @@
 import DividerLine from "@/components/ui/DividerLine";
 import { MainAdBanners } from "@/features/banners/presentation/components/MainAdBanners";
-import DiscountPlatformServer from "@/features/discounts/presentation/components/DiscountPlatformServer";
+import MenuTabServer from "@/components/navbar/menuTab/MenuTabServer";
 import MainAdAreaServer from "@/features/discounts/presentation/components/MainAdAreaServer";
 import NewestDiscountServer from "@/features/discounts/presentation/components/NewestDiscountServer";
 import EventsLatestServer from "@/features/events/presentation/components/EventsLatestServer";
@@ -10,8 +10,11 @@ import MyDiscountClient from "@/features/users/presentation/components/MyDiscoun
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
 
-const DynamicMenuTabServer = dynamic(
-  () => import("@/components/navbar/menuTab/MenuTabServer"),
+const DynamicDiscountPlatformServer = dynamic(
+  () =>
+    import(
+      "@/features/discounts/presentation/components/DiscountPlatformServer"
+    ),
   {
     loading: () => null,
   },
@@ -33,7 +36,7 @@ export default async function Page({
       <Suspense fallback={null}>
         {/* 메뉴탭 : 데스크탑인 경우 양옆, 모바일이라면 세로.  */}
         <div className="container mx-auto">
-          <DynamicMenuTabServer />
+          <MenuTabServer />
           <DividerLine className="my-4" />
 
           {category ? (
@@ -54,10 +57,10 @@ export default async function Page({
                 <MainAdBanners />
               </div>
               {/* 추천 포스트 */}
-              <EventsLatestServer />
+              <EventsLatestServer data-testid="lcp-boundary-section" />
               <DividerLine />
               {/* 플랫폼별 할인 */}
-              <DiscountPlatformServer />
+              <DynamicDiscountPlatformServer />
             </>
           )}
         </div>
