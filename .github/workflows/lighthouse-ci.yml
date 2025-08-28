@@ -84,6 +84,7 @@ jobs:
           
           # 현재 결과 요약을 위한 임시 파일 생성
           mkdir -p .lighthouse-current
+          echo "📁 Created .lighthouse-current directory"
           
           # JSON 파일 찾기 및 처리
           if ls .lighthouseci/lhr-*.json 1> /dev/null 2>&1; then
@@ -120,7 +121,14 @@ jobs:
                   
                   // 현재 결과를 파일에 저장 (다음 실행을 위해)
                   const filename = path.basename('$file').replace('.json', '-summary.json');
+                  
+                  // 디렉터리 존재 확인 및 생성
+                  if (!fs.existsSync('.lighthouse-current')) {
+                    fs.mkdirSync('.lighthouse-current', { recursive: true });
+                  }
+                  
                   fs.writeFileSync('.lighthouse-current/' + filename, JSON.stringify(currentScores, null, 2));
+                  console.log('💾 Saved summary to: .lighthouse-current/' + filename);
                   
                   // 이전 결과와 비교
                   const previousFile = '.lighthouse-previous/' + filename;
@@ -204,7 +212,7 @@ jobs:
 
       - name: Upload results as artifacts (backup)
         uses: actions/upload-artifact@v4
-        if: always()
+        if: always() && (hashFiles('.lighthouse-current/**') != '' || hashFiles('.lighthouseci/**') != '')
         with:
           name: lighthouse-results-backup-${{ github.ref_name }}
           path: |
@@ -214,7 +222,7 @@ jobs:
 
       - name: Upload Lighthouse reports
         uses: actions/upload-artifact@v4
-        if: always()
+        if: always() && hashFiles('.lighthouseci/**') != ''
         with:
           name: lighthouse-reports
           path: .lighthouseci/
