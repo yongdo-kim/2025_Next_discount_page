@@ -43,7 +43,7 @@ jobs:
         run: npx wait-on http://localhost:3000 --timeout 60000
 
       - name: Run Lighthouse collect
-        run: npx lhci collect
+        run: npx lhci collect --settings.throttling.cpuSlowdownMultiplier=4
 
       # - name: Run Lighthouse assert
       #   run: npx lhci assert
@@ -52,19 +52,34 @@ jobs:
         run: |
           echo "🚦 Lighthouse Performance Summary"
           echo "================================="
-          if [ -f ".lighthouseci/lhr-*.json" ]; then
+          echo "📁 Checking for Lighthouse reports..."
+          ls -la .lighthouseci/ || echo "❌ .lighthouseci directory not found"
+          
+          # JSON 파일 찾기 및 처리
+          if ls .lighthouseci/lhr-*.json 1> /dev/null 2>&1; then
+            echo "✅ Found Lighthouse reports:"
             for file in .lighthouseci/lhr-*.json; do
-              echo "📄 $(basename "$file")"
+              echo ""
+              echo "📄 Report: $(basename "$file")"
               node -e "
-                const lhr = JSON.parse(require('fs').readFileSync('$file', 'utf8'));
-                const scores = lhr.categories;
-                console.log('🎯 Performance: ' + Math.round(scores.performance.score * 100));
-                console.log('♿ Accessibility: ' + Math.round(scores.accessibility.score * 100)); 
-                console.log('⚡ Best Practices: ' + Math.round(scores['best-practices'].score * 100));
-                console.log('🔍 SEO: ' + Math.round(scores.seo.score * 100));
-                console.log('---');
+                try {
+                  const lhr = JSON.parse(require('fs').readFileSync('$file', 'utf8'));
+                  const scores = lhr.categories;
+                  console.log('🎯 Performance: ' + Math.round(scores.performance.score * 100));
+                  console.log('♿ Accessibility: ' + Math.round(scores.accessibility.score * 100)); 
+                  console.log('⚡ Best Practices: ' + Math.round(scores['best-practices'].score * 100));
+                  console.log('🔍 SEO: ' + Math.round(scores.seo.score * 100));
+                  console.log('🌐 URL: ' + lhr.finalUrl);
+                } catch (error) {
+                  console.log('❌ Error reading report:', error.message);
+                }
               "
+              echo "---"
             done
+          else
+            echo "❌ No Lighthouse report files found"
+            echo "🔍 Available files in .lighthouseci/:"
+            ls -la .lighthouseci/ 2>/dev/null || echo "Directory empty or doesn't exist"
           fi
 
       - name: Upload Lighthouse reports

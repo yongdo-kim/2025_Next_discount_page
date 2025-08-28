@@ -11,6 +11,12 @@ module.exports = {
         chromeFlags:
           "--no-sandbox --headless --disable-gpu --disable-dev-shm-usage --incognito",
         preset: "desktop",
+        throttling: {
+          cpuSlowdownMultiplier: 2, // CI 환경에서 더 현실적인 CPU 제한
+          requestLatencyMs: 150, // 네트워크 지연 시뮬레이션
+          downloadThroughputKbps: 1600, // 중간 속도 인터넷
+          uploadThroughputKbps: 750,
+        },
       },
       numberOfRuns: 1, // CI에서는 빠른 실행을 위해 1번만
     },
