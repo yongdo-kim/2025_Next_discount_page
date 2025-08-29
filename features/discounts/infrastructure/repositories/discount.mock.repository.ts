@@ -2,47 +2,12 @@ import {
   DiscountPlatformGroup,
   DiscountPlatformPreviewEntity,
 } from "@/features/discounts/domain/entities/discount-platform.entity";
-import { DiscountEntity } from "@/features/discounts/domain/entities/discount.entity";
 import { DiscountRepository } from "@/features/discounts/domain/repositories/discount.repository";
 import { PostPreviewEntity } from "@/features/posts/domain/entities/post-preview.entity";
 import { PostEntity } from "@/features/posts/domain/entities/post.entity";
 import { UserEntity } from "@/features/users/domain/entities/user.entity";
 
 export class MockDiscountRepository implements DiscountRepository {
-  //더미데이터
-  private mockDiscounts = [
-    new DiscountEntity({
-      id: 1,
-      title: "[쿠팡] 스마트폰 할인 특가",
-      description: "최신 스마트폰 특가 할인",
-      originalPrice: 500000,
-      discountedPrice: 400000,
-      discountRate: 20,
-      imageUrl: "https://example.com/phone.jpg",
-      storeUrl: "https://coupang.com",
-      storeName: "쿠팡",
-      categoryId: 1,
-      isActive: true,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    }),
-    new DiscountEntity({
-      id: 2,
-      title: "[11번가] 노트북 특가",
-      description: "게이밍 노트북 할인",
-      originalPrice: 1000000,
-      discountedPrice: 800000,
-      discountRate: 20,
-      imageUrl: "https://example.com/laptop.jpg",
-      storeUrl: "https://11st.co.kr",
-      storeName: "11번가",
-      categoryId: 1,
-      isActive: true,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    }),
-  ];
-
   private mockKakaoPlatformPosts = [
     new DiscountPlatformPreviewEntity({
       id: 271,
@@ -50,7 +15,7 @@ export class MockDiscountRepository implements DiscountRepository {
       createdAt: new Date("2025-08-16T11:40:28.322Z"),
       views: 11,
       postImages: [
-        "https://cdn2.ppomppu.co.kr/zboard/data3/2025/0816/20250816180107_rt7g7O8MXb.jpg",
+        "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgZmlsbD0iIzMzNzNkYyIvPjx0ZXh0IHg9IjIwMCIgeT0iMTUwIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTgiIGZpbGw9IndoaXRlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSI+S2FrYW8gSW1hZ2U8L3RleHQ+PC9zdmc+",
       ],
     }),
     new DiscountPlatformPreviewEntity({
@@ -60,7 +25,7 @@ export class MockDiscountRepository implements DiscountRepository {
       createdAt: new Date("2025-08-16T11:40:28.311Z"),
       views: 17,
       postImages: [
-        "https://cdn2.ppomppu.co.kr/zboard/data3/2025/0816/20250816184323_GxNu4Nx2kw.jpg",
+        "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgZmlsbD0iIzMzNzNkYyIvPjx0ZXh0IHg9IjIwMCIgeT0iMTUwIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTgiIGZpbGw9IndoaXRlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSI+S2FrYW8gSW1hZ2UgMjwvdGV4dD48L3N2Zz4=",
       ],
     }),
   ];
@@ -72,7 +37,7 @@ export class MockDiscountRepository implements DiscountRepository {
       createdAt: new Date("2025-08-19T04:14:00.273Z"),
       views: 0,
       postImages: [
-        "https://cdn2.ppomppu.co.kr/zboard/data3/2025/0819/20250819114739_iV95yfCuEc.jpg",
+        "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgZmlsbD0iIzRmNDZlNSIvPjx0ZXh0IHg9IjIwMCIgeT0iMTUwIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTgiIGZpbGw9IndoaXRlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSI+Q291cGFuZyBJbWFnZTwvdGV4dD48L3N2Zz4=",
       ],
     }),
     new DiscountPlatformPreviewEntity({
@@ -81,7 +46,7 @@ export class MockDiscountRepository implements DiscountRepository {
       createdAt: new Date("2025-08-19T04:14:00.236Z"),
       views: 0,
       postImages: [
-        "https://cdn2.ppomppu.co.kr/zboard/data3/2025/0819/20250819125818_wUO5dMq0Mh.jpeg",
+        "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgZmlsbD0iIzRmNDZlNSIvPjx0ZXh0IHg9IjIwMCIgeT0iMTUwIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTgiIGZpbGw9IndoaXRlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSI+Q291cGFuZyBJbWFnZSAyPC90ZXh0Pjwvc3ZnPg==",
       ],
     }),
     new DiscountPlatformPreviewEntity({
@@ -90,7 +55,7 @@ export class MockDiscountRepository implements DiscountRepository {
       createdAt: new Date("2025-08-16T11:40:28.325Z"),
       views: 14,
       postImages: [
-        "https://cdn2.ppomppu.co.kr/zboard/data3/2025/0816/20250816175339_wlSqUdjbD1.png",
+        "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgZmlsbD0iIzRmNDZlNSIvPjx0ZXh0IHg9IjIwMCIgeT0iMTUwIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTgiIGZpbGw9IndoaXRlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSI+Q291cGFuZyBJbWFnZSAzPC90ZXh0Pjwvc3ZnPg==",
       ],
     }),
     new DiscountPlatformPreviewEntity({
@@ -99,7 +64,7 @@ export class MockDiscountRepository implements DiscountRepository {
       createdAt: new Date("2025-08-16T11:40:28.309Z"),
       views: 0,
       postImages: [
-        "https://cdn2.ppomppu.co.kr/zboard/data3/2025/0816/20250816185116_Zb0lhK6gs5.jpg",
+        "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgZmlsbD0iIzRmNDZlNSIvPjx0ZXh0IHg9IjIwMCIgeT0iMTUwIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTgiIGZpbGw9IndoaXRlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSI+Q291cGFuZyBJbWFnZSA0PC90ZXh0Pjwvc3ZnPg==",
       ],
     }),
     new DiscountPlatformPreviewEntity({
@@ -108,7 +73,7 @@ export class MockDiscountRepository implements DiscountRepository {
       createdAt: new Date("2025-08-16T11:40:28.286Z"),
       views: 0,
       postImages: [
-        "https://cdn2.ppomppu.co.kr/zboard/data3/2025/0816/20250816195759_K09xwOND3W.jpeg",
+        "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgZmlsbD0iIzRmNDZlNSIvPjx0ZXh0IHg9IjIwMCIgeT0iMTUwIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTgiIGZpbGw9IndoaXRlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSI+Q291cGFuZyBJbWFnZSA1PC90ZXh0Pjwvc3ZnPg==",
       ],
     }),
   ];
@@ -120,7 +85,7 @@ export class MockDiscountRepository implements DiscountRepository {
       createdAt: new Date("2025-08-19T04:14:00.336Z"),
       views: 21,
       postImages: [
-        "https://cdn2.ppomppu.co.kr/zboard/data3/2025/0819/20250819110627_YqQ1NmhLSl.jpg",
+        "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgZmlsbD0iIzFkYzY1MyIvPjx0ZXh0IHg9IjIwMCIgeT0iMTUwIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTgiIGZpbGw9IndoaXRlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSI+TmF2ZXIgSW1hZ2U8L3RleHQ+PC9zdmc+",
       ],
     }),
     new DiscountPlatformPreviewEntity({
@@ -130,7 +95,7 @@ export class MockDiscountRepository implements DiscountRepository {
       createdAt: new Date("2025-08-19T04:14:00.330Z"),
       views: 24,
       postImages: [
-        "https://cdn2.ppomppu.co.kr/zboard/data3/2025/0819/20250819110854_5Zou5bOyZO.png",
+        "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgZmlsbD0iIzFkYzY1MyIvPjx0ZXh0IHg9IjIwMCIgeT0iMTUwIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTgiIGZpbGw9IndoaXRlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSI+TmF2ZXIgSW1hZ2UgMjwvdGV4dD48L3N2Zz4=",
       ],
     }),
     new DiscountPlatformPreviewEntity({
@@ -140,7 +105,7 @@ export class MockDiscountRepository implements DiscountRepository {
       createdAt: new Date("2025-08-19T04:14:00.328Z"),
       views: 24,
       postImages: [
-        "https://cdn2.ppomppu.co.kr/zboard/data3/2025/0819/20250819110938_NwAHbwpu69.jpg",
+        "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgZmlsbD0iIzFkYzY1MyIvPjx0ZXh0IHg9IjIwMCIgeT0iMTUwIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTgiIGZpbGw9IndoaXRlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSI+TmF2ZXIgSW1hZ2UgMzwvdGV4dD48L3N2Zz4=",
       ],
     }),
     new DiscountPlatformPreviewEntity({
@@ -149,7 +114,7 @@ export class MockDiscountRepository implements DiscountRepository {
       createdAt: new Date("2025-08-19T04:14:00.254Z"),
       views: 0,
       postImages: [
-        "https://cdn2.ppomppu.co.kr/zboard/data3/2025/0819/20250819124627_E2pFXD9zCv.jpg",
+        "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgZmlsbD0iIzFkYzY1MyIvPjx0ZXh0IHg9IjIwMCIgeT0iMTUwIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTgiIGZpbGw9IndoaXRlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSI+TmF2ZXIgSW1hZ2UgNDwvdGV4dD48L3N2Zz4=",
       ],
     }),
     new DiscountPlatformPreviewEntity({
@@ -159,7 +124,7 @@ export class MockDiscountRepository implements DiscountRepository {
       createdAt: new Date("2025-08-16T11:40:28.318Z"),
       views: 36,
       postImages: [
-        "https://cdn2.ppomppu.co.kr/zboard/data3/2025/0816/20250816180731_H58ewQUmvP.jpg",
+        "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgZmlsbD0iIzFkYzY1MyIvPjx0ZXh0IHg9IjIwMCIgeT0iMTUwIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTgiIGZpbGw9IndoaXRlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSI+TmF2ZXIgSW1hZ2UgNTwvdGV4dD48L3N2Zz4=",
       ],
     }),
     new DiscountPlatformPreviewEntity({
@@ -169,7 +134,7 @@ export class MockDiscountRepository implements DiscountRepository {
       createdAt: new Date("2025-08-16T11:40:28.303Z"),
       views: 0,
       postImages: [
-        "https://cdn2.ppomppu.co.kr/zboard/data3/2025/0816/20250816190413_LssiE5NX.jpg",
+        "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgZmlsbD0iIzFkYzY1MyIvPjx0ZXh0IHg9IjIwMCIgeT0iMTUwIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTgiIGZpbGw9IndoaXRlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSI+TmF2ZXIgSW1hZ2UgNjwvdGV4dD48L3N2Zz4=",
       ],
     }),
     new DiscountPlatformPreviewEntity({
@@ -178,7 +143,7 @@ export class MockDiscountRepository implements DiscountRepository {
       createdAt: new Date("2025-08-16T11:40:28.301Z"),
       views: 0,
       postImages: [
-        "https://cdn2.ppomppu.co.kr/zboard/data3/2025/0816/20250816191409_lcOKnLs5.jpg",
+        "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgZmlsbD0iIzFkYzY1MyIvPjx0ZXh0IHg9IjIwMCIgeT0iMTUwIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTgiIGZpbGw9IndoaXRlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSI+TmF2ZXIgSW1hZ2UgNzwvdGV4dD48L3N2Zz4=",
       ],
     }),
     new DiscountPlatformPreviewEntity({
@@ -187,7 +152,7 @@ export class MockDiscountRepository implements DiscountRepository {
       createdAt: new Date("2025-08-16T11:40:28.212Z"),
       views: 0,
       postImages: [
-        "https://cdn2.ppomppu.co.kr/zboard/data3/2025/0816/20250816200811_IDUvmoIx7w.jpg",
+        "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgZmlsbD0iIzFkYzY1MyIvPjx0ZXh0IHg9IjIwMCIgeT0iMTUwIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTgiIGZpbGw9IndoaXRlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSI+TmF2ZXIgSW1hZ2UgODwvdGV4dD48L3N2Zz4=",
       ],
     }),
   ];
@@ -199,7 +164,7 @@ export class MockDiscountRepository implements DiscountRepository {
       createdAt: new Date("2025-08-16T11:40:28.320Z"),
       views: 10,
       postImages: [
-        "https://cdn2.ppomppu.co.kr/zboard/data3/2025/0816/20250816180349_uDjFF3CUnY.jpg",
+        "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgZmlsbD0iI2ZmNjkwMCIvPjx0ZXh0IHg9IjIwMCIgeT0iMTUwIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTgiIGZpbGw9IndoaXRlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSI+T2hvdXNlIEltYWdlPC90ZXh0Pjwvc3ZnPg==",
       ],
     }),
     new DiscountPlatformPreviewEntity({
@@ -209,7 +174,7 @@ export class MockDiscountRepository implements DiscountRepository {
       createdAt: new Date("2025-08-16T11:40:28.316Z"),
       views: 14,
       postImages: [
-        "https://cdn2.ppomppu.co.kr/zboard/data3/2025/0816/20250816180930_AvrQPCC6Tf.jpg",
+        "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgZmlsbD0iI2ZmNjkwMCIvPjx0ZXh0IHg9IjIwMCIgeT0iMTUwIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTgiIGZpbGw9IndoaXRlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSI+T2hvdXNlIEltYWdlIDI8L3RleHQ+PC9zdmc+",
       ],
     }),
   ];
@@ -221,7 +186,7 @@ export class MockDiscountRepository implements DiscountRepository {
       createdAt: new Date("2025-08-19T04:14:00.333Z"),
       views: 23,
       postImages: [
-        "https://cdn2.ppomppu.co.kr/zboard/data3/2025/0819/20250819110750_bMpluXnI.jpg",
+        "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgZmlsbD0iI2RjMjYyNiIvPjx0ZXh0IHg9IjIwMCIgeT0iMTUwIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTgiIGZpbGw9IndoaXRlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSI+R21hcmtldCBJbWFnZTwvdGV4dD48L3N2Zz4=",
       ],
     }),
     new DiscountPlatformPreviewEntity({
@@ -230,7 +195,7 @@ export class MockDiscountRepository implements DiscountRepository {
       createdAt: new Date("2025-08-16T11:40:28.203Z"),
       views: 0,
       postImages: [
-        "https://cdn2.ppomppu.co.kr/zboard/data3/2025/0816/20250816201234_6sfCEZtc.jpg",
+        "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgZmlsbD0iI2RjMjYyNiIvPjx0ZXh0IHg9IjIwMCIgeT0iMTUwIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTgiIGZpbGw9IndoaXRlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSI+R21hcmtldCBJbWFnZSAyPC90ZXh0Pjwvc3ZnPg==",
       ],
     }),
   ];
@@ -420,11 +385,13 @@ export class MockDiscountRepository implements DiscountRepository {
       id: id + 3,
       title: "할인 정보",
       content: "할인 정보",
-      imageUrl: "https://example.com/laptop.jpg",
+      imageUrl:
+        "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgZmlsbD0iIzMzNzNkYyIvPjx0ZXh0IHg9IjIwMCIgeT0iMTUwIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTgiIGZpbGw9IndoaXRlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSI+UG9zdCBJbWFnZTwvdGV4dD48L3N2Zz4=",
       author: new UserEntity({
         id: 1,
         nickname: "test",
-        picture: "https://example.com/laptop.jpg",
+        picture:
+          "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgZmlsbD0iIzMzNzNkYyIvPjx0ZXh0IHg9IjIwMCIgeT0iMTUwIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTgiIGZpbGw9IndoaXRlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSI+VXNlciBJbWFnZTwvdGV4dD48L3N2Zz4=",
         name: "test",
         provider: "local",
         role: "user",

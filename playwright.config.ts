@@ -19,10 +19,10 @@ export default defineConfig({
   },
 
   // 테스트 실행 설정
-  fullyParallel: false, // 순차 실행
+  fullyParallel: process.env.NODE_ENV === "test", // test 환경에서는 병렬 실행
   forbidOnly: !!process.env.CI, // CI에서는 test.only 금지
   retries: process.env.CI ? 2 : 0, // CI에서는 실패시 2번 재시도
-  workers: 1, // 순차 실행을 위해 항상 1개 워커만 사용
+  workers: process.env.NODE_ENV === "test" ? 4 : 1, // test 환경에서는 4개 워커, 아니면 1개
 
   // 리포터 설정
   reporter: [
@@ -120,7 +120,10 @@ export default defineConfig({
 
   // 개발 서버 설정 (테스트 실행 전 자동으로 서버 시작)
   webServer: {
-    command: "npm run dev -- --port 3000",
+    command:
+      process.env.NODE_ENV === "test"
+        ? "npm run test -- --port 3000"
+        : "npm run dev -- --port 3000",
     port: 3000,
     reuseExistingServer: !process.env.CI, // 로컬에서는 기존 서버 재사용
     timeout: 120 * 1000, // 서버 시작 대기 시간 (2분)

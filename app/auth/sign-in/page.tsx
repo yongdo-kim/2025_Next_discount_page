@@ -45,7 +45,8 @@ export default function SignInPage() {
             }
           >
             <GoogleLoginButton />
-            {process.env.NODE_ENV === "development" && <DevLoginButton />}
+            {(process.env.NODE_ENV === "development" ||
+              process.env.NODE_ENV === "test") && <DevLoginButton />}
           </Suspense>
         </div>
       </div>

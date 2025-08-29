@@ -56,7 +56,8 @@ export class MockUsersRepository implements UsersRepository {
         isBlurredByAI: false,
         isBlockedByMe: false,
         commentsCount: 5,
-        thumbnailUrl: "https://example.com/thumbnail1.jpg",
+        thumbnailUrl:
+          "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgZmlsbD0iIzMzNzNkYyIvPjx0ZXh0IHg9IjIwMCIgeT0iMTUwIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTgiIGZpbGw9IndoaXRlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSI+UG9zdCBJbWFnZTwvdGV4dD48L3N2Zz4=",
         tags: [new TagEntity({ id: 1, name: "할인" })],
         category: { id: 1, name: "디지털/가전" },
       }),

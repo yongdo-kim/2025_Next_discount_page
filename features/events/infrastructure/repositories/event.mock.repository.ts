@@ -19,7 +19,7 @@ export class MockEventRepository implements EventRepository {
       originSourceUrl:
         "https://www.youtube.com/post/Ugkxg2cWuFbX7PeWMPG5WV8yLHzSXCOEiJHf?app=desktop&utm_src=ehi",
       ogImage:
-        "https://instagram.ficn4-1.fna.fbcdn.net/v/t39.30808-6/531278854_1069739048669129_8084525408095322664_n.jpg?stp=dst-jpg_e35_tt6&efg=eyJ2ZW5jb2RlX3RhZyI6IkZFRUQuaW1hZ2VfdXJsZ2VuLjEyMDB4MTUwMC5zZHIuZjMwODA4LmRlZmF1bHRfaW1hZ2UuYzIifQ&_nc_ht=instagram.ficn4-1.fna.fbcdn.net&_nc_cat=105&_nc_oc=Q6cZ2QHj_pDOhGUhM3Cgozgzte4SzBFDcnhbe8Pjm8B6rIufJ6evLGvRrtaJuDcDLd5Lgeo&_nc_ohc=Hr1X9X1O1WYQ7kNvwFjc2pU&_nc_gid=JYqDM0IoK5K2wb0lHKAXWw&edm=APs17CUAAAAA&ccb=7-5&ig_cache_key=MzY5ODAxNDE2NjU5Mjg4Mzc4Nw%3D%3D.3-ccb7-5&oh=00_AfVxT83k-EegYfIIbAD3cZmXh1TPoYTvb1-FPnSE4djz7A&oe=68AA50CF&_nc_sid=10d13b",
+        "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgZmlsbD0iIzllYTNmNyIvPjx0ZXh0IHg9IjIwMCIgeT0iMTUwIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTgiIGZpbGw9IjMzMzMzMyIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkV2ZW50IEltYWdlPC90ZXh0Pjwvc3ZnPg==",
     }),
     new EventEntity({
       postId: 523,
@@ -32,7 +32,7 @@ export class MockEventRepository implements EventRepository {
       originSourceUrl: "https://www.example.com/original",
       eventMethod: "댓글응모",
       ogImage:
-        "https://instagram.ficn4-1.fna.fbcdn.net/v/t39.30808-6/531278854_1069739048669129_8084525408095322664_n.jpg?stp=dst-jpg_e35_tt6&efg=eyJ2ZW5jb2RlX3RhZyI6IkZFRUQuaW1hZ2VfdXJsZ2VuLjEyMDB4MTUwMC5zZHIuZjMwODA4LmRlZmF1bHRfaW1hZ2UuYzIifQ&_nc_ht=instagram.ficn4-1.fna.fbcdn.net&_nc_cat=105&_nc_oc=Q6cZ2QHj_pDOhGUhM3Cgozgzte4SzBFDcnhbe8Pjm8B6rIufJ6evLGvRrtaJuDcDLd5Lgeo&_nc_ohc=Hr1X9X1O1WYQ7kNvwFjc2pU&_nc_gid=JYqDM0IoK5K2wb0lHKAXWw&edm=APs17CUAAAAA&ccb=7-5&ig_cache_key=MzY5ODAxNDE2NjU5Mjg4Mzc4Nw%3D%3D.3-ccb7-5&oh=00_AfVxT83k-EegYfIIbAD3cZmXh1TPoYTvb1-FPnSE4djz7A&oe=68AA50CF&_nc_sid=10d13b",
+        "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgZmlsbD0iIzllYTNmNyIvPjx0ZXh0IHg9IjIwMCIgeT0iMTUwIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTgiIGZpbGw9IjMzMzMzMyIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkV2ZW50IEltYWdlPC90ZXh0Pjwvc3ZnPg==",
     }),
     new EventEntity({
       postId: 524,
@@ -45,7 +45,7 @@ export class MockEventRepository implements EventRepository {
       eventMethod: "댓글응모",
       originSourceUrl: "https://www.valentine.com/source",
       ogImage:
-        "https://instagram.ficn4-1.fna.fbcdn.net/v/t39.30808-6/531278854_1069739048669129_8084525408095322664_n.jpg?stp=dst-jpg_e35_tt6&efg=eyJ2ZW5jb2RlX3RhZyI6IkZFRUQuaW1hZ2VfdXJsZ2VuLjEyMDB4MTUwMC5zZHIuZjMwODA4LmRlZmF1bHRfaW1hZ2UuYzIifQ&_nc_ht=instagram.ficn4-1.fna.fbcdn.net&_nc_cat=105&_nc_oc=Q6cZ2QHj_pDOhGUhM3Cgozgzte4SzBFDcnhbe8Pjm8B6rIufJ6evLGvRrtaJuDcDLd5Lgeo&_nc_ohc=Hr1X9X1O1WYQ7kNvwFjc2pU&_nc_gid=JYqDM0IoK5K2wb0lHKAXWw&edm=APs17CUAAAAA&ccb=7-5&ig_cache_key=MzY5ODAxNDE2NjU5Mjg4Mzc4Nw%3D%3D.3-ccb7-5&oh=00_AfVxT83k-EegYfIIbAD3cZmXh1TPoYTvb1-FPnSE4djz7A&oe=68AA50CF&_nc_sid=10d13b",
+        "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgZmlsbD0iIzllYTNmNyIvPjx0ZXh0IHg9IjIwMCIgeT0iMTUwIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTgiIGZpbGw9IjMzMzMzMyIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkV2ZW50IEltYWdlPC90ZXh0Pjwvc3ZnPg==",
     }),
   ];
 
