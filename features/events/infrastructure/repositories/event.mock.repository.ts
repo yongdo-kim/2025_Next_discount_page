@@ -18,8 +18,7 @@ export class MockEventRepository implements EventRepository {
       eventMethod: "댓글응모",
       originSourceUrl:
         "https://www.youtube.com/post/Ugkxg2cWuFbX7PeWMPG5WV8yLHzSXCOEiJHf?app=desktop&utm_src=ehi",
-      ogImage:
-        "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgZmlsbD0iIzllYTNmNyIvPjx0ZXh0IHg9IjIwMCIgeT0iMTUwIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTgiIGZpbGw9IjMzMzMzMyIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkV2ZW50IEltYWdlPC90ZXh0Pjwvc3ZnPg==",
+      ogImage: "",
     }),
     new EventEntity({
       postId: 523,
