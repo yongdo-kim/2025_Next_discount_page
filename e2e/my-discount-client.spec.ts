@@ -27,7 +27,7 @@ test.describe("LIKE SECTION TEST", () => {
     if (isLoginButtonVisible && !isLogoutButtonVisible) {
       console.log("🔑 로그인되지 않은 상태 - 먼저 로그인 진행");
       await loginButton.click();
-      await page.waitForLoadState("domcontentloaded");
+      await page.waitForLoadState("networkidle");
       await expect(page).toHaveURL(/.*\/auth\/sign-in/);
 
       const devLoginButton = page.locator('[data-testid="dev-login-button"]');
