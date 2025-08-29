@@ -1,0 +1,26 @@
+name: 'Setup E2E Testing Environment'
+description: 'Sets up Node.js, installs dependencies, and builds the application for E2E testing'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        cache: 'npm'
+
+    - name: Install dependencies
+      shell: bash
+      run: npm ci
+
+    - name: Install Playwright browsers
+      shell: bash
+      run: npx playwright install --with-deps
+
+    - name: Build application (test mode)
+      shell: bash
+      run: npm run build
+      env:
+        NODE_ENV: test
+        NEXT_PUBLIC_ENV: test

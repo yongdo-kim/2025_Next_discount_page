@@ -6,7 +6,7 @@ test.describe("DiscountPlatformClient 이미지 로딩 테스트", () => {
   }) => {
     // 1. 홈페이지 진입
     await page.goto("/");
-    await page.waitForLoadState("networkidle");
+    await page.waitForLoadState("domcontentloaded");
 
     // 2. 테마별 할인 섹션이 보이는지 확인
     const discountPlatformSection = page.locator(
@@ -30,9 +30,8 @@ test.describe("DiscountPlatformClient 이미지 로딩 테스트", () => {
       const tab = page.locator(`[data-testid="platform-tab-${platformKey}"]`);
       await tab.click();
 
-      // 탭 클릭 후 데이터 로딩 대기 (네트워크 안정화 대기)
-      await page.waitForLoadState("networkidle", { timeout: 5000 });
-      await page.waitForTimeout(1500);
+      // 탭 클릭 후 데이터 로딩 대기
+      await page.waitForTimeout(2000);
 
       // 해당 플랫폼의 할인 카드들이 로드되는지 확인
       const discountCards = page.locator(
@@ -152,7 +151,7 @@ test.describe("DiscountPlatformClient 이미지 로딩 테스트", () => {
   test("이미지 로딩 실패 시 대체 요소가 표시된다", async ({ page }) => {
     // 1. 홈페이지 진입
     await page.goto("/");
-    await page.waitForLoadState("networkidle");
+    await page.waitForLoadState("domcontentloaded");
 
     // 2. 테마별 할인 섹션 확인
     const discountPlatformSection = page.locator(
@@ -198,7 +197,7 @@ test.describe("DiscountPlatformClient 이미지 로딩 테스트", () => {
   test("플랫폼 탭 전환 시 이미지가 올바르게 업데이트된다", async ({ page }) => {
     // 1. 홈페이지 진입
     await page.goto("/");
-    await page.waitForLoadState("networkidle");
+    await page.waitForLoadState("domcontentloaded");
 
     // 2. 테마별 할인 섹션 확인
     const discountPlatformSection = page.locator(
