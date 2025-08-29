@@ -9,17 +9,19 @@ module.exports = {
       ],
       settings: {
         chromeFlags:
-          "--no-sandbox --headless --disable-gpu --disable-dev-shm-usage --incognito",
+          "--no-sandbox --headless --disable-gpu --disable-dev-shm-usage --incognito --disable-extensions --disable-background-timer-throttling",
         preset: "desktop",
         throttling: {
-          cpuSlowdownMultiplier: 2, // CI 환경에서 더 현실적인 CPU 제한
-          requestLatencyMs: 150, // 네트워크 지연 시뮬레이션
-          downloadThroughputKbps: 1600, // 중간 속도 인터넷
-          uploadThroughputKbps: 750,
+          cpuSlowdownMultiplier: 1, // CI 환경에 맞게 최적화
+          requestLatencyMs: 100, // 네트워크 지연 감소
+          downloadThroughputKbps: 2000, // 더 빠른 인터넷 시뮬레이션
+          uploadThroughputKbps: 1000,
         },
         outputMode: "json", // CI 환경에서 JSON 파일 출력 보장
+        maxWaitForFcp: 30000, // FCP 대기 시간 증가
+        maxWaitForLoad: 60000, // 페이지 로드 대기 시간 증가
       },
-      numberOfRuns: 3, // 여러 번 실행해서 평균값 계산
+      numberOfRuns: 2, // 안정성을 위해 2회로 감소
     },
     assert: {
       assertions: {

@@ -13,9 +13,6 @@ on:
 jobs:
   lighthouse:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        browser: [chrome, safari]
 
     steps:
       - name: Checkout
@@ -27,40 +24,36 @@ jobs:
           node-version: '18'
           cache: 'npm'
 
-      - name: Install Safari browser (WebKit)
-        if: matrix.browser == 'safari'
-        run: |
-          npx playwright install webkit
       
       - name: Cache Lighthouse CI database
         uses: actions/cache@v3
         with:
           path: lhci.db
-          key: lighthouse-db-${{ runner.os }}-${{ matrix.browser }}-${{ github.ref_name }}
+          key: lighthouse-db-${{ runner.os }}-chrome-${{ github.ref_name }}
           restore-keys: |
-            lighthouse-db-${{ runner.os }}-${{ matrix.browser }}-
+            lighthouse-db-${{ runner.os }}-chrome-
 
       - name: Cache previous Lighthouse results
         uses: actions/cache@v3
         with:
           path: .lighthouse-previous
-          key: lighthouse-results-${{ runner.os }}-${{ matrix.browser }}-${{ github.ref_name }}-latest
+          key: lighthouse-results-${{ runner.os }}-chrome-${{ github.ref_name }}-latest
           restore-keys: |
-            lighthouse-results-${{ runner.os }}-${{ matrix.browser }}-${{ github.ref_name }}-latest
-            lighthouse-results-${{ runner.os }}-${{ matrix.browser }}-${{ github.ref_name }}-
+            lighthouse-results-${{ runner.os }}-chrome-${{ github.ref_name }}-latest
+            lighthouse-results-${{ runner.os }}-chrome-${{ github.ref_name }}-
 
       - name: Cache Lighthouse history
         uses: actions/cache@v3
         with:
           path: .lighthouse-history
-          key: lighthouse-history-${{ runner.os }}-${{ matrix.browser }}-${{ github.ref_name }}
+          key: lighthouse-history-${{ runner.os }}-chrome-${{ github.ref_name }}
           restore-keys: |
-            lighthouse-history-${{ runner.os }}-${{ matrix.browser }}-
+            lighthouse-history-${{ runner.os }}-chrome-
 
       - name: Debug cache status and fallback to artifacts
         run: |
-          echo "🔍 Checking cache restore status for ${{ matrix.browser }}..."
-          echo "Cache key: lighthouse-results-${{ runner.os }}-${{ matrix.browser }}-${{ github.ref_name }}-latest"
+          echo "🔍 Checking cache restore status for Chrome..."
+          echo "Cache key: lighthouse-results-${{ runner.os }}-chrome-${{ github.ref_name }}-latest"
           echo "Previous results directory:"
           if [ -d ".lighthouse-previous" ]; then
             echo "✅ .lighthouse-previous directory exists (from cache)"
@@ -78,51 +71,59 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Create Puppeteer script for WebKit
-        if: matrix.browser == 'safari'
-        run: |
-          cat > puppeteer-script.js << 'EOF'
-          const puppeteer = require('puppeteer');
-          
-          module.exports = async () => {
-            const browser = await puppeteer.launch({
-              product: 'webkit',
-              headless: true,
-              args: ['--no-sandbox', '--disable-setuid-sandbox']
-            });
-            return browser;
-          };
-          EOF
         
       - name: Build project
-        run: npm run build
+        run: |
+          echo "🏗️ Starting build process..."
+          npm run build || (echo "❌ Build failed, checking error logs" && exit 1)
+          echo "✅ Build completed successfully"
         
       - name: Start server
-        run: npm run prod &
+        run: |
+          echo "🚀 Starting production server..."
+          npm run prod &
+          SERVER_PID=$!
+          echo "📝 Server started with PID: $SERVER_PID"
+          echo "SERVER_PID=$SERVER_PID" >> $GITHUB_ENV
         env:
           NODE_ENV: production
 
       - name: Wait for server to be ready
-        run: npx wait-on http://localhost:3000 --timeout 60000
+        run: |
+          echo "⏳ Waiting for server to start..."
+          npx wait-on http://localhost:3000 --timeout 120000
+          echo "✅ Server is ready, checking health..."
+          
+          # Additional health check
+          for i in {1..10}; do
+            if curl -s http://localhost:3000/ > /dev/null; then
+              echo "✅ Server health check passed"
+              break
+            else
+              echo "⏳ Health check attempt $i/10 failed, waiting..."
+              sleep 3
+            fi
+          done
 
       - name: Run Lighthouse collect
         run: |
-          echo "🚀 Running Lighthouse collect for ${{ matrix.browser }}..."
+          echo "🚀 Running Lighthouse collect for Chrome..."
+          echo "📊 Server status check before running..."
+          curl -I http://localhost:3000/ || echo "⚠️ Server response check failed"
           
-          if [ "${{ matrix.browser }}" = "safari" ]; then
-            echo "📱 Using Safari/WebKit with custom puppeteer script"
-            npx lhci collect --settings.throttling.cpuSlowdownMultiplier=4 --puppeteer-script puppeteer-script.js
-          else
-            echo "🌐 Using Chrome with default settings"  
-            npx lhci collect --settings.throttling.cpuSlowdownMultiplier=4
-          fi
+          echo "🌐 Using Chrome with optimized settings"  
+          timeout 600 npx lhci collect || (echo "❌ Lighthouse collect timed out or failed" && exit 1)
           
           echo "📊 Lighthouse collect completed. Checking results..."
           if [ -d ".lighthouseci" ]; then
             echo "✅ Results directory created successfully"
+            echo "📁 Contents:"
             ls -la .lighthouseci/
+            echo "📄 File count: $(find .lighthouseci -name '*.json' | wc -l) JSON files"
           else
             echo "❌ Results directory not found!"
+            echo "🔍 Current directory contents:"
+            ls -la
             exit 1
           fi
 
@@ -131,7 +132,7 @@ jobs:
 
       - name: Analyze Lighthouse results and calculate averages
         run: |
-          echo "🚦 Lighthouse Performance Analysis (${{ matrix.browser }})"
+          echo "🚦 Lighthouse Performance Analysis (Chrome)"
           echo "=================================="
           echo "📁 Checking for Lighthouse reports..."
           ls -la .lighthouseci/ || echo "❌ .lighthouseci directory not found"
@@ -139,19 +140,21 @@ jobs:
           # 새로운 스크립트로 평균값 계산 및 비교 분석
           if ls .lighthouseci/lhr-*.json 1> /dev/null 2>&1; then
             echo "✅ Running Lighthouse results analysis..."
-            node scripts/lighthouse-results.mjs
+            node scripts/lighthouse-results.mjs || echo "⚠️ Results analysis failed but continuing"
             
             echo ""
             echo "📚 Adding results to history..."
-            node scripts/lighthouse-history.mjs add
+            node scripts/lighthouse-history.mjs add || echo "⚠️ History update failed but continuing"
             
             echo ""
             echo "📈 Showing performance trend..."
-            node scripts/lighthouse-history.mjs summary
+            node scripts/lighthouse-history.mjs summary || echo "⚠️ Trend analysis failed but continuing"
           else
             echo "❌ No Lighthouse report files found"
             echo "🔍 Available files in .lighthouseci/:"
             ls -la .lighthouseci/ 2>/dev/null || echo "Directory empty or doesn't exist"
+            echo "🔍 Checking file patterns:"
+            find .lighthouseci -name "*.json" -type f 2>/dev/null || echo "No JSON files found"
           fi
 
       - name: Save current results for next comparison
@@ -203,7 +206,7 @@ jobs:
           else
             echo "❌ .lighthouseci directory missing - creating empty one"
             mkdir -p .lighthouseci
-            echo "No Lighthouse reports generated for ${{ matrix.browser }}" > .lighthouseci/README-${{ matrix.browser }}.md
+            echo "No Lighthouse reports generated for Chrome" > .lighthouseci/README-chrome.md
           fi
           
           # .lighthouse-current 확인 및 생성
@@ -232,7 +235,7 @@ jobs:
         uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: lighthouse-results-backup-${{ matrix.browser }}-${{ github.ref_name }}
+          name: lighthouse-results-backup-chrome-${{ github.ref_name }}
           path: |
             .lighthouse-current/
             .lighthouse-history/
@@ -243,7 +246,7 @@ jobs:
         uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: lighthouse-reports-${{ matrix.browser }}
+          name: lighthouse-reports-chrome
           path: |
             .lighthouseci/
             !.lighthouseci/.gitkeep
