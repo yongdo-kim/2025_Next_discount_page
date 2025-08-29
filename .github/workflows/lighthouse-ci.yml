@@ -180,9 +180,9 @@ jobs:
                 node -e "
                   try {
                     const data = JSON.parse(require('fs').readFileSync('$file', 'utf8'));
-                    console.log('  Performance: ' + data.performance + ', Accessibility: ' + data.accessibility);
+                    console.log('  Performance: ' + data.scores.performance + ', Accessibility: ' + data.scores.accessibility);
                   } catch (e) {
-                    console.log('  Error reading file');
+                    console.log('  Error reading file: ' + e.message);
                   }
                 "
               fi
@@ -231,24 +231,49 @@ jobs:
             echo "No history available yet" > .lighthouse-history/README.md
           fi
 
-      - name: Upload results as artifacts (backup)
-        uses: actions/upload-artifact@v4
+      - name: Debug and prepare artifacts for upload
         if: always()
-        with:
-          name: lighthouse-results-backup-chrome-${{ github.ref_name }}
-          path: |
-            .lighthouse-current/
-            .lighthouse-history/
-            .lighthouseci/
-          retention-days: 7
+        run: |
+          echo "🔍 Pre-upload verification..."
+          echo "📁 Current directory structure:"
+          ls -la
+          
+          echo ""
+          echo "📊 .lighthouseci directory:"
+          if [ -d ".lighthouseci" ]; then
+            ls -la .lighthouseci/
+            echo "   JSON files: $(find .lighthouseci -name '*.json' | wc -l)"
+            echo "   Total files: $(find .lighthouseci -type f | wc -l)"
+          else
+            echo "   ❌ Directory does not exist"
+          fi
+          
+          echo ""
+          echo "📈 .lighthouse-current directory:"
+          if [ -d ".lighthouse-current" ]; then
+            ls -la .lighthouse-current/
+            echo "   Files: $(find .lighthouse-current -type f | wc -l)"
+          else
+            echo "   ❌ Directory does not exist"
+          fi
+          
+          echo ""
+          echo "📚 .lighthouse-history directory:"
+          if [ -d ".lighthouse-history" ]; then
+            ls -la .lighthouse-history/
+            echo "   Files: $(find .lighthouse-history -type f | wc -l)"
+          else
+            echo "   ❌ Directory does not exist"
+          fi
 
-      - name: Upload Lighthouse reports
+      - name: Upload Lighthouse results and reports
         uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: lighthouse-reports-chrome
+          name: lighthouse-complete-results-chrome-${{ github.ref_name }}
           path: |
-            .lighthouseci/
-            !.lighthouseci/.gitkeep
-          if-no-files-found: warn
+            .lighthouse-current
+            .lighthouse-history
+            .lighthouseci
+          if-no-files-found: error
           retention-days: 30
