@@ -1,4 +1,4 @@
-name: Lighthouse CI
+name: '[Lighthouse] CI'
 
 on:
   push:
@@ -13,6 +13,9 @@ on:
 jobs:
   lighthouse:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        browser: [chrome, safari]
 
     steps:
       - name: Checkout
@@ -23,36 +26,41 @@ jobs:
         with:
           node-version: '18'
           cache: 'npm'
+
+      - name: Install Safari browser (WebKit)
+        if: matrix.browser == 'safari'
+        run: |
+          npx playwright install webkit
       
       - name: Cache Lighthouse CI database
         uses: actions/cache@v3
         with:
           path: lhci.db
-          key: lighthouse-db-${{ runner.os }}-${{ github.ref_name }}
+          key: lighthouse-db-${{ runner.os }}-${{ matrix.browser }}-${{ github.ref_name }}
           restore-keys: |
-            lighthouse-db-${{ runner.os }}-
+            lighthouse-db-${{ runner.os }}-${{ matrix.browser }}-
 
       - name: Cache previous Lighthouse results
         uses: actions/cache@v3
         with:
           path: .lighthouse-previous
-          key: lighthouse-results-${{ runner.os }}-${{ github.ref_name }}-latest
+          key: lighthouse-results-${{ runner.os }}-${{ matrix.browser }}-${{ github.ref_name }}-latest
           restore-keys: |
-            lighthouse-results-${{ runner.os }}-${{ github.ref_name }}-latest
-            lighthouse-results-${{ runner.os }}-${{ github.ref_name }}-
+            lighthouse-results-${{ runner.os }}-${{ matrix.browser }}-${{ github.ref_name }}-latest
+            lighthouse-results-${{ runner.os }}-${{ matrix.browser }}-${{ github.ref_name }}-
 
       - name: Cache Lighthouse history
         uses: actions/cache@v3
         with:
           path: .lighthouse-history
-          key: lighthouse-history-${{ runner.os }}-${{ github.ref_name }}
+          key: lighthouse-history-${{ runner.os }}-${{ matrix.browser }}-${{ github.ref_name }}
           restore-keys: |
-            lighthouse-history-${{ runner.os }}-
+            lighthouse-history-${{ runner.os }}-${{ matrix.browser }}-
 
       - name: Debug cache status and fallback to artifacts
         run: |
-          echo "🔍 Checking cache restore status..."
-          echo "Cache key: lighthouse-results-${{ runner.os }}-${{ github.ref_name }}-latest"
+          echo "🔍 Checking cache restore status for ${{ matrix.browser }}..."
+          echo "Cache key: lighthouse-results-${{ runner.os }}-${{ matrix.browser }}-${{ github.ref_name }}-latest"
           echo "Previous results directory:"
           if [ -d ".lighthouse-previous" ]; then
             echo "✅ .lighthouse-previous directory exists (from cache)"
@@ -69,6 +77,22 @@ jobs:
           
       - name: Install dependencies
         run: npm ci
+
+      - name: Create Puppeteer script for WebKit
+        if: matrix.browser == 'safari'
+        run: |
+          cat > puppeteer-script.js << 'EOF'
+          const puppeteer = require('puppeteer');
+          
+          module.exports = async () => {
+            const browser = await puppeteer.launch({
+              product: 'webkit',
+              headless: true,
+              args: ['--no-sandbox', '--disable-setuid-sandbox']
+            });
+            return browser;
+          };
+          EOF
         
       - name: Build project
         run: npm run build
@@ -82,14 +106,32 @@ jobs:
         run: npx wait-on http://localhost:3000 --timeout 60000
 
       - name: Run Lighthouse collect
-        run: npx lhci collect --settings.throttling.cpuSlowdownMultiplier=4
+        run: |
+          echo "🚀 Running Lighthouse collect for ${{ matrix.browser }}..."
+          
+          if [ "${{ matrix.browser }}" = "safari" ]; then
+            echo "📱 Using Safari/WebKit with custom puppeteer script"
+            npx lhci collect --settings.throttling.cpuSlowdownMultiplier=4 --puppeteer-script puppeteer-script.js
+          else
+            echo "🌐 Using Chrome with default settings"  
+            npx lhci collect --settings.throttling.cpuSlowdownMultiplier=4
+          fi
+          
+          echo "📊 Lighthouse collect completed. Checking results..."
+          if [ -d ".lighthouseci" ]; then
+            echo "✅ Results directory created successfully"
+            ls -la .lighthouseci/
+          else
+            echo "❌ Results directory not found!"
+            exit 1
+          fi
 
       # - name: Run Lighthouse assert
       #   run: npx lhci assert || echo "⚠️ Some Lighthouse assertions failed, but continuing build..."
 
       - name: Analyze Lighthouse results and calculate averages
         run: |
-          echo "🚦 Lighthouse Performance Analysis"
+          echo "🚦 Lighthouse Performance Analysis (${{ matrix.browser }})"
           echo "=================================="
           echo "📁 Checking for Lighthouse reports..."
           ls -la .lighthouseci/ || echo "❌ .lighthouseci directory not found"
@@ -156,10 +198,12 @@ jobs:
             echo "✅ .lighthouseci directory exists"
             file_count=$(find .lighthouseci -type f | wc -l)
             echo "   Files: $file_count"
+            echo "   File list:"
+            ls -la .lighthouseci/
           else
             echo "❌ .lighthouseci directory missing - creating empty one"
             mkdir -p .lighthouseci
-            echo "No Lighthouse reports generated" > .lighthouseci/README.md
+            echo "No Lighthouse reports generated for ${{ matrix.browser }}" > .lighthouseci/README-${{ matrix.browser }}.md
           fi
           
           # .lighthouse-current 확인 및 생성
@@ -188,7 +232,7 @@ jobs:
         uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: lighthouse-results-backup-${{ github.ref_name }}
+          name: lighthouse-results-backup-${{ matrix.browser }}-${{ github.ref_name }}
           path: |
             .lighthouse-current/
             .lighthouse-history/
@@ -199,6 +243,9 @@ jobs:
         uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: lighthouse-reports
-          path: .lighthouseci/
+          name: lighthouse-reports-${{ matrix.browser }}
+          path: |
+            .lighthouseci/
+            !.lighthouseci/.gitkeep
+          if-no-files-found: warn
           retention-days: 30
