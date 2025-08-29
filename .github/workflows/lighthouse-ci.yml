@@ -146,28 +146,42 @@ jobs:
             echo "❌ No current results directory found"
           fi
 
-      - name: Debug directory status before upload
+      - name: Prepare directories for artifacts upload
         if: always()
         run: |
-          echo "🔍 Debugging directory status for artifacts upload..."
-          echo "Current working directory: $(pwd)"
-          echo "\n📁 Directory structure:"
-          ls -la
-          echo "\n📁 .lighthouse-current status:"
-          if [ -d ".lighthouse-current" ]; then
-            echo "✅ .lighthouse-current exists"
-            ls -la .lighthouse-current/ || echo "Directory empty"
-            find .lighthouse-current -type f | wc -l | xargs echo "Files count:"
-          else
-            echo "❌ .lighthouse-current does not exist"
-          fi
-          echo "\n📁 .lighthouseci status:"
+          echo "📁 Ensuring directories exist for artifacts upload..."
+          
+          # .lighthouseci는 이미 있어야 하지만 확인
           if [ -d ".lighthouseci" ]; then
-            echo "✅ .lighthouseci exists"
-            ls -la .lighthouseci/ || echo "Directory empty"
-            find .lighthouseci -type f | wc -l | xargs echo "Files count:"
+            echo "✅ .lighthouseci directory exists"
+            file_count=$(find .lighthouseci -type f | wc -l)
+            echo "   Files: $file_count"
           else
-            echo "❌ .lighthouseci does not exist"
+            echo "❌ .lighthouseci directory missing - creating empty one"
+            mkdir -p .lighthouseci
+            echo "No Lighthouse reports generated" > .lighthouseci/README.md
+          fi
+          
+          # .lighthouse-current 확인 및 생성
+          if [ -d ".lighthouse-current" ]; then
+            echo "✅ .lighthouse-current directory exists"
+            file_count=$(find .lighthouse-current -type f | wc -l)
+            echo "   Files: $file_count"
+          else
+            echo "ℹ️  .lighthouse-current directory missing - creating empty one"
+            mkdir -p .lighthouse-current
+            echo "No current results available" > .lighthouse-current/README.md
+          fi
+          
+          # .lighthouse-history 확인 및 생성
+          if [ -d ".lighthouse-history" ]; then
+            echo "✅ .lighthouse-history directory exists"
+            file_count=$(find .lighthouse-history -type f | wc -l)
+            echo "   Files: $file_count"
+          else
+            echo "ℹ️  .lighthouse-history directory missing - creating empty one"
+            mkdir -p .lighthouse-history
+            echo "No history available yet" > .lighthouse-history/README.md
           fi
 
       - name: Upload results as artifacts (backup)
@@ -180,7 +194,6 @@ jobs:
             .lighthouse-history/
             .lighthouseci/
           retention-days: 7
-          if-no-files-found: warn
 
       - name: Upload Lighthouse reports
         uses: actions/upload-artifact@v4
@@ -189,4 +202,3 @@ jobs:
           name: lighthouse-reports
           path: .lighthouseci/
           retention-days: 30
-          if-no-files-found: warn
