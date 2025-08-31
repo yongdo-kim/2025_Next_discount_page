@@ -45,8 +45,6 @@ discount_next/
 ├── public/          # 정적 파일 (favicon, og:image 등)
 ```
 
-<img width="917" height="722" alt="스크린샷 2025-08-11 오후 4 14 00" src="https://github.com/user-attachments/assets/8d4caf6e-9106-4284-8d19-e6a1c8b35b1c" />
-
 ## 🎯 프로젝트 목표
 
 - 프론트엔드 실력을 **3년 차 수준까지 끌어올리는 것**이 이 프로젝트의 가장 큰 목표입니다.
@@ -87,3 +85,6 @@ discount_next/
 
 ## 🚧 현재 작업 중
 - 현재까지 모두 완료
+
+## 전체 프로젝트 구성
+<img width="408" height="1007" alt="스크린샷 2025-09-01 오전 12 30 28" src="https://github.com/user-attachments/assets/d13d869e-4769-4937-a53f-a7d51a80a4f7" />
