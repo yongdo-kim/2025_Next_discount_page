@@ -2,7 +2,6 @@
 
 import { ErrorBoundary } from "@/components/error/ErrorBoundary";
 import { Toaster } from "@/components/shadcn/sonner";
-import { RefreshTokenEffect } from "@/features/auth/presentation/hooks/useRefreshToken";
 import { queryClient } from "@/lib/react-query";
 import { captureException } from "@sentry/nextjs";
 import { QueryClientProvider } from "@tanstack/react-query";
@@ -30,7 +29,7 @@ const ReactQueryDevtools =
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
     <QueryClientProvider client={queryClient}>
-      <RefreshTokenEffect />
+      {/* <RefreshTokenEffect /> */}
       <ErrorBoundary onError={(error) => captureException(error)}>
         <ThemeProvider
           attribute="class"
