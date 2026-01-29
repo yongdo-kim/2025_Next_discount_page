@@ -48,8 +48,31 @@ function isApiError(obj: unknown): obj is ApiError {
   );
 }
 
+/**
+ * API 호출 URL 생성 헬퍼 함수
+ * 클라이언트: 상대 경로 그대로 사용 (/aws-api/discount/...) -> next.config.ts rewrites를 통해 프록시됨
+ * 서버: 절대 경로로 변환 (http://13.209.40.142/api/discount/...) -> 직접 호출
+ */
+function constructApiUrl(path: string): string {
+  // 1. 기본적으로는 환경변수 설정값 + path
+  let fullUrl = `${API_BASE_URL}${path}`;
+
+  // 2. 서버 사이드이면서 API_BASE_URL이 /aws-api 로 시작하는 상대 경로인 경우 변환
+  if (isServerSide() && API_BASE_URL?.startsWith("/aws-api")) {
+    const backendUrl = "http://13.209.40.142/api"; // 실제 AWS 백엔드 주소
+    // /aws-api 를 제거하고 나머지 경로 (/discount 등)를 유지
+    const relativePath = API_BASE_URL.replace("/aws-api", "");
+    fullUrl = `${backendUrl}${relativePath}${path}`;
+  }
+
+  return fullUrl;
+}
+
 async function tryRefreshToken(options?: RequestInit): Promise<void> {
-  const refreshResponse = await fetch(`${API_BASE_URL}/auth/refresh-token`, {
+  // 수정: API_BASE_URL 직접 사용 대신 constructApiUrl 사용으로 서버 사이드 크래시 방지
+  const fullUrl = constructApiUrl("/auth/refresh-token");
+
+  const refreshResponse = await fetch(fullUrl, {
     method: "POST",
     credentials: "include",
     headers: getMergedHeaders(options),
@@ -75,16 +98,10 @@ async function request<T>(
     body,
     options,
   }: { query?: string; body?: unknown; options?: RequestInit } = {},
-  retry = true,
+  retry = true, // 기본값 false? 원본 코드엔 true라고 되어있었으므로 유지, 재귀 호출 방지 로직 확인 필요
 ): Promise<T> {
-  let fullUrl = `${API_BASE_URL}${url}`;
-
-  // 서버 사이드에서 실행될 때, 상대 경로(/aws-api)를 절대 경로(http://...)로 변환
-  if (isServerSide() && API_BASE_URL?.startsWith("/aws-api")) {
-    const backendUrl = "http://13.209.40.142/api"; // 실제 AWS 백엔드 주소
-    const relativePath = API_BASE_URL.replace("/aws-api", "");
-    fullUrl = `${backendUrl}${relativePath}${url}`;
-  }
+  // 수정: 공통 URL 생성 함수 사용
+  let fullUrl = constructApiUrl(url);
 
   let data;
   if (query && query.trim() !== "") {
