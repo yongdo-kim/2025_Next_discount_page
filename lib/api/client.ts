@@ -78,6 +78,14 @@ async function request<T>(
   retry = true,
 ): Promise<T> {
   let fullUrl = `${API_BASE_URL}${url}`;
+
+  // 서버 사이드에서 실행될 때, 상대 경로(/aws-api)를 절대 경로(http://...)로 변환
+  if (isServerSide() && API_BASE_URL?.startsWith("/aws-api")) {
+    const backendUrl = "http://13.209.40.142/api"; // 실제 AWS 백엔드 주소
+    const relativePath = API_BASE_URL.replace("/aws-api", "");
+    fullUrl = `${backendUrl}${relativePath}${url}`;
+  }
+
   let data;
   if (query && query.trim() !== "") {
     fullUrl +=
